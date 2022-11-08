@@ -1,4 +1,13 @@
-﻿<!DOCTYPE html>
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Registration</h1>
+
+<a class="nav-link text-dark" asp-area="" asp-controller="Register" asp-action="PatientRegister1">Register as Patient</a>
+
+@*<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -22,7 +31,10 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="LoginTable" asp-action="Index">SignIn/SignUp</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Register" asp-action="PatientRegister1">Register as Patient</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Register" asp-action="Index">Register as Doctor</a>
                         </li>
                     </ul>
                 </div>
@@ -46,3 +58,22 @@
     @RenderSection("Scripts", required: false)
 </body>
 </html>
+
+*@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

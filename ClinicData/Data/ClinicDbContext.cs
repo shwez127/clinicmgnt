@@ -22,11 +22,12 @@ namespace ClinicData.Data
         public DbSet<Pending_Feedback> pending_feedbacks { get; set; }
         public DbSet<Department> departments { get; set; }
         public DbSet<Appointment> appointments { get; set; }
+        public DbSet<LoginTable> logintables { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder dbContextOptionsBuilder)
         {
-            dbContextOptionsBuilder.UseSqlServer("Data Source=VDC01LTC2125;Initial Catalog=ClinicMngt; Integrated Security=true;");
+            dbContextOptionsBuilder.UseSqlServer("Data Source=VDC01LTC2106;Initial Catalog=ClinicMngt; Integrated Security=true;");
         }
 
     }
