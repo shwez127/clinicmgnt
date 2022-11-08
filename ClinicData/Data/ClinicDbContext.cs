@@ -1,19 +1,20 @@
 ﻿using ClinicEntity.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace ClinicData.Data
 {
     public class ClinicDbContext:DbContext
     {
-        /*public ClinicDbContext()
+        public ClinicDbContext()
         {
 
         }
         public ClinicDbContext(DbContextOptions<ClinicDbContext> options) : base(options)
         {
 
-        }*/
+        }
 
         public DbSet<Patient> patients { get; set; }
         public DbSet<Doctor> doctors { get; set; }
@@ -25,7 +26,8 @@ namespace ClinicData.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder dbContextOptionsBuilder)
         {
-            dbContextOptionsBuilder.UseSqlServer("Data Source=LAPTOP-62EGJFDT\\SQLEXPRESS;Initial Catalog=ClinicMngt_2; Integrated Security=true;");
+            dbContextOptionsBuilder.UseSqlServer("Data Source=VDC01LTC2125;Initial Catalog=ClinicMngt; Integrated Security=true;");
         }
+
     }
 }

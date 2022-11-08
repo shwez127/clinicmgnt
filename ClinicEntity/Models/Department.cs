@@ -11,6 +11,7 @@ namespace ClinicEntity.Models
     {
         [Key]
         public int DeptNo { get; set; }
+
         [Required]
         [Column(TypeName = "varchar(20)")]
         public string DeptName { get; set; }

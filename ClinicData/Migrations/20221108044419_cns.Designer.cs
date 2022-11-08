@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClinicData.Migrations
 {
     [DbContext(typeof(ClinicDbContext))]
-    [Migration("20221107174509_databasees")]
-    partial class databasees
+    [Migration("20221108044419_cns")]
+    partial class cns
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -234,7 +234,17 @@ namespace ClinicData.Migrations
                     b.Property<int>("AppointID")
                         .HasColumnType("int");
 
+                    b.Property<int>("DoctorID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PatientID")
+                        .HasColumnType("int");
+
                     b.HasKey("AppointID");
+
+                    b.HasIndex("DoctorID");
+
+                    b.HasIndex("PatientID");
 
                     b.ToTable("pending_Feedbacks");
                 });
@@ -296,7 +306,23 @@ namespace ClinicData.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("ClinicEntity.Models.Doctor", "Doctor")
+                        .WithMany()
+                        .HasForeignKey("DoctorID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ClinicEntity.Models.Patient", "Patient")
+                        .WithMany()
+                        .HasForeignKey("PatientID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Appointment");
+
+                    b.Navigation("Doctor");
+
+                    b.Navigation("Patient");
                 });
 #pragma warning restore 612, 618
         }

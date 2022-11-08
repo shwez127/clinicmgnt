@@ -1,4 +1,5 @@
 using ClinicBusiness;
+using ClinicBusiness.Services;
 using ClinicData.Data;
 using ClinicData.Repository;
 using Microsoft.AspNetCore.Builder;
@@ -31,8 +32,27 @@ namespace ClinicAPI
         {
             string connectionStr = Configuration.GetConnectionString("sqlConnection");
             services.AddDbContext<ClinicDbContext>(options => options.UseSqlServer(connectionStr));
+
             services.AddTransient<PatientService, PatientService>();
             services.AddTransient<IPatientRepository, PatientRepository>();
+
+            services.AddTransient<AppointmentService, AppointmentService>();
+            services.AddTransient<IAppointmentRepository, AppointmentRepository>();
+
+            services.AddTransient<DepartmentService, DepartmentService>();
+            services.AddTransient<IDepartmentRepository, DepartmentRepository>();
+
+            services.AddTransient<DoctorService, DoctorService>();
+            services.AddTransient<IDoctorRepository, DoctorRepository>();
+
+            services.AddTransient<LoginTableService, LoginTableService>();
+            services.AddTransient<ILoginTableRepository, LoginTableRepository>();
+
+            services.AddTransient<StaffServices, StaffServices>();
+            services.AddTransient<IStaffRepository, StaffRepository>();
+
+            services.AddTransient<FeedbackServices, FeedbackServices>();
+            services.AddTransient<IFeedbackRepository, FeedbackRepository>();
             services.AddControllers();
             services.AddSwaggerGen();
             services.AddSwaggerGen(c =>
