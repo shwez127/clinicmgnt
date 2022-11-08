@@ -20,7 +20,7 @@ namespace ClinicData.Repository
 
         public void AddAppointment(Appointment appointment)
         {
-            object value = _appointmentDbContext.Add(appointment);
+            _appointmentDbContext.appointments.Add(appointment);
             _appointmentDbContext.SaveChanges();
         }
 

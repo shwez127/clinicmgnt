@@ -232,7 +232,17 @@ namespace ClinicData.Migrations
                     b.Property<int>("AppointID")
                         .HasColumnType("int");
 
+                    b.Property<int>("DoctorID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PatientID")
+                        .HasColumnType("int");
+
                     b.HasKey("AppointID");
+
+                    b.HasIndex("DoctorID");
+
+                    b.HasIndex("PatientID");
 
                     b.ToTable("pending_Feedbacks");
                 });
@@ -294,7 +304,23 @@ namespace ClinicData.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("ClinicEntity.Models.Doctor", "Doctor")
+                        .WithMany()
+                        .HasForeignKey("DoctorID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ClinicEntity.Models.Patient", "Patient")
+                        .WithMany()
+                        .HasForeignKey("PatientID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Appointment");
+
+                    b.Navigation("Doctor");
+
+                    b.Navigation("Patient");
                 });
 #pragma warning restore 612, 618
         }

@@ -10,8 +10,7 @@ namespace ClinicEntity.Models
     public class Doctor
     {
         [Key]
-        [ForeignKey("LoginTable")]
-        
+        [ForeignKey("LoginTable")]       
         public int DoctorID { get; set; }
         public LoginTable LoginTable { get; set; }
 

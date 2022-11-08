@@ -15,8 +15,7 @@ namespace ClinicEntity.Models
         public LoginTable LoginTable { get; set; }
 
         [Required]
-        [Column(TypeName ="varchar(20)")]
-        
+        [Column(TypeName ="varchar(20)")]      
         public string Name { get; set; }
         
         [Column(TypeName = "char(12)")]
