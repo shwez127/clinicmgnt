@@ -13,6 +13,7 @@ namespace ClinicAPI.Controllers
     [ApiController]
     public class FeedbackController : ControllerBase
     {
+        //creating a constructor for accessing FeedbackService class to access Business Layer
         FeedbackServices _feedbackService;
         public FeedbackController(FeedbackServices feedbackService)
         {

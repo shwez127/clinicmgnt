@@ -19,6 +19,7 @@ namespace Clinic_MVC_UI.Controllers
         {
             return View();
         }
+        [HttpGet]
         public async Task<IActionResult> GetAllDoctors()
         {
             IEnumerable<Doctor> bookingresult = null;
@@ -36,10 +37,10 @@ namespace Clinic_MVC_UI.Controllers
             }
             return View(bookingresult);
         }
-
+        [HttpGet]
         public async Task<IActionResult> GetAllPatients()
         {
-            IEnumerable<Doctor> bookingresult = null;
+            IEnumerable<Patient> bookingresult = null;
             using (HttpClient client = new HttpClient())
             {
                 string endPoint = _configuration["WebApiBaseUrl"] + "Patient/GetAllPatients";
@@ -48,7 +49,7 @@ namespace Clinic_MVC_UI.Controllers
                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
                         var result = await response.Content.ReadAsStringAsync();
-                        bookingresult = JsonConvert.DeserializeObject<IEnumerable<Doctor>>(result);
+                        bookingresult = JsonConvert.DeserializeObject<IEnumerable<Patient>>(result);
                     }
                 }
             }

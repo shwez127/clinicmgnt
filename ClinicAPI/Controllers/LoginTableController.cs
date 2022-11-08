@@ -29,5 +29,13 @@ namespace ClinicAPI.Controllers
             }
             return BadRequest("Invalid user");
         }
+        [HttpPost("AddLogin")]
+        public int AddLogin(LoginTable loginTable)
+        {
+           int flag= _loginTableService.AddLogin(loginTable);
+            if (flag != 0)
+                return flag;
+            return 0;
+        }
     }
 }

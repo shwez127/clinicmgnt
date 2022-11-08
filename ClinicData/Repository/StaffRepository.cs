@@ -18,8 +18,10 @@ namespace ClinicData.Repository
 
         public void AddStaff(OtherStaff otherStaff)
         {
+            #region Adding staff details to database
             _clinicDbContext.otherStaffs.Add(otherStaff);
             _clinicDbContext.SaveChanges();
+            #endregion
         }
 
         public void DeleteStaff(int staffId)

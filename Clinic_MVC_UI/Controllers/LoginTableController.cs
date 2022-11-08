@@ -26,6 +26,7 @@ namespace Clinic_MVC_UI.Controllers
         public async Task<IActionResult> Index(LoginTable loginTable)
         {
             ViewBag.status = "";
+       
             using (HttpClient client = new HttpClient())
             {
                 StringContent content = new StringContent(JsonConvert.SerializeObject(loginTable), Encoding.UTF8, "application/json");
@@ -34,6 +35,7 @@ namespace Clinic_MVC_UI.Controllers
                 {
                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
+                        
                         ViewBag.status = "Ok";
                         ViewBag.message = "User Login Succesfully";
                         return RedirectToAction("Index", "Admin");

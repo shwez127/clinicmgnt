@@ -1,7 +1,84 @@
-﻿
+﻿@{
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
 @{
     ViewData["Title"] = "GetAllPatients";
 }
 
-<h1>GetAllPatients</h1>
+@model IEnumerable<ClinicEntity.Models.Patient>
+<div>
+    <a asp-controller="Movie" asp-action="MovieEntry">Click here for movie Entry</a>
+    <hr />
+   @* <center>
+        <input type="search" value="Search for Movies" style="width:500px" />
+        <input type="button" value="Search" style="color:green" />
+        <hr />
+    </center>*@
+</div>
+@*<div class="row">
+    @foreach (var movie in Model)
+    {
+        string imageBase64Data =
+        Convert.ToBase64String(movie.ImgPoster);
+        string imageDataURL =
+        string.Format("data:image/jpg;base64,{0}",
+        imageBase64Data);
+        <div class="card" style="width: 18rem;">
+            <img height="350" width="350" src="@imageDataURL" />
+            <div class="card-body">
+                <h5 class="card-title">@movie.Name</h5>
+                <h5 class="card-title">@movie.MovieLanguage</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>
+
+    }
+</div>*@
+
+<div class="row">
+    <div class="col-12">
+        <center><h3 style="color:red;font-family:Algerian;">Patient Details</h3></center>
+        <hr />
+        <table class="table table-light table-bordered table-hover">
+            <thead>
+
+                <tr>
+                    <th>PatientID</th>
+                    <th>Name</th>
+                    <th>Gender</th>
+                    <th>BirthDate</th>
+                    <th>Address</th>
+                    <th>Movie Phone</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var movie in Model)
+                {
+                   @* string imageBase64Data =
+                    Convert.ToBase64String(movie.ImgPoster);
+                    string imageDataURL =
+                    string.Format("data:image/jpg;base64,{0}",
+                    imageBase64Data);*@
+                    <tr>
+                        <td>@movie.PatientID</td>
+                        <td>@movie.Name</td>
+                        <td>@movie.Gender</td>
+                        <td>@movie.BirthDate</td>
+                        <td>@movie.Address</td>
+                        <td>@movie.Phone</td>
+                        
+                        <td><a asp-controller="Movie" asp-action="EditMovie" asp-route-MovieId="@movie.PatientID">Edit</a></td>
+                        <td><a asp-controller="Movie" asp-action="DeleteMovie" asp-route-MovieId="@movie.PatientID">Delete</a></td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+
+</div>
 

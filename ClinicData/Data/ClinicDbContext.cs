@@ -1,7 +1,7 @@
 ﻿using ClinicEntity.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Data.Entity.ModelConfiguration.Conventions;
+
 
 namespace ClinicData.Data
 {
