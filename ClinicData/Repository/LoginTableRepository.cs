@@ -13,6 +13,15 @@ namespace ClinicData.Repository
         {
             _clinicDb = clinicDb;
         }
+
+
+      
+        public int AddLoginTable(LoginTable loginTable)
+        {
+            _clinicDb.logintables.Add(loginTable);
+            _clinicDb.SaveChanges();
+            return 0;
+        }
         public int Login(LoginTable loginTable)
         {
             if (loginTable.Email == "Prabhu@gmail.com" && loginTable.Password == "prabhu123")

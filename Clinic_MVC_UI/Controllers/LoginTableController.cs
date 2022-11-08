@@ -30,12 +30,13 @@ namespace Clinic_MVC_UI.Controllers
             {
                 StringContent content = new StringContent(JsonConvert.SerializeObject(loginTable), Encoding.UTF8, "application/json");
                 string endpoint = _configuration["WebApiBaseUrl"] + "LoginTable/Login";
-                using (var response = await client.PutAsync(endpoint, content))
+                using (var response = await client.PostAsync(endpoint, content))
                 {
                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
                         ViewBag.status = "Ok";
                         ViewBag.message = "User Login Succesfully";
+                        return RedirectToAction("Index", "Admin");
                     }
                     else
                     {
@@ -46,5 +47,6 @@ namespace Clinic_MVC_UI.Controllers
             }
             return View();
         }
+        
     }
 }
