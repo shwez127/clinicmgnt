@@ -13,6 +13,7 @@ namespace ClinicAPI.Controllers
     [ApiController]
     public class StaffController : ControllerBase
     {
+        //creating a constructor for accessing StaffService class to access Business Layer
         StaffServices _staffService;
         public StaffController(StaffServices staffService)
         {

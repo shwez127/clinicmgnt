@@ -13,6 +13,7 @@ namespace ClinicAPI.Controllers
     [ApiController]
     public class DoctorController : ControllerBase
     {
+        //creating a constructor for accessing DoctorService class to access Business Layer
         DoctorService _doctorService;
         public DoctorController(DoctorService doctorService)
         {

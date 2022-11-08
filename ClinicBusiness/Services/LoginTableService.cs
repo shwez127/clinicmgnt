@@ -18,5 +18,9 @@ namespace ClinicBusiness.Services
         {
             return _logintableRepository.Login(loginTable);
         }
+        public int AddLogin(LoginTable login)
+        {
+           return _logintableRepository.AddLoginTable(login);
+        }
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
+using System;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,14 +31,22 @@ namespace Clinic_MVC_UI.Controllers
         public async Task<IActionResult> PatientRegister1(LoginTable loginTable)
         {
             ViewBag.Status = "";
+            int loginID = 0;
             using (HttpClient client = new HttpClient())
             {
                 StringContent content = new StringContent(JsonConvert.SerializeObject(loginTable), Encoding.UTF8, "application/json");
-                string endPoint = _configuration["WebApiBaseUrl"] + "Logintable/AddPatient";
+                string endPoint = _configuration["WebApiBaseUrl"] + "LoginTable/AddLogin";
                 using (var response = await client.PostAsync(endPoint, content))
                 {
                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
+                        var result = await response.Content.ReadAsStringAsync();
+                        loginID = JsonConvert.DeserializeObject<int>(result);
+                        if (loginID != 0)
+                        {
+                            TempData["LoginID"]=loginID.ToString();
+                            TempData.Keep();
+                        }
                         ViewBag.status = "Ok";
                         ViewBag.message = "Patient Registered Successfully";
                         return RedirectToAction("PatientRegister2", "Register");
@@ -56,12 +65,13 @@ namespace Clinic_MVC_UI.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> PatientRegister2(LoginTable loginTable)
+        public async Task<IActionResult> PatientRegister2(Patient patient)
         {
+            patient.PatientID = Convert.ToInt32( TempData["LoginID"]);
             ViewBag.Status = "";
             using (HttpClient client = new HttpClient())
             {
-                StringContent content = new StringContent(JsonConvert.SerializeObject(loginTable), Encoding.UTF8, "application/json");
+                StringContent content = new StringContent(JsonConvert.SerializeObject(patient), Encoding.UTF8, "application/json");
                 string endPoint = _configuration["WebApiBaseUrl"] + "Patient/AddPatient";
                 using (var response = await client.PostAsync(endPoint, content))
                 {
@@ -69,6 +79,72 @@ namespace Clinic_MVC_UI.Controllers
                     {
                         ViewBag.status = "Ok";
                         ViewBag.message = "Patient Registered Successfully";
+                    }
+                    else
+                    {
+                        ViewBag.status = "Error";
+                        ViewBag.message = "Wrong Entries";
+                    }
+                }
+            }
+            return View();
+        }
+        public IActionResult DoctorRegister1()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> DoctorRegister1(LoginTable loginTable)
+        {
+            ViewBag.Status = "";
+            int loginID = 0;
+            using (HttpClient client = new HttpClient())
+            {
+                StringContent content = new StringContent(JsonConvert.SerializeObject(loginTable), Encoding.UTF8, "application/json");
+                string endPoint = _configuration["WebApiBaseUrl"] + "LoginTable/AddLogin";
+                using (var response = await client.PostAsync(endPoint, content))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        var result = await response.Content.ReadAsStringAsync();
+                        loginID = JsonConvert.DeserializeObject<int>(result);
+                        if (loginID != 0)
+                        {
+                            TempData["LoginID"] = loginID.ToString();
+                            TempData.Keep();
+                        }
+                        ViewBag.status = "Ok";
+                        ViewBag.message = "Patient Registered Successfully";
+                        return RedirectToAction("PatientRegister2", "Register");
+                    }
+                    else
+                    {
+                        ViewBag.status = "Error";
+                        ViewBag.message = "Wrong Entries";
+                    }
+                }
+            }
+            return View();
+        }
+        public IActionResult DoctorRegister2()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> DoctorRegister2(Doctor doctor)
+        {
+            doctor.DoctorID = Convert.ToInt32(TempData["LoginID"]);
+            ViewBag.Status = "";
+            using (HttpClient client = new HttpClient())
+            {
+                StringContent content = new StringContent(JsonConvert.SerializeObject(doctor), Encoding.UTF8, "application/json");
+                string endPoint = _configuration["WebApiBaseUrl"] + "Doctor/AddDoctor";
+                using (var response = await client.PostAsync(endPoint, content))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        ViewBag.status = "Ok";
+                        ViewBag.message = "Doctor Registered Successfully";
                     }
                     else
                     {
