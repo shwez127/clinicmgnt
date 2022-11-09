@@ -115,7 +115,7 @@ namespace Clinic_MVC_UI.Controllers
                         }
                         ViewBag.status = "Ok";
                         ViewBag.message = "Patient Registered Successfully";
-                        return RedirectToAction("PatientRegister2", "Register");
+                        return RedirectToAction("DoctorRegister2", "Register");
                     }
                     else
                     {
