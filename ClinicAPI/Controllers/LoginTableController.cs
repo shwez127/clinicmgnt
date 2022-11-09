@@ -20,19 +20,28 @@ namespace ClinicAPI.Controllers
         }
 
         [HttpPost("Login")]
-        public IActionResult Login(LoginTable loginTable)
+        public int[] Login(LoginTable loginTable)
         {
-            int flag = _loginTableService.Login(loginTable);
-            if (flag == 1)
+            int[] flag = _loginTableService.Login(loginTable);
+            if ( flag[1]==3)
             {
-                return Ok("Admin Login Suceesfully");
+                return flag;
+            }else
+            if ( flag[1] == 0)
+            {
+                return flag;
+            }else
+            if ( flag[1] == 1)
+            {
+                return flag; ;
             }
-            return BadRequest("Invalid user");
+            return null;
+
         }
         [HttpPost("AddLogin")]
         public int AddLogin(LoginTable loginTable)
         {
-           int flag= _loginTableService.AddLogin(loginTable);
+          int flag= _loginTableService.AddLogin(loginTable);
             if (flag != 0)
                 return flag;
             return 0;

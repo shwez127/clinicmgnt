@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClinicData.Migrations
 {
     [DbContext(typeof(ClinicDbContext))]
-    [Migration("20221108044419_cns")]
-    partial class cns
+    [Migration("20221109051818_db1")]
+    partial class db1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -160,7 +160,7 @@ namespace ClinicData.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("LoginTable");
+                    b.ToTable("logintables");
                 });
 
             modelBuilder.Entity("ClinicEntity.Models.OtherStaff", b =>
