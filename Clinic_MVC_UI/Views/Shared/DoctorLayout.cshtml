@@ -1,8 +1,4 @@
 ﻿
-@{
-    ViewData["Title"] = "AdminLayout";
-}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,41 +10,63 @@
 </head>
 <body>
     <header>
+
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Health_Center</a>
+                <a class="hm-logo-container" href="/">
+                    <img class="hm-logo" alt="Health_Center" style="width:75px; height:75px;" src="~/img/download.png" />
+                    <h4 style="color:black; display:inline-block;">Health_Care Center</h4>
+                </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" style="padding-left:20px;">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index" style="font-size:medium;">Home</a>
                         </li>
-                        
+                        &nbsp;&nbsp;
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="GetAllDoctors">View Doctors</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Doctor" asp-action="Profile" style="font-size:medium;">DoctorProfile</a>
                         </li>
+                        &nbsp;&nbsp;
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="GetAllPatients">View Patients</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="LoginTable" asp-action="Index" style="font-size:medium;">Pending Appointments</a>
                         </li>
+                        &nbsp;&nbsp;
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="View Doctors" asp-action="Index">View Other Staff</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="LoginTable" asp-action="Index" style="font-size:medium;">Todays Appointmemts</a>
                         </li>
+                        &nbsp;&nbsp;
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="View Doctors" asp-action="Index">View Patients</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="LoginTable" asp-action="Index" style="font-size:medium;">Generate Bill</a>
                         </li>
+                        &nbsp;&nbsp;
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="LoginTable" asp-action="Index" style="font-size:medium;">PatientHistory</a>
+                        </li>
+                        &nbsp;&nbsp;
                     </ul>
                 </div>
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="btn btn-dark" asp-area="" asp-controller="LoginTable" asp-action="Index">SignIn/SignUp</a>
+                    </li>
+                </ul>
             </div>
         </nav>
     </header>
+
+
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
+
+
 
     <footer class="border-top footer text-muted">
         <div class="container">
@@ -61,5 +79,4 @@
     @RenderSection("Scripts", required: false)
 </body>
 </html>
-
 

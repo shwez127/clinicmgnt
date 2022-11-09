@@ -99,6 +99,7 @@ namespace Clinic_MVC_UI.Controllers
                     {
                         ViewBag.status = "Ok";
                         ViewBag.message = "Patient Registered Successfully";
+                        return RedirectToAction("Index", "LoginTable");
                     }
                     else
                     {
@@ -165,6 +166,7 @@ namespace Clinic_MVC_UI.Controllers
                     {
                         ViewBag.status = "Ok";
                         ViewBag.message = "Doctor Registered Successfully";
+                        return RedirectToAction("Index", "LoginTable");
                     }
                     else
                     {

@@ -36,14 +36,24 @@ namespace ClinicData.Repository
         public IEnumerable<Doctor> GetAllDoctors()
         {
             #region Show all exixting details in database
-            return _clinicDbContext.doctors.ToList();
+            return _clinicDbContext.doctors.Include(obj=>obj.Department).Include(obj=>obj.LoginTable).ToList();
             #endregion
         }
 
         public Doctor GetDoctorById(int doctorId)
         {
             #region Search Doctor Details in Database through DoctorID
-            return _clinicDbContext.doctors.Find(doctorId);
+            Doctor doctor1=new Doctor();
+            List<Doctor> doctors= _clinicDbContext.doctors.Include(obj => obj.Department).Include(obj => obj.LoginTable).ToList();
+            foreach(var doctor in doctors)
+            {
+                if(doctor.DoctorID == doctorId)
+                {
+                    doctor1 = doctor;
+                }
+            }
+
+            return doctor1;
             #endregion
         }
 

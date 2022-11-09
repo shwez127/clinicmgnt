@@ -35,19 +35,19 @@ namespace Clinic_MVC_UI.Controllers
                 {
                     var result = await response.Content.ReadAsStringAsync();
                     arr = JsonConvert.DeserializeObject<int[]>(result);
-                    var x = TempData["ProfileID"] = arr[0].ToString();
+                    
                     TempData.Keep();
                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
-                        
+                        var x = TempData["ProfileID"] = arr[0].ToString();
                         ViewBag.status = "Ok";
-                        ViewBag.message = "User Login Succesfully";
+                        ViewBag.message = "Login Succesfully";
                         if (arr[1] == 0)
                         {
                             return RedirectToAction("Index","Patient");
                         }else if (arr[1] == 1)
                         {
-                            return RedirectToAction();
+                            return RedirectToAction("Index","Doctor");
                         }else if(arr[1] == 3)
                         {
                             return RedirectToAction("Index", "Admin");
