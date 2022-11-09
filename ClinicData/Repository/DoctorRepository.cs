@@ -36,7 +36,7 @@ namespace ClinicData.Repository
         public IEnumerable<Doctor> GetAllDoctors()
         {
             #region Show all exixting details in database
-            return _clinicDbContext.doctors.ToList();
+            return _clinicDbContext.doctors.Include(obj => obj.Department).ToList();
             #endregion
         }
 
