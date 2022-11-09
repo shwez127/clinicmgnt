@@ -26,19 +26,33 @@ namespace Clinic_MVC_UI.Controllers
         public async Task<IActionResult> Index(LoginTable loginTable)
         {
             ViewBag.status = "";
-       
+            int[] arr;
             using (HttpClient client = new HttpClient())
             {
                 StringContent content = new StringContent(JsonConvert.SerializeObject(loginTable), Encoding.UTF8, "application/json");
                 string endpoint = _configuration["WebApiBaseUrl"] + "LoginTable/Login";
                 using (var response = await client.PostAsync(endpoint, content))
                 {
+                    var result = await response.Content.ReadAsStringAsync();
+                    arr = JsonConvert.DeserializeObject<int[]>(result);
+                    var x = TempData["ProfileID"] = arr[0].ToString();
+                    TempData.Keep();
                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
                         
                         ViewBag.status = "Ok";
                         ViewBag.message = "User Login Succesfully";
-                        return RedirectToAction("Index", "Admin");
+                        if (arr[1] == 0)
+                        {
+                            return RedirectToAction("Index","Patient");
+                        }else if (arr[1] == 1)
+                        {
+                            return RedirectToAction();
+                        }else if(arr[1] == 3)
+                        {
+                            return RedirectToAction("Index", "Admin");
+                        }
+                       
                     }
                     else
                     {

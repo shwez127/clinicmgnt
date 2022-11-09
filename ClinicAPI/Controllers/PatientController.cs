@@ -38,7 +38,7 @@ namespace ClinicAPI.Controllers
             return Ok("Patient Deleted successfully!!");
         }
 
-        [HttpGet("GetMovieById")]
+        [HttpGet("GetPatientById")]
         public Patient GetPatientById(int patientId)
         {
             return _patientService.GetPatientById(patientId);

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ClinicData.Migrations
 {
-    public partial class cns : Migration
+    public partial class db1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -22,7 +22,7 @@ namespace ClinicData.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "LoginTable",
+                name: "logintables",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
@@ -33,7 +33,7 @@ namespace ClinicData.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_LoginTable", x => x.ID);
+                    table.PrimaryKey("PK_logintables", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -86,9 +86,9 @@ namespace ClinicData.Migrations
                         principalColumn: "DeptNo",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_doctors_LoginTable_DoctorID",
+                        name: "FK_doctors_logintables_DoctorID",
                         column: x => x.DoctorID,
-                        principalTable: "LoginTable",
+                        principalTable: "logintables",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -108,9 +108,9 @@ namespace ClinicData.Migrations
                 {
                     table.PrimaryKey("PK_patients", x => x.PatientID);
                     table.ForeignKey(
-                        name: "FK_patients_LoginTable_PatientID",
+                        name: "FK_patients_logintables_PatientID",
                         column: x => x.PatientID,
-                        principalTable: "LoginTable",
+                        principalTable: "logintables",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -226,7 +226,7 @@ namespace ClinicData.Migrations
                 name: "departments");
 
             migrationBuilder.DropTable(
-                name: "LoginTable");
+                name: "logintables");
         }
     }
 }
