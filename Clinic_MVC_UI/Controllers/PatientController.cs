@@ -39,12 +39,19 @@ namespace Clinic_MVC_UI.Controllers
                         var result = await response.Content.ReadAsStringAsync();
                         patient = JsonConvert.DeserializeObject<Patient>(result);
                     }
-
-
-
                 }
             }
             return View(patient);
+        }
+
+        public IActionResult addAppointment()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> addAppointment(Appointment appointment)
+        {
+            return View();
         }
     }
 }
