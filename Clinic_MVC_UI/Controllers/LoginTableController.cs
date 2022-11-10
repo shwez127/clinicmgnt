@@ -39,14 +39,19 @@ namespace Clinic_MVC_UI.Controllers
                     TempData.Keep();
                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
-                        var x = TempData["ProfileID"] = arr[0].ToString();
+                        var x = TempData["ProfileId"] = arr[0].ToString();
+                        TempData.Keep();
                         ViewBag.status = "Ok";
                         ViewBag.message = "Login Succesfully";
                         if (arr[1] == 0)
                         {
+                           /* var x = TempData["PatientID"] = arr[0].ToString();
+                            TempData.Keep();*/
                             return RedirectToAction("Index","Patient");
                         }else if (arr[1] == 1)
                         {
+                           /* var x = TempData["DoctorID"] = arr[0].ToString();
+                            TempData.Keep();*/
                             return RedirectToAction("Index","Doctor");
                         }else if(arr[1] == 3)
                         {

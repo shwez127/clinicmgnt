@@ -45,5 +45,10 @@ namespace ClinicAPI.Controllers
         {
             return _appointmentService.GetAppointment();
         }
+        [HttpGet("GetAppointmentById")]
+        public Appointment GetAppointmentById(int AppointmentId)
+        {
+            return _appointmentService.GetByAppointmentId(AppointmentId);
+        }
     }
 }

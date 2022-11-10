@@ -10,6 +10,7 @@ namespace ClinicData.Repository
         void AddAppointment(Appointment Appointment);
         void DeleteAppointment(int AppointID);
         IEnumerable<Appointment> GetAppointment();
+        Appointment GetAppointmentById(int AppointID);
         void UpdateAppointment(Appointment Appointment);
     }
 }
