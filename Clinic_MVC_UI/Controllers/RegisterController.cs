@@ -82,6 +82,15 @@ namespace Clinic_MVC_UI.Controllers
         }
         public IActionResult PatientRegister2()
         {
+            //Gender dropdown list
+            List<SelectListItem> gender = new List<SelectListItem>()
+            {
+                new SelectListItem{Value="Select",Text="Select"},
+                new SelectListItem{Value="M",Text="Male"},
+                new SelectListItem{Value="F",Text="Female"},
+                new SelectListItem{Value="O",Text="Others"},
+            };
+            ViewBag.genderlist = gender;
             return View();
         }
         [HttpPost]
@@ -146,9 +155,49 @@ namespace Clinic_MVC_UI.Controllers
                 }
             }
             return View();
+
+        }
+       
+
         }*/
-        public IActionResult DoctorRegister2()
+        public async Task<IActionResult> DoctorRegister2()
+
         {
+            //Gender dropdown list
+            List<SelectListItem> gender = new List<SelectListItem>()
+            {
+                new SelectListItem{Value="Select",Text="Select"},
+                new SelectListItem{Value="M",Text="Male"},
+                new SelectListItem{Value="F",Text="Female"},
+                new SelectListItem{Value="O",Text="Others"},
+            };
+            ViewBag.genderlist = gender;
+
+            //Department dropdown list
+            List<Department> departments = new List<Department>();
+            using (HttpClient client = new HttpClient())
+            {
+                string endpoint = _configuration["WebApiBaseUrl"] + "Department/GetDepartments";
+                using (var response = await client.GetAsync(endpoint))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        var result = await response.Content.ReadAsStringAsync();
+                        departments = JsonConvert.DeserializeObject<List<Department>>(result);
+                    }
+                }
+            }
+            List<SelectListItem> department = new List<SelectListItem>();
+
+
+            department.Add(new SelectListItem { Value = "select", Text = "select" });
+            foreach (var item in departments)
+            {
+                department.Add(new SelectListItem { Value = item.DeptNo.ToString(), Text = item.DeptName });
+            }
+
+            ViewBag.Departmentlist = department;
+
             return View();
         }
         [HttpPost]

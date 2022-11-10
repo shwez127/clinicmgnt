@@ -13,4 +13,8 @@
     <ProjectReference Include="..\ClinicEntity\ClinicEntity.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\img\" />
+  </ItemGroup>
+
 </Project>
