@@ -30,6 +30,9 @@
                     <th>Monthly Salary</th>
                     <th>Patient Treated</th>
                     <th>Status</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                    <th>View</th>
                 </tr>
             </thead>
             <tbody>
@@ -52,6 +55,7 @@
                         <td>@doctor.Status</td>
                         <td><a asp-controller="Admin" asp-action="EditDoctor" asp-route-DoctorId="@doctor.DoctorID">Edit</a></td>
                         <td><a asp-controller="Admin" asp-action="DeleteDoctor" asp-route-DoctorId="@doctor.DoctorID">Delete</a></td>
+                        <td><a asp-controller="Admin" asp-action="DoctorProfile" asp-route-doctorProfileId="@doctor.DoctorID">View</a></td>
                     </tr>
                 }
             </tbody>
