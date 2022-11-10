@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
@@ -155,6 +156,23 @@ namespace Clinic_MVC_UI.Controllers
             return View();
 
         }
+        public async Task<IActionResult> DoctorProfile(int doctorProfileId)
+        {
+            Doctor doctor = null;
+            using (HttpClient client = new HttpClient())
+            {
+                string endpoint = _configuration["WebApiBaseUrl"] + "Doctor/GetDoctorById?doctorId=" + doctorProfileId;
+                using (var response = await client.GetAsync(endpoint))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        var result = await response.Content.ReadAsStringAsync();
+                        doctor = JsonConvert.DeserializeObject<Doctor>(result);
+                    }
+                }
+            }
+            return View(doctor);
+        }
         #endregion
 
         #region Patient View-Edit-Delete Actions
@@ -261,6 +279,23 @@ namespace Clinic_MVC_UI.Controllers
                 }
             }
             return View();
+        }
+        public async Task<IActionResult> PatientProfile(int patientProfileId)
+        {
+            Patient patient = null;
+            using (HttpClient client = new HttpClient())
+            {
+                string endpoint = _configuration["WebApiBaseUrl"] + "Patient/GetPatientById?patientId=" + patientProfileId;
+                using (var response = await client.GetAsync(endpoint))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        var result = await response.Content.ReadAsStringAsync();
+                        patient = JsonConvert.DeserializeObject<Patient>(result);
+                    }
+                }
+            }
+            return View(patient);
         }
         #endregion
 

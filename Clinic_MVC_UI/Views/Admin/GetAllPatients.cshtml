@@ -25,6 +25,7 @@
                     <th>Gender</th>
                     <th>Edit</th>
                     <th>Delete</th>
+                    <th>View</th>
                 </tr>
             </thead>
             <tbody>
@@ -39,6 +40,7 @@
                         <td>@patient.Gender</td>
                         <td><a asp-controller="Admin" asp-action="EditPatient" asp-route-PatientId="@patient.PatientID">Edit</a></td>
                         <td><a asp-controller="Admin" asp-action="DeletePatient" asp-route-PatientId="@patient.PatientID">Delete</a></td>
+                        <td><a asp-controller="Admin" asp-action="PatientProfile" asp-route-patientProfileId="@patient.PatientID">View</a></td>
                     </tr>
                 }
             </tbody>
