@@ -29,7 +29,7 @@ namespace Clinic_MVC_UI.Controllers
         {
             List<SelectListItem> gender = new List<SelectListItem>()
             {
-                new SelectListItem{Value="Select",Text="select"},
+                new SelectListItem{Value="Select",Text="Select"},
                 new SelectListItem{Value="0",Text="Are You Patient?"},
                 new SelectListItem{Value="1",Text="Are You Doctor?"},
                
@@ -93,6 +93,7 @@ namespace Clinic_MVC_UI.Controllers
             ViewBag.genderlist = gender;
             return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> PatientRegister2(Patient patient)
         {
@@ -187,9 +188,8 @@ namespace Clinic_MVC_UI.Controllers
                     }
                 }
             }
+
             List<SelectListItem> department = new List<SelectListItem>();
-
-
             department.Add(new SelectListItem { Value = "select", Text = "select" });
             foreach (var item in departments)
             {

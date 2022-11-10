@@ -32,9 +32,6 @@ namespace Clinic_MVC_UI.Controllers
             Patient patient = null;
             using (HttpClient client = new HttpClient())
             {
-
-
-
                 string endpoint = _configuration["WebApiBaseUrl"] + "Patient/GetPatientById?patientId=" + doctorProfileId;
                 using (var response = await client.GetAsync(endpoint))
                 {
@@ -105,6 +102,7 @@ namespace Clinic_MVC_UI.Controllers
 
             return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> addAppointment(Appointment appointment)
         {
