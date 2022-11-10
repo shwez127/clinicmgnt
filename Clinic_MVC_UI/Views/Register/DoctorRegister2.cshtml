@@ -5,30 +5,31 @@
 }
 <form method="post">
     <section class="h-100 bg-dark">
+        @*<h3 style="font-family:Algerian; padding-left:250px; color:white;">Doctor registration form</h3>*@
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col">
                     <div class="card card-registration my-4">
                         <div class="row g-0">
                             <div class="col-xl-6 d-none d-xl-block">
-                                <img src="https://www.google.com/imgres?imgurl=https%3A%2F%2Fmedia.istockphoto.com%2Fid%2F1161326236%2Fphoto%2Ffull-length-young-medical-doctor-on-white-background.jpg%3Fs%3D612x612%26w%3D0%26k%3D20%26c%3DozfBnUFvLw41kbD-NxfYkDh9C2PWoxVnDPGGXYGSyd8%3D&imgrefurl=https%3A%2F%2Fwww.istockphoto.com%2Fphotos%2Fdoctor-full-length&tbnid=AWa0O4dZ-NnL3M&vet=12ahUKEwjpo8XzyZ77AhUp_jgGHW-fAM0QMygIegUIARDMAQ..i&docid=9GfnJRwF_YzzyM&w=408&h=612&q=doctor%20page%20photos%20lengthy&ved=2ahUKEwjpo8XzyZ77AhUp_jgGHW-fAM0QMygIegUIARDMAQ"
-                                     alt="Sample photo" class="img-fluid"
-                                     style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;" />
+                                <img src="~/img/doctor1.jfif"
+                                     alt="Sample photo" style="width:550px; height:1500px;"
+                                      />
                             </div>
                             <div class="col-xl-6">
                                 <div class="card-body p-md-5 text-black">
-                                    <h3 class="mb-5 text-uppercase">Doctor registration form</h3>
+                                    <h3 style="font-family:Algerian">Doctor registration form</h3>
 
                                     <div class="row">
                                         <div class="col-md-6 mb-4">
                                             <div class="form-outline">
-                                                <input asp-for="Name" type="text" id="form3Example1m" class="form-control form-control-lg" />
+                                                <input asp-for="Name" type="text" id="form3Example1m" class="form-control form-control-lg" placeholder="Enter your Name" required/>
                                                 <label class="form-label" for="form3Example1m">Name</label>
                                             </div>
                                         </div>
                                         <div class="col-md-6 mb-4">
                                             <div class="form-outline">
-                                                <input asp-for="Phone" type="text" id="form3Example1n" class="form-control form-control-lg" />
+                                                <input asp-for="Phone" type="text" id="form3Example1n" class="form-control form-control-lg" placeholder="Enter your Phone no" required />
                                                 <label class="form-label" for="form3Example1n">Phone No</label>
                                             </div>
                                         </div>
@@ -37,68 +38,69 @@
                                     <div class="row">
                                         <div class="col-md-6 mb-4">
                                             <div class="form-outline">
-                                                <input asp-for="Address" type="text" id="form3Example1m1" class="form-control form-control-lg" />
+                                                <input asp-for="Address" type="text" id="form3Example1m1" class="form-control form-control-lg" placeholder="Enter your Address" required />
                                                 <label class="form-label" for="form3Example1m1">Adress</label>
                                             </div>
                                         </div>
                                         <div class="col-md-6 mb-4">
                                             <div class="form-outline">
-                                                <input asp-for="BirthDate" type="date" id="form3Example1n1" class="form-control form-control-lg" />
+                                                <input asp-for="BirthDate" type="datetime" id="form3Example1n1" class="form-control form-control-lg" placeholder="Enter your Birthdate" required />
                                                 <label class="form-label" for="form3Example1n1">Birth Date</label>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="form-outline mb-4">
-                                        <input asp-for="Gender" type="text" id="form3Example8" class="form-control form-control-lg" />
                                         <label class="form-label" for="form3Example8">Gender</label>
+                                        <select asp-for="Gender" asp-items="@ViewBag.genderlist" style="width:150px;" required></select>
 
                                     </div>
 
                                     <div class="form-outline mb-4">
-                                        <input asp-for="Deptno" type="text" id="form3Example8" class="form-control form-control-lg" />
+                                        
                                         <label class="form-label" for="form3Example8">Department No</label>
+                                        <select asp-for="Deptno" asp-items="@ViewBag.Departmentlist" style="width:150px;" required></select>
 
                                     </div>
                                     <div class="form-outline mb-4">
-                                        <input asp-for="Charges_Per_Visit" type="text" id="form3Example8" class="form-control form-control-lg" />
+                                        <input asp-for="Charges_Per_Visit" type="text" id="form3Example8" class="form-control form-control-lg" placeholder="Enter your Charges" required />
                                         <label class="form-label" for="form3Example8">Charges Per Visit</label>
 
                                     </div>
                                     <div class="form-outline mb-4">
-                                        <input asp-for="MonthlySalary" type="text" id="form3Example8" class="form-control form-control-lg" />
+                                        <input asp-for="MonthlySalary" type="text" id="form3Example8" class="form-control form-control-lg" placeholder="Enter your Salary"  />
                                         <label class="form-label" for="form3Example8">Monthly salary</label>
 
                                     </div>
                                     
                                     <div class="form-outline mb-4">
-                                        <input asp-for="ReputeIndex" type="text" id="form3Example8" class="form-control form-control-lg" />
+                                        <input asp-for="ReputeIndex" type="text" id="form3Example8" class="form-control form-control-lg" placeholder="Enter your Repute index" required />
                                         <label class="form-label" for="form3Example8">Repute Index</label>
 
                                     </div>
                                     <div class="form-outline mb-4">
-                                        <input asp-for="Patient_Treated" type="text" id="form3Example8" class="form-control form-control-lg" />
+                                        <input asp-for="Patient_Treated" type="text" id="form3Example8" class="form-control form-control-lg" placeholder="Enter Patients treated" required />
                                         <label class="form-label" for="form3Example8">Patients Treated</label>
 
                                     </div>
                                     <div class="form-outline mb-4">
-                                        <input asp-for="Qualification" type="text" id="form3Example8" class="form-control form-control-lg" />
+                                        <input asp-for="Qualification" type="text" id="form3Example8" class="form-control form-control-lg" placeholder="Enter your Qualification" required />
                                         <label class="form-label" for="form3Example8">Qualificaton</label>
 
                                     </div>
                                     <div class="form-outline mb-4">
-                                        <input asp-for="Specialization" type="text" id="form3Example8" class="form-control form-control-lg" />
+                                        <input asp-for="Specialization" type="text" id="form3Example8" class="form-control form-control-lg" placeholder="Enter your Specialization" required />
                                         <label class="form-label" for="form3Example8">Specilization</label>
 
                                     </div>
                                     <div class="form-outline mb-4">
-                                        <input asp-for="Work_Experience" type="text" id="form3Example8" class="form-control form-control-lg" />
+                                        <input asp-for="Work_Experience" type="text" id="form3Example8" class="form-control form-control-lg" placeholder="Enter your Work experience" required />
                                         <label class="form-label" for="form3Example8">Work Experience</label>
 
                                     </div>
                                     <div class="form-outline mb-4">
-                                        <input asp-for="Status" type="text" id="form3Example8" class="form-control form-control-lg" />
-                                        <label class="form-label" for="form3Example8">Staus</label>
+                                        <input asp-for="Status" type="text" id="form3Example8" class="form-control form-control-lg" placeholder="Enter your Status" required />
+                                        <label class="form-label" for="form3Example8">Status</label>
 
                                     </div>
 
@@ -107,6 +109,19 @@
                                     <div class="d-flex justify-content-end pt-3">
                                         <button type="button" class="btn btn-light btn-lg">Reset all</button>
                                         <button type="submit" class="btn btn-warning btn-lg ms-2">Submit form</button>
+                                        <hr />
+                                        @if (ViewBag.status == "Ok")
+                                        {
+                                            <div class="alert alert-success">
+                                                @ViewBag.message
+                                            </div>
+                                        }
+                                        else if (ViewBag.status == "Error")
+                                        {
+                                            <div class="alert alert-danger">
+                                                @ViewBag.message
+                                            </div>
+                                        }
                                     </div>
 
                                 </div>
