@@ -1,0 +1,43 @@
+﻿@model ClinicEntity.Models.Department
+@{
+    ViewData["Title"] = "DepartmentEntry";
+}
+
+
+<div>
+    <hr />
+    <a type="button" class="nav-link text-white btn btn-primary" asp-controller="Admin" asp-action="GetAllDepartments">Return to Department Tab</a>
+    <hr />
+</div>
+
+
+<form method="post" enctype="multipart/form-data">
+    <h2 align="center">Department Entry</h2><hr />
+    <div class="form-group">
+        <label>Department Name</label>
+        <input type="text" asp-for="DeptName"  class="form-control" placeholder="Enter Department Name" />
+    </div>
+    <div class="form-group">
+        <label>Description</label>
+        <input type="text" asp-for="Description" class="form-control" maxlength="500" placeholder="Describe Department" />
+    </div>
+    <input type="submit" value="Save" class="btn btn-outline-success" />
+    <input type="button" value="Reset" class="btn btn-outline-secondary" />
+    <hr />
+    @if (ViewBag.status == "Ok")
+    {
+        <div class="alert alert-success">
+            @ViewBag.message
+        </div>
+    }
+    else if (ViewBag.status == "Error")
+    {
+        <div class="alert alert-danger">
+            @ViewBag.message
+        </div>
+    }
+</form>
+
+
+
+

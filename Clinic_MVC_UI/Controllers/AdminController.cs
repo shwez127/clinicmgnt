@@ -405,5 +405,145 @@ namespace Clinic_MVC_UI.Controllers
 
         }
         #endregion
+
+        #region Departments Create-View-Edit-Delete Actions
+        public async Task<IActionResult> GetAllDepartments()
+        {
+            IEnumerable<Department> departmentresult = null;
+            using (HttpClient client = new HttpClient())
+            {
+                string endPoint = _configuration["WebApiBaseUrl"] + "Department/GetDepartments";
+                using (var response = await client.GetAsync(endPoint))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        var result = await response.Content.ReadAsStringAsync();
+                        departmentresult = JsonConvert.DeserializeObject<IEnumerable<Department>>(result);
+                    }
+                }
+            }
+            return View(departmentresult);
+        }
+        public IActionResult DepartmentEntry()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DepartmentEntry(Department department)
+        {
+            if (ModelState.IsValid)
+            {
+                ViewBag.status = "";
+                using (HttpClient client = new HttpClient())
+                {
+
+                    StringContent content = new StringContent(JsonConvert.SerializeObject(department), Encoding.UTF8, "application/json");
+                    string endPoint = _configuration["WebApiBaseUrl"] + "Department/AddDepartment";
+                    using (var response = await client.PostAsync(endPoint, content))
+                    {
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            ViewBag.status = "Ok";
+                            ViewBag.message = "Department Details Saved Successfully!";
+                        }
+                        else
+                        {
+                            ViewBag.status = "Error";
+                            ViewBag.message = "Wrong Entries!";
+                        }
+                    }
+                }
+            }
+            return View();
+        }
+
+        public async Task<IActionResult> EditDepartment(int DepartmentId)
+        {
+            Department department = null;
+            using (HttpClient client = new HttpClient())
+            {
+                string endPoint = _configuration["WebApiBaseUrl"] + "Department/GetDepartmentsById?departmentId=" + DepartmentId;
+                using (var response = await client.GetAsync(endPoint))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        var result = await response.Content.ReadAsStringAsync();
+                        department = JsonConvert.DeserializeObject<Department>(result);
+                    }
+                }
+            }
+            return View(department);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditDepartment(Department department)
+        {
+            ViewBag.status = "";
+            using (HttpClient client = new HttpClient())
+            {
+                StringContent content = new StringContent(JsonConvert.SerializeObject(department), Encoding.UTF8, "application/json");
+                string endPoint = _configuration["WebApiBaseUrl"] + "Department/UpdateDepartment";
+                using (var response = await client.PutAsync(endPoint, content))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        ViewBag.status = "Ok";
+                        ViewBag.message = "Department Details Updated Successfully!";
+                    }
+                    else
+                    {
+                        ViewBag.status = "Error";
+                        ViewBag.message = "Wrong Entries!";
+                    }
+                }
+            }
+            return View();
+
+        }
+        public async Task<IActionResult> DeleteDepartment(int DepartmentId)
+        {
+            Department department = null;
+            using (HttpClient client = new HttpClient())
+            {
+                string endPoint = _configuration["WebApiBaseUrl"] + "Department/GetDepartmentsById?departmentId=" + DepartmentId;
+                using (var response = await client.GetAsync(endPoint))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        var result = await response.Content.ReadAsStringAsync();
+                        department = JsonConvert.DeserializeObject<Department>(result);
+                    }
+                }
+            }
+            return View(department);
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteDepartment(Department department)
+        {
+            ViewBag.status = "";
+            using (HttpClient client = new HttpClient())
+            {
+                string endPoint = _configuration["WebApiBaseUrl"] + "Department/DeleteDepartment?departmentId=" + department.DeptNo;
+                using (var response = await client.DeleteAsync(endPoint))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        ViewBag.status = "Ok";
+                        ViewBag.message = "Department Details Deleted Successfully!";
+                    }
+                    else
+                    {
+                        ViewBag.status = "Error";
+                        ViewBag.message = "Wrong Entries!";
+                    }
+                }
+            }
+            return View();
+
+        }
+        #endregion
     }
 }
