@@ -27,24 +27,27 @@ namespace ClinicData.Repository
                                select list1).Last();
             return loginTable1.ID;
         }
-        public int Login(LoginTable loginTable)
+        public int[] Login(LoginTable loginTable)
 {
+            int[] arr = { -1, 4 };
           List<LoginTable> LoginLists=_clinicDb.logintables.ToList();
             var TotalList = from v in LoginLists select v;
-            if (loginTable.Email == "Prabhu@gmail.com" && loginTable.Password == "prabhu123" && loginTable.Type==0)
+            if (loginTable.Email == "Prabhu@gmail.com" && loginTable.Password == "prabhu123" )
             {
-                return 1;
+                arr[1] = 3;
+                return arr;
             }else
             {
                 foreach(var i in TotalList)
                 {
-                    if(i.Email==loginTable.Email && i.Password==loginTable.Password && i.Type == loginTable.Type)
+                    if(i.Email==loginTable.Email && i.Password==loginTable.Password )
                     {
-                        return i.Type;
+                        arr[0]=i.ID;
+                        arr[1] = i.Type;
                     }
                 }
             }
-            return 0;
+            return arr;
 
         }
     }

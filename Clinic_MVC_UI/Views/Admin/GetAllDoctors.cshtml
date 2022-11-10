@@ -6,78 +6,52 @@
 @{
     ViewData["Title"] = "GetAllDoctors";
 }
-<div>
-    <a asp-controller="Movie" asp-action="MovieEntry">Click here for movie Entry</a>
-    <hr />
-    <center>
-        <input type="search" value="Search for Movies" style="width:500px" />
-        <input type="button" value="Search" style="color:green" />
-        <hr />
-    </center>
-</div>
-@*<div class="row">
-    @foreach (var movie in Model)
-    {
-        string imageBase64Data =
-        Convert.ToBase64String(movie.ImgPoster);
-        string imageDataURL =
-        string.Format("data:image/jpg;base64,{0}",
-        imageBase64Data);
-        <div class="card" style="width: 18rem;">
-            <img height="350" width="350" src="@imageDataURL" />
-            <div class="card-body">
-                <h5 class="card-title">@movie.Name</h5>
-                <h5 class="card-title">@movie.MovieLanguage</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-        </div>
 
-    }
-</div>*@
 
 <div class="row">
     <div class="col-12">
-        <center><h3 style="color:red;font-family:Algerian;">Movie Entries</h3></center>
+        <center><h3 style="color:black;">List of All Doctors</h3></center>
         <hr />
         <table class="table table-light table-bordered table-hover">
             <thead>
 
                 <tr>
-                    <th>Doctor ID</th>
-                    <th>Movie Name</th>
+                    <th>Doctor Id</th>
+                    <th>Doctor Name</th>
                     <th>Phone</th>
-                    <th>BirthDate</th>
                     <th>Address</th>
+                    <th>BirthDate</th>
+                    <th>Gender</th>
                     <th>Qualification</th>
                     <th>Specialization</th>
-                    <th>Deptno</th>
-                    <th>Charges_Per_Visit</th>
-                    <th>MonthlySalary</th>
+                    <th>Work Experience</th>
+                    <th>Department Name</th>
+                    <th>Charges Per Visit</th>
+                    <th>Monthly Salary</th>
+                    <th>Patient Treated</th>
+                    <th>Status</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var movie in Model)
+                @foreach (var doctor in Model)
                 {
-                    @*string imageBase64Data =
-                    Convert.ToBase64String(movie.ImgPoster);
-                    string imageDataURL =
-                    string.Format("data:image/jpg;base64,{0}",
-                    imageBase64Data);*@
                     <tr>
-                        <td>@movie.DoctorID</td>
-                        <td>@movie.Name</td>
-                        <td>@movie.Phone</td>
-                        <td>@movie.BirthDate</td>
-                        <td>@movie.Address</td>
-                        <td>@movie.Qualification</td>
-                        <td>@movie.Specialization</td>
-                        <td>@movie.Deptno</td>
-                        <td>@movie.Charges_Per_Visit</td>
-                        <td>@movie.MonthlySalary</td>
-                      @*  <td><img height="100" width="100" src="@imageDataURL" /></td>*@
-                        <td><a asp-controller="Movie" asp-action="EditMovie" asp-route-MovieId="@movie.DoctorID">Edit</a></td>
-                        <td><a asp-controller="Movie" asp-action="DeleteMovie" asp-route-MovieId="@movie.DoctorID">Delete</a></td>
+                        <td>@doctor.DoctorID</td>
+                        <td>@doctor.Name</td>
+                        <td>@doctor.Phone</td>
+                        <td>@doctor.Address</td>
+                        <td>@doctor.BirthDate</td>
+                        <td>@doctor.Gender</td>
+                        <td>@doctor.Qualification</td>
+                        <td>@doctor.Specialization</td>
+                        <td>@doctor.Work_Experience</td>
+                        <td>@doctor.Department.DeptName</td>
+                        <td>@doctor.Charges_Per_Visit</td>
+                        <td>@doctor.MonthlySalary</td>
+                        <td>@doctor.Patient_Treated</td>
+                        <td>@doctor.Status</td>
+                        <td><a asp-controller="Admin" asp-action="EditDoctor" asp-route-DoctorId="@doctor.DoctorID">Edit</a></td>
+                        <td><a asp-controller="Admin" asp-action="DeleteDoctor" asp-route-DoctorId="@doctor.DoctorID">Delete</a></td>
                     </tr>
                 }
             </tbody>

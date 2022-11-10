@@ -64,10 +64,20 @@
                             Login
                         </button>
                         <p class="small fw-bold mt-2 pt-1 mb-0">
-                            Don't have an account? <input type="submit" asp-controller="Register" asp-action="Index"
-                                                      class="btn btn-info" value="Register"/>
+                                Don't have an account? <a asp-controller="Register" asp-action="PatientRegister1"
+                                                               >Register</a>
                         </p>
+                            
                     </div>
+                        @if (ViewBag.status == "Ok")
+                        {
+                            <div class="alert alert-success">@ViewBag.message</div>
+
+                        }
+                        else if (ViewBag.status == "Error")
+                        {
+                            <div class="alert alert-danger">@ViewBag.message</div>
+                        }
 
                 </form>
             </div>

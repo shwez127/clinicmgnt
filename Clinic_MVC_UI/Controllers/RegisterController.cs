@@ -1,7 +1,6 @@
 ﻿using ClinicEntity.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.CodeAnalysis;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System;
@@ -28,6 +27,15 @@ namespace Clinic_MVC_UI.Controllers
 
         public IActionResult PatientRegister1()
         {
+            List<SelectListItem> gender = new List<SelectListItem>()
+            {
+                new SelectListItem{Value="Select",Text="select"},
+                new SelectListItem{Value="0",Text="Are You Patient?"},
+                new SelectListItem{Value="1",Text="Are You Doctor?"},
+               
+            };
+            ViewBag.genderlist = gender;
+
             return View();
         }
         [HttpPost]
@@ -50,9 +58,18 @@ namespace Clinic_MVC_UI.Controllers
                             TempData["LoginID"]=loginID.ToString();
                             TempData.Keep();
                         }
-                        ViewBag.status = "Ok";
-                        ViewBag.message = "Patient Registered Successfully";
-                        return RedirectToAction("PatientRegister2", "Register");
+                        if (loginTable.Type == 0)
+                        {
+                            ViewBag.status = "Ok";
+                            ViewBag.message = "Patient Registered Successfully";
+                            return RedirectToAction("PatientRegister2", "Register");
+                        }
+                        else if(loginTable.Type == 1)
+                        {
+                            ViewBag.status = "Ok";
+                            ViewBag.message = "Patient Registered Successfully";
+                            return RedirectToAction("DoctorRegister2", "Register");
+                        }
                     }
                     else
                     {
@@ -91,6 +108,7 @@ namespace Clinic_MVC_UI.Controllers
                     {
                         ViewBag.status = "Ok";
                         ViewBag.message = "Patient Registered Successfully";
+                        return RedirectToAction("Index", "LoginTable");
                     }
                     else
                     {
@@ -101,7 +119,7 @@ namespace Clinic_MVC_UI.Controllers
             }
             return View();
         }
-        public IActionResult DoctorRegister1()
+       /* public IActionResult DoctorRegister1()
         {
             return View();
         }
@@ -137,8 +155,13 @@ namespace Clinic_MVC_UI.Controllers
                 }
             }
             return View();
+
         }
+       
+
+        }*/
         public async Task<IActionResult> DoctorRegister2()
+
         {
             //Gender dropdown list
             List<SelectListItem> gender = new List<SelectListItem>()
@@ -192,6 +215,7 @@ namespace Clinic_MVC_UI.Controllers
                     {
                         ViewBag.status = "Ok";
                         ViewBag.message = "Doctor Registered Successfully";
+                        return RedirectToAction("Index", "LoginTable");
                     }
                     else
                     {

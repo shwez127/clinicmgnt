@@ -1,0 +1,58 @@
+﻿@{
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+@model IEnumerable<ClinicEntity.Models.OtherStaff>
+@{
+    ViewData["Title"] = "GetAllDoctors";
+}
+
+
+<div class="row">
+    <div class="col-12">
+        <center><h3 style="color:black;">List of All Other Staffs</h3></center>
+        <hr />
+        <table class="table table-light table-bordered table-hover">
+            <thead>
+
+                <tr>
+                    <th>Staff Id</th>
+                    <th>Staff Name</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                    <th>DOB</th>
+                    <th>Designation</th>
+                    <th>Gender</th>
+                    <th>Highest Qualification</th>
+                    <th>Salary</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var otherstaff in Model)
+                {
+                    <tr>
+                        <td>@otherstaff.StaffID</td>
+                        <td>@otherstaff.Name</td>
+                        <td>@otherstaff.Phone</td>
+                        <td>@otherstaff.Address</td>
+                        <td>@otherstaff.BirthDate</td>
+                        <td>@otherstaff.Designation</td>
+                        <td>@otherstaff.Gender</td>
+                        <td>@otherstaff.Highest_Qualification</td>
+                        <td>@otherstaff.Salary</td>
+                        <td><a asp-controller="Admin" asp-action="EditOtherStaff" asp-route-OtherStaffId="@otherstaff.StaffID">Edit</a></td>
+                        <td><a asp-controller="Admin" asp-action="DeleteOtherStaff" asp-route-OtherStaffId="@otherstaff.StaffID">Delete</a></td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+</div>
+<div>
+    <hr />
+    <a type="button" class="nav-link text-white btn btn-primary" asp-controller="Admin" asp-action="OtherStaffEntry">Add Other Staffs</a>
+    <hr />
+</div>
+
