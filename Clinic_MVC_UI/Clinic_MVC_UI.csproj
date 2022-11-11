@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ClinicData\ClinicData.csproj" />
     <ProjectReference Include="..\ClinicEntity\ClinicEntity.csproj" />
   </ItemGroup>
 

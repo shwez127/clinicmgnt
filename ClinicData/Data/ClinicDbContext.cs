@@ -27,14 +27,7 @@ namespace ClinicData.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder dbContextOptionsBuilder)
         {
-
-<<<<<<< HEAD
-            dbContextOptionsBuilder.UseSqlServer("Data Source=VDC01LTC2106;Initial Catalog=ClinicMngt; Integrated Security=true;");
-
-=======
-            dbContextOptionsBuilder.UseSqlServer("Data Source=VDC01LTC2156;Initial Catalog=ClinicMngt; Integrated Security=true;");
->>>>>>> b24e7bdf9f704ea45faa2c8546df7470c458d0c6
-
+            dbContextOptionsBuilder.UseSqlServer("Data Source=VDC01LTC2125;Initial Catalog=ClinicMngt; Integrated Security=true;");
         }
 
     }

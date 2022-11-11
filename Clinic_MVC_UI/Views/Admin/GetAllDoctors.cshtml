@@ -7,6 +7,13 @@
     ViewData["Title"] = "GetAllDoctors";
 }
 
+@using (Html.BeginForm())
+{
+    <p>
+        Name &nbsp;@Html.TextBox("SearchName")
+        <input type="submit" value="Search" />
+    </p>
+}
 
 <div class="row">
     <div class="col-12">
@@ -25,7 +32,7 @@
                     <th>Qualification</th>
                     <th>Specialization</th>
                     <th>Work Experience</th>
-                    <th>Department Name</th>
+                    <th>Department No.</th>
                     <th>Charges Per Visit</th>
                     <th>Monthly Salary</th>
                     <th>Patient Treated</th>
@@ -48,7 +55,7 @@
                         <td>@doctor.Qualification</td>
                         <td>@doctor.Specialization</td>
                         <td>@doctor.Work_Experience</td>
-                        <td>@doctor.Department.DeptName</td>
+                        <td>@doctor.Deptno</td>
                         <td>@doctor.Charges_Per_Visit</td>
                         <td>@doctor.MonthlySalary</td>
                         <td>@doctor.Patient_Treated</td>
