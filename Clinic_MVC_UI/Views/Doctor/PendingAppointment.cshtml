@@ -3,7 +3,6 @@
     ViewData["Title"] = "PendingAppointment";
 }
 
-<h1>PendingAppointment</h1>
 @{
     Layout = "~/Views/Shared/DoctorLayout.cshtml";
 }
@@ -11,24 +10,26 @@
 @model IEnumerable<ClinicEntity.Models.Appointment>
 
 
-
+<html>
+ <body>
 <div class="row">
     <div class="col-12">
-        <center><h3 style="color:black;">List of Pending Appointments</h3></center>
+        <h3 class="text-center" style="font-family:'Times New Roman', Times, serif;">List of Pending Appointments</h3>
         <hr />
-        <table class="table table-light table-bordered table-hover">
+        <center>
+        <table class="table-info table-bordered">
             <thead>
 
                 <tr>
-                    <th>Appointment ID</th>
-                    <th>Patient_Name</th>
-                    <th>Patient_Phone</th>
-                    <th>Patient_BirthDate</th>
-                    <th>Date</th>
-                    <th>Progress</th>
-                    <th>Appointment_Status</th>
-                    <th>Bill_Amount</th>
-                    <th> Bill_Status</th>
+                        <th>Appointment ID</th>&nbsp;&nbsp;
+                        <th>Patient_Name</th>&nbsp;&nbsp;
+                        <th>Patient_Phone</th>&nbsp;&nbsp;
+                        <th>Patient_BirthDate</th>&nbsp;&nbsp;
+                        <th>Date</th>&nbsp;&nbsp;
+                        
+                        <th>Appointment_Status</th>&nbsp;&nbsp;
+                        <th>Bill_Amount</th>&nbsp;&nbsp;
+                      
                    
                 </tr>
             </thead>
@@ -36,15 +37,15 @@
                 @foreach (var doctor in Model)
                 {
                     <tr>
-                        <td>@doctor.AppointID</td>
-                        <td>@doctor.Patient.Name</td>
-                        <td>@doctor.Patient.Phone</td>
-                        <td>@doctor.Patient.BirthDate</td>
-                        <td>@doctor.Date</td>
-                        <td>@doctor.Progress</td>
-                        <td>@doctor.Appointment_Status</td>
-                        <td>@doctor.Bill_Amount</td>
-                        <td>@doctor.Bill_Status</td>
+                            <td>@doctor.AppointID</td>&nbsp;&nbsp;
+                            <td>@doctor.Patient.Name</td>&nbsp;&nbsp;
+                            <td>@doctor.Patient.Phone</td>&nbsp;&nbsp;
+                            <td>@doctor.Patient.BirthDate</td>&nbsp;&nbsp;
+                            <td>@doctor.Date</td>&nbsp;&nbsp;
+                            
+                            <td>@doctor.Appointment_Status</td>&nbsp;&nbsp;
+                            <td>@doctor.Bill_Amount</td>&nbsp;&nbsp;
+                            
 
                         
                     </tr>
@@ -52,9 +53,13 @@
             </tbody>
 
         </table>
+        </center>
     </div>
 
 </div>
+</section>
+</body>
+</html>
 
 
 

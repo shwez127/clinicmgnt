@@ -3,7 +3,7 @@
     ViewData["Title"] = "PatientLayout";
 }
 
-<h1>PatientLayout</h1>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,9 +16,12 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3" style="background-color:aliceblue;">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Health_Center</a>
+                <a class="hm-logo-container" href="/">
+                    <img class="hm-logo" alt="Health_Center" style="width:75px; height:75px;" src="~/img/download.png" />
+                    <h5 style="color:black; display:inline-block;">Health_Care Centre</h5>
+                </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -26,31 +29,44 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index" style="font-size:medium;">Home</a>
                         </li>
+                        &nbsp;&nbsp;&nbsp;
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Patient" asp-action="PendingAppointment">Current Appointment</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Patient" asp-action="PendingAppointment" style="font-size:medium;">Current Appointment</a>
                         </li>
+                        &nbsp;&nbsp;&nbsp;
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="View Doctors" asp-action="Index">Bills History</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="View Doctors" asp-action="Index" style="font-size:medium;">Bills History</a>
                         </li>
+                        &nbsp;&nbsp;&nbsp;
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="View Doctors" asp-action="Index">Treatment History</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="View Doctors" asp-action="Index" style="font-size:medium;">Treatment History</a>
                         </li>
+                        &nbsp;&nbsp;&nbsp;
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Patient" asp-action="addAppointment">Take Appointment</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Patient" asp-action="addAppointment" style="font-size:medium;">Take Appointment</a>
                         </li>
+                        &nbsp;&nbsp;&nbsp;
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="View Doctors" asp-action="Index">Notifications</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="View Doctors" asp-action="Index" style="font-size:medium;">Notifications</a>
                         </li>
+                        &nbsp;&nbsp;&nbsp;
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="View Doctors" asp-action="Index">Feedback</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="View Doctors" asp-action="Index" style="font-size:medium;">Feedback</a>
                         </li>
+                        &nbsp;&nbsp;&nbsp;
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Patient" asp-action="Profile">Profile</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Patient" asp-action="Profile" style="font-size:medium;">Profile</a>
                         </li>
+                        &nbsp;&nbsp;&nbsp;
                     </ul>
                 </div>
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="btn btn-secondary" asp-area="" asp-controller="LoginTable" asp-action="Index">SignIn/SignUp</a>
+                    </li>
+                </ul>
             </div>
         </nav>
     </header>
