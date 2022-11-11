@@ -1,0 +1,103 @@
+﻿
+@{
+    ViewData["Title"] = "PatientHistory";
+}
+
+@{
+    Layout = "~/Views/Shared/DoctorLayout.cshtml";
+}
+
+@model IEnumerable<ClinicEntity.Models.Appointment>;
+
+
+<h1>PatientHistory</h1>
+
+<form>
+    <div class="col-12">
+
+        <h3 style="font-family:'Times New Roman', Times, serif">Patient History</h3>
+
+
+        <hr />
+        <table class="table-info table-bordered">
+            <thead>
+
+                <tr>
+                    <th>Patient ID</th>&nbsp;&nbsp;
+                    <th>Patient_Name</th>&nbsp;&nbsp;
+                    <th>Patient_Phone</th>&nbsp;&nbsp;
+                    <th>Patient_BirthDate</th>&nbsp;&nbsp;
+                    
+                    <th>Address</th>&nbsp;&nbsp;
+                    <th>Gender</th>&nbsp;&nbsp;
+
+                    <th>Date</th>&nbsp;&nbsp;
+                    <th>Appointment Status</th>&nbsp;&nbsp;
+                    <th>Bill amount</th>&nbsp;&nbsp;
+                    <th>Bill Status</th>&nbsp;&nbsp;
+                   
+                    
+                    
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var doctor in Model)
+                {
+
+                   
+                        <tr>
+
+                         <td>@doctor.Patient.PatientID</td>
+                        <td>@doctor.Patient.Name</td>
+                        <td>@doctor.Patient.Phone</td>
+                        <td>@doctor.Patient.BirthDate</td>
+                        <td>@doctor.Patient.Address</td>
+                        <td>@doctor.Patient.Gender</td>
+                        <td>@doctor.Date</td>
+                        @if (doctor.Appointment_Status == 0)
+                        {
+                            <td>Requsted</td>
+
+                        }
+                        else if (doctor.Appointment_Status == 1)
+                        {
+                            <td>Approved</td>
+                        }
+                        else if (doctor.Appointment_Status == 2)
+                        {
+                            <td>Pending</td>
+                        }
+                        else if (doctor.Appointment_Status == 3)
+                        {
+                            <td>Completed</td>
+                        }
+                        else if (doctor.Appointment_Status == 4)
+                        {
+                            <td>Rejected</td>
+                        }
+                        <td>@doctor.Bill_Amount</td>
+                        @if (doctor.Bill_Status == 0)
+                        {
+                            <td>Unpaid</td>
+
+                        }
+                        else if (doctor.Bill_Status == 1)
+                        {
+                            <td>Paid</td>
+                        }
+                        
+
+                            
+                            
+
+                            
+
+                        </tr>
+                    
+
+                }
+            </tbody>
+
+        </table>
+    </div>
+</form>
