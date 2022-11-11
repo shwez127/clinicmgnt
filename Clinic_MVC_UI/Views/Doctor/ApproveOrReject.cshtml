@@ -1,0 +1,12 @@
+﻿
+@model ClinicEntity.Models.Appointment
+@{
+    Layout = "~/Views/Shared/DoctorLayout.cshtml";
+}
+
+@if(Model.Appointment_Status==1){
+    <h5>You approved the request</h5>
+}else if(Model.Appointment_Status==4){
+    <h5>You Rejected the request</h5>
+}
+
