@@ -29,9 +29,6 @@ namespace Clinic_MVC_UI.Controllers
             Doctor doctor = null;
             using (HttpClient client = new HttpClient())
             {
-
-
-
                 string endpoint = _configuration["WebApiBaseUrl"] + "Doctor/GetDoctorById?doctorId=" + doctorProfileId;
                 using (var response = await client.GetAsync(endpoint))
                 {
