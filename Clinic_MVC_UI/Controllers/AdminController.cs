@@ -1,4 +1,6 @@
-﻿using ClinicEntity.Models;
+﻿using ClinicData.Data;
+using ClinicEntity.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Configuration;
@@ -6,6 +8,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,8 +22,11 @@ namespace Clinic_MVC_UI.Controllers
         {
             _configuration = configuration;
         }
+
+        ClinicDbContext db =new ClinicDbContext();
         public IActionResult Index()
         {
+ 
             return View();
         }
         public List<SelectListItem> GetGender()
@@ -47,6 +53,18 @@ namespace Clinic_MVC_UI.Controllers
 
             };
             return doctorstatus;
+        }
+
+        public ActionResult GetAllDoctors(string searchName)
+        {
+            var projects = from pr in db.doctors select pr;
+
+            if (!String.IsNullOrEmpty(searchName))
+            {
+                projects = projects.Where(c => c.Name.Contains(searchName));
+            }
+
+            return View(projects);
         }
 
         [HttpGet]
@@ -176,9 +194,22 @@ namespace Clinic_MVC_UI.Controllers
         #endregion
 
         #region Patient View-Edit-Delete Actions
+        public ActionResult GetAllPatients(string searchName)
+        {
+            var projects = from pr in db.patients select pr;
+
+            if (!String.IsNullOrEmpty(searchName))
+            {
+                projects = projects.Where(c => c.Name.Contains(searchName));
+            }
+
+            return View(projects);
+        }
+
         [HttpGet]
         public async Task<IActionResult> GetAllPatients()
         {
+           
             IEnumerable<Patient> patientresult = null;
             using (HttpClient client = new HttpClient())
             {
@@ -192,6 +223,7 @@ namespace Clinic_MVC_UI.Controllers
                     }
                 }
             }
+            
             return View(patientresult);
         }
         public async Task<IActionResult> EditPatient(int PatientId)
@@ -300,6 +332,20 @@ namespace Clinic_MVC_UI.Controllers
         #endregion
 
         #region OtherStaffs Create-View-Edit-Delete Actions
+
+        public ActionResult GetAllOtherStaffs(string searchName)
+        {
+            var projects = from pr in db.otherStaffs select pr;
+
+            if (!String.IsNullOrEmpty(searchName))
+            {
+                projects = projects.Where(c => c.Name.Contains(searchName));
+            }
+
+            return View(projects);
+        }
+
+        [HttpGet]
         public async Task<IActionResult> GetAllOtherStaffs()
         {
             IEnumerable<OtherStaff> otherstaffresult = null;
@@ -580,5 +626,13 @@ namespace Clinic_MVC_UI.Controllers
 
         }
         #endregion
+
+        public IActionResult SearchStaff()
+        {
+            return View();
+        }
+
+
+
     }
 }

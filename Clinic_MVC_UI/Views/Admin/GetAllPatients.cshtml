@@ -8,6 +8,14 @@
 
 @model IEnumerable<ClinicEntity.Models.Patient>
 
+@using (Html.BeginForm())
+{
+    <p>
+        Name &nbsp;@Html.TextBox("SearchName")
+        <input type="submit" value="Search" />
+    </p>
+}
+
 
 <div class="row">
     <div class="col-12">
