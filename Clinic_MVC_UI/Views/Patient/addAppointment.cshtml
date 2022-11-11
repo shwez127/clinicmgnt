@@ -1,6 +1,10 @@
 ﻿@model ClinicEntity.Models.Appointment
 @{
-    ViewData["Title"] = "OtherStaffEntry";
+    ViewData["Title"] = "PendingAppointment";
+}
+
+@{
+    Layout = "~/Views/Shared/PatientLayout.cshtml";
 }
 
 
@@ -10,50 +14,28 @@
     <hr />
 </div>*@
 
-
+@*<center>
 <form method="post" enctype="multipart/form-data">
     <h2 align="center">Request Appointment</h2><hr />
     @*<div class="form-outline mb-4">
         <label class="form-label" for="form3Example8">Department</label>
         <select asp-for="Doctor.Deptno" asp-items="@ViewBag.Departmentlist" style="width:150px;" required></select>
 
-    </div>*@
+    </div>
+    
     <div class="form-outline mb-4">
-        <label class="form-label" for="form3Example8">Doctor</label>
+        <label class="form-label" for="form3Example8">Select Doctor</label>
         <select asp-for="DoctorID" asp-items="@ViewBag.Doctorlist" style="width:150px;" required></select>
 
     </div>
     <div class="col-md-6 mb-4">
         <div class="form-outline">
+                <label class="form-label" for="form3Example1n1">Appointment Date</label>
             <input asp-for="Date" type="date" id="form3Example1n1" class="form-control form-control-lg" />
-            <label class="form-label" for="form3Example1n1">date</label>
+            
         </div>
     </div>
-@*    <div class="form-group">
-        <label>Phone Number</label>
-        <input type="text" asp-for="Phone" class="form-control" placeholder="Enter Phone Number" />
-    </div>
-    <div class="form-group">
-        <label>Address</label>
-        <input type="text" asp-for="Address" class="form-control" placeholder="Enter Address" required />
-    </div>
-    <div class="form-group">
-        <label>Designation</label>
-        <input type="text" asp-for="Designation" class="form-control" placeholder="Enter Designation" required />
-    </div>
-    <div class="form-group">
-        <label>Gender</label>
-        <select asp-for="Gender" asp-items="@ViewBag.genderlist" class="form-control" required></select>
-    </div>
-    
-    <div class="form-group">
-        <label>Highest Qualification</label>
-        <input type="text" asp-for="Highest_Qualification" class="form-control" placeholder="Enter Highest Qualification" required />
-    </div>
-    <div class="form-group">
-        <label>Salary</label>
-        <input type="number" step=0.01 asp-for="Salary" class="form-control" placeholder="Enter Salary" required />
-    </div>*@
+
     <input type="submit" value="Save" class="btn btn-outline-success" />
     <input type="button" value="Reset" class="btn btn-outline-secondary" />
     <hr />
@@ -70,6 +52,122 @@
         </div>
     }
 </form>
+</center>*@
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="well-block">
+                <div class="well-title">
+                    <h2>Book an Appointment</h2>
+                </div>
+                <form method="post">
+                    <!-- Form start -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="form3Example8">Department</label>
+                                <select class="form-control" asp-items="@ViewBag.Departmentlist" style="width:150px;" required></select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label" for="form3Example8">Select Doctor</label>
+                                <select class="form-control" asp-for="DoctorID" asp-items="@ViewBag.Doctorlist" style="width:150px;" required></select>
+                            </div>
+                        </div>
+
+                        
+                        <!-- Text input-->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label  class="control-label" for="date">Date</label>
+                                <input asp-for="Date" id="date" name="date" type="date" placeholder="Preferred Date" class="form-control input-md">
+                            </div>
+                        </div>
+                        <!-- Select Basic -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="time">Preferred Time</label>
+                                <select id="time" name="time" class="form-control">
+                                    <option value="8:00 to 9:00">8:00 to 9:00</option>
+                                    <option value="9:00 to 10:00">9:00 to 10:00</option>
+                                    <option value="10:00 to 1:00">10:00 to 1:00</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <!-- Button -->
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input type="submit" value="Make an Appointment" class="btn btn-outline-success" />
+                                <input type="button" value="Reset" class="btn btn-outline-secondary" />
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                   @* @if (ViewBag.status == "Ok")
+                    {
+                        <div class="alert alert-success">
+                            @ViewBag.message
+                        </div>
+                    }
+                    else if (ViewBag.status == "Error")
+                    {
+                        <div class="alert alert-danger">
+                            @ViewBag.message
+                        </div>
+                    }*@
+                </form>
+                <!-- form end -->
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="well-block">
+                <div class="well-title">
+                    <h2>Why Appointment with Us</h2>
+                </div>
+                <div class="feature-block">
+                    <div class="feature feature-blurb-text">
+                        <h4 class="feature-title">24/7 Hours Available</h4>
+                        <div class="feature-content">
+                            <p>To use the availability.</p>
+                        </div>
+                    </div>
+                    <div class="feature feature-blurb-text">
+                        <h4 class="feature-title">Experienced Staff Available</h4>
+                        <div class="feature-content">
+                            <p>To get better and experinced staff. </p>
+                        </div>
+                    </div>
+                    <div class="feature feature-blurb-text">
+                        <h4 class="feature-title">Low Price & Fees</h4>
+                        <div class="feature-content">
+                            <p>To treat poor people also.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@if (ViewBag.status == "Ok")
+{
+    <div class="alert alert-success">
+        @ViewBag.message
+    </div>
+}
+else if (ViewBag.status == "Error")
+{
+    <div class="alert alert-danger">
+        @ViewBag.message
+    </div>
+}
 
 
 
