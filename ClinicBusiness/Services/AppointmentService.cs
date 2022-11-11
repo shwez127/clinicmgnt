@@ -40,5 +40,10 @@ namespace ClinicBusiness.Services
         {
             return _appointmentRepository.GetAppointment();
         }
+        public Appointment GetByAppointmentId(int AppointmentId)
+        {
+           return _appointmentRepository.GetAppointmentById(AppointmentId);
+        }
+
     }
 }

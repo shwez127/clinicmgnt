@@ -14,7 +14,7 @@ namespace ClinicData.Migrations
                     DeptNo = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DeptName = table.Column<string>(type: "varchar(20)", nullable: false),
-                    Description = table.Column<string>(type: "varchar(100)", nullable: true)
+                    Description = table.Column<string>(type: "varchar(500)", nullable: true)
                 },
                 constraints: table =>
                 {

@@ -32,7 +32,7 @@ namespace ClinicData.Repository
 
         public IEnumerable<Appointment> GetAppointment()
         {
-            return _appointmentDbContext.appointments.ToList();
+            return _appointmentDbContext.appointments.Include(obj=>obj.Doctor).Include(obj=>obj.Patient).ToList();
         }
 
         public void DeleteAppointment(int AppointID)
@@ -40,6 +40,21 @@ namespace ClinicData.Repository
             var appointments = _appointmentDbContext.appointments.Find(AppointID);
             _appointmentDbContext.appointments.Remove(appointments);
             _appointmentDbContext.SaveChanges();
+        }
+       
+
+        public Appointment GetAppointmentById(int AppointID)
+        {
+            var result = _appointmentDbContext.appointments.Include(obj=>obj.Patient).Include(obj => obj.Doctor).Include(obj => obj.Doctor.Department).ToList();
+            foreach (var appointment in result)
+            {
+                if(AppointID== appointment.AppointID)
+                {
+                    return appointment;
+                }
+            }
+            return null;
+
         }
     }
 }

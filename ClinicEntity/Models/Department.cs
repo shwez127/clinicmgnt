@@ -15,7 +15,8 @@ namespace ClinicEntity.Models
         [Required]
         [Column(TypeName = "varchar(20)")]
         public string DeptName { get; set; }
-        [Column(TypeName = "varchar(100)")]
+
+        [Column(TypeName = "varchar(500)")]
         public string Description { get; set; }
     }
 }

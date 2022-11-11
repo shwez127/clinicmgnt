@@ -28,20 +28,23 @@
                         </li>
                         
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="GetAllDoctors">View Doctors</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="GetAllDoctors">Doctors</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="GetAllPatients">View Patients</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="GetAllPatients">Patients</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="GetAllOtherStaffs">View Other Staffs</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="GetAllOtherStaffs">Other Staffs</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="GetAllDepartments">Departments</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="container-fluid">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
