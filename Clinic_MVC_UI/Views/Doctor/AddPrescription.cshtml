@@ -1,0 +1,45 @@
+﻿@{
+    Layout = "~/Views/Shared/DoctorLayout.cshtml";
+}
+@model ClinicEntity.Models.Appointment;
+
+<form method="post" enctype="multipart/form-data">
+    <h2 align="center">Edit Patient Details</h2><hr />
+    <div class="form-group">
+        <label>Patient Id</label>
+        <input type="text" asp-for="AppointID" class="form-control" placeholder="Enter Patient Id" required />
+    </div>
+    <div class="form-group">
+        <label>Enter Disease</label>
+        <input type="text" asp-for="Disease" class="form-control" placeholder="Enter Disease" required />
+    </div>
+    <div class="form-group">
+        <label>Patient Progress</label>
+        <input type="text" asp-for="Progress" class="form-control" placeholder="Enter Patient Progress" required />
+    </div>
+    <div class="form-group">
+        <label>Patient Prescription</label>
+        <input type="text" asp-for="Prescription" class="form-control" placeholder="Enter Patient Prescription" required />
+    </div>
+    <div class="form-group">
+        <label>Bill Amount</label>
+        <input type="text" asp-for="Bill_Amount" class="form-control" placeholder="Enter Bill Amount" required />
+    </div>
+
+    <input type="submit" value="Update" class="btn btn-outline-success" />
+    <input type="button" value="Reset" class="btn btn-outline-secondary" />
+    <hr />
+    @if (ViewBag.status == "Ok")
+    {
+        <div class="alert alert-success">
+            @ViewBag.message
+        </div>
+    }
+    else if (ViewBag.status == "Error")
+    {
+        <div class="alert alert-danger">
+            @ViewBag.message
+        </div>
+    }
+</form>
+
