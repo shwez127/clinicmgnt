@@ -166,6 +166,80 @@ namespace Clinic_MVC_UI.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> BillHistory()
+        {
+            #region Patient can see His Appointments
+            int PatientAppointmentId = Convert.ToInt32(TempData["ProfileID"]);
+            TempData.Keep();
+            IEnumerable<Appointment> Appointments = null;
+            using (HttpClient client = new HttpClient())
+            {
+                string endPoint = _configuration["WebApiBaseUrl"] + "Appointment/GetAppointment";
+                using (var response = await client.GetAsync(endPoint))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        var result = await response.Content.ReadAsStringAsync();
+                        Appointments = JsonConvert.DeserializeObject<IEnumerable<Appointment>>(result);
+                    }
+                }
+            }
+            List<Appointment> PatientAppointments = new List<Appointment>();
+            foreach (var item in Appointments)
+            {
+                if (PatientAppointmentId == item.PatientID && item.Appointment_Status==3 && item.Bill_Status==0)
+                {
+                    PatientAppointments.Add(item);
+                }
+            }
+            #endregion
+            return View(PatientAppointments);
+        }
+    
+        public async Task<IActionResult> UpdateBill(int AppointmentId)
+        {
+            #region Fetching the appointment details
+            Appointment appointment = null;
+            using (HttpClient client = new HttpClient())
+            {
+                string endpoint = _configuration["WebApiBaseUrl"] + "Appointment/GetAppointmentById?AppointmentId=" + AppointmentId;
+                using (var response = await client.GetAsync(endpoint))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        var result = await response.Content.ReadAsStringAsync();
+                        appointment = JsonConvert.DeserializeObject<Appointment>(result);
+                    }
+                }
+            }
+            #endregion
+            #region Updating the Bill Status
+            appointment.Bill_Status = 1;
+
+            ViewBag.status = "";
+            using (HttpClient client = new HttpClient())
+            {
+                StringContent content = new StringContent(JsonConvert.SerializeObject(appointment), Encoding.UTF8, "application/json");
+                string endPoint = _configuration["WebApiBaseUrl"] + "Appointment/UpdateAppointment";
+                using (var response = await client.PutAsync(endPoint, content))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        ViewBag.status = "Ok";
+                        ViewBag.message = "Appointment Details Updated Successfully!";
+                    }
+                    else
+                    {
+                        ViewBag.status = "Error";
+                        ViewBag.message = "appointment wrong Entries!";
+                    }
+                }
+            }
+            #endregion
+            return View();
+        }
+
+        [HttpGet]
         public async Task<IActionResult> Notification()
         {
             #region Patient can see Notifications

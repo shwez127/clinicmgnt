@@ -36,6 +36,8 @@
             <tbody>
                 @foreach (var doctor in Model)
                 {
+                    if(doctor.Appointment_Status==0)
+                    {
                     <tr>
                             <td>@doctor.AppointID</td>&nbsp;&nbsp;
                             <td>@doctor.Patient.Name</td>&nbsp;&nbsp;
@@ -49,6 +51,7 @@
 
                         
                     </tr>
+                }
                 }
             </tbody>
 
