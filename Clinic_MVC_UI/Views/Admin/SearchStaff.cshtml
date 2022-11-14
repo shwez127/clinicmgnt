@@ -24,20 +24,30 @@
             <div class="carousel-item active">
                 <img src="~/img/doctor.svg" class="d-block w-100" alt="" height="725" width="725">
           <div class="carousel-caption d-none d-md-block" >
-                    <b><a class="text-white" style="font-size:50px;text-decoration:none" asp-area="" asp-controller="Admin" asp-action="GetAllDoctors">Doctor</a></b>
+                    <b><a class="text-white" style="font-size:35px;">Doctor</a></b>
+                    <p class="small fw-bold mt-2 pt-1 mb-0" style="font-size:15px">
+                        <b>Click <a asp-controller="Admin" asp-action="GetAllDoctors">Here</a> to search Patient Details.</b>
+                    </p>
           </div>
         </div>
         <div class="carousel-item">
                 <img src="~/img/patient.svg" class="d-block w-100" alt="" height="725" width="725">
           <div class="carousel-caption d-none d-md-block">
-                    <b><a class="text-white" style="font-size:50px;text-decoration:none" asp-area="" asp-controller="Admin" asp-action="GetAllPatients">Patient</a></b>
+                    <b><span class="text-white" style="font-size:35px;">Patient</span></b>
+                    <p class="small fw-bold mt-2 pt-1 mb-0" style="font-size:15px">
+                        <b>Click <a asp-controller="Admin" asp-action="GetAllPatients">Here</a> to search Patient Details.</b>
+                    </p>
           </div>
         </div>
         <div class="carousel-item">
                 <img src="~/img/crowd.svg" class="d-block w-100" alt="" height="725" width="725">
           <div class="carousel-caption d-none d-md-block">
-                    <b><a class="text-white" style="font-size:50px;text-decoration:none" asp-area="" asp-controller="Admin" asp-action="GetAllOtherStaffs">Other Staff</a></b>
-          </div>
+                    <b><span class="text-white" style="font-size:35px;/*text-decoration:none*/">Other Staff</span></b>
+                    <p class="small fw-bold mt-2 pt-1 mb-0" style="font-size:15px">
+                        <b> Click <a asp-controller="Admin" asp-action="GetAllOtherStaffs">Here</a> to search Staff Details.</b>
+                        </p>
+                   
+                </div>
         </div>
       </div>
       <button class="carousel-control-prev" type="button" data-target="#carouselExampleCaptions" data-slide="prev">
