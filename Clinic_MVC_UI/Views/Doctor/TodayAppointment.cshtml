@@ -71,8 +71,8 @@
                         <td>@doctor.Bill_Amount</td>
                         <td>@doctor.Bill_Status</td>
 
-                        <td><a asp-controller="Doctor" asp-action="ApproveOrReject" asp-route-AppointmentId="@doctor.AppointID" asp-route-Appointment_Status=1>Approve</a></td>
-                        <td><a asp-controller="Doctor" asp-action="ApproveOrReject" asp-route-AppointmentId="@doctor.AppointID" asp-route-Appointment_Status=4>Reject</a></td>
+                        <td><a asp-controller="Doctor" class="btn btn-outline-success" asp-action="ApproveOrReject" asp-route-AppointmentId="@doctor.AppointID" asp-route-Appointment_Status=1>Approve </a></td>
+                        <td><a asp-controller="Doctor" class="btn btn-outline-danger" asp-action="ApproveOrReject" asp-route-AppointmentId="@doctor.AppointID" asp-route-Appointment_Status=4>Reject</a></td>
                     </tr>
                     }
                 else if (doctor.Appointment_Status == 1)
@@ -109,7 +109,7 @@
                         <td>@doctor.Bill_Amount</td>
                         <td>@doctor.Bill_Status</td>
 
-                        <td><a asp-controller="Doctor" asp-action="AddPrescription" asp-route-AppointmentId="@doctor.AppointID">Add Precscription</a></td>
+                        <td><a class="btn btn-outline-info" asp-controller="Doctor" asp-action="AddPrescription" asp-route-AppointmentId="@doctor.AppointID">Add Precscription</a></td>
 
                     </tr>
                 }
