@@ -164,5 +164,36 @@ namespace Clinic_MVC_UI.Controllers
 
             return View(PatientAppointments);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Notification()
+        {
+            #region Patient can see Notifications
+            int PatientAppointmentId = Convert.ToInt32(TempData["ProfileID"]);
+            TempData.Keep();
+            IEnumerable<Appointment> Appointments = null;
+            using (HttpClient client = new HttpClient())
+            {
+                string endPoint = _configuration["WebApiBaseUrl"] + "Appointment/GetAppointment";
+                using (var response = await client.GetAsync(endPoint))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        var result = await response.Content.ReadAsStringAsync();
+                        Appointments = JsonConvert.DeserializeObject<IEnumerable<Appointment>>(result);
+                    }
+                }
+            }
+            List<Appointment> PatientAppointments = new List<Appointment>();
+            foreach (var item in Appointments)
+            {
+                if (PatientAppointmentId == item.PatientID && item.Appointment_Status == 1)
+                {
+                    PatientAppointments.Add(item);
+                }
+            }
+            return View(PatientAppointments);
+            #endregion
+        }
     }
 }
