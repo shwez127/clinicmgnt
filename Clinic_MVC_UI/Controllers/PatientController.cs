@@ -164,6 +164,7 @@ namespace Clinic_MVC_UI.Controllers
 
             return View(PatientAppointments);
         }
+
         [HttpGet]
         public async Task<IActionResult> BillHistory()
         {
@@ -237,10 +238,11 @@ namespace Clinic_MVC_UI.Controllers
             #endregion
             return View();
         }
+
         [HttpGet]
-        public async Task<IActionResult> TreatmentHistory()
+        public async Task<IActionResult> Notification()
         {
-            #region Patient can see His Appointments
+            #region Patient can see Notifications
             int PatientAppointmentId = Convert.ToInt32(TempData["ProfileID"]);
             TempData.Keep();
             IEnumerable<Appointment> Appointments = null;
@@ -259,13 +261,13 @@ namespace Clinic_MVC_UI.Controllers
             List<Appointment> PatientAppointments = new List<Appointment>();
             foreach (var item in Appointments)
             {
-                if (PatientAppointmentId == item.PatientID && item.Appointment_Status == 3 && item.Bill_Status == 1)
+                if (PatientAppointmentId == item.PatientID && item.Appointment_Status == 1)
                 {
                     PatientAppointments.Add(item);
                 }
             }
+            return View(PatientAppointments);
             #endregion
-            return View(Appointments);
         }
     }
 }

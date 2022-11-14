@@ -24,11 +24,11 @@ namespace ClinicData.Data
         public DbSet<Appointment> appointments { get; set; }
         public DbSet<LoginTable> logintables { get; set; }
 
-
         protected override void OnConfiguring(DbContextOptionsBuilder dbContextOptionsBuilder)
         {
 
             dbContextOptionsBuilder.UseSqlServer("Data Source=VDC01LTC2156;Initial Catalog=ClinicMngt; Integrated Security=true;");
+
         }
 
     }
