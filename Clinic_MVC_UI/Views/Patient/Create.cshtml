@@ -1,0 +1,98 @@
+﻿
+@{
+    ViewData["Title"] = "Create";
+}
+
+@{
+    Layout = "~/Views/Shared/PatientLayout.cshtml";
+}
+
+<h1>Create</h1>
+ <a class="btn btn-info btn-lg openmodal" asp-controller="Patient" asp-action="Create" data-toggle="modal" data-target="#myModal">
+    Feedback
+</a>
+
+@model ClinicEntity.Models.Pending_Feedback
+<!--Modal Launch Button-->
+
+
+
+<form method="post">
+<!--Division for Modal-->
+<div id="myModal" class="modal fade" role="dialog">
+
+    <!--Modal-->
+    <div class="modal-dialog">
+
+        <!--Modal Content-->
+        <div class="modal-content">
+
+            <!-- Modal Header-->
+            <div class="modal-header">
+                <h3>Feedback Request</h3>
+
+                <!--Close/Cross Button-->
+                <button type="button" class="close" data-dismiss="modal" style="color: white;">&times;</button>
+            </div>
+
+            <!-- Modal Body-->
+            <div class="modal-body text-center">
+                <i class="far fa-file-alt fa-4x mb-3 animated rotateIn icon1"></i>
+                <h3>Your opinion matters</h3>
+                <h5>Help us improve our product? <strong>Give us your feedback.</strong></h5>
+                <hr>
+                <h6>Your Rating</h6>
+            </div>
+
+       
+            <!-- Radio Buttons for Rating-->
+          @*  <div class="form-check mb-4">
+                    <input name="feedback"  type="radio">
+                    <label asp-for="Rating" class="ml-3">Very good</label>
+            </div>
+            <div class="form-check mb-4">
+                    <input name="feedback" type="radio">
+
+                <label asp-for="Comment" class="ml-3">Good</label>
+            </div>
+            <div class="form-check mb-4">
+                <input name="feedback" asp-route="" type="radio">
+                <label asp-for="Rating"  class="ml-3">Mediocre</label>
+            </div>
+            <div class="form-check mb-4">
+                <input name="feedback" type="radio">
+                <label asp-for="Rating" class="ml-3">Bad</label>
+            </div>
+            <div class="form-check mb-4">
+                <input name="feedback" type="radio">
+                <label asp-for="Rating" class="ml-3">Very Bad</label>
+            </div>*@
+
+                <div >
+                    <h4>Ratings</h4>
+                
+                <select style="width:150px; " asp-for="Rating" asp-items="ViewBag.Ratinglist" placeholder="Your Message" rows="3"></select>
+                </div>
+
+            <!--Text Message-->
+            <div class="text-center">
+                <h4>What could we improve?</h4>
+            </div>
+            <textarea type="textarea"asp-for="Comment" placeholder="Your Message" rows="3"></textarea>
+
+
+            <!-- Modal Footer-->
+            <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">
+                    Send
+                    <i class="fa fa-paper-plane"></i>
+                </button>
+                <a href="" class="btn btn-outline-primary" data-dismiss="modal">Cancel</a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+</form>

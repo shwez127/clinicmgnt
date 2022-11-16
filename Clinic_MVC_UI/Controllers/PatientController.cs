@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using static Microsoft.AspNetCore.Razor.Language.TagHelperMetadata;
 
 namespace Clinic_MVC_UI.Controllers
 {
@@ -268,6 +269,119 @@ namespace Clinic_MVC_UI.Controllers
             }
             return View(PatientAppointments);
             #endregion
+        }
+        [HttpGet]
+        public async Task<IActionResult> TreatmentHistory()
+        {
+            #region Patient can see his Treatment history
+            int PatientAppointmentId = Convert.ToInt32(TempData["ProfileID"]);
+            TempData.Keep();
+            IEnumerable<Appointment> Appointments = null;
+            using (HttpClient client = new HttpClient())
+            {
+                string endPoint = _configuration["WebApiBaseUrl"] + "Appointment/GetAppointment";
+                using (var response = await client.GetAsync(endPoint))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        var result = await response.Content.ReadAsStringAsync();
+                        Appointments = JsonConvert.DeserializeObject<IEnumerable<Appointment>>(result);
+                    }
+                }
+            }
+            List<Appointment> PatientAppointments = new List<Appointment>();
+            foreach (var item in Appointments)
+            {
+                if (PatientAppointmentId == item.PatientID && item.Bill_Status == 1)
+                {
+                    PatientAppointments.Add(item);
+                }
+            }
+            return View(PatientAppointments);
+            #endregion
+
+        }
+        public async Task<IActionResult> PatientFeedback()
+        {
+            #region Patient can give Feedback
+            int PatientAppointmentId = Convert.ToInt32(TempData["ProfileID"]);
+            TempData.Keep();
+            IEnumerable<Appointment> Appointments = null;
+            using (HttpClient client = new HttpClient())
+            {
+                string endPoint = _configuration["WebApiBaseUrl"] + "Appointment/GetAppointment";
+                using (var response = await client.GetAsync(endPoint))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        var result = await response.Content.ReadAsStringAsync();
+                        Appointments = JsonConvert.DeserializeObject<IEnumerable<Appointment>>(result);
+                    }
+                }
+            }
+            List<Appointment> PatientAppointments = new List<Appointment>();
+            foreach (var item in Appointments)
+            {
+                if (PatientAppointmentId == item.PatientID && item.Bill_Status == 1)
+                {
+                    PatientAppointments.Add(item);
+                }
+            }
+            return View(PatientAppointments);
+            #endregion
+        }
+
+        public IActionResult Create(int AppointmentId,int doctorId)
+            
+        {
+            TempData["AppointmentId"] = AppointmentId;
+            TempData["DoctorId"] = doctorId;
+            List<SelectListItem> Rating = new List<SelectListItem>()
+            {
+                new SelectListItem{Value="Select",Text="Select"},
+                new SelectListItem{Value="5",Text="Very good"},
+                new SelectListItem{Value="4",Text="Good"},
+                new SelectListItem{Value="3",Text="Mediocre"},
+                new SelectListItem{Value="2",Text="Bad"},
+                 new SelectListItem{Value="1",Text="Very Bad"}
+            };
+            ViewBag.Ratinglist = Rating;
+            return View();
+        }
+        [HttpPost]
+        public async Task<ActionResult> Create(Pending_Feedback pending_Feedback)
+
+        {
+           /* pending_Feedback.PatientID = Convert.ToInt32(TempData["ProfileID"]);
+
+            TempData.Keep();*/
+            pending_Feedback.AppointID= Convert.ToInt32(TempData["AppointmentId"]);
+            TempData.Keep();
+          /*  pending_Feedback.DoctorID = Convert.ToInt32(TempData["DoctorId"]);
+            TempData.Keep();
+*/
+            ViewBag.status = "";
+            using (HttpClient client = new HttpClient())
+            {
+
+                StringContent content = new StringContent(JsonConvert.SerializeObject(pending_Feedback), Encoding.UTF8, "application/json");
+                string endPoint = _configuration["WebApiBaseUrl"] + "Feedback/AddFeedback";
+                using (var response = await client.PostAsync(endPoint, content))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        ViewBag.status = "Ok";
+                        ViewBag.message = "Feedback Submited Successfully!";
+                    }
+                    else
+                    {
+                        ViewBag.status = "Error";
+                        ViewBag.message = "Wrong Entries!";
+                    }
+                }
+            }
+
+            return View();
         }
     }
 }
