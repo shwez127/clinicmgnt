@@ -309,7 +309,7 @@ namespace Clinic_MVC_UI.Controllers
                 }
             }
             #endregion
-            return View();
+            return View(appointmentNew);
         }
 
         [HttpGet]
