@@ -2,35 +2,38 @@
 @{
     ViewData["Title"] = "DeleteDepartment";
 }
-
-<div>
-    <hr />
-    <a type="button" class="nav-link text-white btn btn-primary" asp-controller="Admin" asp-action="GetAllDepartments">Return to Department Tab</a>
-    <hr />
-</div>
-
-
-<form method="post" enctype="multipart/form-data">
-    <h2 align="center">Delete Department Details</h2><hr />
-    <div class="form-group">
-        <label>Department Id</label>
-        <input type="text" asp-for="DeptNo" class="form-control" placeholder="Enter Department Id" required />
+@{
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+    <div>
+        <hr />
+        <a type="button" class="nav-link text-white btn btn-primary" asp-controller="Admin" asp-action="GetAllDepartments">Return to Department Tab</a>
+        <hr />
     </div>
-    <input type="submit" value="Delete" class="btn btn-outline-danger" />
-    <hr />
-    @if (ViewBag.status == "Ok")
-    {
-        <div class="alert alert-success">
-            @ViewBag.message
+
+<hr />
+
+    <form method="post" enctype="multipart/form-data">
+        <h2 align="center">Delete Department Details</h2><hr />
+        <div class="form-group">
+            <label>Department Id</label>
+            <input type="text" asp-for="DeptNo" class="form-control" placeholder="Enter Department Id" required />
         </div>
-    }
-    else if (ViewBag.status == "Error")
-    {
-        <div class="alert alert-danger">
-            @ViewBag.message
-        </div>
-    }
-</form>
+        <input type="submit" value="Delete" class="btn btn-outline-danger" />
+        <hr />
+        @if (ViewBag.status == "Ok")
+        {
+            <div class="alert alert-success">
+                @ViewBag.message
+            </div>
+        }
+        else if (ViewBag.status == "Error")
+        {
+            <div class="alert alert-danger">
+                @ViewBag.message
+            </div>
+        }
+    </form>
 
 
 

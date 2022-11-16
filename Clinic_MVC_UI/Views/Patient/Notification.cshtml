@@ -9,16 +9,13 @@
 
 @model IEnumerable<ClinicEntity.Models.Appointment>
 
-
-
-
+<hr />
 <div class="row">
     <div class="col-12">
-        <h3 class="text-center" style="font-family:'Times New Roman', Times, serif;">Appointment Notifications</h3>
+        <center><h3 style="color:black;">Appointments Notification</h3></center>
         <hr />
-        <table class="table-info table-bordered">
+        <table class="table table-light table-bordered table-hover">
             <thead>
-
                 <tr>
                     <th>Appointment ID</th>
                     <th>Doctor_Name</th>
@@ -26,11 +23,9 @@
                     <th>Doctor Charges per visit</th>
                     <th>Date</th>
                     <th>Progress</th>
-
                     <th>Appointment_Status</th>
                     <th>Bill_Amount</th>
                     <th> Bill_Status</th>
-
                 </tr>
             </thead>
             <tbody>
@@ -67,15 +62,11 @@
 
                         <td>@doctor.Bill_Amount</td>
                         <td>@doctor.Bill_Status</td>
-
-
                     </tr>
-
                 }
             </tbody>
-
         </table>
     </div>
-
 </div>
+<hr />
 

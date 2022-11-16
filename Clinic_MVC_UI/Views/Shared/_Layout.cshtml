@@ -9,12 +9,14 @@
 </head>
 <body>
     <header>
-       
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3" style="background-color:aliceblue;">
-            <div class="container">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light font-weight-bold @*box-shadow mb-3*@" style="background-color:#003399;">
+            <div class="container-fluid">
                 <a class="hm-logo-container" href="/">
-                    <img class="hm-logo" alt="Health_Center" style="width:75px; height:75px;" src="~/img/download.png" />
-                    <h4 style="color:black; display:inline-block;">Health_Care Centre</h4>
+                    <img class="hm-logo" alt="" style="height:120px; padding-bottom:20px" src="https://www.svgrepo.com/show/270145/health-clinic-health-care.svg" />
+                    <h2 style="color:white;font-family:'Copperplate Gothic';display:inline-block;padding-top:30px;padding-left:10px">
+                       <b>THE CARE</b>
+                        <br /><span class="ms-2" style="font-size:15px;letter-spacing:6px"> -- C L I N I C --</span>
+                    </h2>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -23,24 +25,25 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" style="padding-left:20px;">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index" style="font-size:x-large;">Home</a>
+                            <a class="nav-link text-uppercase" asp-area="" asp-controller="Home" asp-action="Index" style="font-size:x-large;color:white;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Home</a>
                         </li>
                         &nbsp;&nbsp;&nbsp;
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="LoginTable" asp-action="Index" style="font-size:x-large;">Departments</a>
+                            <a class="nav-link text-uppercase" asp-area="" asp-controller="LoginTable" asp-action="Index" style="font-size:x-large;color:white;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Departments</a>
                         </li>
                         &nbsp;&nbsp;&nbsp;
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="LoginTable" asp-action="Index" style="font-size:x-large;">About us</a>
+                            <a class="nav-link text-uppercase" asp-area="" asp-controller="LoginTable" asp-action="Index" style="font-size:x-large;color:white;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">About us</a>
                         </li>
                         &nbsp;&nbsp;&nbsp;
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="LoginTable" asp-action="Index" style="font-size:x-large;">Contact us</a>
+                            <a class="nav-link text-uppercase" asp-area="" asp-controller="LoginTable" asp-action="Index" style="font-size:x-large;color:white;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Contact us</a>
                         </li>
                         &nbsp;&nbsp;&nbsp;
                     </ul>     
                     
                 </div>
+
                 <ul class="navbar-nav flex-grow-1">
                     <li class="nav-item">
                         <a class="btn btn-secondary" asp-area="" asp-controller="LoginTable" asp-action="Index">SignIn/SignUp</a>
@@ -50,23 +53,24 @@
         </nav>
     </header>
 
-    <div class="container-fluid">
+    <div class="container-fluid" style="background-color:mediumspringgreen">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="footer text-muted" style="background-color:#003399">
         <div class="container">
              <a class="hm-logo-container" href="/">
-                <img class="hm-logo" alt="Health_Center" style="width:75px; height:75px;" src="~/img/download.png" />
-                <h6 style="color:black; display:inline-block;">Health_Care Centre</h6>
-            </a>&nbsp;&nbsp;&nbsp;&copy; 2022 - Clinic_MVC_UI
+                <img class="hm-logo" alt="" style="width:50px; height:50px;" src="https://www.svgrepo.com/show/270145/health-clinic-health-care.svg" />
+                <h6 style="color:white; display:inline-block;">THE CARE</h6>
+            </a>&nbsp;&nbsp;&nbsp;&copy; <a style="color:white;">2022 - The_Care_Clinic</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
+
 </body>
 </html>

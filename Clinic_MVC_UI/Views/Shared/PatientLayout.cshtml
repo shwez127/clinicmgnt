@@ -16,69 +16,71 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3" style="background-color:aliceblue;">
-            <div class="container">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light font-weight-bold @*box-shadow mb-3*@" style="background-color:#003399;">
+            <div class="container-fluid">
                 <a class="hm-logo-container" href="/">
-                    <img class="hm-logo" alt="Health_Center" style="width:75px; height:75px;" src="~/img/download.png" />
-                    <h5 style="color:black; display:inline-block;">Health_Care Centre</h5>
+                    <img class="hm-logo" alt="" style="height:120px; padding-bottom:20px" src="https://www.svgrepo.com/show/270145/health-clinic-health-care.svg" />
+                    <h2 style="color:white;font-family:'Copperplate Gothic';display:inline-block;padding-top:30px;padding-left:10px">
+                        <b>THE CARE</b>
+                        <br /><span class="ms-2" style="font-size:15px;letter-spacing:6px"> -- C L I N I C --</span>
+                    </h2>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" style="padding-left:20px;">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index" style="font-size:medium;">Home</a>
+                            <a class="nav-link text-uppercase" asp-area="" asp-controller="Patient" asp-action="PendingAppointment" style="font-size:large;color:white;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Current Appointment</a>
                         </li>
                         &nbsp;&nbsp;&nbsp;
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Patient" asp-action="PendingAppointment" style="font-size:medium;">Current Appointment</a>
+                            <a class="nav-link text-uppercase" asp-area="" asp-controller="Patient" asp-action="BillHistory" style="font-size:large;color:white;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Bills History</a>
                         </li>
                         &nbsp;&nbsp;&nbsp;
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Patient" asp-action="BillHistory" style="font-size:medium;">Bills History</a>
+                            <a class="nav-link text-uppercase" asp-area="" asp-controller="Patient" asp-action="TreatmentHistory" style="font-size:large;color:white;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Treatment History</a>
                         </li>
                         &nbsp;&nbsp;&nbsp;
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Patient" asp-action="TreatmentHistory" style="font-size:medium;">Treatment History</a>
+                            <a class="nav-link text-uppercase" asp-area="" asp-controller="Patient" asp-action="addAppointment" style="font-size:large;color:white;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Take Appointment</a>
                         </li>
                         &nbsp;&nbsp;&nbsp;
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Patient" asp-action="addAppointment" style="font-size:medium;">Take Appointment</a>
+                            <a class="nav-link text-uppercase" asp-area="" asp-controller="Patient" asp-action="Notification" style="font-size:large;color:white;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Notifications</a>
                         </li>
                         &nbsp;&nbsp;&nbsp;
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Patient" asp-action="Notification" style="font-size:medium;">Notifications</a>
+                            <a class="nav-link text-uppercase" asp-area="" asp-controller="View Doctors" asp-action="Index" style="font-size:large;color:white;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Feedback</a>
                         </li>
                         &nbsp;&nbsp;&nbsp;
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="View Doctors" asp-action="Index" style="font-size:medium;">Feedback</a>
-                        </li>
-                        &nbsp;&nbsp;&nbsp;
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Patient" asp-action="Profile" style="font-size:medium;">Profile</a>
+                            <a class="nav-link text-uppercase" asp-area="" asp-controller="Patient" asp-action="Profile" style="font-size:large;color:white;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Profile</a>
                         </li>
                         &nbsp;&nbsp;&nbsp;
                     </ul>
                 </div>
                 <ul class="navbar-nav flex-grow-1">
                     <li class="nav-item">
-                        <a class="btn btn-secondary" asp-area="" asp-controller="LoginTable" asp-action="Index">SignIn/SignUp</a>
+                        <a class="btn btn-danger" asp-area="" asp-controller="Home" asp-action="Index">Logout</a>
                     </li>
                 </ul>
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="container-fluid">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="footer text-muted" style="background-color:#003399">
         <div class="container">
-            &copy; 2022 - Clinic_MVC_UI - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <a class="hm-logo-container" href="/">
+                <img class="hm-logo" alt="" style="width:50px; height:50px;" src="https://www.svgrepo.com/show/270145/health-clinic-health-care.svg" />
+                <h6 style="color:white; display:inline-block;">THE CARE</h6>
+            </a>&nbsp;&nbsp;&nbsp;&copy; <a style="color:white;">2022 - The_Care_Clinic</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

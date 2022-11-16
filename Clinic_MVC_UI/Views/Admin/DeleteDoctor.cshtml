@@ -1,34 +1,38 @@
 ﻿@model ClinicEntity.Models.Doctor
-
+@{
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
 @*<div>
     <hr />
     <a asp-controller="Booking" asp-action="Index">Go to Booking Index</a>
     <hr />
 </div>*@
-<div>
-    <hr />
-    <a type="button" class="nav-link text-white btn btn-primary" asp-controller="Admin" asp-action="GetAllDoctors">Return to Doctor Tab</a>
-    <hr />
-</div>
-
-<form method="post" enctype="multipart/form-data">
-    <h2 align="center">Delete Doctor Details</h2><hr />
-    <div class="form-group">
-        <label>Doctor Id</label>
-        <input type="text" asp-for="DoctorID" class="form-control" placeholder="Enter Doctor Id" required />
+    <div>
+        <hr />
+        <a type="button" class="nav-link text-white btn btn-primary" asp-controller="Admin" asp-action="GetAllDoctors">Return to Doctor Tab</a>
+        <hr />
     </div>
-    <input type="submit" value="Delete" class="btn btn-outline-danger" />
-    <hr />
-    @if (ViewBag.status == "Ok")
-    {
-        <div class="alert alert-success">
-            @ViewBag.message
+
+<hr />
+
+    <form method="post" enctype="multipart/form-data">
+        <h2 align="center">Delete Doctor Details</h2><hr />
+        <div class="form-group">
+            <label>Doctor Id</label>
+            <input type="text" asp-for="DoctorID" class="form-control" placeholder="Enter Doctor Id" required />
         </div>
-    }
-    else if (ViewBag.status == "Error")
-    {
-        <div class="alert alert-danger">
-            @ViewBag.message
-        </div>
-    }
-</form>
+        <input type="submit" value="Delete" class="btn btn-outline-danger" />
+        <hr />
+        @if (ViewBag.status == "Ok")
+        {
+            <div class="alert alert-success">
+                @ViewBag.message
+            </div>
+        }
+        else if (ViewBag.status == "Error")
+        {
+            <div class="alert alert-danger">
+                @ViewBag.message
+            </div>
+        }
+    </form>
