@@ -12,7 +12,7 @@
 <hr />
 <div class="row">
     <div class="col-12">
-        <center><h3 style="color:black;">List of Departments</h3></center>
+        <center><a class="font-weight-bold text-uppercase" style="font-size:x-large; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">List of Departments</a></center>
         <hr />
         <table class="table table-light table-bordered table-hover">
             <thead>
@@ -32,8 +32,8 @@
                         <td>@department.DeptNo</td>
                         <td>@department.DeptName</td>
                         <td>@department.Description</td>
-                        <td><a asp-controller="Admin" asp-action="EditDepartment" asp-route-DepartmentId="@department.DeptNo">Edit</a></td>
-                        <td><a asp-controller="Admin" asp-action="DeleteDepartment" asp-route-DepartmentId="@department.DeptNo">Delete</a></td>
+                        <td><a class="btn btn-info" asp-controller="Admin" asp-action="EditDepartment" asp-route-DepartmentId="@department.DeptNo"><i class="fa-sharp fa-solid fa-pen-to-square"></i></a></td>
+                        <td><a class="btn btn-danger" asp-controller="Admin" asp-action="DeleteDepartment" asp-route-DepartmentId="@department.DeptNo"><i class="fa-sharp fa-solid fa-trash"></i></a></td>
                     </tr>
                 }
             </tbody>
