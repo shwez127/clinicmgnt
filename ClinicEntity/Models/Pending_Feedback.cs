@@ -22,5 +22,11 @@ namespace ClinicEntity.Models
         [ForeignKey("Patient")]
         public int PatientID { get; set; }
         public Patient Patient { get; set; }
+       
+        public int Rating { get; set; }
+
+        [StringLength(100)]
+        public string Comment { get; set; }
+     
     }
 }

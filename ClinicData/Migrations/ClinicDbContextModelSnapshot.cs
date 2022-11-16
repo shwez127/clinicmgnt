@@ -74,7 +74,7 @@ namespace ClinicData.Migrations
                         .HasColumnType("varchar(20)");
 
                     b.Property<string>("Description")
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("varchar(500)");
 
                     b.HasKey("DeptNo");
 
@@ -232,10 +232,17 @@ namespace ClinicData.Migrations
                     b.Property<int>("AppointID")
                         .HasColumnType("int");
 
+                    b.Property<string>("Comment")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
                     b.Property<int>("DoctorID")
                         .HasColumnType("int");
 
                     b.Property<int>("PatientID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Rating")
                         .HasColumnType("int");
 
                     b.HasKey("AppointID");
