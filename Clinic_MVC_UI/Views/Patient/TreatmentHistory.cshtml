@@ -1,17 +1,17 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "TreatmentHistory";
 }
-
-
-
 
 
 @{
     Layout = "~/Views/Shared/PatientLayout.cshtml";
 }
 
+
+
 @model IEnumerable<ClinicEntity.Models.Appointment>
+
+
 
 
 
@@ -23,6 +23,8 @@
         <table class="table-info table-bordered">
             <thead>
 
+
+
                 <tr>
                     <th>Appointment ID</th>
                     <th>Doctor_Name</th>
@@ -31,9 +33,13 @@
                     <th>Date</th>
                     <th>Progress</th>
 
+
+
                     <th>Appointment_Status</th>
                     <th>Bill_Amount</th>
                     <th> Bill_Status</th>
+
+
 
                 </tr>
             </thead>
@@ -53,6 +59,8 @@
                             {
                                 <td>Requsted</td>
 
+
+
                             }
                             else if (doctor.Appointment_Status == 1)
                             {
@@ -71,10 +79,14 @@
                                 <td>Rejected</td>
                             }
 
+
+
                             <td>@doctor.Bill_Amount</td>
                             @if (doctor.Bill_Status == 0)
                             {
                                 <td>Unpaid</td>
+
+
 
                             }
                             else if (doctor.Bill_Status == 1)
@@ -84,22 +96,18 @@
 
 
 
-                    </tr>
-                }
+
+
+                        </tr>
+                    }
                 }
             </tbody>
+
+
 
         </table>
     </div>
 
+
+
 </div>
-
-
-
-
-
-
-
-
-
-
