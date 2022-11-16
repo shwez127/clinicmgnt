@@ -9,51 +9,39 @@
 
 @model IEnumerable<ClinicEntity.Models.Appointment>;
 
-
-<h1>PatientHistory</h1>
-
+<hr />
 <form>
     <div class="col-12">
-
-        <h3 style="font-family:'Times New Roman', Times, serif">Patient History</h3>
-
-
+        <center><h3 style="color:black;">Patient History</h3></center>
         <hr />
-        <table class="table-info table-bordered">
+        <table class="table table-light table-bordered table-hover">
             <thead>
-
                 <tr>
-                    <th>Patient ID</th>&nbsp;&nbsp;
-                    <th>Patient_Name</th>&nbsp;&nbsp;
-                    <th>Patient_Phone</th>&nbsp;&nbsp;
-                    <th>Patient_BirthDate</th>&nbsp;&nbsp;
-                    
-                    <th>Address</th>&nbsp;&nbsp;
-                    <th>Gender</th>&nbsp;&nbsp;
-
-                    <th>Date</th>&nbsp;&nbsp;
-                    <th>Appointment Status</th>&nbsp;&nbsp;
-                    <th>Bill amount</th>&nbsp;&nbsp;
-                    <th>Bill Status</th>&nbsp;&nbsp;
-                   
-                    
-                    
+                    <th>Patient ID</th>
+                    <th>Patient_Name</th>
+                    <th>Patient_Phone</th>
+                    <th>Patient_BirthDate</th>
+                    <th>Address</th>
+                    <th>Gender</th>
+                    <th>Date</th>
+                    <th>Appointment Status</th>
+                    <th>Bill amount</th>
+                    <th>Bill Status</th> 
                 </tr>
             </thead>
             <tbody>
                 @foreach (var doctor in Model)
                 {
-
-                   
                         <tr>
 
-                         <td>@doctor.Patient.PatientID</td>
+                        <td>@doctor.Patient.PatientID</td>
                         <td>@doctor.Patient.Name</td>
                         <td>@doctor.Patient.Phone</td>
                         <td>@doctor.Patient.BirthDate</td>
                         <td>@doctor.Patient.Address</td>
                         <td>@doctor.Patient.Gender</td>
                         <td>@doctor.Date</td>
+
                         @if (doctor.Appointment_Status == 0)
                         {
                             <td>Requsted</td>
@@ -85,19 +73,9 @@
                         {
                             <td>Paid</td>
                         }
-                        
-
-                            
-                            
-
-                            
-
                         </tr>
-                    
-
                 }
             </tbody>
-
         </table>
     </div>
 </form>

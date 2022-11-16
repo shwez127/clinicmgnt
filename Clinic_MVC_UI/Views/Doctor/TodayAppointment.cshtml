@@ -12,27 +12,22 @@
 }
 
 
-
+<hr />
     <div class="col-12">
-
         <center><h3 style="color:black;">List of Appointments</h3></center>
-
-
         <hr />
-        <table class="table-info table-bordered">
+        <table class="table table-light table-bordered table-hover">
             <thead>
-
                 <tr>
-                    <th>Appointment ID</th>&nbsp;&nbsp;
-                    <th>Patient_Name</th>&nbsp;&nbsp;
-                    <th>Patient_Phone</th>&nbsp;&nbsp;
-                    <th>Patient_BirthDate</th>&nbsp;&nbsp;
-                    <th>Date</th>&nbsp;&nbsp;
-                    <th>Progress</th>&nbsp;&nbsp;
-                    <th>Appointment_Status</th>&nbsp;&nbsp;
-                    <th>Bill_Amount</th>&nbsp;&nbsp;
-                    <th> Bill_Status</th>&nbsp;&nbsp;
-
+                    <th>Appointment ID</th>
+                    <th>Patient_Name</th>
+                    <th>Patient_Phone</th>
+                    <th>Patient_BirthDate</th>
+                    <th>Date</th>
+                    <th>Progress</th>
+                    <th>Appointment_Status</th>
+                    <th>Bill_Amount</th>
+                    <th> Bill_Status</th>
                 </tr>
             </thead>
             <tbody>
@@ -40,8 +35,8 @@
                 {
                         if (doctor.Appointment_Status == 0)
                         {
-                            <tr>
-                                <td>@doctor.AppointID</td>
+                        <tr>
+                        <td>@doctor.AppointID</td>
                         <td>@doctor.Patient.Name</td>
                         <td>@doctor.Patient.Phone</td>
                         <td>@doctor.Patient.BirthDate</td>
@@ -149,13 +144,9 @@
                 }
                 }
             </tbody>
-
         </table>
     </div>
-
-
-
-
+<hr />
 
   @*      <div class="col-12">
             <center><h3 style="color:black;">List of Approved Appointments</h3></center>

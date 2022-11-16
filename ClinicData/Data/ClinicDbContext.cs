@@ -29,6 +29,7 @@ namespace ClinicData.Data
 
             dbContextOptionsBuilder.UseSqlServer("Data Source=VDC01LTC2106;Initial Catalog=ClinicMngt; Integrated Security=true;");
 
+
         }
 
     }

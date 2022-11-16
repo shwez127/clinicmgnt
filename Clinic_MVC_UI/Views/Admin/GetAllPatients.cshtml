@@ -5,9 +5,12 @@
 @{
     ViewData["Title"] = "GetAllPatients";
 }
-
+@{
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
 @model IEnumerable<ClinicEntity.Models.Patient>
 
+<hr />
 @using (Html.BeginForm())
 {
     <p>
@@ -16,6 +19,7 @@
     </p>
 }
 
+<hr />
 
 <div class="row">
     <div class="col-12">
@@ -55,6 +59,6 @@
 
         </table>
     </div>
-
 </div>
+<hr />
 

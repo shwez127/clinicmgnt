@@ -10,12 +10,14 @@
 </head>
 <body>
     <header>
-
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light font-weight-bold @*box-shadow mb-3*@" style="background-color:#003399;">
+            <div class="container-fluid">
                 <a class="hm-logo-container" href="/">
-                    <img class="hm-logo" alt="Health_Center" style="width:75px; height:75px;" src="~/img/download.png" />
-                    <h4 style="color:black; display:inline-block;">Health_Care Center</h4>
+                    <img class="hm-logo" alt="" style="height:120px; padding-bottom:20px" src="https://www.svgrepo.com/show/270145/health-clinic-health-care.svg" />
+                    <h2 style="color:white;font-family:'Copperplate Gothic';display:inline-block;padding-top:30px;padding-left:10px">
+                        <b>THE CARE</b>
+                        <br /><span class="ms-2" style="font-size:15px;letter-spacing:6px"> -- C L I N I C --</span>
+                    </h2>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -24,34 +26,30 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" style="padding-left:20px;">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index" style="font-size:medium;">Home</a>
+                            <a class="nav-link text-uppercase" asp-area="" asp-controller="Doctor" asp-action="Profile" style="font-size:x-large;color:white;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">DoctorProfile</a>
                         </li>
-                        &nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Doctor" asp-action="Profile" style="font-size:medium;">DoctorProfile</a>
+                            <a class="nav-link text-uppercase" asp-area="" asp-controller="Doctor" asp-action="PendingAppointment" style="font-size:x-large;color:white;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Pending Appointments</a>
                         </li>
-                        &nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Doctor" asp-action="PendingAppointment" style="font-size:medium;">Pending Appointments</a>
+                            <a class="nav-link text-uppercase" asp-area="" asp-controller="Doctor" asp-action="TodayAppointment" style="font-size:x-large;color:white;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Todays Appointmemts</a>
                         </li>
-                        &nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Doctor" asp-action="TodayAppointment" style="font-size:medium;">Todays Appointmemts</a>
+                            <a class="nav-link text-uppercase" asp-area="" asp-controller="Doctor" asp-action="GetAllCompleted" style="font-size:x-large;color:white;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Generate Bill</a>
                         </li>
-                        &nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Doctor" asp-action="GetAllCompleted" style="font-size:medium;">Generate Bill</a>
+                            <a class="nav-link text-uppercase" asp-area="" asp-controller="Doctor" asp-action="PatientHistory" style="font-size:x-large;color:white;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">PatientHistory</a>
                         </li>
-                        &nbsp;&nbsp;
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Doctor" asp-action="PatientHistory" style="font-size:medium;">PatientHistory</a>
-                        </li>
-                        &nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;
                     </ul>
                 </div>
                 <ul class="navbar-nav flex-grow-1">
                     <li class="nav-item">
-                        <a class="btn btn-dark" asp-area="" asp-controller="LoginTable" asp-action="Index">SignIn/SignUp</a>
+                        <a class="btn btn-danger" asp-area="" asp-controller="Home" asp-action="Index">Logout</a>
                     </li>
                 </ul>
             </div>
@@ -59,8 +57,7 @@
     </header>
 
 
-
-    <div class="container">
+    <div class="container-fluid">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
@@ -68,9 +65,12 @@
 
 
 
-    <footer class="border-top footer text-muted">
+    <footer class="footer text-muted" style="background-color:#003399">
         <div class="container">
-            &copy; 2022 - Clinic_MVC_UI - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <a class="hm-logo-container" href="/">
+                <img class="hm-logo" alt="" style="width:50px; height:50px;" src="https://www.svgrepo.com/show/270145/health-clinic-health-care.svg" />
+                <h6 style="color:white; display:inline-block;">THE CARE</h6>
+            </a>&nbsp;&nbsp;&nbsp;&copy; <a style="color:white;">2022 - The_Care_Clinic</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

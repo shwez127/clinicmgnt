@@ -3,12 +3,16 @@
     ViewData["Title"] = "EditDepartment";
 }
 
-
+@{
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
 <div>
     <hr />
     <a type="button" class="nav-link text-white btn btn-primary" asp-controller="Admin" asp-action="GetAllDepartments">Return to Department Tab</a>
     <hr />
 </div>
+
+<hr />
 
 <form method="post" enctype="multipart/form-data">
     <h2 align="center">Edit Department Details</h2><hr />
