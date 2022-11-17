@@ -311,8 +311,23 @@ namespace Clinic_MVC_UI.Controllers
                     }
                 }
             }
-            #endregion
-            return View();
+
+            Appointment appointment1 = null;
+            using (HttpClient client = new HttpClient())
+            {
+                string endpoint = _configuration["WebApiBaseUrl"] + "Appointment/GetAppointmentById?AppointmentId=" + AppointmentId;
+                using (var response = await client.GetAsync(endpoint))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        var result = await response.Content.ReadAsStringAsync();
+                        appointment1 = JsonConvert.DeserializeObject<Appointment>(result);
+                    }
+                }
+            }
+                #endregion
+                return View(appointment1);
+            
         }
 
         [HttpGet]

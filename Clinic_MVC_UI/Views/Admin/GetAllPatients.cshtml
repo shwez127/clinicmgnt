@@ -11,19 +11,22 @@
 @model IEnumerable<ClinicEntity.Models.Patient>
 
 <hr />
-@using (Html.BeginForm())
-{
-    <p>
-        Name &nbsp;@Html.TextBox("SearchName")
-        <input type="submit" value="Search" />
-    </p>
-}
-
-<hr />
-
 <div class="row">
     <div class="col-12">
-        <center><h3 style="color:black;">List of Patients</h3></center>
+        @using (Html.BeginForm())
+        {
+            <div>
+                Name &nbsp;@Html.TextBox("SearchName")
+                <input type="submit" value="Search"/>
+
+                @for (int i = 0; i <= 60; i++)
+                {
+                    <a>&nbsp;</a>
+                }
+                <a class="font-weight-bold text-uppercase" style="font-size:x-large; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">List of Patients</a>
+            </div>
+        }
+
         <hr />
         <table class="table table-light table-bordered table-hover">
             <thead>
@@ -50,9 +53,9 @@
                         <td>@patient.Address</td>
                         <td>@patient.BirthDate</td>
                         <td>@patient.Gender</td>
-                        <td><a asp-controller="Admin" asp-action="EditPatient" asp-route-PatientId="@patient.PatientID">Edit</a></td>
-                        <td><a asp-controller="Admin" asp-action="DeletePatient" asp-route-PatientId="@patient.PatientID">Delete</a></td>
-                        <td><a asp-controller="Admin" asp-action="PatientProfile" asp-route-patientProfileId="@patient.PatientID">View</a></td>
+                        <td><a class="btn btn-info" asp-controller="Admin" asp-action="EditPatient" asp-route-PatientId="@patient.PatientID"><i class="fa-sharp fa-solid fa-pen-to-square"></i></a></td>
+                        <td><a class="btn btn-danger" asp-controller="Admin" asp-action="DeletePatient" asp-route-PatientId="@patient.PatientID"><i class="fa-sharp fa-solid fa-trash"></i></a></td>
+                        <td><a class="btn btn-success" asp-controller="Admin" asp-action="PatientProfile" asp-route-patientProfileId="@patient.PatientID"><i class="fa-regular fa-eye"></i></a></td>
                     </tr>
                 }
             </tbody>

@@ -2,22 +2,10 @@
     Layout = "~/Views/Shared/DoctorLayout.cshtml";
 }
 
-
-
 @model ClinicEntity.Models.Doctor;
-<html>
-<head>
-    @*<script type="text/javascript">
-    function preventBack() { window.history.forward(); }
-    setTimeout("preventBack()", 0);
-    window.onunload = function () { null };
-    </script>*@
 
-
-</head>
-<body>
-    <span><i class="fa fa-check" style="color:black;"></i></span>
-    <section class="vh-100" style="background-color: #f4f5f7;">
+<body style="background-color:mediumspringgreen">
+    <section class="vh-100">
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col col-lg-6 mb-4 mb-lg-0">
@@ -25,78 +13,42 @@
                         <div class="row g-0">
                             <div class="col-md-4 gradient-custom text-center text-white"
                                  style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
-                                <img src="~/prabhu.jpg"
-                                     alt="Avatar" class="img-fluid my-5" style="width: 80px;" />
-                                <h5>Marie Horwitz</h5>
-                                <p>Web Designer</p>
+                                <img src="https://www.pngrepo.com/png/284184/180/doctor.png"
+                                     alt="Avatar" class="img-fluid my-5" style="width: 110px;" />
+                                <h5>@Model.Name</h5>
+                                <p>@Model.Qualification</p>
                                 <i class="far fa-edit mb-5"></i>
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body p-4">
-                                    <h6>Doctor Information</h6>
+                                    <h6>Information</h6>
                                     <hr class="mt-0 mb-4">
-                                    <div class="row pt-1">
-                                        <div class="col-6 mb-3">
-                                            <h6>Name</h6>
-                                            <p class="text-muted">@Model.Name</p>
-                                        </div>
-                                        <div class="col-6 mb-3">
-                                            <h6>Phone</h6>
-                                            <p class="text-muted">@Model.Phone</p>
-                                        </div>
-                                    </div>
-                                    @*<h6>Personal Information</h6>
-                                    <hr class="mt-0 mb-4">*@
                                     <div class="row pt-1">
                                         <div class="col-6 mb-3">
                                             <h6>Address</h6>
                                             <p class="text-muted">@Model.Address</p>
                                         </div>
                                         <div class="col-6 mb-3">
-                                            <h6>BirthDate</h6>
-                                            <p class="text-muted">@Model.BirthDate</p>
+                                            <h6>Phone</h6>
+                                            <p class="text-muted">@Model.Phone</p>
                                         </div>
                                     </div>
+                                    <h6>Details</h6>
+                                    <hr class="mt-0 mb-4">
                                     <div class="row pt-1">
                                         <div class="col-6 mb-3">
-                                            <h6>Gender</h6>
-                                            <p class="text-muted">@Model.Gender</p>
-                                        </div>
-                                        <div class="col-6 mb-3">
-                                            <h6>Gender</h6>
-                                            <p class="text-muted">@Model.Department.DeptName</p>
-                                        </div>
-
-                                    </div>
-                                    <div class="row pt-1">
-                                        <div class="col-6 mb-3">
-                                            <h6>Gender</h6>
-                                            <p class="text-muted">@Model.Qualification</p>
-                                        </div>
-                                        <div class="col-6 mb-3">
-                                            <h6>Gender</h6>
+                                            <h6>Specialization</h6>
                                             <p class="text-muted">@Model.Specialization</p>
                                         </div>
-
-                                    </div>
-                                    <div class="row pt-1">
                                         <div class="col-6 mb-3">
-                                            <h6>Gender</h6>
+                                            <h6>Fees</h6>
                                             <p class="text-muted">@Model.Charges_Per_Visit</p>
                                         </div>
-                                        <div class="col-6 mb-3">
-                                            <h6>Gender</h6>
-                                            <p class="text-muted">@Model.Work_Experience</p>
-                                        </div>
-
                                     </div>
-                                    @* <div>
-                                    <a class="btn btn-outline-primary" type="button" value="Logout" asp-controller="UserDetails" asp-action="UserLogin">Logout</a>
-                                    </div>*@
                                     <div class="d-flex justify-content-start">
-                                        <a href="#!"><i class="fab fa-facebook-f fa-lg me-3"></i></a>
-                                        <a href="#!"><i class="fab fa-twitter fa-lg me-3"></i></a>
-                                        <a href="#!"><i class="fab fa-instagram fa-lg"></i></a>
+                                        <a href="#!"><i class="fab fa-facebook-f fa-lg me-3"></i></a>&nbsp;&nbsp;
+                                        <a href="#!"><i class="fab fa-twitter fa-lg me-3"></i></a>&nbsp;&nbsp;
+                                        <a href="#!"><i class="fab fa-instagram fa-lg"></i></a>&nbsp;&nbsp;
                                     </div>
                                 </div>
                             </div>
@@ -107,4 +59,3 @@
         </div>
     </section>
 </body>
-</html>
