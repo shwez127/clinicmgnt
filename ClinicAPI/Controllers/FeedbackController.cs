@@ -26,7 +26,7 @@ namespace ClinicAPI.Controllers
             return _feedbackService.GetAllFeedbacks();
         }
 
-        [HttpDelete("AddFeedback")]
+        [HttpPost("AddFeedback")]
         public IActionResult AddFeedback(Pending_Feedback pending_Feedback)
         {
             _feedbackService.AddFeedback(pending_Feedback);

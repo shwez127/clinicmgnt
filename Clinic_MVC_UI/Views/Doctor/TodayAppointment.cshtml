@@ -70,7 +70,7 @@
                         <td><a asp-controller="Doctor" class="btn btn-outline-danger" asp-action="ApproveOrReject" asp-route-AppointmentId="@doctor.AppointID" asp-route-Appointment_Status=4>Reject</a></td>
                     </tr>
                     }
-                else if (doctor.Appointment_Status == 1)
+                else if (doctor.Appointment_Status == 1 && doctor.Disease ==null && doctor.Prescription==null)
                 {
                     <tr>
 
