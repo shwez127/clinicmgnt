@@ -15,15 +15,7 @@ namespace ClinicEntity.Models
         public int AppointID { get; set; }
         public Appointment Appointment { get; set; }
 
-        [ForeignKey("Doctor")]
-        public int DoctorID { get; set; }
-        public Doctor Doctor { get; set; }
-
-        [ForeignKey("Patient")]
-        public int PatientID { get; set; }
-        public Patient Patient { get; set; }
-       
-        public int Rating { get; set; }
+         public int Rating { get; set; }
 
         [StringLength(100)]
         public string Comment { get; set; }

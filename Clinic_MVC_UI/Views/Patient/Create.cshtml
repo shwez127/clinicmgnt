@@ -79,7 +79,7 @@
                 <h4>What could we improve?</h4>
             </div>
             <textarea type="textarea"asp-for="Comment" placeholder="Your Message" rows="3"></textarea>
-
+             
 
             <!-- Modal Footer-->
             <div class="modal-footer">
@@ -96,3 +96,15 @@
 
 </div>
 </form>
+@if (ViewBag.status == "Ok")
+{
+        <div class="alert alert-success">
+        @ViewBag.message
+        </div>
+}
+else if (ViewBag.status == "Error")
+{
+        <div class="alert alert-danger">
+        @ViewBag.message
+        </div>
+}
