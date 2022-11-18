@@ -54,7 +54,6 @@ namespace Clinic_MVC_UI.Controllers
             };
             return doctorstatus;
         }
-
         public ActionResult GetAllDoctors(string searchName)
         {
             var projects = from pr in db.doctors select pr;
@@ -102,7 +101,7 @@ namespace Clinic_MVC_UI.Controllers
                 }
             }
             ViewBag.genderlist = GetGender();
-            ViewBag.doctorstatuslist = GetDoctorStatus();
+            ViewBag.doctorstatuslist = GetDoctorStatus();        
             return View(doctor);
         }
 
@@ -627,11 +626,7 @@ namespace Clinic_MVC_UI.Controllers
         }
         #endregion
 
-        public IActionResult SearchStaff()
-        {
-            return View();
-        }
-
+       
 
 
     }
