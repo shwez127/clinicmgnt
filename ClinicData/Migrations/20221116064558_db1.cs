@@ -139,7 +139,7 @@ namespace ClinicData.Migrations
                         column: x => x.DoctorID,
                         principalTable: "doctors",
                         principalColumn: "DoctorID",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_appointments_patients_PatientID",
                         column: x => x.PatientID,
@@ -153,8 +153,8 @@ namespace ClinicData.Migrations
                 columns: table => new
                 {
                     AppointID = table.Column<int>(type: "int", nullable: false),
-                    DoctorID = table.Column<int>(type: "int", nullable: false),
-                    PatientID = table.Column<int>(type: "int", nullable: false)
+                    Rating = table.Column<int>(type: "int", nullable: false),
+                    Comment = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -165,18 +165,6 @@ namespace ClinicData.Migrations
                         principalTable: "appointments",
                         principalColumn: "AppointID",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_pending_Feedbacks_doctors_DoctorID",
-                        column: x => x.DoctorID,
-                        principalTable: "doctors",
-                        principalColumn: "DoctorID",
-                        onDelete: ReferentialAction.NoAction);
-                    table.ForeignKey(
-                        name: "FK_pending_Feedbacks_patients_PatientID",
-                        column: x => x.PatientID,
-                        principalTable: "patients",
-                        principalColumn: "PatientID",
-                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateIndex(
@@ -193,16 +181,6 @@ namespace ClinicData.Migrations
                 name: "IX_doctors_Deptno",
                 table: "doctors",
                 column: "Deptno");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_pending_Feedbacks_DoctorID",
-                table: "pending_Feedbacks",
-                column: "DoctorID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_pending_Feedbacks_PatientID",
-                table: "pending_Feedbacks",
-                column: "PatientID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

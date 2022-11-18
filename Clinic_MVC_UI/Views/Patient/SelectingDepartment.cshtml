@@ -1,7 +1,9 @@
-﻿@model ClinicEntity.Models.Appointment
+﻿
 @{
-    ViewData["Title"] = "addAppointment";
+    ViewData["Title"] = "SelectingDepartment";
 }
+
+@model ClinicEntity.Models.Department
 
 @{
     Layout = "~/Views/Shared/PatientLayout.cshtml";
@@ -22,7 +24,7 @@
         <select asp-for="Doctor.Deptno" asp-items="@ViewBag.Departmentlist" style="width:150px;" required></select>
 
     </div>
-    
+
     <div class="form-outline mb-4">
         <label class="form-label" for="form3Example8">Select Doctor</label>
         <select asp-for="DoctorID" asp-items="@ViewBag.Doctorlist" style="width:150px;" required></select>
@@ -32,7 +34,7 @@
         <div class="form-outline">
                 <label class="form-label" for="form3Example1n1">Appointment Date</label>
             <input asp-for="Date" type="date" id="form3Example1n1" class="form-control form-control-lg" />
-            
+
         </div>
     </div>
 
@@ -73,22 +75,21 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label" for="form3Example8">Department</label>
-                                <p>@Model.Progress</p>
-                                @*<select class="form-control" asp-for="Progress" style="width:150px;" required></select>*@
+                                <select class="form-control" asp-for="DeptNo" asp-items="@ViewBag.Departmentlist" style="width:150px;" required></select>
                             </div>
                         </div>
-                        <div class="col-md-6">
+              @*          <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-label" for="form3Example8">Select Doctor</label>
                                 <select class="form-control" asp-for="DoctorID" asp-items="@ViewBag.Doctorlist" style="width:150px;" required></select>
                             </div>
                         </div>
 
-                        
+
                         <!-- Text input-->
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label  class="control-label" for="date">Date</label>
+                                <label class="control-label" for="date">Date</label>
                                 <input asp-for="Date" id="date" name="date" type="date" placeholder="Preferred Date" class="form-control input-md">
                             </div>
                         </div>
@@ -102,28 +103,28 @@
                                     <option value="10:00 to 1:00">10:00 to 1:00</option>
                                 </select>
                             </div>
-                        </div>
-                        
+                        </div>*@
+
                         <!-- Button -->
                         <div class="col-md-12">
                             <div class="form-group">
-                                <input type="submit" value="Make an Appointment" class="btn btn-outline-success" />
+                                <input type="submit" value="Search Doctors" class="btn btn-success" />
                                 <input type="button" value="Reset" class="btn btn-outline-secondary" />
                             </div>
                         </div>
                     </div>
                     <hr />
-                   @* @if (ViewBag.status == "Ok")
+                    @* @if (ViewBag.status == "Ok")
                     {
-                        <div class="alert alert-success">
-                            @ViewBag.message
-                        </div>
+                    <div class="alert alert-success">
+                    @ViewBag.message
+                    </div>
                     }
                     else if (ViewBag.status == "Error")
                     {
-                        <div class="alert alert-danger">
-                            @ViewBag.message
-                        </div>
+                    <div class="alert alert-danger">
+                    @ViewBag.message
+                    </div>
                     }*@
                 </form>
                 <!-- form end -->
@@ -171,6 +172,7 @@ else if (ViewBag.status == "Error")
         @ViewBag.message
     </div>
 }
+
 
 
 

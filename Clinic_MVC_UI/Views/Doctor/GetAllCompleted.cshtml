@@ -28,7 +28,7 @@
         <tbody>
             @foreach (var doctor in Model)
             {
-                if (doctor.Appointment_Status == 3)
+                    if (doctor.Appointment_Status == 1 && (doctor.Disease != null || doctor.Prescription != null))
                 {
                     <tr>
                         <td>@doctor.AppointID</td>

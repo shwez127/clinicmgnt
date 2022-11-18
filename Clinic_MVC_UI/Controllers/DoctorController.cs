@@ -206,7 +206,8 @@ namespace Clinic_MVC_UI.Controllers
             }
             #endregion
             #region Updateing the appointment by using prescription, disease and Progress 
-            appointmentNew.Appointment_Status = 3;
+
+            appointmentNew.Appointment_Status = 1;
             appointmentNew.Prescription = appointment.Prescription;
             appointmentNew.Disease = appointment.Disease;
             appointmentNew.Progress = appointment.Progress;
@@ -259,7 +260,7 @@ namespace Clinic_MVC_UI.Controllers
             List<Appointment> DoctorAppointments = new List<Appointment>();
             foreach (var item in Appointments)
             {
-                if (doctorappointId == item.DoctorID && item.Appointment_Status==3 && item.Bill_Amount==0)
+                if (doctorappointId == item.DoctorID && item.Appointment_Status==1 && item.Bill_Amount==0)
                 {
                     DoctorAppointments.Add(item);
                 }
@@ -288,6 +289,7 @@ namespace Clinic_MVC_UI.Controllers
             #endregion
             #region Update the Bill
             appointmentNew.Bill_Amount=appointmentNew.Doctor.Charges_Per_Visit;
+            appointmentNew.Appointment_Status = 3;
 
             ViewBag.status = "";
             using (HttpClient client = new HttpClient())
@@ -309,7 +311,7 @@ namespace Clinic_MVC_UI.Controllers
                 }
             }
             #endregion
-            return View();
+            return View(appointmentNew);
         }
 
         [HttpGet]
