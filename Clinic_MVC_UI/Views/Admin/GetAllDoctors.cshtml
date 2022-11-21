@@ -6,48 +6,45 @@
 @{
     ViewData["Title"] = "GetAllDoctors";
 }
-
-<hr />
-<div class="row">
+<div style="padding:55px">
     <div class="col-12">
         @using (Html.BeginForm())
         {
-            <div>
+            <div style="color:#003399;font-family:'Copperplate Gothic';" class="font-weight-bolder text-uppercase">
                 Name &nbsp;@Html.TextBox("SearchName")
                 <input type="submit" value="Search"/>
 
-                @for(int i=0;i<=60;i++)
+                @for(int i=0;i<=48 ;i++)
                 {
                     <a>&nbsp;</a>
                 }
-                <a class="font-weight-bold text-uppercase" style="font-size:x-large; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">List of Doctors</a>
+                <a class="font-weight-bolder text-uppercase" style="color:#003399;font-family:'Copperplate Gothic'; font-size:xx-large" align="center">List of Doctors</a>
             </div>
         }
-        
         <hr />
-        <table class="table table-light table-bordered table-hover">
-            <thead>
+        <table class="table table-light table-bordered table-hover" style=" background-image: url('https://images.rawpixel.com/image_1000/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvdjg3MC1teW50LTIwXzFfMi5qcGc.jpg');">
+            <thead class="font-weight-bolder" style="color:#003399;font-family:'Copperplate Gothic';font-size:20px" align="center">
                 <tr>
                     <th>Doctor Id</th>
                     <th>Doctor Name</th>
                     <th>Phone</th>
                     <th>Address</th>
-                    <th>BirthDate</th>
+                    @*<th>BirthDate</th>*@
                     <th>Gender</th>
                     <th>Qualification</th>
                     <th>Specialization</th>
                     <th>Work Experience</th>
                     <th>Department No.</th>
                     <th>Charges Per Visit</th>
-                    <th>Monthly Salary</th>
-                    <th>Patient Treated</th>
+                    @*<th>Monthly Salary</th>*@
+                    @*<th>Patient Treated</th>*@
                     <th>Status</th>
                     <th>Edit</th>
                     <th>Delete</th>
                     <th>View</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="font-weight-bold" style="opacity:.8;color:#003399;font-family:'Copperplate Gothic';font-size:19px" align="center">
                 @foreach (var doctor in Model)
                 {
                     <tr>
@@ -55,15 +52,15 @@
                         <td>@doctor.Name</td>
                         <td>@doctor.Phone</td>
                         <td>@doctor.Address</td>
-                        <td>@doctor.BirthDate</td>
+                        @*<td>@doctor.BirthDate</td>*@
                         <td>@doctor.Gender</td>
                         <td>@doctor.Qualification</td>
                         <td>@doctor.Specialization</td>
                         <td>@doctor.Work_Experience</td>
                         <td>@doctor.Deptno</td>
                         <td>@doctor.Charges_Per_Visit</td>
-                        <td>@doctor.MonthlySalary</td>
-                        <td>@doctor.Patient_Treated</td>
+                        @*<td>@doctor.MonthlySalary</td>*@
+                        @*<td>@doctor.Patient_Treated</td>*@
                         <td>@doctor.Status</td>
                         <td>
                             <a class="btn btn-info" asp-controller="Admin" asp-action="EditDoctor" asp-route-DoctorId="@doctor.DoctorID">
@@ -71,6 +68,7 @@
                             </a>
                         </td>
                         <td>
+                           
                             <a class="btn btn-danger" asp-controller="Admin" asp-action="DeleteDoctor" asp-route-DoctorId="@doctor.DoctorID">
                                 <i class="fa-sharp fa-solid fa-trash"></i>
                             </a>
@@ -86,5 +84,5 @@
         </table>
     </div>
 </div>
-<hr />
+
 

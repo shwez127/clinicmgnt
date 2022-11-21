@@ -6,8 +6,8 @@
 @{
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
-<body style="background-color:mediumspringgreen">
-<section class="vh-100">
+<body class="img-responsive" style="background-image: url('https://images.rawpixel.com/image_1000/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvdjg3MC1teW50LTIwXzFfMi5qcGc.jpg');">
+    <section style="padding-top:140px">
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col col-lg-6 mb-4 mb-lg-0">
@@ -19,8 +19,7 @@
                                      alt="Avatar" class="img-fluid my-5" style="width: 110px;" />
                                 <h5>@Model.Name</h5>
                                 <p>@Model.Qualification</p>
-                                <a asp-controller="Admin" asp-action="EditDoctor"></a>
-                                <i class="far fa-edit mb-5"></i>
+                                <a asp-controller="Admin" asp-action="EditDoctor"><i class="far fa-edit mb-5"></i></a>
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body p-4">
