@@ -5,34 +5,35 @@
 @{
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
-<div>
-    <hr />
-    <a type="button" class="nav-link text-white btn btn-primary" asp-controller="Admin" asp-action="GetAllOtherStaffs">Return to Other Staff Tab</a>
-    <hr />
+
+<div style=" background-image: url('https://images.rawpixel.com/image_1000/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvdjg3MC1teW50LTIwXzFfMi5qcGc.jpg');padding:55px">
+    <form method="post" enctype="multipart/form-data">
+        <h3 style="color:#003399;font-family:'Copperplate Gothic'" class="font-weight-bolder text-uppercase" align="center">Delete Other Staff Details</h3>
+
+        <div class="form-group">
+            <label class="font-weight-bold" style="color:#003399;font-family:'Copperplate Gothic';font-size:20px">Staff Id</label>
+            <input style="opacity:.8;" type="text" asp-for="StaffID" class="form-control" placeholder="Enter Staff Id" required />
+        </div>
+        <input type="submit" value="Delete" class="btn btn-outline-danger" />
+  
+        @if (ViewBag.status == "Ok")
+        {
+            <br />
+
+            <br />
+            <div class="alert alert-warning">
+                @ViewBag.message
+            </div>
+        }
+        else if (ViewBag.status == "Error")
+        {
+            <br />
+
+            <br />
+            <div class="alert alert-danger">
+                @ViewBag.message
+            </div>
+        }
+    </form>
 </div>
-
-<hr />
-
-<form method="post" enctype="multipart/form-data">
-    <h2 align="center">Delete Staff Details</h2><hr />
-    <div class="form-group">
-        <label>Staff Id</label>
-        <input type="text" asp-for="StaffID" class="form-control" placeholder="Enter Staff Id"  required />
-    </div>
-    <input type="submit" value="Delete" class="btn btn-outline-danger" />
-    <hr />
-    @if (ViewBag.status == "Ok")
-    {
-        <div class="alert alert-success">
-            @ViewBag.message
-        </div>
-    }
-    else if (ViewBag.status == "Error")
-    {
-        <div class="alert alert-danger">
-            @ViewBag.message
-        </div>
-    }
-</form>
-
 

@@ -9,14 +9,14 @@
 @model IEnumerable<ClinicEntity.Models.Department>
 
 
-<hr />
-<div class="row">
+<div style="padding:55px">
     <div class="col-12">
-        <center><a class="font-weight-bold text-uppercase" style="font-size:x-large; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">List of Departments</a></center>
+        <center>
+            <a class="font-weight-bolder text-uppercase" style="color:#003399;font-family:'Copperplate Gothic'; font-size:xx-large" align="center">List of Departments</a>
+        </center>
         <hr />
-        <table class="table table-light table-bordered table-hover">
-            <thead>
-
+        <table class="table table-light table-bordered table-hover" style=" background-image: url('https://images.rawpixel.com/image_1000/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvdjg3MC1teW50LTIwXzFfMi5qcGc.jpg');">
+            <thead class="font-weight-bolder" style="color:#003399;font-family:'Copperplate Gothic';font-size:20px" align="center">
                 <tr>
                     <th>Department No.</th>
                     <th>Department Name</th>
@@ -25,7 +25,7 @@
                     <th>Delete</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="font-weight-bold" style="opacity:.8;color:#003399;font-family:'Copperplate Gothic';font-size:19px" align="center">
                 @foreach (var department in Model)
                 {
                     <tr>
@@ -41,10 +41,8 @@
         </table>
     </div>
 </div>
-<div>
-    <hr />
-    <a type="button" class="nav-link text-white btn btn-primary" asp-controller="Admin" asp-action="DepartmentEntry">Click Here to Add Department</a>
-    <hr />
+<div style="padding-left:70px; padding-right:70px">
+    <a type="button" class="nav-link text-white btn btn-info" asp-controller="Admin" asp-action="DepartmentEntry">Click Here to Add Department</a>
 </div>
 
 
