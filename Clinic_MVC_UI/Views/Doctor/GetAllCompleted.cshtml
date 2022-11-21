@@ -7,22 +7,23 @@
     ViewData["Title"] = "GetAllDoctors";
 }
 
-<hr />
+@if(Model.Count()>=1)
+{
 <form>
 <div class="col-12">
-        <center><h3 style="color:black">Bill Generate</h3></center>
+        <center><h3 style="font-size:x-large;color:black;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Bill Generate</h3></center>
        <hr />
        <table class="table table-light table-bordered table-hover">
        <thead>
 
             <tr>
                 <th>Appointment ID</th>
-                <th>Patient_Name</th>
-                <th>Patient_Phone</th>
+                <th>Patient Name</th>
+                <th>Patient Phone</th>
                 <th>Prescription</th>
                 <th>Date</th>
                 <th>Progress</th>
-                <th>Appointment_Status</th>
+                <th>Appointment Status</th>
             </tr>
         </thead>
         <tbody>
@@ -39,7 +40,7 @@
                         <td>@doctor.Progress</td>
                         @if (doctor.Appointment_Status == 0)
                         {
-                            <td>Requsted</td>
+                            <td>Requested</td>
 
                         }
                         else if (doctor.Appointment_Status == 1)
@@ -58,7 +59,7 @@
                         {
                             <td>Rejected</td>
                         }
-                        <td><a class="btn btn-info" asp-controller="Doctor" asp-action="GenerateBill" asp-route-AppointmentId="@doctor.AppointID">GenerateBill</a></td>
+                        <td><a class="btn btn-info" asp-controller="Doctor" asp-action="GenerateBill" asp-route-AppointmentId="@doctor.AppointID">Generate Bill</a></td>
                     </tr>
                 } 
             }
@@ -66,5 +67,11 @@
     </table>
 </div>
 </form>
+}
+else
+{
+    <h1>There is no pending appointments</h1>
+}
+
 
 

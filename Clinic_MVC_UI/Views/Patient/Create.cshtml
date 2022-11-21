@@ -7,95 +7,65 @@
     Layout = "~/Views/Shared/PatientLayout.cshtml";
 }
 
-<h1>Create</h1>
+@*<h1>Create</h1>
  <a class="btn btn-info btn-lg openmodal" asp-controller="Patient" asp-action="Create" data-toggle="modal" data-target="#myModal">
     Feedback
 </a>
-
+*@
 @model ClinicEntity.Models.Pending_Feedback
 <!--Modal Launch Button-->
 
+<div>
+    <h3 class="text-center" style="font-size:x-large;color:black;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Feedback Request</h3>
 
+</div>
+<br />
 
-<form method="post">
+<center>
+<form method="post" style="width:800px; height:500px; background-color:gradient; padding-top:20px;">
 <!--Division for Modal-->
-<div id="myModal" class="modal fade" role="dialog">
-
-    <!--Modal-->
-    <div class="modal-dialog">
-
-        <!--Modal Content-->
-        <div class="modal-content">
-
-            <!-- Modal Header-->
-            <div class="modal-header">
-                <h3>Feedback Request</h3>
-
-                <!--Close/Cross Button-->
-                <button type="button" class="close" data-dismiss="modal" style="color: white;">&times;</button>
-            </div>
-
+<div>
             <!-- Modal Body-->
             <div class="modal-body text-center">
                 <i class="far fa-file-alt fa-4x mb-3 animated rotateIn icon1"></i>
-                <h3>Your opinion matters</h3>
-                <h5>Help us improve our product? <strong>Give us your feedback.</strong></h5>
-                <hr>
-                <h6>Your Rating</h6>
-            </div>
-
-       
-            <!-- Radio Buttons for Rating-->
-          @*  <div class="form-check mb-4">
-                    <input name="feedback"  type="radio">
-                    <label asp-for="Rating" class="ml-3">Very good</label>
-            </div>
-            <div class="form-check mb-4">
-                    <input name="feedback" type="radio">
-
-                <label asp-for="Comment" class="ml-3">Good</label>
-            </div>
-            <div class="form-check mb-4">
-                <input name="feedback" asp-route="" type="radio">
-                <label asp-for="Rating"  class="ml-3">Mediocre</label>
-            </div>
-            <div class="form-check mb-4">
-                <input name="feedback" type="radio">
-                <label asp-for="Rating" class="ml-3">Bad</label>
-            </div>
-            <div class="form-check mb-4">
-                <input name="feedback" type="radio">
-                <label asp-for="Rating" class="ml-3">Very Bad</label>
-            </div>*@
-
-                <div >
-                    <h4>Ratings</h4>
+                <h3 style="font-size:x-large;color:black;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Your opinion matters</h3>
+                <h5>Help us improve our service? <strong>Give us your feedback.</strong></h5>
+                <br />
+                <h4>Your Rating </h4>
+                <span style="display: inline-block; font-size: 24px; color: #ff0000;">❤️</span>
                 
-                <select style="width:150px; " asp-for="Rating" asp-items="ViewBag.Ratinglist" placeholder="Your Message" rows="3"></select>
+                <span style="display: inline-block; font-size: 24px; color: #ffea00;">😄</span>
+                <span style="display: inline-block; font-size: 24px; color: #fbff00;">👍</span>
+                <span style="display: inline-block; font-size: 24px; color: #fae500; ">😢</span>
+                <span style="display: inline-block; font-size: 24px; color: #ff0000;">😡</span>
+            </div>
+                <div >
+                <h5>Ratings &nbsp;<select style="width:150px;" asp-for="Rating" asp-items="ViewBag.Ratinglist" placeholder="Your Message" rows="3"></select></h5>
+                
                 </div>
 
             <!--Text Message-->
             <div class="text-center">
-                <h4>What could we improve?</h4>
+                <h6>What could we improve?</h6>
             </div>
             <textarea type="textarea"asp-for="Comment" placeholder="Your Message" rows="3"></textarea>
              
+            <br />
 
             <!-- Modal Footer-->
-            <div class="modal-footer">
+            <div style="padding-top:20px;">
                     <button type="submit" class="btn btn-primary">
                     Send
                     <i class="fa fa-paper-plane"></i>
                 </button>
-                <a href="" class="btn btn-outline-primary" data-dismiss="modal">Cancel</a>
+                <button class="btn btn-secondary" type="reset" value="Reset">Reset<i class="fa fa-paper-plane"></i></button>
             </div>
 
         </div>
 
-    </div>
-
-</div>
+   
 </form>
+</center>
 @if (ViewBag.status == "Ok")
 {
         <div class="alert alert-success">
@@ -108,3 +78,59 @@ else if (ViewBag.status == "Error")
         @ViewBag.message
         </div>
 }
+
+
+@*<form method="post">
+    <!--Division for Modal-->
+    <div id="myModal" class="modal fade" role="dialog">
+
+        <!--Modal-->
+        <div class="modal-dialog">
+
+            <!--Modal Content-->
+            <div class="modal-content">
+
+                <!-- Modal Header-->
+                <div class="modal-header">
+                    <h3>Feedback Request</h3>
+
+                    <!--Close/Cross Button-->
+                    <button type="button" class="close" data-dismiss="modal" style="color: white;">&times;</button>
+                </div>
+
+                <!-- Modal Body-->
+                <div class="modal-body text-center">
+                    <i class="far fa-file-alt fa-4x mb-3 animated rotateIn icon1"></i>
+                    <h3>Your opinion matters</h3>
+                    <h5>Help us improve our product? <strong>Give us your feedback.</strong></h5>
+                    <hr>
+                    <h6>Your Rating</h6>
+                </div>
+                <div>
+                    <h4>Ratings</h4>
+
+                    <select style="width:150px; " asp-for="Rating" asp-items="ViewBag.Ratinglist" placeholder="Your Message" rows="3"></select>
+                </div>
+
+                <!--Text Message-->
+                <div class="text-center">
+                    <h4>What could we improve?</h4>
+                </div>
+                <textarea type="textarea" asp-for="Comment" placeholder="Your Message" rows="3"></textarea>
+
+
+                <!-- Modal Footer-->
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">
+                        Send
+                        <i class="fa fa-paper-plane"></i>
+                    </button>
+                    <a href="" class="btn btn-outline-primary" data-dismiss="modal">Cancel</a>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</form>*@

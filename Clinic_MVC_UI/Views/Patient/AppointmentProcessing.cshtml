@@ -6,5 +6,97 @@
     Layout = "~/Views/Shared/PatientLayout.cshtml";
 }
 
-<center><h1>Your appointment is not completed</h1></center>
+
+@model IEnumerable<ClinicEntity.Models.Appointment>
+
+ <html>
+
+<body>
+    @if(Model.Count()>=1)
+{
+    <h3 class="text-center" style="font-size:x-large;color:black;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Your Appointment is in Progress</h3>
+    <br />
+    
+<div class="row">
+    <div class="col-12">
+        
+        <table class="table table-light table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Appointment ID</th>
+                    <th>Doctor Name</th>
+                    <th>Doctor Phone</th>
+                    <th>Doctor Charges per visit</th>
+                    <th>Date</th>
+     
+                    <th>Appointment Status</th>
+                    <th>Bill Status</th>
+                  
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var doctor in Model)
+                {
+                    if(doctor.Bill_Status!=1 && doctor.Appointment_Status !=4 )
+                    {
+                    <tr>
+                        <td>@doctor.AppointID</td>
+                        <td>@doctor.Doctor.Name</td>
+                        <td>@doctor.Doctor.Phone</td>
+                        <td>@doctor.Doctor.Charges_Per_Visit</td>
+                        <td>@doctor.Date</td>
+          
+                        @if (doctor.Appointment_Status == 0)
+                        {
+                            <td>Requested</td>
+
+                        }
+                        else if (doctor.Appointment_Status == 1)
+                        {
+                            <td>Approved</td>
+                        }
+                        else if (doctor.Appointment_Status == 2)
+                        {
+                            <td>Pending</td>
+                        }
+                        else if (doctor.Appointment_Status == 3)
+                        {
+                            <td>Completed</td>
+                        }
+                        else if (doctor.Appointment_Status == 4)
+                        {
+                            <td>Rejected</td>
+                        }
+
+                        @if (doctor.Bill_Status == 0)
+                        {
+                            <td>Unpaid</td>
+
+                        }
+                        else if (doctor.Bill_Status == 1)
+                        {
+                            <td>Paid</td>
+                        }
+    
+                        
+                    </tr>
+                        }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+    }
+    else
+    {
+        <h1>There is no pending appointments</h1>
+    }
+
+</body>
+</html>
+
+
+
+
+
 

@@ -8,64 +8,23 @@
 }
 
 
-@*<div>
-    <hr />
-    <a type="button" class="nav-link text-white btn btn-primary" asp-controller="Admin" asp-action="GetAllOtherStaffs">Return to Other Staff Tab</a>
-    <hr />
-</div>*@
-
-@*<center>
-<form method="post" enctype="multipart/form-data">
-    <h2 align="center">Request Appointment</h2><hr />
-    @*<div class="form-outline mb-4">
-        <label class="form-label" for="form3Example8">Department</label>
-        <select asp-for="Doctor.Deptno" asp-items="@ViewBag.Departmentlist" style="width:150px;" required></select>
-
-    </div>
-    
-    <div class="form-outline mb-4">
-        <label class="form-label" for="form3Example8">Select Doctor</label>
-        <select asp-for="DoctorID" asp-items="@ViewBag.Doctorlist" style="width:150px;" required></select>
-
-    </div>
-    <div class="col-md-6 mb-4">
-        <div class="form-outline">
-                <label class="form-label" for="form3Example1n1">Appointment Date</label>
-            <input asp-for="Date" type="date" id="form3Example1n1" class="form-control form-control-lg" />
-            
-        </div>
-    </div>
-
-    <input type="submit" value="Save" class="btn btn-outline-success" />
-    <input type="button" value="Reset" class="btn btn-outline-secondary" />
-    <hr />
-    @if (ViewBag.status == "Ok")
-    {
-        <div class="alert alert-success">
-            @ViewBag.message
-        </div>
-    }
-    else if (ViewBag.status == "Error")
-    {
-        <div class="alert alert-danger">
-            @ViewBag.message
-        </div>
-    }
-</form>
-</center>*@
-
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 
-<hr />
+
+<html>
+    @if(Model ==null){
+        <h1>Click Correct date</h1>
+    }else{
+    <body>
 <div class="container">
     <div class="row">
         <div class="col-md-6">
             <div class="well-block">
                 <div class="well-title">
-                    <h2>Book an Appointment</h2>
+                    <h2 style="font-size:x-large;color:black;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Book an Appointment</h2>
                 </div>
                 <form method="post">
                     <!-- Form start -->
@@ -92,39 +51,18 @@
                                 <input asp-for="Date" id="date" name="date" type="date" placeholder="Preferred Date" class="form-control input-md">
                             </div>
                         </div>
-                        <!-- Select Basic -->
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="control-label" for="time">Preferred Time</label>
-                                <select id="time" name="time" class="form-control">
-                                    <option value="8:00 to 9:00">8:00 to 9:00</option>
-                                    <option value="9:00 to 10:00">9:00 to 10:00</option>
-                                    <option value="10:00 to 1:00">10:00 to 1:00</option>
-                                </select>
-                            </div>
-                        </div>
+                       
                         
                         <!-- Button -->
                         <div class="col-md-12">
                             <div class="form-group">
                                 <input type="submit" value="Make an Appointment" class="btn btn-outline-success" />
-                                <input type="button" value="Reset" class="btn btn-outline-secondary" />
+                                <input type="reset" value="Reset" class="btn btn-outline-secondary" />
                             </div>
                         </div>
                     </div>
                     <hr />
-                   @* @if (ViewBag.status == "Ok")
-                    {
-                        <div class="alert alert-success">
-                            @ViewBag.message
-                        </div>
-                    }
-                    else if (ViewBag.status == "Error")
-                    {
-                        <div class="alert alert-danger">
-                            @ViewBag.message
-                        </div>
-                    }*@
+                  
                 </form>
                 <!-- form end -->
             </div>
@@ -132,7 +70,7 @@
         <div class="col-md-6">
             <div class="well-block">
                 <div class="well-title">
-                    <h2>Why Appointment with Us</h2>
+                        <h2 style="font-size:x-large;color:black;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Why Appointment with Us</h2>
                 </div>
                 <div class="feature-block">
                     <div class="feature feature-blurb-text">
@@ -159,6 +97,10 @@
     </div>
 </div>
 <hr />
+      
+
+</body>
+}
 @if (ViewBag.status == "Ok")
 {
     <div class="alert alert-success">
@@ -171,7 +113,7 @@ else if (ViewBag.status == "Error")
         @ViewBag.message
     </div>
 }
-
+</html>
 
 
 

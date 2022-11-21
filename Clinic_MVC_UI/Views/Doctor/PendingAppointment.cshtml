@@ -8,22 +8,22 @@
 }
 
 @model IEnumerable<ClinicEntity.Models.Appointment>
-
-<hr />
+@if(Model.Count()>=1)
+{
 <div class="row">
     <div class="col-12">
-            <center><h3 class="text-center" style="color:black">List of Pending Appointments</h3></center>
+        <center><h3 style="font-size:x-large;color:black;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">List of Pending Appointments</h3></center>
         <hr />
         <table class="table table-light table-bordered table-hover">
             <thead>
                 <tr>
                         <th>Appointment ID</th>
-                        <th>Patient_Name</th>
-                        <th>Patient_Phone</th>
-                        <th>Patient_BirthDate</th>
+                        <th>Patient Name</th>
+                        <th>Patient Phone</th>
+                        <th>Patient BirthDate</th>
                         <th>Date</th>
-                        <th>Appointment_Status</th>
-                        <th>Bill_Amount</th>
+                        <th>Appointment Status</th>
+                        <th>Bill Amount</th>
                 </tr>
             </thead>
             <tbody>
@@ -59,7 +59,11 @@
         </table>
     </div>
 </div>
-<hr />
+<br />
 
-
+}
+else
+{
+    <h1>There is no pending appointments</h1>
+}
 

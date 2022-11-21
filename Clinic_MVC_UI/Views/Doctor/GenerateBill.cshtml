@@ -69,14 +69,14 @@
                             <tr>
 
                                 <th scope="col">Appointment ID</th>
-                                <th scope="col">Doctor_Name</th>
-                                <th scope="col">Doctor_Phone</th>
+                                <th scope="col">Doctor Name</th>
+                                <th scope="col">Doctor Phone</th>
                                 <th scope="col">Doctor Charges per visit</th>
                                 <th scope="col">Date</th>
                                 <th scope="col">Progress</th>
                                 <th scope="col">Appointment_Status</th>
-                                <th scope="col">Bill_Amount</th>
-                                <th scope="col"> Bill_Status</th>
+                                <th scope="col">Bill Amount</th>
+                                <th scope="col"> Bill Status</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -89,7 +89,7 @@
                                 <td scope="row">@Model.Progress</td>
                                 @if (Model.Appointment_Status == 0)
                                 {
-                                    <td>Requsted</td>
+                                    <td>Requested</td>
 
                                 }
                                 else if (Model.Appointment_Status == 1)
@@ -159,6 +159,7 @@
         </div>
     </div>
 </div>
+
 
 
     

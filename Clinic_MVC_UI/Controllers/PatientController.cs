@@ -27,6 +27,7 @@ namespace Clinic_MVC_UI.Controllers
         }
         public async Task<IActionResult> Profile()
         {
+            #region Patient profile
             int doctorProfileId = Convert.ToInt32(TempData["ProfileID"]);
             TempData.Keep();
 
@@ -44,6 +45,7 @@ namespace Clinic_MVC_UI.Controllers
                 }
             }
             return View(patient);
+            #endregion
         }
 
         public async Task<IActionResult> SelectingDepartment()
@@ -97,12 +99,39 @@ namespace Clinic_MVC_UI.Controllers
             }
 
             ViewBag.Departmentlist = department;
+           
+            return View();
             #endregion
-            return View();
         }
-        public IActionResult AppointmentProcessing()
+        public async Task<IActionResult> AppointmentProcessing()
         {
-            return View();
+            #region Patient can see His Appointments
+            int PatientAppointmentId = Convert.ToInt32(TempData["ProfileID"]);
+            TempData.Keep();
+            IEnumerable<Appointment> Appointments = null;
+            using (HttpClient client = new HttpClient())
+            {
+                string endPoint = _configuration["WebApiBaseUrl"] + "Appointment/GetAppointment";
+                using (var response = await client.GetAsync(endPoint))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        var result = await response.Content.ReadAsStringAsync();
+                        Appointments = JsonConvert.DeserializeObject<IEnumerable<Appointment>>(result);
+                    }
+                }
+            }
+            List<Appointment> PatientAppointments = new List<Appointment>();
+            foreach (var item in Appointments)
+            {
+                if (PatientAppointmentId == item.PatientID  )
+                {
+                    PatientAppointments.Add(item);
+                }
+            }
+            
+            return View(PatientAppointments);
+            #endregion
         }
 
         [HttpPost]
@@ -114,10 +143,9 @@ namespace Clinic_MVC_UI.Controllers
             return View();
         }
         public async  Task<IActionResult> addAppointment()
-
         {
-            Appointment appointment = new Appointment();
             #region Selecting the department
+            Appointment appointment = new Appointment();
             List<Department> departments = new List<Department>();
             using (HttpClient client = new HttpClient())
             {
@@ -142,7 +170,6 @@ namespace Clinic_MVC_UI.Controllers
                     appointment.Progress=item.DeptName;
                 }
             }
-
         
             #endregion
             #region selecting the doctor
@@ -173,20 +200,25 @@ namespace Clinic_MVC_UI.Controllers
             }
 
             ViewBag.Doctorlist = Doctorlist;
-            #endregion
-
             return View(appointment);
+            #endregion
         }
 
         [HttpPost]
         public async Task<IActionResult> addAppointment(Appointment appointment)
         {
+            #region Adding of Appointment
             appointment.PatientID = Convert.ToInt32(TempData["ProfileID"]);
             TempData.Keep();
-             
-            
-       
             ViewBag.Status = "";
+            if (appointment.Date <= DateTime.Today)
+            {
+                ViewBag.status = "Error";
+                ViewBag.message = "Ensure your Appointment date must be Today Onwards";
+            }
+            else { 
+       
+            
             using (HttpClient client = new HttpClient())
             {
                 StringContent content = new StringContent(JsonConvert.SerializeObject(appointment), Encoding.UTF8, "application/json");
@@ -196,7 +228,7 @@ namespace Clinic_MVC_UI.Controllers
                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
                         ViewBag.status = "Ok";
-                        ViewBag.message = "Appointment requested Successfully";
+                        ViewBag.message = "Appointment booked Successfully";
                         return RedirectToAction("Index", "Patient");
 
                     }
@@ -207,7 +239,9 @@ namespace Clinic_MVC_UI.Controllers
                     }
                 }
             }
+            }
             return View();
+            #endregion
         }
         [HttpGet]
         public async Task<IActionResult> PendingAppointment()
@@ -231,14 +265,15 @@ namespace Clinic_MVC_UI.Controllers
             List<Appointment> PatientAppointments = new List<Appointment>();
             foreach (var item in Appointments)
             {
-                if (PatientAppointmentId == item.PatientID&& item.Appointment_Status!=3)
+                if (PatientAppointmentId == item.PatientID && (item.Appointment_Status!=3 && item.Appointment_Status !=4))
                 {
                     PatientAppointments.Add(item);
                 }
             }
-            #endregion
+            
 
             return View(PatientAppointments);
+            #endregion
         }
 
         [HttpGet]
@@ -325,9 +360,10 @@ namespace Clinic_MVC_UI.Controllers
                     }
                 }
             }
-                #endregion
+                
                 return View(appointment1);
-            
+            #endregion
+
         }
 
         [HttpGet]
@@ -424,7 +460,8 @@ namespace Clinic_MVC_UI.Controllers
         public IActionResult Create(int AppointmentId)
             
         {
-           
+            #region Feedback rating select list
+
             TempData["AppointmentId"] = AppointmentId;
             
             List<SelectListItem> Rating = new List<SelectListItem>()
@@ -438,11 +475,13 @@ namespace Clinic_MVC_UI.Controllers
             };
             ViewBag.Ratinglist = Rating;
             return View();
+            #endregion
         }
         [HttpPost]
         public async Task<ActionResult> Create(Pending_Feedback pending_Feedback)
 
         {
+            #region Feedback
             /* pending_Feedback.PatientID = Convert.ToInt32(TempData["ProfileID"]);
 
              TempData.Keep();*/
@@ -466,7 +505,7 @@ namespace Clinic_MVC_UI.Controllers
                     else
                     {
                         ViewBag.status = "Error";
-                        ViewBag.message = "You Feedback is Already Submitted";
+                        ViewBag.message = "Your Feedback is already submitted";
                     }
                 }
             }
@@ -495,6 +534,7 @@ namespace Clinic_MVC_UI.Controllers
             }*/
 
             return View();
+            #endregion
         }
     }
 }

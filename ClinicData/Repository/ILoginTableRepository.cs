@@ -10,5 +10,9 @@ namespace ClinicData.Repository
     {
         public int[] Login(LoginTable loginTable);
         public int AddLoginTable(LoginTable loginTable);
+
+        public LoginTable ForgetPassword(LoginTable loginTable);
+
+        public void UpdatePassword(LoginTable login);
     }
 }

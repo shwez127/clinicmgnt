@@ -25,6 +25,7 @@ namespace Clinic_MVC_UI.Controllers
         }
         public async Task<IActionResult> Profile()
         {
+            #region Doctor profile
             int doctorProfileId = Convert.ToInt32(TempData["ProfileID"]);
             TempData.Keep();
 
@@ -45,6 +46,7 @@ namespace Clinic_MVC_UI.Controllers
                 }
             }
             return View(doctor);
+            #endregion
         }
         [HttpGet]
         public async Task<IActionResult> PendingAppointment()
@@ -68,14 +70,13 @@ namespace Clinic_MVC_UI.Controllers
              List<Appointment> DoctorAppointments= new List<Appointment>();
             foreach(var item in Appointments)
             {
-                if (doctorappointId == item.DoctorID)
+                if (doctorappointId == item.DoctorID && item.Appointment_Status==0)
                 {
                     DoctorAppointments.Add(item);
                 }
             }
-            #endregion
-
             return View(DoctorAppointments);
+            #endregion
         }
         [HttpGet]
         public async Task<IActionResult> TodayAppointment()
@@ -105,7 +106,7 @@ namespace Clinic_MVC_UI.Controllers
                 }
             }
             #endregion
-            #region He acn see today only
+            #region He can see today only
             List<Appointment> TodayAppointments = new List<Appointment>();
             foreach (var item in DoctorAppointments)
             {
@@ -117,12 +118,11 @@ namespace Clinic_MVC_UI.Controllers
 
                 }
             }
+            return View(TodayAppointments);
             #endregion
 
-            return View(TodayAppointments);
-
         }
-      
+
         public async Task<IActionResult> ApproveOrReject(int AppointmentId, int Appointment_Status)
         {
             #region Fetching the appointment details
@@ -162,10 +162,8 @@ namespace Clinic_MVC_UI.Controllers
                     }
                 }
             }
-            #endregion
-
             return View(appointment);
-            
+            #endregion
         }
 
         public async Task<IActionResult> AddPrescription(int AppointmentId)
@@ -184,14 +182,15 @@ namespace Clinic_MVC_UI.Controllers
                     }
                 }
             }
-            #endregion
             return View(appointment);
+            #endregion
+
         }
         [HttpPost]
         public async Task<IActionResult> AddPrescription(Appointment appointment)
         {
             #region Again Feching the appointment details
-            Appointment appointmentNew = null;
+            Appointment appointmentNew = new Appointment();
             using (HttpClient client = new HttpClient())
             {
                 string endpoint = _configuration["WebApiBaseUrl"] + "Appointment/GetAppointmentById?AppointmentId=" + appointment.AppointID;
@@ -205,7 +204,7 @@ namespace Clinic_MVC_UI.Controllers
                 }
             }
             #endregion
-            #region Updateing the appointment by using prescription, disease and Progress 
+            #region Updating the appointment by using prescription, disease and Progress 
 
             appointmentNew.Appointment_Status = 1;
             appointmentNew.Prescription = appointment.Prescription;
@@ -224,19 +223,19 @@ namespace Clinic_MVC_UI.Controllers
                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
                         ViewBag.status = "Ok";
-                        ViewBag.message = "Appointment Preception Updated Successfully!";
+                        ViewBag.message = "Prescription Updated Successfully!";
                     }
                     else
                     {
                         ViewBag.status = "Error";
-                        ViewBag.message = "appointment wrong Entries!";
+                        ViewBag.message = "Prescription wrong Entries!";
                     }
                 }
             }
-            #endregion
-
             return View();
+            #endregion
         }
+
         [HttpGet]
         public async Task<IActionResult> GetAllCompleted()
         {
@@ -265,8 +264,8 @@ namespace Clinic_MVC_UI.Controllers
                     DoctorAppointments.Add(item);
                 }
             }
-            #endregion
             return View(DoctorAppointments);
+            #endregion
         }
        
        
@@ -310,8 +309,8 @@ namespace Clinic_MVC_UI.Controllers
                     }
                 }
             }
-            #endregion
             return View(appointmentNew);
+            #endregion
         }
 
         [HttpGet]
@@ -341,8 +340,9 @@ namespace Clinic_MVC_UI.Controllers
                     DoctorAppointments.Add(item);
                 }
             }
-            #endregion
             return View(DoctorAppointments);
+            #endregion
+
         }
 
 
