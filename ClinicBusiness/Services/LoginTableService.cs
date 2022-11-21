@@ -22,5 +22,13 @@ namespace ClinicBusiness.Services
         {
            return _logintableRepository.AddLoginTable(login);
         }
+        public LoginTable ForgetPassword(LoginTable login)
+        {
+            return _logintableRepository.ForgetPassword(login);
+        }
+        public void UpdatePassword(LoginTable login)
+        {
+            _logintableRepository.UpdatePassword(login);
+        }
     }
 }

@@ -9,25 +9,26 @@
 
 @model IEnumerable<ClinicEntity.Models.Appointment>
 
-
-<hr />
+@if (Model.Count() >= 1)
+{
 
 <div class="row">
     <div class="col-12">
-        <center><h3 style="color:black;">List of Pending Appointments</h3></center>
+        <center><h3 style="font-size:x-large;color:black;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">List of Pending Appointments</h3></center>
         <hr />
         <table class="table table-light table-bordered table-hover">
             <thead>
                 <tr>
                     <th>Appointment ID</th>
-                    <th>Doctor_Name</th>
-                    <th>Doctor_Phone</th>
+                    <th>Doctor Name</th>
+                    <th>Doctor Phone</th>
                     <th>Doctor Charges per visit</th>
                     <th>Date</th>
                     <th>Progress</th>
-                    <th>Appointment_Status</th>
-                    <th>Bill_Amount</th>
-                    <th>Bill_Status</th>
+                    <th>Prescription</th>
+                    <th>Appointment Status</th>
+                    <th>Bill Amount</th>
+                    <th>Bill Status</th>
                 </tr>
             </thead>
             <tbody>
@@ -42,12 +43,10 @@
                             <td>@doctor.Doctor.Charges_Per_Visit</td>
                             <td>@doctor.Date</td>
                             <td>@doctor.Progress</td>
+                            <td>@doctor.Prescription</td>
                             @if (doctor.Appointment_Status == 0)
                             {
-                                <td>Requsted</td>
-
-
-
+                                <td>Requested</td>
                             }
                             else if (doctor.Appointment_Status == 1)
                             {
@@ -70,9 +69,6 @@
                             @if (doctor.Bill_Status == 0)
                             {
                                 <td>Unpaid</td>
-
-
-
                             }
                             else if (doctor.Bill_Status == 1)
                             {
@@ -86,7 +82,14 @@
         </table>
     </div>
 </div>
-<hr />
+<br />
+}
+else
+{
+    <h1 class="text-center" style="font-size:x-large;color:black;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">You have not visited yet</h1>
+}
+
+
 
 
 

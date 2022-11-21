@@ -22,25 +22,28 @@ namespace Clinic_MVC_UI.Controllers
         public IActionResult Index()
         {
             return View();
-        
+
         }
 
         public IActionResult PatientRegister1()
         {
+            #region Select list before registration
             List<SelectListItem> gender = new List<SelectListItem>()
             {
                 new SelectListItem{Value="Select",Text="Select"},
                 new SelectListItem{Value="0",Text="Are You Patient?"},
                 new SelectListItem{Value="1",Text="Are You Doctor?"},
-               
+
             };
             ViewBag.genderlist = gender;
 
             return View();
+            #endregion
         }
         [HttpPost]
         public async Task<IActionResult> PatientRegister1(LoginTable loginTable)
         {
+            #region Patient can register here only by email and password
             ViewBag.Status = "";
             int loginID = 0;
             using (HttpClient client = new HttpClient())
@@ -55,7 +58,7 @@ namespace Clinic_MVC_UI.Controllers
                         loginID = JsonConvert.DeserializeObject<int>(result);
                         if (loginID != 0)
                         {
-                            TempData["LoginID"]=loginID.ToString();
+                            TempData["LoginID"] = loginID.ToString();
                             TempData.Keep();
                         }
                         if (loginTable.Type == 0)
@@ -64,7 +67,7 @@ namespace Clinic_MVC_UI.Controllers
                             ViewBag.message = "Patient Registered Successfully";
                             return RedirectToAction("PatientRegister2", "Register");
                         }
-                        else if(loginTable.Type == 1)
+                        else if (loginTable.Type == 1)
                         {
                             ViewBag.status = "Ok";
                             ViewBag.message = "Patient Registered Successfully";
@@ -92,12 +95,14 @@ namespace Clinic_MVC_UI.Controllers
             };
             ViewBag.genderlist = gender;
             return View();
+            #endregion
         }
 
         [HttpPost]
         public async Task<IActionResult> PatientRegister2(Patient patient)
         {
-            patient.PatientID = Convert.ToInt32( TempData["LoginID"]);
+            #region Patient register here with all details
+            patient.PatientID = Convert.ToInt32(TempData["LoginID"]);
             ViewBag.Status = "";
             using (HttpClient client = new HttpClient())
             {
@@ -119,51 +124,52 @@ namespace Clinic_MVC_UI.Controllers
                 }
             }
             return View();
+            #endregion
         }
-       /* public IActionResult DoctorRegister1()
-        {
-            return View();
-        }
-        [HttpPost]
-        public async Task<IActionResult> DoctorRegister1(LoginTable loginTable)
-        {
-            ViewBag.Status = "";
-            int loginID = 0;
-            using (HttpClient client = new HttpClient())
-            {
-                StringContent content = new StringContent(JsonConvert.SerializeObject(loginTable), Encoding.UTF8, "application/json");
-                string endPoint = _configuration["WebApiBaseUrl"] + "LoginTable/AddLogin";
-                using (var response = await client.PostAsync(endPoint, content))
-                {
-                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                    {
-                        var result = await response.Content.ReadAsStringAsync();
-                        loginID = JsonConvert.DeserializeObject<int>(result);
-                        if (loginID != 0)
-                        {
-                            TempData["LoginID"] = loginID.ToString();
-                            TempData.Keep();
-                        }
-                        ViewBag.status = "Ok";
-                        ViewBag.message = "Patient Registered Successfully";
-                        return RedirectToAction("DoctorRegister2", "Register");
-                    }
-                    else
-                    {
-                        ViewBag.status = "Error";
-                        ViewBag.message = "Wrong Entries";
-                    }
-                }
-            }
-            return View();
+        /* public IActionResult DoctorRegister1()
+         {
+             return View();
+         }
+         [HttpPost]
+         public async Task<IActionResult> DoctorRegister1(LoginTable loginTable)
+         {
+             ViewBag.Status = "";
+             int loginID = 0;
+             using (HttpClient client = new HttpClient())
+             {
+                 StringContent content = new StringContent(JsonConvert.SerializeObject(loginTable), Encoding.UTF8, "application/json");
+                 string endPoint = _configuration["WebApiBaseUrl"] + "LoginTable/AddLogin";
+                 using (var response = await client.PostAsync(endPoint, content))
+                 {
+                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                     {
+                         var result = await response.Content.ReadAsStringAsync();
+                         loginID = JsonConvert.DeserializeObject<int>(result);
+                         if (loginID != 0)
+                         {
+                             TempData["LoginID"] = loginID.ToString();
+                             TempData.Keep();
+                         }
+                         ViewBag.status = "Ok";
+                         ViewBag.message = "Patient Registered Successfully";
+                         return RedirectToAction("DoctorRegister2", "Register");
+                     }
+                     else
+                     {
+                         ViewBag.status = "Error";
+                         ViewBag.message = "Wrong Entries";
+                     }
+                 }
+             }
+             return View();
 
-        }
-       
+         }
 
-        }*/
+
+         }*/
         public async Task<IActionResult> DoctorRegister2()
-
         {
+            #region Doctor can register here only by email and password
             //Gender dropdown list
             List<SelectListItem> gender = new List<SelectListItem>()
             {
@@ -199,10 +205,12 @@ namespace Clinic_MVC_UI.Controllers
             ViewBag.Departmentlist = department;
 
             return View();
+            #endregion
         }
         [HttpPost]
         public async Task<IActionResult> DoctorRegister2(Doctor doctor)
         {
+            #region Doctor register here with all details
             doctor.DoctorID = Convert.ToInt32(TempData["LoginID"]);
             ViewBag.Status = "";
             using (HttpClient client = new HttpClient())
@@ -225,6 +233,148 @@ namespace Clinic_MVC_UI.Controllers
                 }
             }
             return View();
+            #endregion
+        }
+        public IActionResult ForgetPassword()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> ForgetPassword(LoginTable loginTable)
+        {
+            #region Forget Password
+            loginTable.Password ="hell";
+            LoginTable loginTable1 = new LoginTable();  
+            ViewBag.status = "";
+            int[] arr = new int[2];
+            TempData["EmailAdress"] = loginTable.Email;
+            using (HttpClient client = new HttpClient())
+            {
+                StringContent content = new StringContent(JsonConvert.SerializeObject(loginTable), Encoding.UTF8, "application/json");
+                string endpoint = _configuration["WebApiBaseUrl"] + "LoginTable/ForgetPassword";
+                using (var response = await client.PostAsync(endpoint, content))
+                {
+                    var result = await response.Content.ReadAsStringAsync();
+                    loginTable1 = JsonConvert.DeserializeObject<LoginTable>(result);
+
+
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        TempData["ForgetId"] = loginTable1.ID;
+                        TempData.Keep();
+                        TempData["TypeId"] = loginTable1.Type;
+                        TempData.Keep();
+                        ViewBag.status = "Ok";
+                        ViewBag.message = "Login Succesfully";
+                        if (loginTable1.Type == 0)
+                        {
+
+                            return RedirectToAction("UpdatePassword", "Register");
+                        }
+                        else if (loginTable1.Type == 1)
+                        {
+                            
+                            TempData.Keep();
+                            return RedirectToAction("UpdatePassword", "Register");
+                        }
+
+
+                    }
+                    else
+                    {
+                        ViewBag.staus = "Error";
+                        ViewBag.message = "Wrong Entries";
+                    }
+                }
+            }
+
+            return View();
+            #endregion
+        }
+        public IActionResult UpdatePassword()
+        {
+
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> UpdatePassword(Doctor doctor)
+        {
+            #region Update password
+            LoginTable loginTable = new LoginTable();
+            loginTable.ID = Convert.ToInt32(TempData["ForgetId"]);
+            loginTable.Type = Convert.ToInt32(TempData["TypeId"]);
+            if (Convert.ToInt32(TempData["TypeId"]) == 1)
+            {
+                Doctor doctor1 = null;
+                using (HttpClient client = new HttpClient())
+                {
+                    string endpoint = _configuration["WebApiBaseUrl"] + "Doctor/GetDoctorById?doctorId=" + Convert.ToInt32(TempData["ForgetId"]);
+                    using (var response = await client.GetAsync(endpoint))
+                    {
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            var result = await response.Content.ReadAsStringAsync();
+                            doctor1 = JsonConvert.DeserializeObject<Doctor>(result);
+                        }
+
+
+
+                    }
+                }
+                if (doctor1.BirthDate == doctor.BirthDate)
+                {
+                    loginTable.Password = doctor.LoginTable.Password;
+                }
+            }
+            else if (Convert.ToInt32(TempData["TypeId"]) == 0)
+            {
+
+
+                Patient patient = null;
+                using (HttpClient client = new HttpClient())
+                {
+                    string endpoint = _configuration["WebApiBaseUrl"] + "Patient/GetPatientById?patientId=" + Convert.ToInt32(TempData["ForgetId"]);
+                    using (var response = await client.GetAsync(endpoint))
+                    {
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            var result = await response.Content.ReadAsStringAsync();
+                            patient = JsonConvert.DeserializeObject<Patient>(result);
+                        }
+                    }
+                }
+                if (patient.BirthDate == doctor.BirthDate)
+                {
+                    loginTable.Password = doctor.LoginTable.Password;
+                }
+
+            }
+            loginTable.Email = TempData["EmailAdress"].ToString();
+
+            ViewBag.status = "";
+            using (HttpClient client = new HttpClient())
+            {
+                StringContent content = new StringContent(JsonConvert.SerializeObject(loginTable), Encoding.UTF8, "application/json");
+                string endPoint = _configuration["WebApiBaseUrl"] + "LoginTable/UpdatePassword";
+                using (var response = await client.PutAsync(endPoint, content))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        ViewBag.status = "Ok";
+                        ViewBag.message = "Password Updated Successfully";
+                    }
+                    else
+                    {
+                        ViewBag.status = "Error";
+                        ViewBag.message = "Wrong Entries!";
+                    }
+                }
+            }
+            return View();
+            #endregion
         }
     }
 }
+
+
+

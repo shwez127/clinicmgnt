@@ -46,5 +46,15 @@ namespace ClinicAPI.Controllers
                 return flag;
             return 0;
         }
+        [HttpPost("ForgetPassword")]
+        public LoginTable ForgetPassword(LoginTable login)
+        {
+            return _loginTableService.ForgetPassword(login);
+        }
+        [HttpPut("UpdatePassword")]
+        public void UpdatePassword(LoginTable login)
+        {
+            _loginTableService.UpdatePassword(login);
+        }
     }
 }

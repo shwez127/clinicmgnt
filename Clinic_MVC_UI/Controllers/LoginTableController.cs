@@ -25,8 +25,9 @@ namespace Clinic_MVC_UI.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(LoginTable loginTable)
         {
+            #region Admin, patient and doctor can login
             ViewBag.status = "";
-            int[] arr;
+            int[] arr = new int[2];
             using (HttpClient client = new HttpClient())
             {
                 StringContent content = new StringContent(JsonConvert.SerializeObject(loginTable), Encoding.UTF8, "application/json");
@@ -35,29 +36,31 @@ namespace Clinic_MVC_UI.Controllers
                 {
                     var result = await response.Content.ReadAsStringAsync();
                     arr = JsonConvert.DeserializeObject<int[]>(result);
-                    
+
                     TempData.Keep();
                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
-                        var x = TempData["ProfileId"] = arr[0].ToString();
+                         TempData["ProfileId"] = arr[0].ToString();
                         TempData.Keep();
                         ViewBag.status = "Ok";
                         ViewBag.message = "Login Succesfully";
                         if (arr[1] == 0)
                         {
-                           /* var x = TempData["PatientID"] = arr[0].ToString();
-                            TempData.Keep();*/
-                            return RedirectToAction("Index","Patient");
-                        }else if (arr[1] == 1)
+                            TempData["PatientID"] = arr[0].ToString();
+                            TempData.Keep();
+                            return RedirectToAction("Index", "Patient");
+                        }
+                        else if (arr[1] == 1)
                         {
-                           /* var x = TempData["DoctorID"] = arr[0].ToString();
-                            TempData.Keep();*/
-                            return RedirectToAction("Index","Doctor");
-                        }else if(arr[1] == 3)
+                             TempData["DoctorID"] = arr[0].ToString();
+                            TempData.Keep();
+                            return RedirectToAction("Index", "Doctor");
+                        }
+                        else if (arr[1] == 3)
                         {
                             return RedirectToAction("Index", "Admin");
                         }
-                       
+
                     }
                     else
                     {
@@ -67,7 +70,8 @@ namespace Clinic_MVC_UI.Controllers
                 }
             }
             return View();
+            #endregion
         }
-        
+
     }
 }
