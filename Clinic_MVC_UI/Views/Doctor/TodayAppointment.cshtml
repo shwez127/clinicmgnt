@@ -1,7 +1,5 @@
 ﻿
 
-
-
 @{
     Layout = "~/Views/Shared/DoctorLayout.cshtml";
 }
@@ -12,22 +10,23 @@
 }
 
 
-<hr />
+@if(Model.Count()>=1)
+{
     <div class="col-12">
-        <center><h3 style="color:black;">List of Appointments</h3></center>
+    <center><h3 style="font-size:x-large;color:black;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">List of Appointments</h3></center>
         <hr />
         <table class="table table-light table-bordered table-hover">
             <thead>
                 <tr>
                     <th>Appointment ID</th>
-                    <th>Patient_Name</th>
-                    <th>Patient_Phone</th>
-                    <th>Patient_BirthDate</th>
+                    <th>Patient Name</th>
+                    <th>Patient Phone</th>
+                    <th>Patient BirthDate</th>
                     <th>Date</th>
                     <th>Progress</th>
-                    <th>Appointment_Status</th>
-                    <th>Bill_Amount</th>
-                    <th> Bill_Status</th>
+                    <th>Appointment Status</th>
+                    <th>Bill Amount</th>
+                    <th> Bill Status</th>
                 </tr>
             </thead>
             <tbody>
@@ -147,96 +146,10 @@
         </table>
     </div>
 <hr />
-
-  @*      <div class="col-12">
-            <center><h3 style="color:black;">List of Approved Appointments</h3></center>
-            <hr />
-            <table class="table table-light table-bordered table-hover">
-                <thead>
-
-                    <tr>
-                        <th>Appointment ID</th>
-                        <th>Patient_Name</th>
-                        <th>Patient_Phone</th>
-                        <th>Patient_BirthDate</th>
-                        <th>Date</th>
-                        <th>Progress</th>
-                        <th>Appointment_Status</th>
-                        <th>Bill_Amount</th>
-                        <th> Bill_Status</th>
-
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var doctor in Model)
-                    {
-                        if (doctor.Appointment_Status == 1)
-                        {
-                            <tr>
-                                <td>@doctor.AppointID</td>
-                            <td>@doctor.Patient.Name</td>
-                            <td>@doctor.Patient.Phone</td>
-                            <td>@doctor.Patient.BirthDate</td>
-                            <td>@doctor.Date</td>
-                            <td>@doctor.Progress</td>
-                            <td>@doctor.Appointment_Status</td>
-                            <td>@doctor.Bill_Amount</td>
-                            <td>@doctor.Bill_Status</td>
-
-                            <td><a asp-controller="Doctor" asp-action="ApproveOrReject" asp-route-AppointmentId="@doctor.AppointID">Add Precscription</a></td>
-                           
-                        </tr>
-                        }
-                    }
-                </tbody>
-
-            </table>
-        </div>
-
-        <div class="col-12">
-            <center><h3 style="color:black;">List of Rejected Appointments</h3></center>
-            <hr />
-            <table class="table table-light table-bordered table-hover">
-                <thead>
-
-                    <tr>
-                        <th>Appointment ID</th>
-                        <th>Patient_Name</th>
-                        <th>Patient_Phone</th>
-                        <th>Patient_BirthDate</th>
-                        <th>Date</th>
-                        <th>Progress</th>
-                        <th>Appointment_Status</th>
-                        <th>Bill_Amount</th>
-                        <th> Bill_Status</th>
-
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var doctor in Model)
-                    {
-                        if (doctor.Appointment_Status == 4)
-                        {
-                            <tr>
-                                <td>@doctor.AppointID</td>
-                                <td>@doctor.Patient.Name</td>
-                                <td>@doctor.Patient.Phone</td>
-                                <td>@doctor.Patient.BirthDate</td>
-                                <td>@doctor.Date</td>
-                                <td>@doctor.Progress</td>
-                                <td>@doctor.Appointment_Status</td>
-                                <td>@doctor.Bill_Amount</td>
-                                <td>@doctor.Bill_Status</td>
-                            </tr>
-                        }
-
-                    }
-                </tbody>
-                <h6>Rejected......</h6>
-
-            </table>
-        </div>*@
-
+}else{
+    <h1>There is no pending appointments</h1>
+}
+  
 
 
 

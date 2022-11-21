@@ -1,5 +1,6 @@
 ﻿using ClinicData.Data;
 using ClinicEntity.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,6 +50,37 @@ namespace ClinicData.Repository
             }
             return arr;
 
+        }
+
+        public LoginTable ForgetPassword(LoginTable loginTable)
+        {
+           /* int[] arr = { -1, 4 };*/
+            List<LoginTable> LoginLists = _clinicDb.logintables.ToList();
+            var TotalList = from v in LoginLists select v;
+            LoginTable loginTable1 = new LoginTable();
+            /*if (loginTable.Email == "Prabhu@gmail.com" && loginTable.Password == "prabhu123")
+            {
+                arr[1] = 3;
+                return arr;
+            }*/
+            
+          foreach (var i in TotalList)
+           {
+                    if (i.Email == loginTable.Email )
+                    {
+                        return i;
+                    }
+           }
+            
+            return loginTable1;
+
+        }
+        public void UpdatePassword(LoginTable login)
+        {
+            #region Updating Patient Details in Database
+            _clinicDb.Entry(login).State = EntityState.Modified;
+            _clinicDb.SaveChanges();
+            #endregion
         }
     }
 }
