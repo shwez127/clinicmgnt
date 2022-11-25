@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Configuration;
+using Microsoft.VisualBasic;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -174,6 +175,9 @@ namespace Clinic_MVC_UI.Controllers
             #endregion
             #region selecting the doctor
             List<Doctor> doctors = new List<Doctor>();
+
+            
+
             using (HttpClient client = new HttpClient())
             {
                 string endpoint = _configuration["WebApiBaseUrl"] + "Doctor/GetDoctors";
@@ -186,28 +190,57 @@ namespace Clinic_MVC_UI.Controllers
                     }
                 }
             }
-            
-            List<SelectListItem> Doctorlist = new List<SelectListItem>();
+            List<Doctor> Doctors = new List<Doctor>();
 
-
-            Doctorlist.Add(new SelectListItem { Value = "select", Text = "select" });
             foreach (var item in doctors)
             {
-                if (item.Deptno == Convert.ToInt32(TempData["DepartmentId"])) 
+                if (item.Deptno == Convert.ToInt32(TempData["DepartmentId"]))
                 {
-                    Doctorlist.Add(new SelectListItem { Value = item.DoctorID.ToString(), Text = "Name: " + item.Name + "; Qulification:  " + item.Qualification + "; Charges Per Visit: " + item.Charges_Per_Visit });
+                    Doctors.Add(item);
                 }
             }
 
-            ViewBag.Doctorlist = Doctorlist;
-            return View(appointment);
+            /* List<SelectListItem> Doctorlist = new List<SelectListItem>();
+             Doctorlist.Add(new SelectListItem { Value = "select", Text = "select" });
+             foreach (var item in doctors)
+             {
+                 if (item.Deptno == Convert.ToInt32(TempData["DepartmentId"]))
+                 {
+                     Doctorlist.Add(new SelectListItem { Value = item.DoctorID.ToString(), Text = "Name: " + item.Name + "; Qulification:  " + item.Qualification + "; Charges Per Visit: " + item.Charges_Per_Visit });
+                 }
+             }
+
+             ViewBag.Doctorlist = Doctorlist;*/
+            return View(Doctors);
             #endregion
         }
-
-        [HttpPost]
-        public async Task<IActionResult> addAppointment(Appointment appointment)
+        public async Task<IActionResult> After_Selecting_doctor (int SelectingDoctorId)
         {
+            Appointment appointment = new Appointment();
+            Doctor doctor = new Doctor();
+            using (HttpClient client = new HttpClient())
+            {
+                string endPoint = _configuration["WebApiBaseUrl"] + "Doctor/GetDoctorById?doctorId=" + SelectingDoctorId;
+                using (var response = await client.GetAsync(endPoint))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        var result = await response.Content.ReadAsStringAsync();
+                        doctor = JsonConvert.DeserializeObject<Doctor>(result);
+                    }
+                }
+            }
+            /*var tupeluser = new Tuple<Doctor, Appointment>(doctor, appointment);*/
+            return View(doctor);
+          
+        }
+        [HttpPost]
+        public async Task<IActionResult> After_Selecting_doctor(Doctor doctor, int DoctorIdd)
+        {
+            Appointment appointment = new Appointment();
             #region Adding of Appointment
+            appointment.DoctorID=DoctorIdd;
+            appointment.Date = doctor.BirthDate;
             appointment.PatientID = Convert.ToInt32(TempData["ProfileID"]);
             TempData.Keep();
             ViewBag.Status = "";
@@ -216,33 +249,83 @@ namespace Clinic_MVC_UI.Controllers
                 ViewBag.status = "Error";
                 ViewBag.message = "Ensure your Appointment date must be Today Onwards";
             }
-            else { 
-       
-            
-            using (HttpClient client = new HttpClient())
+            else
             {
-                StringContent content = new StringContent(JsonConvert.SerializeObject(appointment), Encoding.UTF8, "application/json");
-                string endPoint = _configuration["WebApiBaseUrl"] + "Appointment/AddAppointment";
-                using (var response = await client.PostAsync(endPoint, content))
-                {
-                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                    {
-                        ViewBag.status = "Ok";
-                        ViewBag.message = "Appointment booked Successfully";
-                        return RedirectToAction("Index", "Patient");
 
-                    }
-                    else
+
+                using (HttpClient client = new HttpClient())
+                {
+                    StringContent content = new StringContent(JsonConvert.SerializeObject(appointment), Encoding.UTF8, "application/json");
+                    string endPoint = _configuration["WebApiBaseUrl"] + "Appointment/AddAppointment";
+                    using (var response = await client.PostAsync(endPoint, content))
                     {
-                        ViewBag.status = "Error";
-                        ViewBag.message = "Wrong Entries";
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            ViewBag.status = "Ok";
+                            ViewBag.message = "Appointment booked Successfully";
+                            return RedirectToAction("SelectingDepartment", "Patient");
+                            
+
+                        }
+                        else
+                        {
+                            ViewBag.status = "Error";
+                            ViewBag.message = "Wrong Entries";
+                        }
                     }
+
                 }
             }
-            }
-            return View();
+            
             #endregion
+            return View();
         }
+
+
+            /* [HttpPost]
+         public async Task<IActionResult> addAppointment(int a)
+
+
+         {
+
+             Appointment appointment=new Appointment();  
+             #region Adding of Appointment
+
+             appointment.PatientID = Convert.ToInt32(TempData["ProfileID"]);
+             TempData.Keep();
+             ViewBag.Status = "";
+             if (appointment.Date < DateTime.Today)
+             {
+                 ViewBag.status = "Error";
+                 ViewBag.message = "Ensure your Appointment date must be Today Onwards";
+             }
+             else { 
+
+
+             using (HttpClient client = new HttpClient())
+             {
+                 StringContent content = new StringContent(JsonConvert.SerializeObject(appointment), Encoding.UTF8, "application/json");
+                 string endPoint = _configuration["WebApiBaseUrl"] + "Appointment/AddAppointment";
+                 using (var response = await client.PostAsync(endPoint, content))
+                 {
+                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                     {
+                         ViewBag.status = "Ok";
+                         ViewBag.message = "Appointment booked Successfully";
+                         return RedirectToAction("Index", "Patient");
+
+                     }
+                     else
+                     {
+                         ViewBag.status = "Error";
+                         ViewBag.message = "Wrong Entries";
+                     }
+                 }
+             }
+             }
+             return View();
+             #endregion*/
+        
         [HttpGet]
         public async Task<IActionResult> PendingAppointment()
         {
@@ -534,6 +617,50 @@ namespace Clinic_MVC_UI.Controllers
             }*/
 
             return View();
+            #endregion
+        }
+
+      
+        public async Task<IActionResult> ApproveOrReject(int AppointmentId, int Appointment_Status)
+        {
+            #region Fetching the appointment details
+            Appointment appointment = null;
+            using (HttpClient client = new HttpClient())
+            {
+                string endpoint = _configuration["WebApiBaseUrl"] + "Appointment/GetAppointmentById?AppointmentId=" + AppointmentId;
+                using (var response = await client.GetAsync(endpoint))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        var result = await response.Content.ReadAsStringAsync();
+                        appointment = JsonConvert.DeserializeObject<Appointment>(result);
+                    }
+                }
+            }
+            #endregion
+            #region Updating the Apppointment Status
+            appointment.Appointment_Status = Appointment_Status;
+
+            ViewBag.status = "";
+            using (HttpClient client = new HttpClient())
+            {
+                StringContent content = new StringContent(JsonConvert.SerializeObject(appointment), Encoding.UTF8, "application/json");
+                string endPoint = _configuration["WebApiBaseUrl"] + "Appointment/UpdateAppointment";
+                using (var response = await client.PutAsync(endPoint, content))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        ViewBag.status = "Ok";
+                        ViewBag.message = "Appointment Details Updated Successfully!";
+                    }
+                    else
+                    {
+                        ViewBag.status = "Error";
+                        ViewBag.message = "appointment wrong Entries!";
+                    }
+                }
+            }
+            return View(appointment);
             #endregion
         }
     }

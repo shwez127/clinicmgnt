@@ -5,7 +5,9 @@ using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Net.Http;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -25,24 +27,72 @@ namespace Clinic_MVC_UI.Controllers
 
         }
 
-        public IActionResult PatientRegister1()
+        public async Task<IActionResult> PatientRegister1()
+      
         {
             #region Select list before registration
+            /* List<SelectListItem> gender = new List<SelectListItem>()
+             {
+                 new SelectListItem{Value="Select",Text="Select"},
+                 new SelectListItem{Value="0",Text="Are You Patient?"},
+                 new SelectListItem{Value="1",Text="Are You Doctor?"},
+
+             };
+             ViewBag.genderlist = gender;*/
             List<SelectListItem> gender = new List<SelectListItem>()
             {
-                new SelectListItem{Value="Select",Text="Select"},
-                new SelectListItem{Value="0",Text="Are You Patient?"},
-                new SelectListItem{Value="1",Text="Are You Doctor?"},
-
+                new SelectListItem{Value="Gender",Text="Gender"},
+                new SelectListItem{Value="M",Text="Male"},
+                new SelectListItem{Value="F",Text="Female"},
+                new SelectListItem{Value="O",Text="Others"},
             };
             ViewBag.genderlist = gender;
+            //Department dropdown list
+            List<Department> departments = new List<Department>();
+            using (HttpClient client = new HttpClient())
+            {
+                string endpoint = _configuration["WebApiBaseUrl"] + "Department/GetDepartments";
+                using (var response = await client.GetAsync(endpoint))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        var result = await response.Content.ReadAsStringAsync();
+                        departments = JsonConvert.DeserializeObject<List<Department>>(result);
+                    }
+                }
+            }
 
+            List<SelectListItem> department = new List<SelectListItem>();
+            department.Add(new SelectListItem { Value = "Department", Text = "Department" });
+            foreach (var item in departments)
+            {
+                department.Add(new SelectListItem { Value = item.DeptNo.ToString(), Text = item.DeptName });
+            }
+
+            ViewBag.Departmentlist = department;
+
+            dynamic d= new ExpandoObject();
+            
+           
             return View();
             #endregion
         }
         [HttpPost]
-        public async Task<IActionResult> PatientRegister1(LoginTable loginTable)
+        public async Task<IActionResult> PatientRegister1(Appointment appointment, int Type)
         {
+            LoginTable loginTable = new LoginTable();
+            if (Type == 1)
+            {
+                loginTable.Email = appointment.Doctor.LoginTable.Email;
+                loginTable.Password = appointment.Doctor.LoginTable.Password;
+                loginTable.Type= Type;
+            }
+            else if(Type==0)
+            {
+                loginTable.Email = appointment.Patient.LoginTable.Email;
+                loginTable.Password = appointment.Patient.LoginTable.Password;
+                loginTable.Type = Type;
+            }
             #region Patient can register here only by email and password
             ViewBag.Status = "";
             int loginID = 0;
@@ -60,19 +110,9 @@ namespace Clinic_MVC_UI.Controllers
                         {
                             TempData["LoginID"] = loginID.ToString();
                             TempData.Keep();
+
                         }
-                        if (loginTable.Type == 0)
-                        {
-                            ViewBag.status = "Ok";
-                            ViewBag.message = "Patient Registered Successfully";
-                            return RedirectToAction("PatientRegister2", "Register");
-                        }
-                        else if (loginTable.Type == 1)
-                        {
-                            ViewBag.status = "Ok";
-                            ViewBag.message = "Patient Registered Successfully";
-                            return RedirectToAction("DoctorRegister2", "Register");
-                        }
+                       
                     }
                     else
                     {
@@ -81,10 +121,77 @@ namespace Clinic_MVC_UI.Controllers
                     }
                 }
             }
+            if (Type == 1)
+            {
+                Doctor doctor=new Doctor();
+                doctor.DoctorID = loginID;
+                doctor.Name = appointment.Doctor.Name;
+                doctor.Address = appointment.Doctor.Address;
+                doctor.BirthDate = appointment.Doctor.BirthDate;
+                doctor.Gender = appointment.Doctor.Gender;  
+                doctor.Phone = appointment.Doctor.Phone;
+                doctor.Deptno = appointment.Doctor.Deptno;
+                doctor.Specialization = appointment.Doctor.Specialization;
+                doctor.Qualification= appointment.Doctor.Qualification;
+                doctor.Charges_Per_Visit = appointment.Doctor.Charges_Per_Visit;
+                doctor.Work_Experience = appointment.Doctor.Work_Experience;
+                ViewBag.Status = "";
+                using (HttpClient client = new HttpClient())
+                {
+                    StringContent content = new StringContent(JsonConvert.SerializeObject(doctor), Encoding.UTF8, "application/json");
+                    string endPoint = _configuration["WebApiBaseUrl"] + "Doctor/AddDoctor";
+                    using (var response = await client.PostAsync(endPoint, content))
+                    {
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            ViewBag.status = "Ok";
+                            ViewBag.message = "Doctor Registered Successfully";
+                            return RedirectToAction("Index", "LoginTable");
+                        }
+                        else
+                        {
+                            ViewBag.status = "Error";
+                            ViewBag.message = "Wrong Entries";
+                        }
+                    }
+                }
+
+            }
+            else if (Type == 0){
+                ViewBag.Status = "";
+                Patient patient= new Patient();
+                patient.PatientID = loginID;
+                patient.Name = appointment.Patient.Name;
+                patient.Address = appointment.Patient.Address;
+                patient.BirthDate=appointment.Patient.BirthDate;
+                patient.Gender = appointment.Patient.Gender;
+                patient.Phone = appointment.Patient.Phone;
+                using (HttpClient client = new HttpClient())
+                {
+                    StringContent content = new StringContent(JsonConvert.SerializeObject(patient), Encoding.UTF8, "application/json");
+                    string endPoint = _configuration["WebApiBaseUrl"] + "Patient/AddPatient";
+                    using (var response = await client.PostAsync(endPoint, content))
+                    {
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            ViewBag.status = "Ok";
+                            ViewBag.message = "Patient Registered Successfully";
+                            return RedirectToAction("Index", "LoginTable");
+                        }
+                        else
+                        {
+                            ViewBag.status = "Error";
+                            ViewBag.message = "Wrong Entries";
+                        }
+                    }
+                }
+            }
             return View();
+            #endregion
         }
-        public IActionResult PatientRegister2()
+        public async Task<IActionResult> PatientRegister2()
         {
+            #region The dropdown
             //Gender dropdown list
             List<SelectListItem> gender = new List<SelectListItem>()
             {
@@ -94,6 +201,8 @@ namespace Clinic_MVC_UI.Controllers
                 new SelectListItem{Value="O",Text="Others"},
             };
             ViewBag.genderlist = gender;
+
+           
             return View();
             #endregion
         }

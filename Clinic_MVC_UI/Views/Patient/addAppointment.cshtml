@@ -1,4 +1,4 @@
-﻿@model ClinicEntity.Models.Appointment
+﻿@model IEnumerable<ClinicEntity.Models.Doctor>
 @{
     ViewData["Title"] = "addAppointment";
 }
@@ -8,7 +8,7 @@
 }
 
 
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+@*<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
@@ -33,7 +33,7 @@
                             <div class="form-group">
                                 <label class="control-label" for="form3Example8">Department</label>
                                 <p>@Model.Progress</p>
-                                @*<select class="form-control" asp-for="Progress" style="width:150px;" required></select>*@
+                                
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -100,7 +100,69 @@
       
 
 </body>
-}
+}*@
+
+
+<form >
+<div class="row" style="height:25vh">
+    
+ @foreach (var item in Model)
+        {
+            <div class="card " style="padding:25px;margin:40px;">
+       
+        <img src="https://th.bing.com/th/id/OIP.m-7G-KL5wDT5KESHG3hRSQHaHa?w=188&h=188&c=7&r=0&o=5&pid=1.7" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">@item.Name</h5>
+            <h5 class="card-title">@item.Qualification</h5>
+
+            <p class="card-text">@item.Charges_Per_Visit</p>
+            <p class="card-text">@item.DoctorID</p>
+
+                    <a class="btn btn-dark" asp-controller="Patient" asp-action="After_Selecting_doctor" asp-route-SelectingDoctorId="@item.DoctorID">Book appointment</a>
+
+            @*<div class="modal fade" id="loginModal"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header border-bottom-0">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-title text-center">
+                                    <h4>Select Appointment Date</h4>
+                            </div>
+                            <div class="d-flex flex-column text-center">
+                                
+                                <form>
+                                  
+                                    <div class="form-group">
+                                            
+                                        <input  type="date" asp-for="@item.BirthDate" class="form-control" id="email1" placeholder="Appointment Date">
+                                    </div>
+
+                                            <button asp-route-hello="@item.DoctorID" type="submit" class="btn btn-info btn-block btn-round">Submit</button>
+                                </form>
+
+                                
+
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>*@
+        </div>
+        
+    </div>
+    }
+</div>
+</form>
+
+
+<!-- Modal -->
+
+    
 @if (ViewBag.status == "Ok")
 {
     <div class="alert alert-success">
