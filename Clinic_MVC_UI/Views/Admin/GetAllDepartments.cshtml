@@ -8,42 +8,48 @@
 }
 @model IEnumerable<ClinicEntity.Models.Department>
 
-
-<div style="padding:55px">
-    <div class="col-12">
-        <center>
-            <a class="font-weight-bolder text-uppercase" style="color:#003399;font-family:'Copperplate Gothic'; font-size:xx-large" align="center">List of Departments</a>
-        </center>
-        <hr />
-        <table class="table table-light table-bordered table-hover" style=" background-image: url('https://images.rawpixel.com/image_1000/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvdjg3MC1teW50LTIwXzFfMi5qcGc.jpg');">
-            <thead class="font-weight-bolder" style="color:#003399;font-family:'Copperplate Gothic';font-size:20px" align="center">
-                <tr>
-                    <th>Department No.</th>
-                    <th>Department Name</th>
-                    <th>Description</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                </tr>
-            </thead>
-            <tbody class="font-weight-bold" style="opacity:.8;color:#003399;font-family:'Copperplate Gothic';font-size:19px" align="center">
-                @foreach (var department in Model)
-                {
-                    <tr>
-                        <td>@department.DeptNo</td>
-                        <td>@department.DeptName</td>
-                        <td>@department.Description</td>
-                        <td><a class="btn btn-info" asp-controller="Admin" asp-action="EditDepartment" asp-route-DepartmentId="@department.DeptNo"><i class="fa-sharp fa-solid fa-pen-to-square"></i></a></td>
-                        <td><a class="btn btn-danger" asp-controller="Admin" asp-action="DeleteDepartment" asp-route-DepartmentId="@department.DeptNo"><i class="fa-sharp fa-solid fa-trash"></i></a></td>
-                    </tr>
-                }
-            </tbody>
-
-        </table>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width-device-width" />
+</head>
+<body>
+    <br/>
+    <br/>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <a class="text-uppercase d-inline-block text-center" style="color:#003399;font-size:x-large" align="center"> Department <span class="font-weight-bold" style="font-size:x-large">Details</span></a>
+            <a type="button" class="nav-link text-white btn btn-info add-new d-inline-block" style="float:right" asp-controller="Admin" asp-action="DepartmentEntry"><i class="fa fa-plus"></i>  Add New</a>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Department No.</th>
+                            <th>Department Name</th>
+                            <th>Description</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var department in Model)
+                        {
+                            <tr>
+                                <td>@department.DeptNo</td>
+                                <td>@department.DeptName</td>
+                                <td>@department.Description</td>
+                                <td align="center"><a class="btn btn-info" asp-controller="Admin" asp-action="EditDepartment" asp-route-DepartmentId="@department.DeptNo"><i class="fa-sharp fa-solid fa-pen-to-square"></i></a></td>
+                                <td align="center"><a class="btn btn-danger" asp-controller="Admin" asp-action="DeleteDepartment" onclick="deleteFunction()" asp-route-DepartmentId="@department.DeptNo"><i class="fa-sharp fa-solid fa-trash"></i></a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-</div>
-<div style="padding-left:70px; padding-right:70px">
-    <a type="button" class="nav-link text-white btn btn-info" asp-controller="Admin" asp-action="DepartmentEntry">Click Here to Add Department</a>
-</div>
-
+</body>
+</html>
 
 

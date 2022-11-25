@@ -1,64 +1,60 @@
-﻿@{
+﻿@model IEnumerable<ClinicEntity.Models.Patient>
+
+@{
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
-
 @{
     ViewData["Title"] = "GetAllPatients";
 }
-@{
-    Layout = "~/Views/Shared/AdminLayout.cshtml";
-}
-@model IEnumerable<ClinicEntity.Models.Patient>
 
-<div style="padding:55px">
-    <div class="col-12">
-        @using (Html.BeginForm())
-        {
-            <div style="color:#003399;font-family:'Copperplate Gothic';" class="font-weight-bolder text-uppercase">
-                Name &nbsp;@Html.TextBox("SearchName")
-                <input type="submit" value="Search"/>
-
-                @for (int i = 0; i <= 48; i++)
-                {
-                    <a>&nbsp;</a>
-                }
-                <a class="font-weight-bolder text-uppercase" style="color:#003399;font-family:'Copperplate Gothic'; font-size:xx-large" align="center">List of Patients</a>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width-device-width" />
+</head>
+<body>
+    <br />
+    <br />
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <a class="text-uppercase d-inline-block text-center" style="color:#003399;font-size:x-large" align="center"> Patient <span class="font-weight-bold" style="font-size:x-large">Details</span></a>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Patient Id</th>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>Address</th>
+                            <th>BirthDate</th>
+                            <th>Gender</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                            <th>View</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var patient in Model)
+                    {
+                        <tr>
+                            <td>@patient.PatientID</td>
+                            <td>@patient.Name</td>
+                            <td>@patient.Phone</td>
+                            <td>@patient.Address</td>
+                            <td>@patient.BirthDate</td>
+                            <td>@patient.Gender</td>
+                            <td align="center"><a class="btn btn-info" asp-controller="Admin" asp-action="EditPatient" asp-route-PatientId="@patient.PatientID"><i class="fa-sharp fa-solid fa-pen-to-square"></i></a></td>
+                            <td align="center"><a class="btn btn-danger" asp-controller="Admin" asp-action="DeletePatient" onclick="deleteFunction()" asp-route-PatientId="@patient.PatientID"><i class="fa-sharp fa-solid fa-trash"></i></a></td>
+                            <td align="center"><a class="btn btn-success" asp-controller="Admin" asp-action="PatientProfile" asp-route-patientProfileId="@patient.PatientID"><i class="fa-regular fa-eye"></i></a></td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
             </div>
-        }
-        <hr />
-        <table class="table table-light table-bordered table-hover" style=" background-image: url('https://images.rawpixel.com/image_1000/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvdjg3MC1teW50LTIwXzFfMi5qcGc.jpg');">
-            <thead class="font-weight-bolder" style="color:#003399;font-family:'Copperplate Gothic';font-size:20px" align="center">
-
-                <tr>
-                    <th>Patient Id</th>
-                    <th>Name</th>
-                    <th>Phone</th>
-                    <th>Address</th>                   
-                    <th>BirthDate</th>
-                    <th>Gender</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                    <th>View</th>
-                </tr>
-            </thead>
-            <tbody class="font-weight-bold" style="opacity:.8;color:#003399;font-family:'Copperplate Gothic';font-size:19px" align="center">
-                @foreach (var patient in Model)
-                {
-                    <tr>
-                        <td>@patient.PatientID</td>
-                        <td>@patient.Name</td>
-                        <td>@patient.Phone</td>
-                        <td>@patient.Address</td>
-                        <td>@patient.BirthDate</td>
-                        <td>@patient.Gender</td>
-                        <td><a class="btn btn-info" asp-controller="Admin" asp-action="EditPatient" asp-route-PatientId="@patient.PatientID"><i class="fa-sharp fa-solid fa-pen-to-square"></i></a></td>
-                        <td><a class="btn btn-danger" asp-controller="Admin" asp-action="DeletePatient" asp-route-PatientId="@patient.PatientID"><i class="fa-sharp fa-solid fa-trash"></i></a></td>
-                        <td><a class="btn btn-success" asp-controller="Admin" asp-action="PatientProfile" asp-route-patientProfileId="@patient.PatientID"><i class="fa-regular fa-eye"></i></a></td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+        </div>
     </div>
-</div>
-
+</body>
+</html>
 
