@@ -25,8 +25,15 @@ namespace Clinic_MVC_UI.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(LoginTable loginTable)
         {
-            #region Admin, patient and doctor can login
             ViewBag.status = "";
+            if (loginTable.Email == null && loginTable.Password ==null)
+            {
+                ViewBag.status = "Error";
+                ViewBag.message = "Email and Password is required";
+            }
+            else { 
+            #region Admin, patient and doctor can login
+           
             int[] arr = new int[2];
             using (HttpClient client = new HttpClient())
             {
@@ -64,10 +71,11 @@ namespace Clinic_MVC_UI.Controllers
                     }
                     else
                     {
-                        ViewBag.staus = "Error";
-                        ViewBag.message = "Wrong Entries";
+                        ViewBag.status = "Error";
+                        ViewBag.message = "Invalid Email Adress/Password";
                     }
                 }
+            }
             }
             return View();
             #endregion

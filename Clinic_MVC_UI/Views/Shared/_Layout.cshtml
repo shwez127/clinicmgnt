@@ -14,7 +14,7 @@
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light font-weight-bold" style="background-color:#003399;">
             <div class="container-fluid">
                 <a class="hm-logo-container" href="/">
-                    <img class="hm-logo" alt="" style="height:120px; padding-bottom:20px" src="https://www.svgrepo.com/show/270145/health-clinic-health-care.svg" />
+                    <img class="hm-logo" alt="" style="height:120px" src="https://www.svgrepo.com/show/270145/health-clinic-health-care.svg" />
                     <h2 style="color:white;font-family:'Copperplate Gothic';display:inline-block;padding-top:30px;padding-left:10px">
                        <b>THE CARE</b>
                         <br /><span class="ms-2" style="font-size:15px;letter-spacing:6px"> -- C L I N I C --</span>
@@ -55,7 +55,7 @@
         </nav>
     </header>
 
-    <div class="container-fluid" @*style="background-color:mediumspringgreen"*@>
+    <div class="container-fluid" >
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
@@ -72,6 +72,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     @RenderSection("Scripts", required: false)
 
 </body>
