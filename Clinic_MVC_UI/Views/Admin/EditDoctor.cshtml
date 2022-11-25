@@ -3,93 +3,102 @@
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
 
+<a asp-area="" asp-controller="Admin" asp-action="GetAllDoctors" type="button" class="btn  text-dark"><img class="img-fluid" style="height:35px" src="https://www.svgrepo.com/show/230939/back.svg"></a>
+<center><h2 style="color:#003399" class="font-weight-bolder text-uppercase" align="center">Edit Doctor Details</h2></center>
 
-<body class=" img-responsive" style="background-image: url('https://images.rawpixel.com/image_1000/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvdjg3MC1teW50LTIwXzFfMi5qcGc.jpg')" >
-    <div style="padding:60px;">
+<div style="background-color:#f0f8ff;font-family:'Roboto',sans-serif;padding:40px">
     <form method="post" enctype="multipart/form-data">
-        <h2 style="color:#003399;font-family:'Copperplate Gothic'" class="font-weight-bolder text-uppercase" align="center">Edit Doctor Details</h2>
-    <div class="form-group">
-            <label class="font-weight-bold" style="color:#003399;font-family:'Copperplate Gothic';font-size:20px">Doctor Id</label>
-            <input style="opacity:.8;" type="text" asp-for="DoctorID" class="form-control" placeholder="Enter Doctor Id" required />
-    </div>
-    <div class="form-group">
-            <label class="font-weight-bold" style="color:#003399;font-family:'Copperplate Gothic';font-size:20px">Doctor Name</label>
-            <input style="opacity:.8;" type="text" asp-for="Name" class="form-control" placeholder="Enter Doctor Name" required />
-    </div>
-    <div class="form-group">
-            <label class="font-weight-bold" style="color:#003399;font-family:'Copperplate Gothic';font-size:20px">Phone</label>
-            <input style="opacity:.8;" type="text" asp-for="Phone" class="form-control" placeholder="Enter Phone Number" required />
-    </div>
-    <div class="form-group">
-            <label class="font-weight-bold" style="color:#003399;font-family:'Copperplate Gothic';font-size:20px">Address</label>
-            <input style="opacity:.8;" type="text" asp-for="Address" class="form-control" placeholder="Enter Doctor's Address" required />
-    </div>
-    <div class="form-group">
-            <label class="font-weight-bold" style="color:#003399;font-family:'Copperplate Gothic';font-size:20px">Date of Birth</label>
-            <input style="opacity:.8;" type="date" asp-for="BirthDate" class="form-control" placeholder="Enter DOB" required />
-    </div>
-    <div class="form-group">
-            <label class="font-weight-bold" style="color:#003399;font-family:'Copperplate Gothic';font-size:20px">Gender</label>
-            <select style="opacity:.8;" asp-for="Gender" asp-items="@ViewBag.genderlist" class="form-control" required></select>
-    </div>
-    <div class="form-group">
-            <label class="font-weight-bold" style="color:#003399;font-family:'Copperplate Gothic';font-size:20px">Department Number</label>
-            <input style="opacity:.8;" type="number" asp-for="Deptno" class="form-control" placeholder="Enter Department Number" required />
-     </div>
-    <div class="form-group">
-            <label class="font-weight-bold" style="color:#003399;font-family:'Copperplate Gothic';font-size:20px">Charger Per Visit</label>
-            <input style="opacity:.8;" type="text" asp-for="Charges_Per_Visit" class="form-control" placeholder="Enter Fees" required />
-    </div>
-    <div class="form-group">
-            <label class="font-weight-bold" style="color:#003399;font-family:'Copperplate Gothic';font-size:20px">Monthly Salary</label>
-            <input style="opacity:.8;" type="text" asp-for="MonthlySalary" class="form-control" placeholder="Enter Monthly Salary" required />
-    </div>
-    <div class="form-group">
-           <label class="font-weight-bold" style="color:#003399;font-family:'Copperplate Gothic';font-size:20px">Status</label>
-           <select style="opacity:.8;" asp-for="Status" asp-items="@ViewBag.doctorstatuslist" class="form-control" required></select>
-    </div>
-    <div class="form-group">
-            <label class="font-weight-bold" style="color:#003399;font-family:'copperplate gothic';font-size:20px">Qualification</label>
-            <input style="opacity:.8;" type="text" asp-for="Qualification" class="form-control" placeholder="enter doctor's Qualification" required />
-    </div>
-    <div class="form-group">
-            <label class="font-weight-bold" style="color:#003399;font-family:'Copperplate Gothic';font-size:20px">Specialization</label>
-            <input style="opacity:.8;" type="text" asp-for="Specialization" class="form-control" placeholder="Enter Doctor's Specialization" required />
-    </div>
-    @* <div class="form-group">
-        <label>Repute Index</label>
-        <input type="text" asp-for="ReputeIndex" class="form-control" placeholder="Enter Repute Index" required />
-    </div>*@
-    <div class="form-group">
-            <label class="font-weight-bold" style="color:#003399;font-family:'Copperplate Gothic';font-size:20px">Patient Treated</label>
-            <input style="opacity:.8;" type="text" asp-for="Patient_Treated" class="form-control" placeholder="Patients Treated" required />
-    </div>
-    <div class="form-group">
-            <label class="font-weight-bold" style="color:#003399;font-family:'Copperplate Gothic';font-size:20px">Work Experience</label>
-            <input style="opacity:.8;" type="text" asp-for="Work_Experience" class="form-control" placeholder="Enter Work Experience" required />
-    </div>
 
-    <input type="submit" value="Update" class="btn btn-outline-success" />
-    <input type="reset" value="Reset" class="btn btn-outline-secondary" />
+        <div class="col-4 d-inline-block align-top" style="margin-left:50px">
+            <div class="form-group">
+                <label style="color:#003399;font-size:20px">Doctor Id</label>
+                <input style="width:90%" type="number" asp-for="DoctorID" class="form-control" placeholder="Enter Doctor Id" required />
+            </div>
+            <div class="form-group">
+                <label style="color:#003399;;font-size:20px">Doctor Name</label>
+                <input style="width:90%" type="text" asp-for="Name" class="form-control" placeholder="Enter Doctor Name" required />
+            </div>
+            <div class="form-group">
+                <label style="color:#003399;font-size:20px">Phone</label>
+                <input style="width:90%" type="text" asp-for="Phone" class="form-control" placeholder="Enter Phone Number" required />
+            </div>
+            <div class="form-group">
+                <label style="color:#003399;font-size:20px">Address</label>
+                <input style="width:90%" type="text" asp-for="Address" class="form-control" placeholder="Enter Doctor's Address" required />
+            </div>
+            <div class="form-group">
+                <label style="color:#003399;font-size:20px">Date of Birth</label>
+                <input style="width:90%" type="date" asp-for="BirthDate" class="form-control" placeholder="Enter DOB" required />
+            </div>
+            <div class="form-group">
+                <label style="color:#003399;font-size:20px">Gender</label>
+                <select style="width:90%" asp-for="Gender" asp-items="@ViewBag.genderlist" class="form-control" required></select>
+            </div>
+
+        </div>
+        <div class="col-4 d-inline-block align-top">
+            <div class="form-group">
+                <label style="color:#003399;font-size:20px">Charger Per Visit</label>
+                <input style="width:90%" type="text" asp-for="Charges_Per_Visit" class="form-control" placeholder="Enter Fees" required />
+            </div>
+            <div class="form-group">
+                <label style="color:#003399;font-size:20px">Monthly Salary</label>
+                <input style="width:90%" type="text" asp-for="MonthlySalary" class="form-control" placeholder="Enter Monthly Salary" required />
+            </div>
+            <div class="form-group">
+                <label style="color:#003399;;font-size:20px">Status</label>
+                <select style="width:90%" asp-for="Status" asp-items="@ViewBag.doctorstatuslist" class="form-control" required></select>
+            </div>
+            <div class="form-group">
+                <label style="color:#003399;font-size:20px">Qualification</label>
+                <input style="width:90%" type="text" asp-for="Qualification" class="form-control" placeholder="enter doctor's Qualification" required />
+            </div>
+            <div class="form-group">
+                <label style="color:#003399;font-size:20px">Specialization</label>
+                <input style="width:90%" type="text" asp-for="Specialization" class="form-control" placeholder="Enter Doctor's Specialization" required />
+            </div>
+            <div class="form-group">
+                <label style="color:#003399;font-size:20px">Repute Index</label>
+                <input style="width:90%" type="text" asp-for="ReputeIndex" class="form-control" placeholder="Enter Repute Index" required />
+            </div>
+        </div>
+        <div class="col-3 d-inline-block align-top">
+            
+            <div class="form-group">
+                <label style="color:#003399;font-size:20px">Patient Treated</label>
+                <input type="text" asp-for="Patient_Treated" class="form-control" placeholder="Patients Treated" required />
+            </div>
+            <div class="form-group">
+                <label style="color:#003399;font-size:20px">Department Number</label>
+                <input type="text" asp-for="Deptno" class="form-control" placeholder="Enter Department Number" required />
+            </div>
+            <div class="form-group">
+                <label style="color:#003399;font-size:20px">Work Experience</label>
+                <input type="text" asp-for="Work_Experience" class="form-control" placeholder="Enter Work Experience" required />
+            </div>
+            
+
+                <input type="submit" value="Update" onclick="editFunction()" class="btn btn-outline-success" />
+                <input type="reset" value="Reset" class="btn btn-outline-secondary" />
    
-    @if (ViewBag.status == "Ok")
-            {
-                <br />
+                @if (ViewBag.status == "Ok")
+                        {
+                            <br />
 
-                <br />
-        <div class="alert alert-warning">
-            @ViewBag.message
-        </div>
-    }
-    else if (ViewBag.status == "Error")
-    {
-                <br />
+                            <br />
+                    <div class="alert alert-success">
+                        @ViewBag.message
+                    </div>
+                }
+                else if (ViewBag.status == "Error")
+                {
+                            <br />
 
-                <br />
-        <div class="alert alert-danger">
-            @ViewBag.message
+                            <br />
+                    <div class="alert alert-danger">
+                        @ViewBag.message
+                    </div>
+                }
         </div>
-    }
-</form>
+    </form>
 </div>
-</body>

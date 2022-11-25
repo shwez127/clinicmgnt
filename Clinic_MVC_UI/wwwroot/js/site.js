@@ -7,19 +7,35 @@
 
 // Write your JavaScript code.
 // Sticky Navigation Menu JS Code
-let nav = document.querySelector("nav");
-let scrollBtn = document.querySelector(".scroll-button a");
-console.log(scrollBtn);
-let val;
-window.onscroll = function () {
-    if (document.documentElement.scrollTop > 20) {
-        nav.classList.add("sticky");
-        scrollBtn.style.display = "block";
-    } else {
-        nav.classList.remove("sticky");
-        scrollBtn.style.display = "none";
-    }
 
+$(document).ready(function () {
+    $('#myTable').DataTable({
+        lengthMenu: [
+            [3, 6],
+            [3, 6],
+
+        ],
+    });
+});
+
+function deleteFunction() {
+    let val = confirm("Are you sure you want to Delete?");
+    if (val == false) {
+        return event.preventDefault();
+    }
+}
+
+function addFunction() {
+    let val = confirm("Are you sure you want to Save?");
+    if (val == false) {
+        return event.preventDefault();
+    }
 }
 
 
+function editFunction() {
+    let val = confirm("Are you sure you want to Edit?");
+    if (val == false) {
+        return event.preventDefault();
+    }
+}

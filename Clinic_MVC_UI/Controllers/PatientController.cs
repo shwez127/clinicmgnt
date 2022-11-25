@@ -211,7 +211,7 @@ namespace Clinic_MVC_UI.Controllers
             appointment.PatientID = Convert.ToInt32(TempData["ProfileID"]);
             TempData.Keep();
             ViewBag.Status = "";
-            if (appointment.Date <= DateTime.Today)
+            if (appointment.Date < DateTime.Today)
             {
                 ViewBag.status = "Error";
                 ViewBag.message = "Ensure your Appointment date must be Today Onwards";

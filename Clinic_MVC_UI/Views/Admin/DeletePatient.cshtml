@@ -7,14 +7,13 @@
     <a asp-controller="Booking" asp-action="Index">Go to Booking Index</a>
     <hr />
 </div>*@
-
-<div style=" background-image: url('https://images.rawpixel.com/image_1000/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvdjg3MC1teW50LTIwXzFfMi5qcGc.jpg');padding:55px">
+<div style="background-color:#f0f8ff;padding:55px; font-family:'Roboto', sans-serif">
     <form method="post" enctype="multipart/form-data">
-        <h3 style="color:#003399;font-family:'Copperplate Gothic'" class="font-weight-bolder text-uppercase" align="center">Delete Patient Details</h3>
+        <h3 style="color:#003399" class="font-weight-bolder text-uppercase" align="center">Delete Patient Details</h3>
         
         <div class="form-group">
-            <label class="font-weight-bold" style="color:#003399;font-family:'Copperplate Gothic';font-size:20px">Patient Id</label>
-            <input style="opacity:.8;" type="text" asp-for="PatientID" class="form-control" placeholder="Enter Patient Id" required />
+            <label class="font-weight-bold" style="color:#003399;font-size:20px">Patient Id</label>
+            <input type="text" asp-for="PatientID" class="form-control" placeholder="Enter Patient Id" required />
         </div>
         <input type="submit" value="Delete" class="btn btn-outline-danger" />
   

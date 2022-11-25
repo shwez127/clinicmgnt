@@ -6,18 +6,19 @@
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
 
-<div class="img-responsive" style=" background-image: url('https://images.rawpixel.com/image_1000/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvdjg3MC1teW50LTIwXzFfMi5qcGc.jpg');padding:55px">
+<a asp-area="" asp-controller="Admin" asp-action="GetAllDepartments" type="button" class="btn  text-dark"><img class="img-fluid" style="height:35px" src="https://www.svgrepo.com/show/230939/back.svg"></a>
+<div style="background-color:#f0f8ff;font-family:'Roboto',sans-serif ;padding:55px">
     <form method="post" enctype="multipart/form-data">
-        <h2 style="color:#003399;font-family:'Copperplate Gothic'" class="font-weight-bolder text-uppercase" align="center">Department Entry</h2>
+        <h2 style="color:#003399" class="font-weight-bolder text-uppercase" align="center">Department Entry</h2>
         <div class="form-group">
-            <label class="font-weight-bold" style="color:#003399;font-family:'Copperplate Gothic';font-size:20px">Department Name</label>
-            <input style="opacity:.8;" type="text" asp-for="DeptName" class="form-control" placeholder="Enter Department Name" />
+            <label class="font-weight-bold" style="color:#003399;font-size:20px">Department Name</label>
+            <input type="text" asp-for="DeptName" class="form-control" placeholder="Enter Department Name" />
         </div>
         <div class="form-group">
-            <label class="font-weight-bold" style="color:#003399;font-family:'Copperplate Gothic';font-size:20px">Description</label>
-            <input style="opacity:.8;" type="text" asp-for="Description" class="form-control" maxlength="500" placeholder="Describe Department" />
+            <label class="font-weight-bold" style="color:#003399;font-size:20px">Description</label>
+            <input type="text" asp-for="Description" class="form-control" maxlength="500" placeholder="Describe Department" />
         </div>
-        <input type="submit" value="Save" class="btn btn-outline-success" />
+        <input type="submit" value="Save" onclick="addFunction()" class="btn btn-outline-success" />
         <input type="reset" value="Reset" class="btn btn-outline-secondary" />
 
         @if (ViewBag.status == "Ok")
@@ -25,7 +26,7 @@
             <br />
 
             <br />
-            <div class="alert alert-warning">
+            <div class="alert alert-success">
                 @ViewBag.message
             </div>
         }
@@ -40,7 +41,3 @@
         }
     </form>
 </div>
-
-
-
-

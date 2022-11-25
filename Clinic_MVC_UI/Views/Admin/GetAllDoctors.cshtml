@@ -6,83 +6,72 @@
 @{
     ViewData["Title"] = "GetAllDoctors";
 }
-<div style="padding:55px">
-    <div class="col-12">
-        @using (Html.BeginForm())
-        {
-            <div style="color:#003399;font-family:'Copperplate Gothic';" class="font-weight-bolder text-uppercase">
-                Name &nbsp;@Html.TextBox("SearchName")
-                <input type="submit" value="Search"/>
 
-                @for(int i=0;i<=48 ;i++)
-                {
-                    <a>&nbsp;</a>
-                }
-                <a class="font-weight-bolder text-uppercase" style="color:#003399;font-family:'Copperplate Gothic'; font-size:xx-large" align="center">List of Doctors</a>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width-device-width" />
+</head>
+<body>
+    <br />
+    <br />
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <a class="text-uppercase d-inline-block text-center" style="color:#003399;font-size:x-large" align="center"> Doctor <span class="font-weight-bold" style="font-size:x-large">Details</span></a>
+            
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Doctor Id</th>
+                            <th>Doctor Name</th>
+                            <th>Phone</th>
+                            <th>Address</th>
+                            @*<th>BirthDate</th>*@
+                            <th>Gender</th>
+                            <th>Qualification</th>
+                            <th>Specialization</th>
+                            <th>Work Experience</th>
+                            <th>Department No.</th>
+                            <th>Charges Per Visit</th>
+                            @*<th>Monthly Salary</th>*@
+                            @*<th>Patient Treated</th>*@
+                            <th>Status</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                            <th>View</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var doctor in Model)
+                        {
+                            <tr>
+                                <td>@doctor.DoctorID</td>
+                                <td>@doctor.Name</td>
+                                <td>@doctor.Phone</td>
+                                <td>@doctor.Address</td>
+                                @*<td>@doctor.BirthDate</td>*@
+                                <td>@doctor.Gender</td>
+                                <td>@doctor.Qualification</td>
+                                <td>@doctor.Specialization</td>
+                                <td>@doctor.Work_Experience</td>
+                                <td>@doctor.Deptno</td>
+                                <td>@doctor.Charges_Per_Visit</td>
+                                @*<td>@doctor.MonthlySalary</td>*@
+                                @*<td>@doctor.Patient_Treated</td>*@
+                                <td>@doctor.Status</td>
+                                <td align="center"><a class="btn btn-info" asp-controller="Admin" asp-action="EditDoctor" asp-route-DoctorId="@doctor.DoctorID"><i class="fa-sharp fa-solid fa-pen-to-square"></i></a></td>
+                                <td align="center"><a class="btn btn-danger" asp-controller="Admin" asp-action="DeleteDoctor" onclick="deleteFunction()" asp-route-DoctorId="@doctor.DoctorID"><i class="fa-sharp fa-solid fa-trash"></i></a></td>
+                                <td align="center"><a class="btn btn-success" asp-controller="Admin" asp-action="DoctorProfile" asp-route-doctorProfileId="@doctor.DoctorID"><i class="fa-regular fa-eye"></i></a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
             </div>
-        }
-        <hr />
-        <table class="table table-light table-bordered table-hover" style=" background-image: url('https://images.rawpixel.com/image_1000/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvdjg3MC1teW50LTIwXzFfMi5qcGc.jpg');">
-            <thead class="font-weight-bolder" style="color:#003399;font-family:'Copperplate Gothic';font-size:20px" align="center">
-                <tr>
-                    <th>Doctor Id</th>
-                    <th>Doctor Name</th>
-                    <th>Phone</th>
-                    <th>Address</th>
-                    @*<th>BirthDate</th>*@
-                    <th>Gender</th>
-                    <th>Qualification</th>
-                    <th>Specialization</th>
-                    <th>Work Experience</th>
-                    <th>Department No.</th>
-                    <th>Charges Per Visit</th>
-                    @*<th>Monthly Salary</th>*@
-                    @*<th>Patient Treated</th>*@
-                    <th>Status</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                    <th>View</th>
-                </tr>
-            </thead>
-            <tbody class="font-weight-bold" style="opacity:.8;color:#003399;font-family:'Copperplate Gothic';font-size:19px" align="center">
-                @foreach (var doctor in Model)
-                {
-                    <tr>
-                        <td>@doctor.DoctorID</td>
-                        <td>@doctor.Name</td>
-                        <td>@doctor.Phone</td>
-                        <td>@doctor.Address</td>
-                        @*<td>@doctor.BirthDate</td>*@
-                        <td>@doctor.Gender</td>
-                        <td>@doctor.Qualification</td>
-                        <td>@doctor.Specialization</td>
-                        <td>@doctor.Work_Experience</td>
-                        <td>@doctor.Deptno</td>
-                        <td>@doctor.Charges_Per_Visit</td>
-                        @*<td>@doctor.MonthlySalary</td>*@
-                        @*<td>@doctor.Patient_Treated</td>*@
-                        <td>@doctor.Status</td>
-                        <td>
-                            <a class="btn btn-info" asp-controller="Admin" asp-action="EditDoctor" asp-route-DoctorId="@doctor.DoctorID">
-                                <i class="fa-sharp fa-solid fa-pen-to-square"></i>
-                            </a>
-                        </td>
-                        <td>
-                           
-                            <a class="btn btn-danger" asp-controller="Admin" asp-action="DeleteDoctor" asp-route-DoctorId="@doctor.DoctorID">
-                                <i class="fa-sharp fa-solid fa-trash"></i>
-                            </a>
-                        </td>
-                        <td>
-                            <a class="btn btn-success" asp-controller="Admin" asp-action="DoctorProfile" asp-route-doctorProfileId="@doctor.DoctorID">
-                                <i class="fa-regular fa-eye"></i>
-                            </a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+        </div>
     </div>
-</div>
-
+</body>
+</html>
 
