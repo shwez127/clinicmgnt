@@ -6,69 +6,62 @@
     ViewData["Title"] = "GetAllOtherStaffs";
 }
 
-<div style="padding:55px">
-    <div class="col-12">
-        @using (Html.BeginForm())
-        {
-            <div style="color:#003399;font-family:'Copperplate Gothic';" class="font-weight-bolder text-uppercase">
-                Name &nbsp;@Html.TextBox("SearchName")
-                <input type="submit" value="Search"/>
 
-                @for (int i = 0; i <= 48; i++)
-                {
-                    <a>&nbsp;</a>
-                }
-                <a class="font-weight-bolder text-uppercase" style="color:#003399;font-family:'Copperplate Gothic'; font-size:xx-large" align="center">List of Other Staffs</a>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width-device-width" />
+</head>
+<body>
+    <br />
+    <br />
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <a class="text-uppercase d-inline-block text-center" style="color:#003399;font-size:x-large" align="center"> Staff <span class="font-weight-bold" style="font-size:x-large">Details</span></a>
+            <a type="button" class="nav-link text-white btn btn-info add-new d-inline-block" style="float:right" asp-controller="Admin" asp-action="OtherStaffEntry"><i class="fa fa-plus"></i>  Add New</a>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Staff Id</th>
+                            <th>Staff Name</th>
+                            <th>Phone</th>
+                            <th>Address</th>
+                            <th>DOB</th>
+                            <th>Designation</th>
+                            <th>Gender</th>
+                            <th>Highest Qualification</th>
+                            <th>Salary</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var otherstaff in Model)
+                        {
+                            <tr>
+                                <td>@otherstaff.StaffID</td>
+                                <td>@otherstaff.Name</td>
+                                <td>@otherstaff.Phone</td>
+                                <td>@otherstaff.Address</td>
+                                <td>@otherstaff.BirthDate.ToShortDateString()</td>
+                                <td>@otherstaff.Designation</td>
+                                <td>@otherstaff.Gender</td>
+                                <td>@otherstaff.Highest_Qualification</td>
+                                <td>@otherstaff.Salary</td>
+                                <td align="center"><a class="btn btn-info" asp-controller="Admin" asp-action="EditOtherStaff" asp-route-OtherStaffId="@otherstaff.StaffID"><i class="fa-sharp fa-solid fa-pen-to-square"></i></a></td>
+                                <td align="center"><a class="btn btn-danger" asp-controller="Admin" asp-action="DeleteOtherStaff" onclick="deleteFunction()" asp-route-OtherStaffId="@otherstaff.StaffID"><i class="fa-sharp fa-solid fa-trash"></i></a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
             </div>
-        }
-        <hr />
-        <table class="table table-light table-bordered table-hover" style=" background-image: url('https://images.rawpixel.com/image_1000/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvdjg3MC1teW50LTIwXzFfMi5qcGc.jpg');">
-            <thead class="font-weight-bolder" style="color:#003399;font-family:'Copperplate Gothic';font-size:20px" align="center">
-                <tr>
-                    <th>Staff Id</th>
-                    <th>Staff Name</th>
-                    <th>Phone</th>
-                    <th>Address</th>
-                    <th>DOB</th>
-                    <th>Designation</th>
-                    <th>Gender</th>
-                    <th>Highest Qualification</th>
-                    <th>Salary</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                </tr>
-            </thead>
-            <tbody class="font-weight-bold" style="opacity:.8;color:#003399;font-family:'Copperplate Gothic';font-size:19px" align="center">
-                @foreach (var otherstaff in Model)
-                {
-                    <tr>
-                        <td>@otherstaff.StaffID</td>
-                        <td>@otherstaff.Name</td>
-                        <td>@otherstaff.Phone</td>
-                        <td>@otherstaff.Address</td>
-                        <td>@otherstaff.BirthDate</td>
-                        <td>@otherstaff.Designation</td>
-                        <td>@otherstaff.Gender</td>
-                        <td>@otherstaff.Highest_Qualification</td>
-                        <td>@otherstaff.Salary</td>
-                        <td><a class="btn btn-info" asp-controller="Admin" asp-action="EditOtherStaff" asp-route-OtherStaffId="@otherstaff.StaffID">
-                                <i class="fa-sharp fa-solid fa-pen-to-square"></i>
-                        </a></td>
-                        <td>
-                            
-                            <a class="btn btn-danger" asp-controller="Admin" asp-action="DeleteOtherStaff" asp-route-OtherStaffId="@otherstaff.StaffID">
-                                <i class="fa-sharp fa-solid fa-trash"></i>
-                        </a></td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+        </div>
     </div>
-</div>
-<div style="padding-left:70px; padding-right:70px">
-
-    <a type="button" class="nav-link text-white btn btn-info" asp-controller="Admin" asp-action="OtherStaffEntry">Click Here to Add Other Staffs</a>
-</div>
-
+</body>
+</html>
 
 

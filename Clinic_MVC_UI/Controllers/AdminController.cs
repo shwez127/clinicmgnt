@@ -3,6 +3,7 @@ using ClinicEntity.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis.Options;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System;
@@ -12,6 +13,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+
 
 namespace Clinic_MVC_UI.Controllers
 {
@@ -87,10 +89,16 @@ namespace Clinic_MVC_UI.Controllers
 
         public async Task<IActionResult> EditDoctor(int DoctorId)
         {
+            if(DoctorId != 0) 
+            {
+                TempData["EditDoctorId"]=DoctorId;
+                TempData.Keep();
+            }
             Doctor doctor = null;
             using (HttpClient client = new HttpClient())
             {
-                string endPoint = _configuration["WebApiBaseUrl"] + "Doctor/GetDoctorById?doctorId=" + DoctorId;
+                string endPoint = _configuration["WebApiBaseUrl"] + "Doctor/GetDoctorById?doctorId=" + Convert.ToInt32(TempData["EditDoctorId"]);
+                TempData.Keep();
                 using (var response = await client.GetAsync(endPoint))
                 {
                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
@@ -101,7 +109,31 @@ namespace Clinic_MVC_UI.Controllers
                 }
             }
             ViewBag.genderlist = GetGender();
-            ViewBag.doctorstatuslist = GetDoctorStatus();        
+            ViewBag.doctorstatuslist = GetDoctorStatus();
+
+            //Department dropdown list
+            List<Department> departments = new List<Department>();
+            using (HttpClient client = new HttpClient())
+            {
+                string endpoint = _configuration["WebApiBaseUrl"] + "Department/GetDepartments";
+                using (var response = await client.GetAsync(endpoint))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        var result = await response.Content.ReadAsStringAsync();
+                        departments = JsonConvert.DeserializeObject<List<Department>>(result);
+                    }
+                }
+            }
+
+            List<SelectListItem> department = new List<SelectListItem>();
+            department.Add(new SelectListItem { Value = "select", Text = "select" });
+            foreach (var item in departments)
+            {
+                department.Add(new SelectListItem { Value = item.DeptNo.ToString(), Text = item.DeptName });
+            }
+
+            ViewBag.Departmentlist = department;
             return View(doctor);
         }
 
@@ -119,6 +151,7 @@ namespace Clinic_MVC_UI.Controllers
                     {
                         ViewBag.status = "Ok";
                         ViewBag.message = "Doctor Details Updated Successfully!";
+                        return RedirectToAction("GetAllDoctors", "Admin");
                     }
                     else
                     {
@@ -130,38 +163,20 @@ namespace Clinic_MVC_UI.Controllers
             return View();
 
         }
+       
         public async Task<IActionResult> DeleteDoctor(int DoctorId)
-        {
-            Doctor doctor = null;
-            using (HttpClient client = new HttpClient())
-            {
-                string endPoint = _configuration["WebApiBaseUrl"] + "Doctor/GetDoctorById?doctorId=" + DoctorId;
-                using (var response = await client.GetAsync(endPoint))
-                {
-                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                    {
-                        var result = await response.Content.ReadAsStringAsync();
-                        doctor = JsonConvert.DeserializeObject<Doctor>(result);
-                    }
-                }
-            }
-            return View(doctor);
-
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> DeleteDoctor(Doctor doctor)
         {
             ViewBag.status = "";
             using (HttpClient client = new HttpClient())
             {
-                string endPoint = _configuration["WebApiBaseUrl"] + "Doctor/DeleteDoctor?doctorId=" + doctor.DoctorID;
+                string endPoint = _configuration["WebApiBaseUrl"] + "Doctor/DeleteDoctor?doctorId=" + DoctorId;
                 using (var response = await client.DeleteAsync(endPoint))
                 {
                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
                         ViewBag.status = "Ok";
                         ViewBag.message = "Doctor Details Deleted Successfully!";
+                        return RedirectToAction("GetAllDoctors", "Admin");
                     }
                     else
                     {
@@ -193,16 +208,22 @@ namespace Clinic_MVC_UI.Controllers
         #endregion
 
         #region Patient View-Edit-Delete Actions
-        public ActionResult GetAllPatients(string searchName)
+
+        public ActionResult GetAllPatients(string option, string search)
         {
-            var projects = from pr in db.patients select pr;
-
-            if (!String.IsNullOrEmpty(searchName))
+            if (option == "Subjects")
             {
-                projects = projects.Where(c => c.Name.Contains(searchName));
+                //GetAllPatients action method will return a view with a patient records based on what a user specify the value in textbox  
+                return View(db.patients.Where(x => x.Address == search || search == null).ToList());
             }
-
-            return View(projects);
+            else if (option == "Gender")
+            {
+                return View(db.patients.Where(x => x.Gender == search || search == null).ToList());
+            }
+            else
+            {
+                return View(db.patients.Where(x => x.Name.StartsWith(search) || search == null).ToList());
+            }
         }
 
         [HttpGet]
@@ -258,6 +279,7 @@ namespace Clinic_MVC_UI.Controllers
                     {
                         ViewBag.status = "Ok";
                         ViewBag.message = "Patient Details Updated Successfully!";
+                        return RedirectToAction("GetAllPatients", "Admin");
                     }
                     else
                     {
@@ -269,38 +291,20 @@ namespace Clinic_MVC_UI.Controllers
             return View();
 
         }
+        
         public async Task<IActionResult> DeletePatient(int PatientId)
-        {
-            Patient patient = null;
-            using (HttpClient client = new HttpClient())
-            {
-                string endPoint = _configuration["WebApiBaseUrl"] + "Patient/GetPatientById?patientId=" + PatientId;
-                using (var response = await client.GetAsync(endPoint))
-                {
-                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                    {
-                        var result = await response.Content.ReadAsStringAsync();
-                        patient = JsonConvert.DeserializeObject<Patient>(result);
-                    }
-                }
-            }
-            return View(patient);
-
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> DeletePatient(Patient patient)
         {
             ViewBag.status = "";
             using (HttpClient client = new HttpClient())
             {
-                string endPoint = _configuration["WebApiBaseUrl"] + "Patient/DeletePatient?patientId=" + patient.PatientID;
+                string endPoint = _configuration["WebApiBaseUrl"] + "Patient/DeletePatient?patientId=" + PatientId;
                 using (var response = await client.DeleteAsync(endPoint))
                 {
                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
                         ViewBag.status = "Ok";
                         ViewBag.message = "Patient Details Deleted Successfully!";
+                        return RedirectToAction("GetAllPatients", "Admin");
                     }
                     else
                     {
@@ -310,6 +314,7 @@ namespace Clinic_MVC_UI.Controllers
                 }
             }
             return View();
+
         }
         public async Task<IActionResult> PatientProfile(int patientProfileId)
         {
@@ -430,6 +435,7 @@ namespace Clinic_MVC_UI.Controllers
                     {
                         ViewBag.status = "Ok";
                         ViewBag.message = "Staff Details Updated Successfully!";
+                        return RedirectToAction("GetAllOtherStaffs", "Admin");
                     }
                     else
                     {
@@ -441,38 +447,20 @@ namespace Clinic_MVC_UI.Controllers
             return View();
 
         }
+        
         public async Task<IActionResult> DeleteOtherStaff(int OtherStaffId)
-        {
-            OtherStaff otherStaff = null;
-            using (HttpClient client = new HttpClient())
-            {
-                string endPoint = _configuration["WebApiBaseUrl"] + "Staff/GetStaffById?staffId=" + OtherStaffId;
-                using (var response = await client.GetAsync(endPoint))
-                {
-                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                    {
-                        var result = await response.Content.ReadAsStringAsync();
-                        otherStaff = JsonConvert.DeserializeObject<OtherStaff>(result);
-                    }
-                }
-            }
-            return View(otherStaff);
-
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> DeleteOtherStaff(OtherStaff otherStaff)
         {
             ViewBag.status = "";
             using (HttpClient client = new HttpClient())
             {
-                string endPoint = _configuration["WebApiBaseUrl"] + "Staff/DeleteStaff?staffId=" + otherStaff.StaffID;
+                string endPoint = _configuration["WebApiBaseUrl"] + "Staff/DeleteStaff?staffId=" + OtherStaffId;
                 using (var response = await client.DeleteAsync(endPoint))
                 {
                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
                         ViewBag.status = "Ok";
                         ViewBag.message = "Staff Details Deleted Successfully!";
+                        return RedirectToAction("GetAllOtherStaffs", "Admin");
                     }
                     else
                     {
@@ -570,6 +558,7 @@ namespace Clinic_MVC_UI.Controllers
                     {
                         ViewBag.status = "Ok";
                         ViewBag.message = "Department Details Updated Successfully!";
+                        return RedirectToAction("GetAllDepartments", "Admin");
                     }
                     else
                     {
@@ -581,38 +570,20 @@ namespace Clinic_MVC_UI.Controllers
             return View();
 
         }
+
         public async Task<IActionResult> DeleteDepartment(int DepartmentId)
-        {
-            Department department = null;
-            using (HttpClient client = new HttpClient())
-            {
-                string endPoint = _configuration["WebApiBaseUrl"] + "Department/GetDepartmentsById?departmentId=" + DepartmentId;
-                using (var response = await client.GetAsync(endPoint))
-                {
-                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                    {
-                        var result = await response.Content.ReadAsStringAsync();
-                        department = JsonConvert.DeserializeObject<Department>(result);
-                    }
-                }
-            }
-            return View(department);
-
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> DeleteDepartment(Department department)
         {
             ViewBag.status = "";
             using (HttpClient client = new HttpClient())
             {
-                string endPoint = _configuration["WebApiBaseUrl"] + "Department/DeleteDepartment?departmentId=" + department.DeptNo;
+                string endPoint = _configuration["WebApiBaseUrl"] + "Department/DeleteDepartment?departmentId=" + DepartmentId;
                 using (var response = await client.DeleteAsync(endPoint))
                 {
                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
                         ViewBag.status = "Ok";
                         ViewBag.message = "Department Details Deleted Successfully!";
+                        return RedirectToAction("GetAllDepartments", "Admin");
                     }
                     else
                     {

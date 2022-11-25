@@ -7,25 +7,26 @@
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
 
+<a asp-area="" asp-controller="Admin" asp-action="GetAllDepartments" type="button" class="btn  text-dark"><img class="img-fluid" style="height:35px" src="https://www.svgrepo.com/show/230939/back.svg"></a>
 
-<div class="img-responsive" style=" background-image: url('https://images.rawpixel.com/image_1000/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvdjg3MC1teW50LTIwXzFfMi5qcGc.jpg');padding:55px">
+<div style="background-color:#f0f8ff;padding:55px;font-family:'Roboto',sans-serif">
     <form method="post" enctype="multipart/form-data">
         <h2 style="color:#003399;font-family:'Copperplate Gothic'" class="font-weight-bolder text-uppercase" align="center">Edit Department Details</h2>
         <div class="form-group">
-            <label class="font-weight-bold" style="color:#003399;font-family:'Copperplate Gothic';font-size:20px">Department Id</label>
-            <input style="opacity:.8;" type="text" asp-for="DeptNo" class="form-control" placeholder="Enter Department Id" />
+            <label class="font-weight-bold" style="color:#003399;font-size:20px">Department Id</label>
+            <input type="text" asp-for="DeptNo" class="form-control" placeholder="Enter Department Id" />
         </div>
         <div class="form-group">
-            <label class="font-weight-bold" style="color:#003399;font-family:'Copperplate Gothic';font-size:20px">Department Name</label>
-            <input style="opacity:.8;" type="text" asp-for="DeptName" class="form-control" placeholder="Enter Department Name" />
+            <label class="font-weight-bold" style="color:#003399;font-size:20px">Department Name</label>
+            <input type="text" asp-for="DeptName" class="form-control" placeholder="Enter Department Name" />
             @Html.ValidationMessageFor(obj=>obj.DeptName)
         </div>
         <div class="form-group">
-            <label class="font-weight-bold" style="color:#003399;font-family:'Copperplate Gothic';font-size:20px">Description</label>
-            <input style="opacity:.8;" type="text" asp-for="Description" class="form-control" placeholder="Describe Department" />
+            <label class="font-weight-bold" style="color:#003399;font-size:20px">Description</label>
+            <input type="text" asp-for="Description" class="form-control" placeholder="Describe Department" />
         </div>
 
-        <input type="submit" value="Update" class="btn btn-outline-success" />
+        <input type="submit" onclick="editFunction()" value="Update" class="btn btn-outline-success" />
         <input type="reset" value="Reset" class="btn btn-outline-secondary" />
         
   
@@ -34,7 +35,7 @@
                 <br />
 
                 <br />
-                    <div class=" alert alert-warning">
+                    <div class=" alert alert-success">
                         @ViewBag.message
                     </div>
             }

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.32901.82
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Clinic_Mngmt", "Clinic_Mngmt\Clinic_Mngmt.csproj", "{DB14FD97-4BFD-4FF5-B17D-6B14DA331372}"
 EndProject
@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClinicBusiness", "ClinicBus
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClinicAPI", "ClinicAPI\ClinicAPI.csproj", "{9A6DA8BC-3C93-41B5-A0BB-5608E21DAB78}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clinic_MVC_UI", "Clinic_MVC_UI\Clinic_MVC_UI.csproj", "{0714C090-7F5B-4103-86E4-B89AA05A67C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Clinic_MVC_UI", "Clinic_MVC_UI\Clinic_MVC_UI.csproj", "{0714C090-7F5B-4103-86E4-B89AA05A67C0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

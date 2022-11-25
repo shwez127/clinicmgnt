@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Clinic_MVC_UI</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/site2.css" />
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light font-weight-bold @*box-shadow mb-3*@" style="background-color:#003399;">
             <div class="container-fluid">
-                <a class="hm-logo-container" href="/">
+                <a class="hm-logo-container" asp-controller="Doctor" asp-action="Index">
                     <img class="hm-logo" alt="" style="height:120px; padding-bottom:20px" src="https://www.svgrepo.com/show/270145/health-clinic-health-care.svg" />
                     <h2 style="color:white;font-family:'Copperplate Gothic';display:inline-block;padding-top:30px;padding-left:10px">
                         <b>THE CARE</b>
@@ -55,15 +55,13 @@
     </header>
 
 
-    <div class="container-fluid">
+    <div class="container-fluid img-responsive" style="background-color:#f0f8ff; height:76vh">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-
-
-    <footer class="footer text-muted" style="background-color:#003399">
+    <footer class="footer text-muted" style="background-color:#003399;position:fixed;bottom:0;">
         <div class="container">
             <a class="hm-logo-container" href="/">
                 <img class="hm-logo" alt="" style="width:50px; height:50px;" src="https://www.svgrepo.com/show/270145/health-clinic-health-care.svg" />

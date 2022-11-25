@@ -1,0 +1,316 @@
+﻿
+a.navbar-brand {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+}
+
+/* Provide sufficient contrast against white background */
+a {
+    color: #0366d6;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.border-top {
+    border-top: 1px solid #e5e5e5;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+    font-size: 1rem;
+    line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px; /* Vertically center the text there */
+}
+/*-------------------------------------------------------------------------------------------------------------------------*/
+
+
+.u-section-2 .u-sheet-1 {
+    min-height: 1319px;
+}
+
+.u-section-2 .u-shape-1 {
+    width: 212px;
+    height: 212px;
+    margin: 60px auto 0 58px;
+}
+
+.u-section-2 .u-shape-2 {
+    width: 164px;
+    height: 164px;
+    margin: -174px 144px 0 auto;
+}
+
+.u-section-2 .u-image-1 {
+    background-image: url("https://www.usmedicoabroad.com/blog/wp-content/uploads/2017/12/top-country-for-mbbs-abroad-in-philippines.jpg");
+    width: 799px;
+    height: 799px;
+    background-position: 50% 50%;
+    margin: -53px 144px 0 auto;
+}
+
+.u-section-2 .u-shape-3 {
+    width: 250px;
+    height: 250px;
+    margin: -619px auto 0 890px;
+}
+
+.u-section-2 .u-group-1 {
+    background-image: none;
+    width: 541px;
+    min-height: 441px;
+    height: auto;
+    margin: 22px auto 60px 0;
+}
+
+.u-section-2 .u-container-layout-1 {
+    padding: 24px 40px;
+}
+
+.u-section-2 .u-icon-1 {
+    width: 61px;
+    height: 61px;
+    margin: 22px auto 0 0;
+}
+
+.u-section-2 .u-text-1 {
+    font-weight: 700;
+    font-size: 3rem;
+    font-family: Roboto, sans-serif;
+    margin: 23px 0 0;
+}
+
+.u-section-2 .u-text-2 {
+    letter-spacing: 1px;
+    margin: 21px 28px 0 0;
+}
+
+.u-section-2 .u-btn-1 {
+    border-style: none none solid;
+    padding: 0;
+}
+
+@media (max-width: 1199px) {
+    .u-section-2 .u-sheet-1 {
+        min-height: 1346px;
+    }
+
+    .u-section-2 .u-shape-1 {
+        width: 181px;
+        height: 181px;
+        margin-left: 58px;
+    }
+
+    .u-section-2 .u-shape-2 {
+        width: 164px;
+        margin-top: -142px;
+        margin-right: 144px;
+    }
+
+    .u-section-2 .u-image-1 {
+        width: 746px;
+        height: 746px;
+        margin-top: 0;
+        margin-right: auto;
+        margin-left: 53px;
+    }
+
+    .u-section-2 .u-shape-3 {
+        margin-top: -619px;
+        margin-left: 690px;
+    }
+
+    .u-section-2 .u-group-1 {
+        min-height: 547px;
+        margin-top: 49px;
+        height: auto;
+    }
+
+    .u-section-2 .u-icon-1 {
+        width: 61px;
+        height: 61px;
+    }
+}
+
+@media (max-width: 991px) {
+    .u-section-2 .u-sheet-1 {
+        min-height: 1363px;
+    }
+
+    .u-section-2 .u-shape-2 {
+        width: 106px;
+        height: 106px;
+        margin-top: -124px;
+        margin-right: 88px;
+    }
+
+    .u-section-2 .u-image-1 {
+        width: 680px;
+        height: 680px;
+        margin-top: 40px;
+        margin-left: 0;
+    }
+
+    .u-section-2 .u-shape-3 {
+        width: 194px;
+        height: 194px;
+        margin-top: -553px;
+        margin-right: 0;
+        margin-left: auto;
+    }
+
+    .u-section-2 .u-group-1 {
+        width: 432px;
+        min-height: 515px;
+        margin-top: 147px;
+    }
+
+    .u-section-2 .u-container-layout-1 {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    .u-section-2 .u-icon-1 {
+        margin-top: 0;
+    }
+
+    .u-section-2 .u-text-1 {
+        font-size: 2.25rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .u-section-2 .u-sheet-1 {
+        min-height: 1258px;
+    }
+
+    .u-section-2 .u-shape-1 {
+        margin-left: 23px;
+    }
+
+    .u-section-2 .u-shape-2 {
+        width: 106px;
+        margin-top: -123px;
+        margin-right: 88px;
+    }
+
+    .u-section-2 .u-image-1 {
+        width: 487px;
+        height: 487px;
+        margin-top: 40px;
+    }
+
+    .u-section-2 .u-shape-3 {
+        width: 143px;
+        height: 143px;
+        margin-top: -439px;
+    }
+
+    .u-section-2 .u-group-1 {
+        width: 363px;
+        min-height: 544px;
+        margin-top: 199px;
+    }
+
+    .u-section-2 .u-container-layout-1 {
+        padding-left: 10px;
+    }
+}
+
+@media (max-width: 575px) {
+    .u-section-2 .u-sheet-1 {
+        min-height: 50vw;
+    }
+
+    .u-section-2 .u-shape-1 {
+        width: 114px;
+        height: 114px;
+        margin-top: 61px;
+        margin-left: 21px;
+    }
+
+    .u-section-2 .u-shape-2 {
+        width: 84px;
+        height: 84px;
+        margin-top: -99px;
+        margin-right: 38px;
+    }
+
+    .u-section-2 .u-image-1 {
+        width: 302px;
+        height: 302px;
+        margin-top: 60px;
+    }
+
+    .u-section-2 .u-shape-3 {
+        width: 116px;
+        height: 116px;
+        margin-top: -254px;
+        margin-right: 0;
+    }
+
+    .u-section-2 .u-group-1 {
+        margin-top: 159px;
+        margin-bottom: 46px;
+        min-height: 371px;
+        margin-right: initial;
+        margin-left: initial;
+        width: auto;
+    }
+
+    .u-section-2 .u-text-1 {
+        font-size: 1.5rem;
+    }
+
+    .u-section-2 .u-text-2 {
+        margin-right: 25px;
+    }
+}
