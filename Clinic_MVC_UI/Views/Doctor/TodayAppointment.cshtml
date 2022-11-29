@@ -21,12 +21,10 @@
                     <th>Appointment ID</th>
                     <th>Patient Name</th>
                     <th>Patient Phone</th>
-                    <th>Patient BirthDate</th>
-                    <th>Date</th>
-                    <th>Progress</th>
-                    <th>Appointment Status</th>
-                    <th>Bill Amount</th>
-                    <th> Bill Status</th>
+                    <th>Email Address</th>
+                    <th>Appiontment Date</th>
+                   <th>Appointment Status</th>
+                    
                 </tr>
             </thead>
             <tbody>
@@ -38,12 +36,12 @@
                         <td>@doctor.AppointID</td>
                         <td>@doctor.Patient.Name</td>
                         <td>@doctor.Patient.Phone</td>
-                        <td>@doctor.Patient.BirthDate</td>
-                        <td>@doctor.Date</td>
-                        <td>@doctor.Progress</td>
+                        <td>@doctor.Patient.LoginTable.Email</td>
+                        <td>@doctor.Date.ToShortDateString()</td>
+                     
                         @if (doctor.Appointment_Status == 0)
                         {
-                            <td>Requsted</td>
+                            <td>Requested</td>
 
                         }
                         else if (doctor.Appointment_Status == 1)
@@ -62,8 +60,7 @@
                         {
                             <td>Rejected</td>
                         }
-                        <td>@doctor.Bill_Amount</td>
-                        <td>@doctor.Bill_Status</td>
+                      
 
                         <td><a asp-controller="Doctor" class="btn btn-outline-success" asp-action="ApproveOrReject" asp-route-AppointmentId="@doctor.AppointID" asp-route-Appointment_Status=1>Approve </a></td>
                         <td><a asp-controller="Doctor" class="btn btn-outline-danger" asp-action="ApproveOrReject" asp-route-AppointmentId="@doctor.AppointID" asp-route-Appointment_Status=4>Reject</a></td>
@@ -76,12 +73,12 @@
                         <td>@doctor.AppointID</td>
                         <td>@doctor.Patient.Name</td>
                         <td>@doctor.Patient.Phone</td>
-                        <td>@doctor.Patient.BirthDate</td>
-                        <td>@doctor.Date</td>
-                        <td>@doctor.Progress</td>
+                            <td>@doctor.Patient.LoginTable.Email</td>
+                        <td>@doctor.Date.ToShortDateString()</td>
+                       
                         @if (doctor.Appointment_Status == 0)
                         {
-                            <td>Requsted</td>
+                            <td>Requested</td>
 
                         }
                         else if (doctor.Appointment_Status == 1)
@@ -100,8 +97,7 @@
                         {
                             <td>Rejected</td>
                         }
-                        <td>@doctor.Bill_Amount</td>
-                        <td>@doctor.Bill_Status</td>
+                        
 
                         <td><a class="btn btn-outline-info" asp-controller="Doctor" asp-action="AddPrescription" asp-route-AppointmentId="@doctor.AppointID">Add Precscription</a></td>
 
@@ -113,12 +109,12 @@
                         <td>@doctor.AppointID</td>
                         <td>@doctor.Patient.Name</td>
                         <td>@doctor.Patient.Phone</td>
-                        <td>@doctor.Patient.BirthDate</td>
-                        <td>@doctor.Date</td>
-                        <td>@doctor.Progress</td>
+                        <td>@doctor.Patient.LoginTable.Email</td>
+                        <td>@doctor.Date.ToShortDateString()</td>
+                      
                         @if (doctor.Appointment_Status == 0)
                         {
-                            <td>Requsted</td>
+                            <td>Requested</td>
 
                         }
                         else if (doctor.Appointment_Status == 1)
@@ -137,8 +133,7 @@
                         {
                             <td>Rejected</td>
                         }
-                        <td>@doctor.Bill_Amount</td>
-                        <td>@doctor.Bill_Status</td>
+                       
                     </tr>
                 }
                 }

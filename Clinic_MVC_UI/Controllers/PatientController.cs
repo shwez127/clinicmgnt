@@ -1,11 +1,16 @@
 ﻿using ClinicEntity.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualBasic;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Linq;
 using System.Net.Http;
 using System.Numerics;
 using System.Text;
@@ -263,6 +268,8 @@ namespace Clinic_MVC_UI.Controllers
                         {
                             ViewBag.status = "Ok";
                             ViewBag.message = "Appointment booked Successfully";
+                            TempData["Notification"] = Convert.ToInt32(TempData["Notification"]) + 1;
+                            TempData.Keep();
                             return RedirectToAction("SelectingDepartment", "Patient");
                             
 
@@ -420,7 +427,9 @@ namespace Clinic_MVC_UI.Controllers
                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
                         ViewBag.status = "Ok";
-                        ViewBag.message = "Appointment Details Updated Successfully!";
+                        ViewBag.message = "Bill Paid Successfully!";
+                        TempData["Notification"] = Convert.ToInt32(TempData["Notification"]) + 1;
+                        TempData.Keep();
                     }
                     else
                     {
@@ -448,11 +457,16 @@ namespace Clinic_MVC_UI.Controllers
             #endregion
 
         }
-
         [HttpGet]
         public async Task<IActionResult> Notification()
         {
+
+            
+          
+
             #region Patient can see Notifications
+            TempData["Notification"] = 0;
+            TempData.Keep();
             int PatientAppointmentId = Convert.ToInt32(TempData["ProfileID"]);
             TempData.Keep();
             IEnumerable<Appointment> Appointments = null;
@@ -468,14 +482,19 @@ namespace Clinic_MVC_UI.Controllers
                     }
                 }
             }
+            
+           
+
             List<Appointment> PatientAppointments = new List<Appointment>();
             foreach (var item in Appointments)
             {
-                if (PatientAppointmentId == item.PatientID && item.Appointment_Status == 1)
+                if (PatientAppointmentId == item.PatientID &&( item.Appointment_Status==1 || item.Appointment_Status==0))
                 {
                     PatientAppointments.Add(item);
                 }
             }
+          
+            TempData["oldone"] = PatientAppointments.Count();
             return View(PatientAppointments);
             #endregion
         }
@@ -591,6 +610,58 @@ namespace Clinic_MVC_UI.Controllers
                         ViewBag.message = "Your Feedback is already submitted";
                     }
                 }
+
+            }
+
+            #region Fetching the appointment details
+            Appointment appointment = null;
+            using (HttpClient client = new HttpClient())
+            {
+                string endpoint = _configuration["WebApiBaseUrl"] + "Appointment/GetAppointmentById?AppointmentId=" + pending_Feedback.AppointID;
+                using (var response = await client.GetAsync(endpoint))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        var result = await response.Content.ReadAsStringAsync();
+                        appointment = JsonConvert.DeserializeObject<Appointment>(result);
+                    }
+                }
+            }
+            #endregion
+            //Updating the ratings of doctor
+            Doctor doctor = new Doctor();
+            using (HttpClient client = new HttpClient())
+            {
+                string endPoint = _configuration["WebApiBaseUrl"] + "Doctor/GetDoctorById?doctorId=" + appointment.DoctorID;
+                TempData.Keep();
+                using (var response = await client.GetAsync(endPoint))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        var result = await response.Content.ReadAsStringAsync();
+                        doctor = JsonConvert.DeserializeObject<Doctor>(result);
+                    }
+                }
+            }
+            doctor.ReputeIndex = ((doctor.ReputeIndex * (doctor.Patient_Treated - 1)) + pending_Feedback.Rating) / doctor.Patient_Treated;
+            using (HttpClient client = new HttpClient())
+            {
+                StringContent content = new StringContent(JsonConvert.SerializeObject(doctor), Encoding.UTF8, "application/json");
+                string endPoint = _configuration["WebApiBaseUrl"] + "Doctor/UpdateDoctor";
+                using (var response = await client.PutAsync(endPoint, content))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        ViewBag.status = "Ok";
+                        ViewBag.message = "Doctor Details Updated Successfully!";
+
+                    }
+                    else
+                    {
+                        ViewBag.status = "Error";
+                        ViewBag.message = "Wrong Entries!";
+                    }
+                }
             }
             /*  pending_Feedback.DoctorID = Convert.ToInt32(TempData["DoctorId"]);
               TempData.Keep();
@@ -663,5 +734,21 @@ namespace Clinic_MVC_UI.Controllers
             return View(appointment);
             #endregion
         }
+      /*  public async Task<IActionResult> Logout()
+        {
+            List<string> TempDataTest = new List<string>();
+            TempDataTest.Add("Tejas");
+            TempDataTest.Add("Jignesh");
+            TempDataTest.Add("Rakesh");
+            TempData["listofnotification"] = TempDataTest;
+
+           *//* Dictionary<string, int> dictExample = new Dictionary<string, int>();
+            dictExample.Add(TempData["ProfileId"].ToString(), Convert.ToInt32(TempData["Notification"]));
+            TempData["listofnotification"] = dictExample;
+            TempData.Keep();*//*
+
+            return RedirectToAction("Index", "Home");
+          
+        }*/
     }
 }

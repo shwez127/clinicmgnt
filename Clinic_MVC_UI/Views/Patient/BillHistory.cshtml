@@ -18,7 +18,7 @@
 <div class="card">
     <div class="card-body">
         <div class="container mb-5 mt-3">
-            <div class="row d-flex align-items-baseline">
+            @*<div class="row d-flex align-items-baseline">
                 <div class="col-xl-9">
                     <p style="color: #7e8d9f;font-size: 20px;">Invoice >> <strong>ID: #123-123</strong></p>
                 </div>
@@ -31,7 +31,7 @@
                     </a>
                 </div>
                 <hr>
-            </div>
+            </div>*@
 
             <div class="container">
                 <div class="col-md-12">
@@ -57,10 +57,10 @@
                         <p class="text-muted">Invoice</p>
                         <ul class="list-unstyled">
                             <li class="text-muted">
-                                        <i class="fas fa-circle" style="color:#84B0CA ;"></i> <span class="fw-bold">ID:</span>@docters.PatientID
+                                        <i class="fas fa-circle" style="color:#84B0CA ;"></i> <span class="fw-bold">Appointment ID:</span>@docters.AppointID
                             </li>
                             <li class="text-muted">
-                                        <i class="fas fa-circle" style="color:#84B0CA ;"></i> <span class="fw-bold">Creation Date: </span>@docters.Patient.BirthDate
+                                        <i class="fas fa-circle" style="color:#84B0CA ;"></i> <span class="fw-bold">Creation Date: </span>@DateTime.Today.ToShortDateString()
                             </li>
                             <li class="text-muted">
                                 <i class="fas fa-circle" style="color:#84B0CA ;"></i> <span class="me-1 fw-bold">Status:</span><span class="badge bg-warning text-black fw-bold">
@@ -76,11 +76,11 @@
                         <thead style="background-color:#84B0CA ;" class="text-white">
                             <tr>
 
-                                <th scope="col">Appointment ID</th>
+                               @* <th scope="col">Appointment ID</th>*@
                                 <th scope="col">Doctor Name</th>
                                 <th scope="col">Doctor Phone</th>
                                 <th scope="col">Doctor Charges per visit</th>
-                                <th scope="col">Date</th>
+                                <th scope="col">Appointment Date</th>
                                 
                                 <th scope="col">Appointment Status</th>
                                 <th scope="col">Bill Amount</th>
@@ -89,11 +89,11 @@
                         </thead>
                         <tbody>
                             <tr>
-                                        <td scope="row">@docters.AppointID</td>
+                                       @* <td scope="row">@docters.AppointID</td>*@
                                         <td scope="row">@docters.Doctor.Name</td>
                                         <td scope="row">@docters.Doctor.Phone</td>
                                         <td scope="row">@docters.Doctor.Charges_Per_Visit</td>
-                                        <td scope="row">@docters.Date</td>
+                                        <td scope="row">@docters.Date.ToShortDateString()</td>
                                       
                                         @if (docters.Appointment_Status == 0)
                                 {

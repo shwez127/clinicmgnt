@@ -25,11 +25,20 @@ namespace Clinic_MVC_UI.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(LoginTable loginTable)
         {
+            //checking the notification
+            /*Dictionary<int, int> modelData = TempData["listofnotification"] as Dictionary<int, int>;
+            TempData.Keep();*/
+
+          
+
+
+
             ViewBag.status = "";
             if (loginTable.Email == null && loginTable.Password ==null)
             {
                 ViewBag.status = "Error";
                 ViewBag.message = "Email and Password is required";
+               
             }
             else { 
             #region Admin, patient and doctor can login
@@ -55,6 +64,7 @@ namespace Clinic_MVC_UI.Controllers
                         {
                             TempData["PatientID"] = arr[0].ToString();
                             TempData.Keep();
+                               
                             return RedirectToAction("Index", "Patient");
                         }
                         else if (arr[1] == 1)

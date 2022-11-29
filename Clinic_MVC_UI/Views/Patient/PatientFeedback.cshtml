@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "PatientFeedback";
 }
 
@@ -9,39 +8,39 @@
 @model IEnumerable<ClinicEntity.Models.Appointment>
 
 
-@if(Model.Count()>=1)
+@if (Model.Count() >= 1)
 {
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width-device-width" />
-</head>
-<body>
-    <br />
-    <a asp-area="" asp-controller="Patient" asp-action="Index"><img class="img-fluid" style="height:35px" src="https://img.icons8.com/fluency/512/circled-left.png"></a>
-    <br />
-    <br />
-    <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <a class="text-uppercase d-inline-block text-center" style="color:#003399;font-size:x-large" align="center"> Your <span class="font-weight-bold" style="font-size:x-large">Feedback</span></a>
-        </div>
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
-                    <thead>
-                        <tr>
-                             <th>Appointment ID</th>
-                             <th>Doctor Name</th>
-                             <th>Doctor Phone</th>
-                             <th>Doctor Charges per visit</th>
-                             <th>Date</th>
-                             <th>Appointment_Status</th>
-                             <th>Bill Amount</th>
-                             <th>Bill Status</th>
-                             <th>Feedback</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta name="viewport" content="width-device-width" />
+    </head>
+    <body>
+        <br />
+        <a asp-area="" asp-controller="Patient" asp-action="Index"><img class="img-fluid" style="height:35px" src="https://img.icons8.com/fluency/512/circled-left.png"></a>
+        <br />
+        <br />
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <a class="text-uppercase d-inline-block text-center" style="color:#003399;font-size:x-large" align="center"> Your <span class="font-weight-bold" style="font-size:x-large">Feedback</span></a>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Appointment ID</th>
+                                <th>Doctor Name</th>
+                                <th>Doctor Phone</th>
+                                <th>Doctor Charges per visit</th>
+                                <th>Date</th>
+                                <th>Appointment_Status</th>
+                                <th>Bill Amount</th>
+                                <th>Bill Status</th>
+                                <th>Feedback</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                             @foreach (var doctor in Model)
                             {
                                 if (doctor.Bill_Status == 1)
@@ -87,13 +86,13 @@
                                     </tr>
                                 }
                             }
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-    </div>
-</body>
-</html>
+    </body>
+    </html>
 }
 else
 {

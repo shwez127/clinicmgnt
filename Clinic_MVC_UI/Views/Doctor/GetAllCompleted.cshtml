@@ -22,7 +22,7 @@
                 <th>Patient Phone</th>
                 <th>Prescription</th>
                 <th>Date</th>
-                <th>Progress</th>
+                
                 <th>Appointment Status</th>
             </tr>
         </thead>
@@ -36,8 +36,8 @@
                         <td>@doctor.Patient.Name</td>
                         <td>@doctor.Patient.Phone</td>
                         <td>@doctor.Prescription</td>
-                        <td>@doctor.Date</td>
-                        <td>@doctor.Progress</td>
+                        <td>@doctor.Date.ToShortDateString()</td>
+                       
                         @if (doctor.Appointment_Status == 0)
                         {
                             <td>Requested</td>
