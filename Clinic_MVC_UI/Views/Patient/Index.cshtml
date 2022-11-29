@@ -1,10 +1,33 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Index";
 }
 @{
     Layout = "~/Views/Shared/PatientLayout.cshtml";
 }
+<link rel="stylesheet" href="~/css/site5.css" />
+<body>
+    <div class="site-wrapper" style="background-image: url('https://img.freepik.com/premium-vector/hospital-room-interior-illustration-cartoon-empty-ward-patients-hospitalization-with-modern-medical-equipment-background_213110-494.jpg?w=2000'); height: 76vh">
 
-<h1>Patient page</h1>
 
+
+        <div class="site-wrapper-inner">
+
+
+
+            <div class="container" style="color:#003399">
+                <div class="inner cover">
+                    <h1 class="cover-heading">Bringing The Future Of Healthcare</h1>
+                    <p class="lead">
+                        We think that everyone should have easy access to excellent
+                        healthcare. Our aim is to make the procedure as simple as
+                        possible for our patients and to offer treatment no matter
+                        where they are — in person or at their convenience.
+                    </p>
+                    <p class="lead">
+                        <a asp-area="" asp-controller="Patient" asp-action="SelectingDepartment" class="btn btn-lg btn-primary">Make An Appointmnet</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
