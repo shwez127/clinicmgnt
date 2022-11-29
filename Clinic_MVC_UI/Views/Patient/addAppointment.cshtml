@@ -6,176 +6,41 @@
 @{
     Layout = "~/Views/Shared/PatientLayout.cshtml";
 }
-
-
-@*<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
-
-
-<html>
-    @if(Model ==null){
-        <h1>Click Correct date</h1>
-    }else{
-    <body>
-<div class="container">
-    <div class="row">
-        <div class="col-md-6">
-            <div class="well-block">
-                <div class="well-title">
-                    <h2 style="font-size:x-large;color:black;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Book an Appointment</h2>
+<body style="background-color:#f0f8ff;font-family:'Roboto',sans-serif">
+    <form >
+        <div class="row" style="height:25vh">
+             @foreach (var item in Model)
+             {
+                <div class="card " style="padding:25px;margin:40px;">
+                    <img style="height:200px;" src="https://www.svgrepo.com/show/284185/doctor.svg" class="card-img-top" alt=" ">
+                        <div class="card-body" align="center">
+                        <h5 class="card-title" style="color:#003399">@item.Name</h5>
+                        <h5 class="card-title" style="color:#003399">@item.Qualification</h5>
+                        <h6 class="card-text"><i class="fa fa-inr"></i> @item.Charges_Per_Visit</h6>
+                            <h6 class="card-text">@item.ReputeIndex / 5</h6>
+                            <a class="btn btn-dark" asp-controller="Patient" asp-action="After_Selecting_doctor" asp-route-SelectingDoctorId="@item.DoctorID">Book Appointment</a>
+                        </div>
                 </div>
-                <form method="post">
-                    <!-- Form start -->
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="control-label" for="form3Example8">Department</label>
-                                <p>@Model.Progress</p>
-                                
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="form-label" for="form3Example8">Select Doctor</label>
-                                <select class="form-control" asp-for="DoctorID" asp-items="@ViewBag.Doctorlist" style="width:150px;" required></select>
-                            </div>
-                        </div>
-
-                        
-                        <!-- Text input-->
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label  class="control-label" for="date">Date</label>
-                                <input asp-for="Date" id="date" name="date" type="date" placeholder="Preferred Date" class="form-control input-md">
-                            </div>
-                        </div>
-                       
-                        
-                        <!-- Button -->
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <input type="submit" value="Make an Appointment" class="btn btn-outline-success" />
-                                <input type="reset" value="Reset" class="btn btn-outline-secondary" />
-                            </div>
-                        </div>
-                    </div>
-                    <hr />
-                  
-                </form>
-                <!-- form end -->
-            </div>
+             }
         </div>
-        <div class="col-md-6">
-            <div class="well-block">
-                <div class="well-title">
-                        <h2 style="font-size:x-large;color:black;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Why Appointment with Us</h2>
-                </div>
-                <div class="feature-block">
-                    <div class="feature feature-blurb-text">
-                        <h4 class="feature-title">24/7 Hours Available</h4>
-                        <div class="feature-content">
-                            <p>To use the availability.</p>
-                        </div>
-                    </div>
-                    <div class="feature feature-blurb-text">
-                        <h4 class="feature-title">Experienced Staff Available</h4>
-                        <div class="feature-content">
-                            <p>To get better and experinced staff. </p>
-                        </div>
-                    </div>
-                    <div class="feature feature-blurb-text">
-                        <h4 class="feature-title">Low Price & Fees</h4>
-                        <div class="feature-content">
-                            <p>To treat poor people also.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<hr />
-      
+    </form>
 
-</body>
-}*@
-
-
-<form >
-<div class="row" style="height:25vh">
+    <!-- Modal -->
     
- @foreach (var item in Model)
-        {
-            <div class="card " style="padding:25px;margin:40px;">
-       
-        <img src="https://th.bing.com/th/id/OIP.m-7G-KL5wDT5KESHG3hRSQHaHa?w=188&h=188&c=7&r=0&o=5&pid=1.7" class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">@item.Name</h5>
-            <h5 class="card-title">@item.Qualification</h5>
-
-            <p class="card-text">@item.Charges_Per_Visit</p>
-            <p class="card-text">@item.DoctorID</p>
-
-                    <a class="btn btn-dark" asp-controller="Patient" asp-action="After_Selecting_doctor" asp-route-SelectingDoctorId="@item.DoctorID">Book appointment</a>
-
-            @*<div class="modal fade" id="loginModal"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header border-bottom-0">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="form-title text-center">
-                                    <h4>Select Appointment Date</h4>
-                            </div>
-                            <div class="d-flex flex-column text-center">
-                                
-                                <form>
-                                  
-                                    <div class="form-group">
-                                            
-                                        <input  type="date" asp-for="@item.BirthDate" class="form-control" id="email1" placeholder="Appointment Date">
-                                    </div>
-
-                                            <button asp-route-hello="@item.DoctorID" type="submit" class="btn btn-info btn-block btn-round">Submit</button>
-                                </form>
-
-                                
-
-                                </div>
-                            </div>
-                        </div>
-                       
-                    </div>
-                </div>*@
+    @if (ViewBag.status == "Ok")
+    {
+        <div class="alert alert-success">
+            @ViewBag.message
         </div>
-        
-    </div>
     }
-</div>
-</form>
+    else if (ViewBag.status == "Error")
+    {
+        <div class="alert alert-danger">
+            @ViewBag.message
+        </div>
+    }
+</body>
 
-
-<!-- Modal -->
-
-    
-@if (ViewBag.status == "Ok")
-{
-    <div class="alert alert-success">
-        @ViewBag.message
-    </div>
-}
-else if (ViewBag.status == "Error")
-{
-    <div class="alert alert-danger">
-        @ViewBag.message
-    </div>
-}
-</html>
 
 
 

@@ -5,8 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Clinic_MVC_UI</title>
+    <script src="https://kit.fontawesome.com/bf21391385.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site2.css" />
+    <link href="//cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" rel="stylesheet" />
 </head>
 <body>
     <header>
@@ -23,30 +25,30 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" style="padding-left:20px;">
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" style="font-family:'Roboto',sans-serif;padding-left:20px;">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-uppercase" asp-area="" asp-controller="Doctor" asp-action="PendingAppointment" style="font-size:x-large;color:white;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Pending Appointments</a>
+                            <a class="nav-link text-uppercase" asp-area="" asp-controller="Doctor" asp-action="PendingAppointment" style="font-size:x-large;color:white">Pending Appointments</a>
                         </li>
                         &nbsp;&nbsp;&nbsp;
                         <li class="nav-item">
-                            <a class="nav-link text-uppercase" asp-area="" asp-controller="Doctor" asp-action="TodayAppointment" style="font-size:x-large;color:white;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Todays Appointmemts</a>
+                            <a class="nav-link text-uppercase" asp-area="" asp-controller="Doctor" asp-action="TodayAppointment" style="font-size:x-large;color:white">Todays Appointmemts</a>
                         </li>
                         &nbsp;&nbsp;&nbsp;
                         <li class="nav-item">
-                            <a class="nav-link text-uppercase" asp-area="" asp-controller="Doctor" asp-action="GetAllCompleted" style="font-size:x-large;color:white;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Generate Bill</a>
+                            <a class="nav-link text-uppercase" asp-area="" asp-controller="Doctor" asp-action="GetAllCompleted" style="font-size:x-large;color:white">Generate Bill</a>
                         </li>
                         &nbsp;&nbsp;&nbsp;
                         <li class="nav-item">
-                            <a class="nav-link text-uppercase" asp-area="" asp-controller="Doctor" asp-action="PatientHistory" style="font-size:x-large;color:white;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">PatientHistory</a>
+                            <a class="nav-link text-uppercase" asp-area="" asp-controller="Doctor" asp-action="PatientHistory" style="font-size:x-large;color:white">PatientHistory</a>
                         </li>
                         &nbsp;&nbsp;&nbsp;
                         <li class="nav-item">
-                            <a class="nav-link text-uppercase" asp-area="" asp-controller="Doctor" asp-action="Profile" style="font-size:x-large;color:white;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Profile</a>
+                            <a class="nav-link text-uppercase" asp-area="" asp-controller="Doctor" asp-action="Profile" style="font-size:x-large;color:white">Profile</a>
                         </li>
                         &nbsp;&nbsp;&nbsp;
                         <li class="nav-item">
-                        <a class="nav-link text-uppercase" asp-area="" asp-controller="Home" asp-action="Index" style="font-size:x-large;color:white;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Logout</a>
+                        <a class="nav-link text-uppercase" asp-area="" asp-controller="Home" asp-action="Index" style="font-size:x-large;color:white">Logout</a>
                     </li>
                     </ul>
                 </div>

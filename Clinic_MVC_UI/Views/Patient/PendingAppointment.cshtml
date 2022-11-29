@@ -61,7 +61,7 @@
                             <td>Rejected</td>
                         }
                         @if(doctor.Appointment_Status==0){
-                                    <td><a class="btn btn-danger " asp-controller="Patient" asp-action="ApproveOrReject" asp-route-AppointmentId="@doctor.AppointID" asp-route-Appointment_Status=4>Cancel</a></td>
+                            <td><a class="btn btn-danger " asp-controller="Patient" asp-action="ApproveOrReject" asp-route-AppointmentId="@doctor.AppointID" asp-route-Appointment_Status=4>Cancel</a></td>
 
                         }
                         

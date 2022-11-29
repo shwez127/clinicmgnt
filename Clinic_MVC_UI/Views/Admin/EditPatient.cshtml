@@ -2,56 +2,62 @@
 @{
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
-<a asp-area="" asp-controller="Admin" asp-action="GetAllPatients" type="button" class="btn  text-dark"><img class="img-fluid" style="height:35px" src="https://www.svgrepo.com/show/230939/back.svg"></a>
+<br/>
+<a asp-area="" asp-controller="Admin" asp-action="GetAllPatients"><img class="img-fluid" style="height:35px" src="https://img.icons8.com/fluency/512/circled-left.png"></a>
+
+<h2 style="color:#003399" class="font-weight-bolder text-uppercase" align="center">Edit Patient Details</h2>
 
 <div style="background-color:#f0f8ff;font-family:'Roboto',sans-serif;padding:55px">
     <form method="post" enctype="multipart/form-data">
-        <h2 style="color:#003399" class="font-weight-bolder text-uppercase" align="center">Edit Patient Details</h2>
-        <div class="form-group">
-            <label class="font-weight-bold" style="color:#003399;font-size:20px">Patient Id</label>
-            <input  type="text" asp-for="PatientID" class="form-control" placeholder="Enter Patient Id" required />
+        <div class="col-4 d-inline-block align-top" style=" margin-right:50px;margin-left:270px">
+            <div class="form-group">
+                <label style="color:#003399;font-size:20px">Patient Id</label>
+                <input  type="text" asp-for="PatientID" class="form-control" placeholder="Enter Patient Id" required />
+            </div>
+            <div class="form-group">
+                <label style="color:#003399;font-size:20px">Patient Name</label>
+                <input  type="text" asp-for="Name" class="form-control" placeholder="Enter Patient Name" required />
+            </div>
+            <div class="form-group">
+                <label style="color:#003399;font-size:20px">Phone</label>
+                <input  type="text" asp-for="Phone" class="form-control" placeholder="Enter Phone Number" required />
+            </div>
+            <div class="form-group">
+                <label style="color:#003399;font-size:20px">Address</label>
+                <input  type="text" asp-for="Address" class="form-control" placeholder="Enter Patient Address" required />
+            </div>
         </div>
-        <div class="form-group">
-            <label class="font-weight-bold" style="color:#003399;font-size:20px">Patient Name</label>
-            <input  type="text" asp-for="Name" class="form-control" placeholder="Enter Patient Name" required />
-        </div>
-        <div class="form-group">
-            <label class="font-weight-bold" style="color:#003399;font-size:20px">Phone</label>
-            <input  type="text" asp-for="Phone" class="form-control" placeholder="Enter Phone Number" required />
-        </div>
-        <div class="form-group">
-            <label class="font-weight-bold" style="color:#003399;font-size:20px">Address</label>
-            <input  type="text" asp-for="Address" class="form-control" placeholder="Enter Patient Address" required />
-        </div>
-        <div class="form-group">
-            <label class="font-weight-bold" style="color:#003399;font-size:20px">Date of Birth</label>
-            <input  type="date" asp-for="BirthDate" class="form-control" placeholder="Enter DOB" required />
-        </div>
-        <div class="form-group">
-            <label class="font-weight-bold" style="color:#003399;font-size:20px">Gender</label>
-            <select  asp-for="Gender" asp-items="@ViewBag.genderlist" class="form-control" required></select>
-        </div>
+        <div class="col-4 d-inline-block align-top">
+            <div class="form-group">
+                <label style="color:#003399;font-size:20px">Date of Birth</label>
+                <input  type="date" asp-for="BirthDate" class="form-control" placeholder="Enter DOB" required />
+            </div>
+            <div class="form-group">
+                <label style="color:#003399;font-size:20px">Gender</label>
+                <select  asp-for="Gender" asp-items="@ViewBag.genderlist" class="form-control" required></select>
+            </div>
 
-        <input type="submit" value="Update" onclick="editFunction()" class="btn btn-outline-success" />
-        <input type="reset" value="Reset" class="btn btn-outline-secondary" />
+            <input type="submit" value="Update" onclick="editFunction()" class="btn btn-outline-success" />
+            <input type="reset" value="Reset" class="btn btn-outline-secondary" />
     
-        @if (ViewBag.status == "Ok")
-        {
-            <br />
+            @if (ViewBag.status == "Ok")
+            {
+                <br />
 
-            <br />
-            <div class="alert alert-success">
-                @ViewBag.message
-            </div>
-        }
-        else if (ViewBag.status == "Error")
-        {
-            <br />
+                <br />
+                <div class="alert alert-success">
+                    @ViewBag.message
+                </div>
+            }
+            else if (ViewBag.status == "Error")
+            {
+                <br />
 
-            <br />
-            <div class="alert alert-danger">
-                @ViewBag.message
-            </div>
-        }
+                <br />
+                <div class="alert alert-danger">
+                    @ViewBag.message
+                </div>
+            }
+        </div>
     </form>
 </div>

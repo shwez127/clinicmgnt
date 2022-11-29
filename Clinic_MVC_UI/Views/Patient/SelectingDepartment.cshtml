@@ -1,101 +1,40 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "SelectingDepartment";
 }
 
+
+
 @model ClinicEntity.Models.Department
+
+
 
 @{
     Layout = "~/Views/Shared/PatientLayout.cshtml";
 }
 
 
+<body style="background-image: url('https://img.freepik.com/premium-vector/good-hospital-will-have-clear-procedural-service-system-public-health-standards_1150-50288.jpg?w=1800')">
 
-
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
-
-<hr />
-<div class="container">
-    <div class="row">
-        <div class="col-md-6">
-            <div class="well-block">
-                <div class="well-title">
-                    <h2 style="font-size:x-large;color:black;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Select a department to book an Appointment</h2>
+    <div class="container" style="padding-top:200px;opacity:0.9">
+        <div class="row">
+            <div class="col-md-8 offset-md-2 border p-4 shadow bg-light">
+                <div class="col-12">
+                    <h3 class="fw-normal text-secondary fs-4 text-uppercase mb-4" align="center">Select Department to Book an Appointment</h3>
                 </div>
                 <form method="post">
-                    <!-- Form start -->
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="control-label" for="form3Example8">Department</label>
-                                <select class="form-control" asp-for="DeptNo" asp-items="@ViewBag.Departmentlist" style="width:150px;" required></select>
-                            </div>
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <label class="control-label" for="form3Example8">Department</label>
+                            <select class="form-control" asp-for="DeptNo" asp-items="@ViewBag.Departmentlist" required></select>
                         </div>
-             
 
-                        <!-- Button -->
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <input type="submit" value="Search Doctors" class="btn btn-success" />
-                                <input type="button" value="Reset" class="btn btn-outline-secondary" />
-                            </div>
+                        <div class="col-12 mt-5" style="margin-left:510px">
+                            <button type="reset" class="btn btn-outline-secondary float-end me-2">Reset</button>
+                            <button type="submit" class="btn btn-primary float-end">Search Doctors</button>
                         </div>
                     </div>
-                    <hr />
-                  
                 </form>
-                <!-- form end -->
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="well-block">
-                <div class="well-title">
-                    <h2 style="font-size:x-large;color:black;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Why Appointment with Us</h2>
-                </div>
-                <div class="feature-block">
-                    <div class="feature feature-blurb-text">
-                        <h4 class="feature-title">24/7 Hours Available</h4>
-                        <div class="feature-content">
-                            <p>To use the availability.</p>
-                        </div>
-                    </div>
-                    <div class="feature feature-blurb-text">
-                        <h4 class="feature-title">Experienced Staff Available</h4>
-                        <div class="feature-content">
-                            <p>To get better and experinced staff. </p>
-                        </div>
-                    </div>
-                    <div class="feature feature-blurb-text">
-                        <h4 class="feature-title">Low Price & Fees</h4>
-                        <div class="feature-content">
-                            <p>To treat poor people also.</p>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
-</div>
-<hr />
-@if (ViewBag.status == "Ok")
-{
-    <div class="alert alert-success">
-        @ViewBag.message
-    </div>
-}
-else if (ViewBag.status == "Error")
-{
-    <div class="alert alert-danger">
-        @ViewBag.message
-    </div>
-}
-
-
-
-
-
-
-
+</body>
