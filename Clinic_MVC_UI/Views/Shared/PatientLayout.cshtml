@@ -48,7 +48,19 @@
                         </li>
                         &nbsp;&nbsp;&nbsp;
                         <li class="nav-item">
-                            <a class="nav-link text-uppercase" asp-area="" asp-controller="Patient" asp-action="Notification" style="font-size:large;color:white;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Notifications</a>
+                           @if(true){
+                               int a=0;
+                                <a class="nav-link text-uppercase" asp-area="" asp-controller="Patient" asp-action="Notification" style="font-size:large;color:white;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
+                                Notification
+                                @if (true == true)
+                                {
+                                    a = Convert.ToInt32(TempData["Notification"]);
+                                        TempData.Keep();
+                                    }
+                                    @if(a >0){<sup style="color:red" >@a</sup>
+                                    }
+                                    </a>
+                               } 
                         </li>
                        
                         &nbsp;&nbsp;&nbsp;
@@ -63,7 +75,7 @@
                         </li>
                         &nbsp;&nbsp;&nbsp;
                         <li class="nav-item">
-                        <a class="nav-link text-uppercase" asp-area="" asp-controller="Home" asp-action="Index" style="font-size:large;color:white;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Logout</a>
+                            <a class="nav-link text-uppercase" asp-area="" asp-controller="Home" asp-action="Index" style="font-size:large;color:white;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Logout</a>
                     </li>
                     </ul>
                 </div>

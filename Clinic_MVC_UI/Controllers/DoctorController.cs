@@ -154,6 +154,8 @@ namespace Clinic_MVC_UI.Controllers
                     {
                         ViewBag.status = "Ok";
                         ViewBag.message = "Appointment Details Updated Successfully!";
+                        TempData["Notification"] = Convert.ToInt32(TempData["Notification"]) + 1;
+                        TempData.Keep();
                     }
                     else
                     {
@@ -169,6 +171,7 @@ namespace Clinic_MVC_UI.Controllers
         public async Task<IActionResult> AddPrescription(int AppointmentId)
         {
             #region Fecthing the appointment details
+            TempData["AppointmentIDFor"]= AppointmentId;
             Appointment appointment = null;
             using (HttpClient client = new HttpClient())
             {
@@ -189,6 +192,7 @@ namespace Clinic_MVC_UI.Controllers
         [HttpPost]
         public async Task<IActionResult> AddPrescription(Appointment appointment)
         {
+            appointment.AppointID = Convert.ToInt32(TempData["AppointmentIDFor"]);
             #region Again Feching the appointment details
             Appointment appointmentNew = new Appointment();
             using (HttpClient client = new HttpClient())
@@ -224,6 +228,8 @@ namespace Clinic_MVC_UI.Controllers
                     {
                         ViewBag.status = "Ok";
                         ViewBag.message = "Prescription Updated Successfully!";
+                        TempData["Notification"] = Convert.ToInt32(TempData["Notification"]) + 1;
+                        TempData.Keep();
                     }
                     else
                     {
@@ -301,6 +307,8 @@ namespace Clinic_MVC_UI.Controllers
                     {
                         ViewBag.status = "Ok";
                         ViewBag.message = "Appointment Bill Generated!";
+                        TempData["Notification"] = Convert.ToInt32(TempData["Notification"]) + 1;
+                        TempData.Keep();
                     }
                     else
                     {
@@ -309,7 +317,43 @@ namespace Clinic_MVC_UI.Controllers
                     }
                 }
             }
+            Doctor doctor = new Doctor();
+            using (HttpClient client = new HttpClient())
+            {
+                string endPoint = _configuration["WebApiBaseUrl"] + "Doctor/GetDoctorById?doctorId=" + appointmentNew.DoctorID;
+                TempData.Keep();
+                using (var response = await client.GetAsync(endPoint))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        var result = await response.Content.ReadAsStringAsync();
+                        doctor = JsonConvert.DeserializeObject<Doctor>(result);
+                    }
+                }
+            }
+            doctor.Patient_Treated += 1;
+            using (HttpClient client = new HttpClient())
+            {
+                StringContent content = new StringContent(JsonConvert.SerializeObject(doctor), Encoding.UTF8, "application/json");
+                string endPoint = _configuration["WebApiBaseUrl"] + "Doctor/UpdateDoctor";
+                using (var response = await client.PutAsync(endPoint, content))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        ViewBag.status = "Ok";
+                        ViewBag.message = "Doctor Details Updated Successfully!";
+                       
+                    }
+                    else
+                    {
+                        ViewBag.status = "Error";
+                        ViewBag.message = "Wrong Entries!";
+                    }
+                }
+            }
+            
             return View(appointmentNew);
+
             #endregion
         }
 

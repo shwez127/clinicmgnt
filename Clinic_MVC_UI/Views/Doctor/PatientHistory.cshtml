@@ -18,13 +18,14 @@
         <table class="table table-light table-bordered table-hover">
             <thead>
                 <tr>
-                    <th>Patient ID</th>
+                    
                     <th>Patient Name</th>
                     <th>Patient Phone</th>
-                    <th>Patient BirthDate</th>
+                   <th>Email Address</th>
                     <th>Address</th>
                     <th>Gender</th>
-                    <th>Date</th>
+                    <th>Appointment Date</th>
+                    <th>Disease</th>
                     <th>Appointment Status</th>
                     <th>Bill amount</th>
                     <th>Bill Status</th> 
@@ -35,13 +36,14 @@
                 {
                         <tr>
 
-                        <td>@doctor.Patient.PatientID</td>
+                        
                         <td>@doctor.Patient.Name</td>
                         <td>@doctor.Patient.Phone</td>
-                        <td>@doctor.Patient.BirthDate</td>
+                        <td>@doctor.Patient.LoginTable.Email</td>
                         <td>@doctor.Patient.Address</td>
                         <td>@doctor.Patient.Gender</td>
-                        <td>@doctor.Date</td>
+                        <td>@doctor.Date.ToShortDateString()</td>
+                        <td>@doctor.Disease</td>
 
                         @if (doctor.Appointment_Status == 0)
                         {

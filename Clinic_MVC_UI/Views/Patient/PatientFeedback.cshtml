@@ -22,8 +22,8 @@
                     <th>Doctor Name</th>
                     <th>Doctor Phone</th>
                     <th>Doctor Charges per visit</th>
-                    <th>Date</th>
-                    <th>Appointment_Status</th>
+                    <th>Appointment Date</th>
+                    <th>Appointment Status</th>
                     <th>Bill Amount</th>
                     <th> Bill Status</th>
                 </tr>
@@ -38,7 +38,7 @@
                             <td>@doctor.Doctor.Name</td>
                             <td>@doctor.Doctor.Phone</td>
                             <td>@doctor.Doctor.Charges_Per_Visit</td>
-                            <td>@doctor.Date</td>
+                            <td>@doctor.Date.ToShortDateString()</td>
                             
                             @if (doctor.Appointment_Status == 0)
                             {

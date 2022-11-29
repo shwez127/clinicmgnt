@@ -30,6 +30,8 @@ namespace Clinic_MVC_UI.Controllers
         public async Task<IActionResult> PatientRegister1()
       
         {
+            TempData["Notification"] = 0;
+            TempData.Keep();
             #region Select list before registration
             /* List<SelectListItem> gender = new List<SelectListItem>()
              {
