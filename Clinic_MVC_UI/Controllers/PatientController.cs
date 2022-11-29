@@ -98,7 +98,7 @@ namespace Clinic_MVC_UI.Controllers
             List<SelectListItem> department = new List<SelectListItem>();
 
 
-            department.Add(new SelectListItem { Value = "select", Text = "select" });
+            department.Add(new SelectListItem { Value = "Select Department", Text = "Select Department" });
             foreach (var item in departments)
             {
                 department.Add(new SelectListItem { Value = item.DeptNo.ToString(), Text = item.DeptName });

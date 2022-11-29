@@ -11,8 +11,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Clinic_MVC_UI</title>
+    <script src="https://kit.fontawesome.com/bf21391385.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link href="//cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" rel="stylesheet" />
 </head>
 <body>
     <header>
@@ -29,18 +31,18 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" style="padding-left:20px;">
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" style="font-family:'Roboto',sans-serif;padding-left:20px;">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-uppercase" asp-area="" asp-controller="Patient" asp-action="PendingAppointment" style="font-size:large;color:white;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Current Appointment</a>
+                            <a class="nav-link text-uppercase" asp-area="" asp-controller="Patient" asp-action="BillHistory" style="font-size:large;color:white">Bills History</a>
                         </li>
                         &nbsp;&nbsp;&nbsp;
                         <li class="nav-item">
-                            <a class="nav-link text-uppercase" asp-area="" asp-controller="Patient" asp-action="BillHistory" style="font-size:large;color:white;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Bills History</a>
+                            <a class="nav-link text-uppercase" asp-area="" asp-controller="Patient" asp-action="TreatmentHistory" style="font-size:large;color:white">Treatment History</a>
                         </li>
                         &nbsp;&nbsp;&nbsp;
                         <li class="nav-item">
-                            <a class="nav-link text-uppercase" asp-area="" asp-controller="Patient" asp-action="TreatmentHistory" style="font-size:large;color:white;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Treatment History</a>
+                            <a class="nav-link text-uppercase" asp-area="" asp-controller="Patient" asp-action="SelectingDepartment" style="font-size:large;color:white">Take Appointment</a>
                         </li>
                         &nbsp;&nbsp;&nbsp;
                         <li class="nav-item">
@@ -65,24 +67,24 @@
                        
                         &nbsp;&nbsp;&nbsp;
                         <li class="nav-item">
-                            <a class="nav-link text-uppercase" asp-area="" asp-controller="Patient" asp-action="PatientFeedback" style="font-size:large;color:white;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Feedback</a>
+                            <a class="nav-link text-uppercase" asp-area="" asp-controller="Patient" asp-action="PatientFeedback" style="font-size:large;color:white">Feedback</a>
 
                         </li>
                         &nbsp;&nbsp;&nbsp;
                         <li class="nav-item">
-                            <a class="nav-link text-uppercase" asp-area="" asp-controller="Patient" asp-action="Profile" style="font-size:large;color:white;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Profile</a>
+                            <a class="nav-link text-uppercase" asp-area="" asp-controller="Patient" asp-action="Profile" style="font-size:large;color:white">Profile</a>
 
                         </li>
                         &nbsp;&nbsp;&nbsp;
                         <li class="nav-item">
-                            <a class="nav-link text-uppercase" asp-area="" asp-controller="Home" asp-action="Index" style="font-size:large;color:white;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Logout</a>
-                    </li>
+                            <a class="nav-link text-uppercase" asp-area="" asp-controller="Home" asp-action="Index" style="font-size:large;color:white">Logout</a>
+                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container-fluid">
+    <div class="container-fluid" style="height:76vh">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
@@ -99,6 +101,8 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="//cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
     @RenderSection("Scripts", required: false)
+
 </body>
 </html>
