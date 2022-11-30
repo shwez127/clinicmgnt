@@ -18,7 +18,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light font-weight-bold @*box-shadow mb-3*@" style="background-color:#003399;">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light font-weight-bold" style="background-color:#003399;">
             <div class="container-fluid">
                 <a class="hm-logo-container" asp-controller="Patient" asp-action="Index">
                     <img class="hm-logo" alt="" style="height:120px; padding-bottom:20px" src="https://www.svgrepo.com/show/270145/health-clinic-health-care.svg" />
@@ -45,14 +45,10 @@
                             <a class="nav-link text-uppercase" asp-area="" asp-controller="Patient" asp-action="SelectingDepartment" style="font-size:large;color:white">Take Appointment</a>
                         </li>
                         &nbsp;&nbsp;&nbsp;
-                       @* <li class="nav-item">
-                            <a class="nav-link text-uppercase" asp-area="" asp-controller="Patient" asp-action="SelectingDepartment" style="font-size:large;color:white;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Take Appointment</a>
-                        </li>
-                        &nbsp;&nbsp;&nbsp;*@
                         <li class="nav-item">
                            @if(true){
                                int a=0;
-                                <a class="nav-link text-uppercase" asp-area="" asp-controller="Patient" asp-action="Notification" style="font-size:large;color:white;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
+                                <a class="nav-link text-uppercase" asp-area="" asp-controller="Patient" asp-action="Notification" style="font-size:large;color:white">
                                 Notification
                                 @if (true == true)
                                 {
@@ -70,18 +66,17 @@
                             <a class="nav-link text-uppercase" asp-area="" asp-controller="Patient" asp-action="PatientFeedback" style="font-size:large;color:white">Feedback</a>
 
                         </li>
-                        &nbsp;&nbsp;&nbsp;
-                        <li class="nav-item">
-                            <a class="nav-link text-uppercase" asp-area="" asp-controller="Patient" asp-action="Profile" style="font-size:large;color:white">Profile</a>
-
-                        </li>
-                        &nbsp;&nbsp;&nbsp;
-                        <li class="nav-item">
-                            <a class="nav-link text-uppercase" asp-area="" asp-controller="Home" asp-action="Index" style="font-size:large;color:white">Logout</a>
-                        </li>
                     </ul>
                 </div>
+                <div class="btn-group">
+                    <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="img-fluid" style="height:45px" src="https://www.svgrepo.com/show/209791/user-profile.svg"></a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" asp-area="" asp-controller="Patient" asp-action="Profile"><img class="img-fluid" style="height:20px" src="https://www.svgrepo.com/show/318484/profile.svg">Profile</a>
+                        <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Index" style="color:red"><img class="img-fluid" style="height:12px" src="https://www.svgrepo.com/show/79009/logout.svg"> Logout</a>
+                    </div>
+                </div>
             </div>
+            
         </nav>
     </header>
     <div class="container-fluid" style="height:76vh">
@@ -90,7 +85,7 @@
         </main>
     </div>
 
-    <footer class="footer text-muted" style="background-color:#003399">
+    <footer class="footer text-muted" style="background-color:#003399;position:fixed; bottom:0;">
         <div class="container">
             <a class="hm-logo-container" href="/">
                 <img class="hm-logo" alt="" style="width:50px; height:50px;" src="https://www.svgrepo.com/show/270145/health-clinic-health-care.svg" />

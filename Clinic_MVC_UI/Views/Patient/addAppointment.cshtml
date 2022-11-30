@@ -6,19 +6,31 @@
 @{
     Layout = "~/Views/Shared/PatientLayout.cshtml";
 }
+<style>
+    i.size {
+        font-size: 20px;
+    }
+</style>
 <body style="background-color:#f0f8ff;font-family:'Roboto',sans-serif">
     <form >
         <div class="row" style="height:25vh">
              @foreach (var item in Model)
              {
                 <div class="card " style="padding:25px;margin:40px;">
-                    <img style="height:200px;" src="https://www.svgrepo.com/show/284185/doctor.svg" class="card-img-top" alt=" ">
+                    @if (item.Gender == "M")
+                    {
+                        <img style="height:150px;" src="https://www.svgrepo.com/show/284184/doctor.svg" class="card-img-top" alt=" ">
+                    }
+                    else
+                    {
+                        <img style="height:150px;" src="https://www.svgrepo.com/show/55261/doctor.svg" class="card-img-top" alt=" ">
+                    }
                         <div class="card-body" align="center">
                         <h5 class="card-title" style="color:#003399">@item.Name</h5>
                         <h5 class="card-title" style="color:#003399">@item.Qualification</h5>
-                        <h6 class="card-text"><i class="fa fa-inr"></i> @item.Charges_Per_Visit</h6>
-                            <h6 class="card-text">@item.ReputeIndex / 5</h6>
-                            <a class="btn btn-dark" asp-controller="Patient" asp-action="After_Selecting_doctor" asp-route-SelectingDoctorId="@item.DoctorID">Book Appointment</a>
+                        <h4 class="card-text font-weight-bold"><i class="fa fa-inr size"></i> @item.Charges_Per_Visit</h4>
+                        <h5 class="card-text font-weight-bold" style="font-size:22px"><img class="img-fluid" style="height:20px" src="https://www.svgrepo.com/show/60262/rating.svg"> @item.ReputeIndex</h5>
+                        <a class="btn btn-dark text-uppercase" asp-controller="Patient" asp-action="After_Selecting_doctor" asp-route-SelectingDoctorId="@item.DoctorID">Book Appointment</a>
                         </div>
                 </div>
              }

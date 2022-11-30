@@ -12,8 +12,6 @@
  <html>
 
 <body>
-    @if(Model.Count()>=1)
-{
     <h3 class="text-center" style="font-size:x-large;color:black;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Your Appointment is in Progress</h3>
     <br />
     
@@ -79,10 +77,8 @@
                         }
                         @if (doctor.Appointment_Status == 0)
                         {
-                            <td><a class="btn btn-danger " asp-controller="Patient" asp-action="ApproveOrReject" asp-route-AppointmentId="@doctor.AppointID" asp-route-Appointment_Status=4>Cancel</a></td>
-                        }
-    
-                        
+                             <td><a class="btn btn-danger " asp-controller="Patient" onclick="cancelFunction()" asp-action="ApproveOrReject" asp-route-AppointmentId="@doctor.AppointID" asp-route-Appointment_Status=4>Cancel</a></td>
+                        }                       
                     </tr>
                         }
                 }
@@ -90,17 +86,9 @@
         </table>
     </div>
 </div>
-    }
-    else
-    {
-        <h1>There is no pending appointments</h1>
-    }
 
+ 
 </body>
 </html>
-
-
-
-
 
 

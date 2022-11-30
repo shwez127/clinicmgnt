@@ -283,9 +283,11 @@ namespace Clinic_MVC_UI.Controllers
             #endregion region
 
         }
+
         [HttpPost]
         public async Task<IActionResult> After_Selecting_doctor(Doctor doctor, int DoctorIdd)
         {
+
             #region We are Avoiding the null referance error
             Doctor doctors = new Doctor();
             using (HttpClient client = new HttpClient())
@@ -302,7 +304,6 @@ namespace Clinic_MVC_UI.Controllers
             }
             #endregion
 
-            
             Appointment appointment = new Appointment();
             #region Adding of Appointment
             appointment.DoctorID=DoctorIdd;
@@ -313,11 +314,10 @@ namespace Clinic_MVC_UI.Controllers
             if (appointment.Date < DateTime.Today)
             {
                 ViewBag.status = "Error";
-                ViewBag.message = "Ensure your Appointment date must be Today Onwards";
+                ViewBag.message = "Ensure your appointment date must be today onwards";
             }
             else
             {
-
 
                 using (HttpClient client = new HttpClient())
                 {
@@ -332,7 +332,7 @@ namespace Clinic_MVC_UI.Controllers
                             TempData["Notification"] =  1;
                             TempData.Keep();
                             return RedirectToAction("SelectingDepartment", "Patient");
-                            
+
 
                         }
                         else
