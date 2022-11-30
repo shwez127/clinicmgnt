@@ -7,24 +7,7 @@
     Layout = "~/Views/Shared/PatientLayout.cshtml";
 }
 
-@if(Model == null)
-{
-    if (ViewBag.status == "Ok")
-    {
-        <body onload="myFunction()" class="alert alert-success">
-            @ViewBag.message
-            
-        </body>
-      
-    }
-    else if (ViewBag.status == "Error")
-    {
-        <div class="alert alert-danger">
-            @ViewBag.message
-        </div>
-    }
-}else
-{
+
 <form method="post">
 <section class="section about-section gray-bg" id="about">
     <div class="container">
@@ -127,9 +110,21 @@
 
 </section>
 </form>
-}
-<script>
-    function myFunction() {
-        alert("Appointment requested");
+
+
+@if (ViewBag.status == "Ok")
+    {
+        
+       <div class="badge-danger">
+        @ViewBag.message
+    </div>
+        
+      
     }
-</script>
+    else if (ViewBag.status == "Error")
+    {
+
+    <div class="badge-danger">
+        @ViewBag.message
+    </div>
+    }
