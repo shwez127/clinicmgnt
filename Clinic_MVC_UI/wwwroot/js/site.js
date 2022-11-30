@@ -18,6 +18,17 @@ $(document).ready(function () {
     });
 });
 
+$(document).ready(function () {
+    $('#example').DataTable({
+        order: [[3, 'desc']],
+        lengthMenu: [
+            [3, 6],
+            [3, 6],
+
+        ],
+    });
+});
+
 function deleteFunction() {
     let val = confirm("Are you sure you want to Delete?");
     if (val == false) {
@@ -35,6 +46,20 @@ function addFunction() {
 
 function editFunction() {
     let val = confirm("Are you sure you want to Edit?");
+    if (val == false) {
+        return event.preventDefault();
+    }
+}
+
+function confirmFunction() {
+    let val = confirm("Are you sure you want to book an appointment?");
+    if (val == false) {
+        return event.preventDefault();
+    }
+}
+
+function cancelFunction() {
+    let val = confirm("Are you sure you want to cancel?");
     if (val == false) {
         return event.preventDefault();
     }

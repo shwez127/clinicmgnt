@@ -6,130 +6,134 @@
 @{
     Layout = "~/Views/Shared/PatientLayout.cshtml";
 }
+<html>
+    <head>
+    </head>  
+    <form method="post">
+    <body style="background-color:#F0F8FF">
+        <div>
+            <div class="container py-5">
+                <div class="row h-100 align-items-center py-5">
+                    <div class="col-lg-6">
+                        <h1 class="display-4">@Model.Name<span class="lead text-muted mb-0"> (@Model.Qualification) </span></h1>
+                        <p class="lead text-muted mb-0">Specailist: <strong>@Model.Specialization</strong></p>
+                        <p class="lead text-muted">
+                            Department:<strong> @Model.Department.DeptName</strong><br />
+                            Status: <strong>Available</strong>
+                        </p>
+                    </div>                  
+                    @if (Model.Gender == "M")
+                    {
+                        <div class="col-lg-4 d-none d-lg-block"><img src="https://www.svgrepo.com/show/284184/doctor.svg" alt="" class="img-fluid"></div>
+                    }
+                    else
+                    {
+                        <div class="col-lg-4 d-none d-lg-block"><img src="https://www.svgrepo.com/show/55261/doctor.svg" alt="" class="img-fluid"></div>
+                    }                    
+                    <div class="text-center">
+                        <h6>Select appointment date <span style="color:red;">*</span></h6>
+                        <div class="form-group mb-4">                           
+                            <div class="datepicker date input-group p-0 shadow-sm">                                
+                                <input type="date" asp-for="BirthDate" placeholder="Choose a appointment date"  class="form-control py-4 px-4" id="mySelect" onchange="myFunction()" />
+                            </div>
+                            </div>
+                        <p class="font-italic text-muted mb-0">Your appointment day is</p>
+                        
+                        <h4 id="pickedDate" class="font-weight-bold text-uppercase mb-3">@Model.BirthDate.ToShortDateString()</h4>
+                        <input type="submit" value="Confirm Appointment" onclick="confirmFunction()" asp-route-DoctorIdd="@Model.DoctorID" class="btn btn-primary btn-sm px-4 rounded-pill text-uppercase font-weight-bold shadow-sm" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
 
-@if(Model == null)
-{
-    if (ViewBag.status == "Ok")
-    {
-        <body onload="myFunction()" class="alert alert-success">
-            @ViewBag.message
-            
+    <body style="background-color:white">
+        <div class="bg-white py-5">
+            <div class="container py-5">
+                <div class="row align-items-center mb-5">
+                    <div class="col-lg-6 order-2 order-lg-1">
+                        <i class="fa fa-bar-chart fa-2x mb-3 text-primary"></i>
+                        <h2 class="font-weight-light">Department</h2>
+                        <p class="font-italic text-muted mb-4">@Model.Department.Description</p><a href="#" class="btn btn-light px-5 rounded-pill shadow-sm">Learn More</a>
+                    </div>
+                    <div class="col-lg-5 px-5 mx-auto order-1 order-lg-2"><img src="https://bootstrapious.com/i/snippets/sn-about/img-1.jpg" alt="" class="img-fluid mb-4 mb-lg-0"></div>
+                </div>
+                <div class="row align-items-center">
+                    <div class="col-lg-5 px-5 mx-auto"><img src="https://bootstrapious.com/i/snippets/sn-about/img-2.jpg" alt="" class="img-fluid mb-4 mb-lg-0"></div>
+                    <div class="col-lg-6">
+                        <i class="fa fa-leaf fa-2x mb-3 text-primary"></i>
+                        <h2 class="font-weight-light">Contact Me</h2>
+                        <p class="font-italic text-muted mb-4">E-mail: @Model.LoginTable.Email<br />Phone: @Model.Phone<br />Address: @Model.Address</p><a href="#" class="btn btn-light px-5 rounded-pill shadow-sm">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+    <body style="background-color:#F0F8FF">
+        <div class="py-5">
+            <div class="container py-5">
+                <div class="row mb-4">
+                    <div class="col-lg-5">
+                        <h3 class="display-4 font-weight-light">Medication Stats</h3>
+                    </div>
+                </div>
+
+                <div class="row text-center">
+                    
+                    <div class="col-xl-3 col-sm-6 mb-5">
+                        <div class="bg-white rounded shadow-sm py-5 px-4">
+                            <img src="https://www.svgrepo.com/show/46112/medical-doctor-and-a-patient-on-a-stretcher-bed.svg" alt="" width="80" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+                            <h4 class="mb-0">@Model.Patient_Treated</h4><span class="small text-uppercase text-muted">Patient Treated</span>
+                        </div>
+                    </div>
+                    
+                    <div class="col-xl-3 col-sm-6 mb-5">
+                        <div class="bg-white rounded shadow-sm py-5 px-4">
+                            <img src="https://www.svgrepo.com/show/168104/rating.svg" alt="" width="80" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+                            <h4 class="mb-0">@Model.ReputeIndex</h4><span class="small text-uppercase text-muted">Repute Index</span>
+                        </div>
+                    </div>
+                    
+                    <div class="col-xl-3 col-sm-6 mb-5">
+                        <div class="bg-white rounded shadow-sm py-5 px-4">
+                            <img src="https://www.svgrepo.com/show/20572/money.svg" alt="" width="80" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+                            <h4 class="mb-0">@Model.Charges_Per_Visit</h4><span class="small text-uppercase text-muted">Charges Per Visit</span>
+                        </div>
+                    </div>
+                    
+                    <div class="col-xl-3 col-sm-6 mb-5">
+                        <div class="bg-white rounded shadow-sm py-5 px-4">
+                            <img src="https://www.svgrepo.com/show/106812/doctor.svg" alt="" width="80" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+                            <h4 class="mb-0">@Model.Work_Experience</h4><span class="small text-uppercase text-muted">Work Experience</span>
+                        </div>
+                    </div>
+                    
+
+                </div>
+            </div>
+        </div>
         </body>
-      
+    </form>
+
+    <script>
+        function myFunction() {                      
+            var x = document.getElementById("mySelect").value;      
+            var n = new Date(x);
+            document.getElementById("pickedDate").innerHTML = x;
+        }
+    </script>
+    @if (ViewBag.status == "Ok")
+    {
+        
     }
     else if (ViewBag.status == "Error")
     {
-        <div class="alert alert-danger">
-            @ViewBag.message
-        </div>
-    }
-}else
-{
-<form method="post">
-<section class="section about-section gray-bg" id="about">
-    <div class="container">
-        <div class="row align-items-center flex-row-reverse">
-            <div class="col-lg-6">
-                <div class="about-text go-to">
-                    <h3 class="dark-color">About Me</h3>
-                    <h6 class="theme-color lead">@Model.Specialization<span> @Model.Qualification</span></h6>
-                    <p> @*<mark>design and develop</mark>*@ Department<mark> @Model.Department.DeptName</mark> @Model.Department.Description</p>
-                    <div class="row about-list">
-                        <div class="col-md-6">
-                            <div class="media">
-                                <label>DOB :</label>
-                                <p>@Model.BirthDate.ToShortDateString()</p>
-                            </div>
-                            <div class="media">
-                                <label>Age</label>
-                                <p>25</p>
-                            </div>
-                            <div class="media">
-                                <label>Residence :</label>
-                                <p>Residane</p>
-                            </div>
-                            <div class="media">
-                                <label>Address :</label>
-                                <p>@Model.Address</p>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="media">
-                                <label>E-mail :</label>
-                                <p>@Model.LoginTable.Email</p>
-                            </div>
-                            <div class="media">
-                                <label>Phone :</label>
-                                <p>@Model.Phone</p>
-                            </div>
-                            <div class="media">
-                                <label>Gender :</label>
-                                <p>@Model.Gender</p>
-                            </div>
-                            <div class="media">
-                                <label>Status :</label>
-                                <p>Available</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="about-avatar">
-                            @if (Model.Gender == "M")
-                            {
-                                <img src="data:image/png;base64,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" title="" alt="">
-                            }else
-                            {
-                                <img src="data:image/png;base64,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" title="" alt="">
-                            }
-                        </div>
-            </div>
-        </div>
-        <div class="counter">
-            <div class="row">
-                <div class="col-6 col-lg-3">
-                    <div class="count-data text-center">
-                        <h6 class="count h2" data-to="500" data-speed="500">@Model.Patient_Treated</h6>
-                        <p class="m-0px font-w-600">Patient Treated</p>
-                    </div>
-                </div>
-                <div class="col-6 col-lg-3">
-                    <div class="count-data text-center">
-                        <h6 class="count h2" data-to="150" data-speed="150">@Model.ReputeIndex</h6>
-                        <p class="m-0px font-w-600">Reputed Index</p>
-                    </div>
-                </div>
-                <div class="col-6 col-lg-3">
-                    <div class="count-data text-center">
-                        <h6 class="count h2" data-to="850" data-speed="850">@Model.Charges_Per_Visit</h6>
-                        <p class="m-0px font-w-600">Charges Per Visit</p>
-                    </div>
-                </div>
-                <div class="col-6 col-lg-3">
-                    <div class="count-data text-center">
-                        <h6 class="count h2" data-to="190" data-speed="190">@Model.Work_Experience</h6>
-                        <p class="m-0px font-w-600">Work Experience</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <h6>Select the Appointment Date <span style="color:red;">*</span></h6>
-            <input asp-for="BirthDate" style="width:250px;" type="date" class="form-control" placeholder="Select Date" required />
-            <br />
-            <div style="padding-left:250px;">
-            <input type="submit" onclick="myFunction()" value="Make an Appointment" class="btn btn-outline-success" asp-route-DoctorIdd="@Model.DoctorID" />
-                <input type="reset" value="Reset" class="btn btn-outline-secondary" />
-            </div>
-        </div>
-    </div>
 
-</section>
-</form>
-}
-<script>
-    function myFunction() {
-        alert("Appointment requested");
+        <script>
+            alert("Ensure your appointment date must be today onwards");
+        </script>
     }
-</script>
+
+</html>
+

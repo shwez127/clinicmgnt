@@ -235,13 +235,29 @@ namespace Clinic_MVC_UI.Controllers
                     }
                 }
             }
+            doctor.BirthDate = DateTime.Today;
             /*var tupeluser = new Tuple<Doctor, Appointment>(doctor, appointment);*/
             return View(doctor);
           
         }
+
         [HttpPost]
         public async Task<IActionResult> After_Selecting_doctor(Doctor doctor, int DoctorIdd)
         {
+            Doctor doctors = new Doctor();
+            using (HttpClient client = new HttpClient())
+            {
+                string endPoint = _configuration["WebApiBaseUrl"] + "Doctor/GetDoctorById?doctorId=" + DoctorIdd;
+                using (var response = await client.GetAsync(endPoint))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        var result = await response.Content.ReadAsStringAsync();
+                        doctors = JsonConvert.DeserializeObject<Doctor>(result);
+                    }
+                }
+            }
+
             Appointment appointment = new Appointment();
             #region Adding of Appointment
             appointment.DoctorID=DoctorIdd;
@@ -252,11 +268,10 @@ namespace Clinic_MVC_UI.Controllers
             if (appointment.Date < DateTime.Today)
             {
                 ViewBag.status = "Error";
-                ViewBag.message = "Ensure your Appointment date must be Today Onwards";
+                ViewBag.message = "Ensure your appointment date must be today onwards";
             }
             else
             {
-
 
                 using (HttpClient client = new HttpClient())
                 {
@@ -271,7 +286,7 @@ namespace Clinic_MVC_UI.Controllers
                             TempData["Notification"] = Convert.ToInt32(TempData["Notification"]) + 1;
                             TempData.Keep();
                             return RedirectToAction("SelectingDepartment", "Patient");
-                            
+
 
                         }
                         else
@@ -285,7 +300,7 @@ namespace Clinic_MVC_UI.Controllers
             }
             
             #endregion
-            return View();
+            return View(doctors);
         }
 
 
