@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "After_Selecting_doctor";
 }
 @model ClinicEntity.Models.Doctor
@@ -7,9 +6,9 @@
     Layout = "~/Views/Shared/PatientLayout.cshtml";
 }
 <html>
-    <head>
-    </head>  
-    <form method="post">
+<head>
+</head>
+<form method="post">
     <body style="background-color:#F0F8FF">
         <div>
             <div class="container py-5">
@@ -21,7 +20,7 @@
                             Department:<strong> @Model.Department.DeptName</strong><br />
                             Status: <strong>Available</strong>
                         </p>
-                    </div>                  
+                    </div>
                     @if (Model.Gender == "M")
                     {
                         <div class="col-lg-4 d-none d-lg-block"><img src="https://www.svgrepo.com/show/284184/doctor.svg" alt="" class="img-fluid"></div>
@@ -29,16 +28,16 @@
                     else
                     {
                         <div class="col-lg-4 d-none d-lg-block"><img src="https://www.svgrepo.com/show/55261/doctor.svg" alt="" class="img-fluid"></div>
-                    }                    
+                    }
                     <div class="text-center">
                         <h6>Select appointment date <span style="color:red;">*</span></h6>
-                        <div class="form-group mb-4">                           
-                            <div class="datepicker date input-group p-0 shadow-sm">                                
-                                <input type="date" asp-for="BirthDate" placeholder="Choose a appointment date"  class="form-control py-4 px-4" id="mySelect" onchange="myFunction()" />
+                        <div class="form-group mb-4">
+                            <div class="datepicker date input-group p-0 shadow-sm">
+                                <input type="date" asp-for="BirthDate" placeholder="Choose a appointment date" class="form-control py-4 px-4" id="mySelect" onchange="myFunction()" />
                             </div>
-                            </div>
+                        </div>
                         <p class="font-italic text-muted mb-0">Your appointment day is</p>
-                        
+
                         <h4 id="pickedDate" class="font-weight-bold text-uppercase mb-3">@Model.BirthDate.ToShortDateString()</h4>
                         <input type="submit" value="Confirm Appointment" onclick="confirmFunction()" asp-route-DoctorIdd="@Model.DoctorID" class="btn btn-primary btn-sm px-4 rounded-pill text-uppercase font-weight-bold shadow-sm" />
                     </div>
@@ -80,60 +79,59 @@
                 </div>
 
                 <div class="row text-center">
-                    
+
                     <div class="col-xl-3 col-sm-6 mb-5">
                         <div class="bg-white rounded shadow-sm py-5 px-4">
                             <img src="https://www.svgrepo.com/show/46112/medical-doctor-and-a-patient-on-a-stretcher-bed.svg" alt="" width="80" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
                             <h4 class="mb-0">@Model.Patient_Treated</h4><span class="small text-uppercase text-muted">Patient Treated</span>
                         </div>
                     </div>
-                    
+
                     <div class="col-xl-3 col-sm-6 mb-5">
                         <div class="bg-white rounded shadow-sm py-5 px-4">
                             <img src="https://www.svgrepo.com/show/168104/rating.svg" alt="" width="80" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
                             <h4 class="mb-0">@Model.ReputeIndex</h4><span class="small text-uppercase text-muted">Repute Index</span>
                         </div>
                     </div>
-                    
+
                     <div class="col-xl-3 col-sm-6 mb-5">
                         <div class="bg-white rounded shadow-sm py-5 px-4">
                             <img src="https://www.svgrepo.com/show/20572/money.svg" alt="" width="80" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
                             <h4 class="mb-0">@Model.Charges_Per_Visit</h4><span class="small text-uppercase text-muted">Charges Per Visit</span>
                         </div>
                     </div>
-                    
+
                     <div class="col-xl-3 col-sm-6 mb-5">
                         <div class="bg-white rounded shadow-sm py-5 px-4">
                             <img src="https://www.svgrepo.com/show/106812/doctor.svg" alt="" width="80" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
                             <h4 class="mb-0">@Model.Work_Experience</h4><span class="small text-uppercase text-muted">Work Experience</span>
                         </div>
                     </div>
-                    
+
 
                 </div>
             </div>
         </div>
-        </body>
-    </form>
+    </body>
+</form>
+
+<script>
+    function myFunction() {
+        var x = document.getElementById("mySelect").value;
+        var n = new Date(x);
+        document.getElementById("pickedDate").innerHTML = x;
+    }
+</script>
+@if (ViewBag.status == "Ok")
+{
+
+}
+else if (ViewBag.status == "Error")
+{
 
     <script>
-        function myFunction() {                      
-            var x = document.getElementById("mySelect").value;      
-            var n = new Date(x);
-            document.getElementById("pickedDate").innerHTML = x;
-        }
+        alert("Ensure your appointment date must be today onwards");
     </script>
-    @if (ViewBag.status == "Ok")
-    {
-        
-    }
-    else if (ViewBag.status == "Error")
-    {
-
-        <script>
-            alert("Ensure your appointment date must be today onwards");
-        </script>
-    }
+}
 
 </html>
-

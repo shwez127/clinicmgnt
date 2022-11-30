@@ -26,6 +26,8 @@ namespace Clinic_MVC_UI.Controllers
         {
             _configuration = configuration;
         }
+        
+
         public IActionResult Index()
         {
 
@@ -130,12 +132,51 @@ namespace Clinic_MVC_UI.Controllers
             List<Appointment> PatientAppointments = new List<Appointment>();
             foreach (var item in Appointments)
             {
+                
                 if (PatientAppointmentId == item.PatientID  )
                 {
+                    #region checking the adate of appointment it is less than today it will automatically reject
+                    if (item.Date < DateTime.Today && (item.Appointment_Status==0 || item.Appointment_Status==1))
+                    {
+
+                        item.Appointment_Status = 4;
+                        #region Upadting the appointment
+                        ViewBag.status = "";
+                        using (HttpClient client = new HttpClient())
+                        {
+                            StringContent content = new StringContent(JsonConvert.SerializeObject(item), Encoding.UTF8, "application/json");
+                            string endPoint = _configuration["WebApiBaseUrl"] + "Appointment/UpdateAppointment";
+                            using (var response = await client.PutAsync(endPoint, content))
+                            {
+                                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                                {
+                                    ViewBag.status = "Ok";
+                                    ViewBag.message = "Appointment Details Updated Successfully!";
+                                    TempData["Notification"] =  1;
+                                }
+                                else
+                                {
+                                    ViewBag.status = "Error";
+                                    ViewBag.message = "appointment wrong Entries!";
+                                }
+                            }
+                        }
+                        #endregion
+                    }
+                    else { 
+                    #endregion
                     PatientAppointments.Add(item);
+                    }
                 }
             }
-            
+            Appointment appointment = null;
+            foreach(var doctor in PatientAppointments) { 
+            if (doctor.Bill_Status != 1 && doctor.Appointment_Status != 4)
+            {
+                    appointment=doctor;
+            }
+            }
+            TempData["AppointmentidNotify"] = appointment.AppointID;
             return View(PatientAppointments);
             #endregion
         }
@@ -221,6 +262,7 @@ namespace Clinic_MVC_UI.Controllers
         }
         public async Task<IActionResult> After_Selecting_doctor (int SelectingDoctorId)
         {
+            #region it shows the full details of doctor
             Appointment appointment = new Appointment();
             Doctor doctor = new Doctor();
             using (HttpClient client = new HttpClient())
@@ -238,12 +280,15 @@ namespace Clinic_MVC_UI.Controllers
             doctor.BirthDate = DateTime.Today;
             /*var tupeluser = new Tuple<Doctor, Appointment>(doctor, appointment);*/
             return View(doctor);
-          
+            #endregion region
+
         }
 
         [HttpPost]
         public async Task<IActionResult> After_Selecting_doctor(Doctor doctor, int DoctorIdd)
         {
+
+            #region We are Avoiding the null referance error
             Doctor doctors = new Doctor();
             using (HttpClient client = new HttpClient())
             {
@@ -257,6 +302,7 @@ namespace Clinic_MVC_UI.Controllers
                     }
                 }
             }
+            #endregion
 
             Appointment appointment = new Appointment();
             #region Adding of Appointment
@@ -283,7 +329,7 @@ namespace Clinic_MVC_UI.Controllers
                         {
                             ViewBag.status = "Ok";
                             ViewBag.message = "Appointment booked Successfully";
-                            TempData["Notification"] = Convert.ToInt32(TempData["Notification"]) + 1;
+                            TempData["Notification"] =  1;
                             TempData.Keep();
                             return RedirectToAction("SelectingDepartment", "Patient");
 
@@ -304,49 +350,7 @@ namespace Clinic_MVC_UI.Controllers
         }
 
 
-            /* [HttpPost]
-         public async Task<IActionResult> addAppointment(int a)
-
-
-         {
-
-             Appointment appointment=new Appointment();  
-             #region Adding of Appointment
-
-             appointment.PatientID = Convert.ToInt32(TempData["ProfileID"]);
-             TempData.Keep();
-             ViewBag.Status = "";
-             if (appointment.Date < DateTime.Today)
-             {
-                 ViewBag.status = "Error";
-                 ViewBag.message = "Ensure your Appointment date must be Today Onwards";
-             }
-             else { 
-
-
-             using (HttpClient client = new HttpClient())
-             {
-                 StringContent content = new StringContent(JsonConvert.SerializeObject(appointment), Encoding.UTF8, "application/json");
-                 string endPoint = _configuration["WebApiBaseUrl"] + "Appointment/AddAppointment";
-                 using (var response = await client.PostAsync(endPoint, content))
-                 {
-                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                     {
-                         ViewBag.status = "Ok";
-                         ViewBag.message = "Appointment booked Successfully";
-                         return RedirectToAction("Index", "Patient");
-
-                     }
-                     else
-                     {
-                         ViewBag.status = "Error";
-                         ViewBag.message = "Wrong Entries";
-                     }
-                 }
-             }
-             }
-             return View();
-             #endregion*/
+        
         
         [HttpGet]
         public async Task<IActionResult> PendingAppointment()
@@ -443,7 +447,7 @@ namespace Clinic_MVC_UI.Controllers
                     {
                         ViewBag.status = "Ok";
                         ViewBag.message = "Bill Paid Successfully!";
-                        TempData["Notification"] = Convert.ToInt32(TempData["Notification"]) + 1;
+                        TempData["Notification"] =  1;
                         TempData.Keep();
                     }
                     else
@@ -475,10 +479,6 @@ namespace Clinic_MVC_UI.Controllers
         [HttpGet]
         public async Task<IActionResult> Notification()
         {
-
-            
-          
-
             #region Patient can see Notifications
             TempData["Notification"] = 0;
             TempData.Keep();
@@ -503,7 +503,7 @@ namespace Clinic_MVC_UI.Controllers
             List<Appointment> PatientAppointments = new List<Appointment>();
             foreach (var item in Appointments)
             {
-                if (PatientAppointmentId == item.PatientID &&( item.Appointment_Status==1 || item.Appointment_Status==0))
+                if (PatientAppointmentId == item.PatientID  )
                 {
                     PatientAppointments.Add(item);
                 }
@@ -738,6 +738,7 @@ namespace Clinic_MVC_UI.Controllers
                     {
                         ViewBag.status = "Ok";
                         ViewBag.message = "Appointment Details Updated Successfully!";
+                        TempData["Notification"] =  1;
                     }
                     else
                     {
@@ -749,21 +750,6 @@ namespace Clinic_MVC_UI.Controllers
             return View(appointment);
             #endregion
         }
-      /*  public async Task<IActionResult> Logout()
-        {
-            List<string> TempDataTest = new List<string>();
-            TempDataTest.Add("Tejas");
-            TempDataTest.Add("Jignesh");
-            TempDataTest.Add("Rakesh");
-            TempData["listofnotification"] = TempDataTest;
-
-           *//* Dictionary<string, int> dictExample = new Dictionary<string, int>();
-            dictExample.Add(TempData["ProfileId"].ToString(), Convert.ToInt32(TempData["Notification"]));
-            TempData["listofnotification"] = dictExample;
-            TempData.Keep();*//*
-
-            return RedirectToAction("Index", "Home");
-          
-        }*/
+      
     }
 }
