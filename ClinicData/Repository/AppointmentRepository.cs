@@ -32,7 +32,7 @@ namespace ClinicData.Repository
 
         public IEnumerable<Appointment> GetAppointment()
         {
-            return _appointmentDbContext.appointments.Include(obj=>obj.Doctor).Include(obj=>obj.Patient).Include(obj => obj.Doctor.LoginTable).Include(obj => obj.Patient.LoginTable).ToList();
+            return _appointmentDbContext.appointments.Include(obj=>obj.Doctor).Include(obj=>obj.Doctor.Department).Include(obj=>obj.Patient).Include(obj => obj.Doctor.LoginTable).Include(obj => obj.Patient.LoginTable).ToList();
         }
 
         public void DeleteAppointment(int AppointID)

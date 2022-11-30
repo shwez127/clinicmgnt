@@ -9,81 +9,197 @@
 
 @model IEnumerable<ClinicEntity.Models.Appointment>
 
+    <center>
 @if (Model.Count() >= 1)
 {
-    @foreach (var item in Model)
+    @foreach (var doctor in Model)
     {
-        <br />
-        <div class="card text-white bg-info mb-3">
-            <div class="card-header">
-                Quote
-            </div>
-            <div class="card-body">
-                <blockquote class="blockquote mb-0">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                    <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
-                </blockquote>
-            </div>
-        </div>
-    }
-    @*<div class="row">
-    <div class="col-12">
-        <center><h3 style="font-size:x-large;color:black;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Appointments Notification</h3></center>
-        <hr />
-        <table class="table table-light table-bordered table-hover">
-            <thead>
-                <tr>
-                    <th>Appointment ID</th>
-                    <th>Doctor Name</th>
-                    <th>Doctor Phone</th>
-                    <th>Doctor Charges per visit</th>
-                    <th>Date</th>
-                 
-                    <th>Appointment Status</th>
-                    
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var doctor in Model)
-                {
-                    <tr>
-                        <td>@doctor.AppointID</td>
-                        <td>@doctor.Doctor.Name</td>
-                        <td>@doctor.Doctor.Phone</td>
-                        <td>@doctor.Doctor.Charges_Per_Visit</td>
-                        <td>@doctor.Date.ToShortDateString()</td>
-                    
+        if (Convert.ToInt32(TempData["AppointmentidNotify"]) == doctor.AppointID)
+        {
+            TempData.Keep();
+           <br />
+            <br />
+            @if (doctor.Appointment_Status == 0)
+            {
+                <div class="card text-white bg-info mb-3" style="width:800px;">
+                    <div class="card-header">
                         @if (doctor.Appointment_Status == 0)
                         {
-                            <td>Requested</td>
-
+                                    <p><span>Status: &nbsp;</span><strong>Requested</strong></p>
                         }
                         else if (doctor.Appointment_Status == 1)
                         {
-                            <td>Approved</td>
+                            <p>Approved</p>
                         }
                         else if (doctor.Appointment_Status == 2)
                         {
-                            <td>Pending</td>
+                            <p>Pending</p>
                         }
                         else if (doctor.Appointment_Status == 3)
                         {
-                            <td>Completed</td>
+                            <p>Completed</p>
                         }
                         else if (doctor.Appointment_Status == 4)
                         {
-                            <td>Rejected</td>
+                            <p>Rejected</p>
                         }
-
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-</div>*@
-<br />
+                    </div>
+                    <div class="card-body">
+                        <blockquote class="blockquote mb-0">
+                            <p><span>Doctor Name:&nbsp;</span>@doctor.Doctor.Name<span>&nbsp; <br/> Department: @doctor.Doctor.Department.DeptName</span></p>
+                            <footer style="color:white"><span>Appointment Date:</span>&nbsp;@doctor.Date.ToShortDateString() <cite title="Source Title"> <br /> <span>Email: &nbsp;</span>@doctor.Patient.LoginTable.Email</cite></footer>
+                        </blockquote>
+                    </div>
+                </div>
+                <br />
+                <br />
+            }
+            else if (doctor.Appointment_Status == 1)
+            {
+                <div class="card text-white bg-primary mb-3" style="width:800px;">
+                    <div class="card-header">
+                        @if (doctor.Appointment_Status == 0)
+                        {
+                            <p>Requested</p>
+                        }
+                        else if (doctor.Appointment_Status == 1)
+                        {
+                            <p><span>Status: &nbsp;</span><strong>Approved</strong></p>
+                        }
+                        else if (doctor.Appointment_Status == 2)
+                        {
+                            <p>Pending</p>
+                        }
+                        else if (doctor.Appointment_Status == 3)
+                        {
+                            <p>Completed</p>
+                        }
+                        else if (doctor.Appointment_Status == 4)
+                        {
+                            <p>Rejected</p>
+                        }
+                    </div>
+                    <div class="card-body">
+                        <blockquote class="blockquote mb-0">
+                            <p><span>Doctor Name:&nbsp;</span>@doctor.Doctor.Name<span>&nbsp; <br> Department: @doctor.Doctor.Department.DeptName</span></p>
+                            <footer style="color:white" ><span>Appointment Date:</span>&nbsp;@doctor.Date.ToShortDateString() <cite title="Source Title"><br />  <span>Email: &nbsp;</span>@doctor.Patient.LoginTable.Email</cite></footer>
+                        </blockquote>
+                    </div>
+                </div>
+                <br />
+                <br />
+            }
+            else if (doctor.Appointment_Status == 2)
+            {
+                <div class="card text-white bg-info mb-3" style="width:800px;">
+                    <div class="card-header">
+                        @if (doctor.Appointment_Status == 0)
+                        {
+                            <p>Requested</p>
+                        }
+                        else if (doctor.Appointment_Status == 1)
+                        {
+                            <p>Approved</p>
+                        }
+                        else if (doctor.Appointment_Status == 2)
+                        {
+                            <p><span>Status: &nbsp;</span><strong>Pending</strong></p>
+                        }
+                        else if (doctor.Appointment_Status == 3)
+                        {
+                            <p>Completed</p>
+                        }
+                        else if (doctor.Appointment_Status == 4)
+                        {
+                            <p>Rejected</p>
+                        }
+                    </div>
+                    <div class="card-body">
+                        <blockquote class="blockquote mb-0">
+                            <p><span>Doctor Name:&nbsp;</span>@doctor.Doctor.Name<span>&nbsp; <br> Department: @doctor.Doctor.Department.DeptName</span></p>
+                            <footer style="color:white" ><span>Appointment Date:</span>&nbsp;@doctor.Date.ToShortDateString() <cite title="Source Title"><br />  <span>Email: &nbsp;</span>@doctor.Patient.LoginTable.Email</cite></footer>
+                        </blockquote>
+                    </div>
+                </div>
+                <br />
+                <br />
+            }
+            else if (doctor.Appointment_Status == 3)
+            {
+                <div class="card text-white bg-success mb-3" style="width:800px;">
+                    <div class="card-header">
+                        @if (doctor.Appointment_Status == 0)
+                        {
+                            <p>Requested</p>
+                        }
+                        else if (doctor.Appointment_Status == 1)
+                        {
+                            <p>Approved</p>
+                        }
+                        else if (doctor.Appointment_Status == 2)
+                        {
+                            <p>Pending</p>
+                        }
+                        else if (doctor.Appointment_Status == 3)
+                        {
+                            <p><span>Status: &nbsp;</span><strong>Completed</strong></p>
+                        }
+                        else if (doctor.Appointment_Status == 4)
+                        {
+                            <p>Rejected</p>
+                        }
+                    </div>
+                    <div class="card-body">
+                        <blockquote class="blockquote mb-0">
+                            <p><span>Doctor Name:&nbsp;</span>@doctor.Doctor.Name<span>&nbsp; <br/> Department: @doctor.Doctor.Department.DeptName</span></p>
+                            <footer style="color:white"><span>Appointment Date:</span>&nbsp;@doctor.Date.ToShortDateString() <cite title="Source Title"> <br /> <span>Email: &nbsp;</span>@doctor.Patient.LoginTable.Email</cite></footer>
+                        </blockquote>
+                    </div>
+                </div>
+                <br />
+                <br />
+            }
+            else if (doctor.Appointment_Status == 4)
+            {
+                <div class="card text-white bg-danger mb-3" style="width:800px;">
+                    <div class="card-header">
+                        @if (doctor.Appointment_Status == 0)
+                        {
+                            <p>Requested</p>
+                        }
+                        else if (doctor.Appointment_Status == 1)
+                        {
+                            <p>Approved</p>
+                        }
+                        else if (doctor.Appointment_Status == 2)
+                        {
+                            <p>Pending</p>
+                        }
+                        else if (doctor.Appointment_Status == 3)
+                        {
+                            <p>Completed</p>
+                        }
+                        else if (doctor.Appointment_Status == 4)
+                        {
+                            <p><span>Status: &nbsp;</span><strong>Rejected</strong></p>
+                        }
+                    </div>
+                    <div class="card-body">
+                        <blockquote class="blockquote mb-0">
+                            <p><span>Doctor Name:&nbsp;</span>@doctor.Doctor.Name<span>&nbsp; <br> Department: @doctor.Doctor.Department.DeptName</span></p>
+                            <footer style="color:white" ><span>Appointment Date:</span>&nbsp;@doctor.Date.ToShortDateString() <cite title="Source Title"><br/> <span>Email: &nbsp;</span>@doctor.Patient.LoginTable.Email</cite></footer>
+                        </blockquote>
+                    </div>
+                </div>
+                <br />
+                <br />
+            }
+            
+        }
+    }
+ 
 }else{
     <h1 class="text-center" style="font-size:x-large;color:black;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">You don't have any Notifications</h1>
 }
-
+</center>
 

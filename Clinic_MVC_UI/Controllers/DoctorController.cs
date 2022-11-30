@@ -154,7 +154,7 @@ namespace Clinic_MVC_UI.Controllers
                     {
                         ViewBag.status = "Ok";
                         ViewBag.message = "Appointment Details Updated Successfully!";
-                        TempData["Notification"] = Convert.ToInt32(TempData["Notification"]) + 1;
+                        TempData["Notification"] =  1;
                         TempData.Keep();
                     }
                     else
@@ -228,7 +228,7 @@ namespace Clinic_MVC_UI.Controllers
                     {
                         ViewBag.status = "Ok";
                         ViewBag.message = "Prescription Updated Successfully!";
-                        TempData["Notification"] = Convert.ToInt32(TempData["Notification"]) + 1;
+                        TempData["Notification"] =  1;
                         TempData.Keep();
                     }
                     else
@@ -265,7 +265,7 @@ namespace Clinic_MVC_UI.Controllers
             List<Appointment> DoctorAppointments = new List<Appointment>();
             foreach (var item in Appointments)
             {
-                if (doctorappointId == item.DoctorID && item.Appointment_Status==1 && item.Bill_Amount==0)
+                if (doctorappointId == item.DoctorID && item.Appointment_Status==1 && item.Bill_Amount==0 && (item.Prescription != null || item.Disease != null))
                 {
                     DoctorAppointments.Add(item);
                 }
@@ -307,7 +307,7 @@ namespace Clinic_MVC_UI.Controllers
                     {
                         ViewBag.status = "Ok";
                         ViewBag.message = "Appointment Bill Generated!";
-                        TempData["Notification"] = Convert.ToInt32(TempData["Notification"]) + 1;
+                        TempData["Notification"] =  1;
                         TempData.Keep();
                     }
                     else
