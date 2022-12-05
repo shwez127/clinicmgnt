@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Text;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Clinic_MVC_UI.Controllers
 {
@@ -391,7 +392,117 @@ namespace Clinic_MVC_UI.Controllers
 
 
 
+        public List<SelectListItem> GetGender()
+        {
+            List<SelectListItem> gender = new List<SelectListItem>()
+            {
+                new SelectListItem{Value="Select",Text="Select"},
+                new SelectListItem{Value="M",Text="Male"},
+                new SelectListItem{Value="F",Text="Female"},
+                new SelectListItem{Value="O",Text="Others"},
 
+
+
+           };
+            return gender;
+        }
+        public List<SelectListItem> GetDoctorStatus()
+        {
+            List<SelectListItem> doctorstatus = new List<SelectListItem>()
+            {
+                new SelectListItem{Value="Select",Text="select"},
+                new SelectListItem{Value="1",Text="Present"},
+                new SelectListItem{Value="0",Text="Left"},
+
+
+
+           };
+            return doctorstatus;
+        }
+        public async Task<IActionResult> EditDoctor(int DoctorId)
+        {
+            if (DoctorId != 0)
+            {
+                TempData["EditDoctorId"] = DoctorId;
+                TempData.Keep();
+            }
+            Doctor doctor = null;
+            using (HttpClient client = new HttpClient())
+            {
+                string endPoint = _configuration["WebApiBaseUrl"] + "Doctor/GetDoctorById?doctorId=" + Convert.ToInt32(TempData["EditDoctorId"]);
+                TempData.Keep();
+                using (var response = await client.GetAsync(endPoint))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        var result = await response.Content.ReadAsStringAsync();
+                        doctor = JsonConvert.DeserializeObject<Doctor>(result);
+                    }
+                }
+            }
+            ViewBag.genderlist = GetGender();
+            ViewBag.doctorstatuslist = GetDoctorStatus();
+
+
+
+            //Department dropdown list
+            List<Department> departments = new List<Department>();
+            using (HttpClient client = new HttpClient())
+            {
+                string endpoint = _configuration["WebApiBaseUrl"] + "Department/GetDepartments";
+                using (var response = await client.GetAsync(endpoint))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        var result = await response.Content.ReadAsStringAsync();
+                        departments = JsonConvert.DeserializeObject<List<Department>>(result);
+                    }
+                }
+            }
+
+
+
+            List<SelectListItem> department = new List<SelectListItem>();
+            department.Add(new SelectListItem { Value = "select", Text = "select" });
+            foreach (var item in departments)
+            {
+                department.Add(new SelectListItem { Value = item.DeptNo.ToString(), Text = item.DeptName });
+            }
+
+
+
+            ViewBag.Departmentlist = department;
+            return View(doctor);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditDoctor(Doctor doctor)
+        {
+            ViewBag.status = "";
+            using (HttpClient client = new HttpClient())
+            {
+                StringContent content = new StringContent(JsonConvert.SerializeObject(doctor), Encoding.UTF8, "application/json");
+                string endPoint = _configuration["WebApiBaseUrl"] + "Doctor/UpdateDoctor";
+                using (var response = await client.PutAsync(endPoint, content))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        ViewBag.status = "Ok";
+                        ViewBag.message = "Doctor Details Updated Successfully!";
+                        return RedirectToAction("Profile", "Doctor");
+                    }
+                    else
+                    {
+                        ViewBag.status = "Error";
+                        ViewBag.message = "Wrong Entries!";
+                    }
+                }
+            }
+            return View();
+
+
+
+        }
 
 
 

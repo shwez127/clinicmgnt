@@ -46,33 +46,33 @@
                         </li>
                         &nbsp;&nbsp;&nbsp;
                         <li class="nav-item">
-                           @if(true){
-                               int a=0;
-                                <a class="nav-link text-uppercase" asp-area="" asp-controller="Patient" asp-action="Notification" style="font-size:large;color:white">
-                                Notification
-                                @if (true == true)
-                                {
-                                    a = Convert.ToInt32(TempData["Notification"]);
-                                        TempData.Keep();
-                                    }
-                                    @if(a >0){<sup style="color:red" >@a</sup>
-                                    }
-                                    </a>
-                               } 
-                        </li>
-                       
-                        &nbsp;&nbsp;&nbsp;
-                        <li class="nav-item">
                             <a class="nav-link text-uppercase" asp-area="" asp-controller="Patient" asp-action="PatientFeedback" style="font-size:large;color:white">Feedback</a>
-
                         </li>
                     </ul>
                 </div>
+                <div class="nav-item">
+                    @if (true)
+                    {
+                        int a = 0;
+                        <a class="nav-link text-uppercase" asp-area="" asp-controller="Patient" asp-action="Notification" style="font-size:large">
+                            <img class="img-fluid" style="height:25px" src="https://www.svgrepo.com/show/18861/bell.svg">
+                            @if (true == true)
+                            {
+                                a = Convert.ToInt32(TempData["Notification"]);
+                                TempData.Keep();
+                            }
+                            @if (a > 0)
+                            {
+                                <sub class="badge bg-danger" style="color:#f0f8ff;font-size:12px">@a</sub>
+                            }
+                        </a>
+                    }
+                </div>
                 <div class="btn-group">
-                    <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="img-fluid" style="height:45px" src="https://www.svgrepo.com/show/209791/user-profile.svg"></a>
+                    <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#f0f8ff"><img class="img-fluid" style="height:25px" src="https://www.svgrepo.com/show/213315/avatar-profile.svg"></a>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" asp-area="" asp-controller="Patient" asp-action="Profile"><img class="img-fluid" style="height:20px" src="https://www.svgrepo.com/show/318484/profile.svg">Profile</a>
-                        <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Index" style="color:red"><img class="img-fluid" style="height:12px" src="https://www.svgrepo.com/show/79009/logout.svg"> Logout</a>
+                        <a class="dropdown-item" asp-area="" asp-controller="Patient" asp-action="Profile"><img class="img-fluid" style="height:20px" src="https://www.svgrepo.com/show/318484/profile.svg">&nbsp; Profile</a>
+                        <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Index" style="color:red">&nbsp;<img class="img-fluid" style="height:14px" src="https://www.svgrepo.com/show/79009/logout.svg">&nbsp; Logout</a>
                     </div>
                 </div>
             </div>
@@ -85,7 +85,7 @@
         </main>
     </div>
 
-    <footer class="footer text-muted" style="background-color:#003399;position:fixed; bottom:0;">
+    <footer class="footer text-muted" style="font-family:'Roboto',sans-serif;background-color:#003399;position:fixed; bottom:0;">
         <div class="container">
             <a class="hm-logo-container" href="/">
                 <img class="hm-logo" alt="" style="width:50px; height:50px;" src="https://www.svgrepo.com/show/270145/health-clinic-health-care.svg" />

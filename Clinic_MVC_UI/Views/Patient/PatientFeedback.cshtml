@@ -15,7 +15,7 @@
     <head>
         <meta name="viewport" content="width-device-width" />
     </head>
-    <body>
+    <body style="background-color:#F0F8FF">
         <br />
         <a asp-area="" asp-controller="Patient" asp-action="Index"><img class="img-fluid" style="height:35px" src="https://img.icons8.com/fluency/512/circled-left.png"></a>
         <br />
@@ -96,5 +96,7 @@
 }
 else
 {
-    <h1 class="text-center" style="font-size:x-large;color:black;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">You don't have any feedback pending</h1>
+    <h2 class="h-100 d-flex align-items-center justify-content-center" style="color:#003399;font-family:'Roboto',sans-serif;padding-top:340px">
+        You don't have any feedback pending.
+    </h2> 
 }   
