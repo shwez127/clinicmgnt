@@ -171,7 +171,7 @@ namespace Clinic_MVC_UI.Controllers
             }
             Appointment appointment = null;
             foreach(var doctor in PatientAppointments) { 
-            if (doctor.Bill_Status != 1 && doctor.Appointment_Status != 4)
+            if (doctor.Bill_Status != 1 )
             {
                     appointment=doctor;
             }
@@ -348,10 +348,7 @@ namespace Clinic_MVC_UI.Controllers
             #endregion
             return View(doctors);
         }
-
-
-        
-        
+    
         [HttpGet]
         public async Task<IActionResult> PendingAppointment()
         {
@@ -739,6 +736,7 @@ namespace Clinic_MVC_UI.Controllers
                         ViewBag.status = "Ok";
                         ViewBag.message = "Appointment Details Updated Successfully!";
                         TempData["Notification"] =  1;
+                        return RedirectToAction("AppointmentProcessing", "Patient");
                     }
                     else
                     {
@@ -750,6 +748,64 @@ namespace Clinic_MVC_UI.Controllers
             return View(appointment);
             #endregion
         }
-      
+
+        public List<SelectListItem> GetGender()
+        {
+            List<SelectListItem> gender = new List<SelectListItem>()
+            {
+                new SelectListItem{Value="Select",Text="Select"},
+                new SelectListItem{Value="M",Text="Male"},
+                new SelectListItem{Value="F",Text="Female"},
+                new SelectListItem{Value="O",Text="Others"},
+
+
+
+           };
+            return gender;
+        }
+        public async Task<IActionResult> EditPatient(int PatientId)
+        {
+            Patient patient = null;
+            using (HttpClient client = new HttpClient())
+            {
+                string endPoint = _configuration["WebApiBaseUrl"] + "Patient/GetPatientById?patientId=" + PatientId;
+                using (var response = await client.GetAsync(endPoint))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        var result = await response.Content.ReadAsStringAsync();
+                        patient = JsonConvert.DeserializeObject<Patient>(result);
+                    }
+                }
+            }
+            ViewBag.genderlist = GetGender();
+            return View(patient);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditPatient(Patient patient)
+        {
+            ViewBag.status = "";
+            using (HttpClient client = new HttpClient())
+            {
+                StringContent content = new StringContent(JsonConvert.SerializeObject(patient), Encoding.UTF8, "application/json");
+                string endPoint = _configuration["WebApiBaseUrl"] + "Patient/UpdatePatient";
+                using (var response = await client.PutAsync(endPoint, content))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        ViewBag.status = "Ok";
+                        ViewBag.message = "Patient Details Updated Successfully!";
+                        return RedirectToAction("Profile", "Patient");
+                    }
+                    else
+                    {
+                        ViewBag.status = "Error";
+                        ViewBag.message = "Wrong Entries!";
+                    }
+                }
+            }
+            return View();
+        }
     }
 }

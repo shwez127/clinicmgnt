@@ -20,7 +20,7 @@
                                      alt="Avatar" class="img-fluid my-5" style="width: 110px;" />
                                 <h5>@Model.Name</h5>
                                 <p>@Model.Qualification</p>
-                                <i class="far fa-edit mb-5"></i>
+                                <a asp-controller="Doctor" asp-action="EditDoctor" asp-route-DoctorId="@Model.DoctorID"><i class="far fa-edit mb-5"></i></a>
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body p-4">
