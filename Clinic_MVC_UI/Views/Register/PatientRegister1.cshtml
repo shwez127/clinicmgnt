@@ -11,10 +11,10 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link rel="stylesheet" href="~/css/site4.css" />
-<body >
+<body style="background:-webkit-linear-gradient(left, #3931af, #00c6ff)">
 <form method="post">
 
-        <div class="row register" style="margin-top:-27px">
+        <div class="row register" style="margin-top:5px">
             <div class="col-md-3 register-left">
                 <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt="" />
                 <h3>Welcome</h3>
@@ -48,7 +48,6 @@
                                 <div class="form-group">
                                     <input  asp-for="Patient.BirthDate" type="date" class="form-control" placeholder="Birthday date *" value="" />
                                 </div>
-                               
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -58,12 +57,10 @@
                                     @*<input asp-for="Patient.Phone" type="text" minlength="10" maxlength="10" name="txtEmpPhone" class="form-control" placeholder="Your Phone *" value="" />*@
                                     <input asp-for="Patient.Phone" type="text" class="form-control" placeholder="Phone No *" value="" />
                                 </div>
-                               
                                 <div class="form-group">
                                     <input asp-for="Patient.Address" type="text" class="form-control" placeholder="Your Address *" value="" />
                                 </div>
                                 <input onclick="myfunction()" asp-route-Type="0" type="submit" class="btnRegister" value="Register" />
-                                
                             </div>
                         </div>
                     </div>
@@ -83,7 +80,6 @@
                                 <div class="form-group">
                                     <input asp-for="Doctor.LoginTable.Password" type="password"  class="form-control" placeholder="Password *" value="" />
                                 </div>
-
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -98,10 +94,8 @@
                                 <div class="form-group">
                                     <input asp-for="Doctor.BirthDate" type="date" class="form-control" placeholder="Birth Date *" value="" />
                                 </div>
-
                             </div>
                             <div class="col-md-4">
-                               
                                 <div class="form-group">
                                     <input asp-for="Doctor.Phone" type="text" class="form-control" placeholder="Phone No *" value="" />
                                 </div>
@@ -115,7 +109,6 @@
                                     <input asp-for="Doctor.Work_Experience" type="text" class="form-control" placeholder="Work Experience *" value="" />
                                 </div>
                                 <input onclick="myfunction()" type="submit" asp-route-Type="1" class="btnRegister" value="Register" />
-
                             </div>
                         </div>
                     </div>

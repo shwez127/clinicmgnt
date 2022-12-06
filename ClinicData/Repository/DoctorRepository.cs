@@ -29,7 +29,7 @@ namespace ClinicData.Repository
             #region Deleting doctor details from database
             var doctor = _clinicDbContext.doctors.Find(doctorId);
             _clinicDbContext.doctors.Remove(doctor);
-            _clinicDbContext.SaveChanges();
+            _clinicDbContext.SaveChanges(); 
             #endregion
         }
 

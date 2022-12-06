@@ -42,22 +42,21 @@
                         <li class="nav-item">
                             <a class="nav-link text-uppercase" asp-area="" asp-controller="Doctor" asp-action="PatientHistory" style="font-size:x-large;color:white">PatientHistory</a>
                         </li>
-                        &nbsp;&nbsp;&nbsp;
-                        <li class="nav-item">
-                            <a class="nav-link text-uppercase" asp-area="" asp-controller="Doctor" asp-action="Profile" style="font-size:x-large;color:white">Profile</a>
-                        </li>
-                        &nbsp;&nbsp;&nbsp;
-                        <li class="nav-item">
-                        <a class="nav-link text-uppercase" asp-area="" asp-controller="Home" asp-action="Index" style="font-size:x-large;color:white">Logout</a>
-                    </li>
                     </ul>
+                </div>
+                <div class="btn-group">
+                    <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#f0f8ff"><img class="img-fluid" style="height:25px" src="https://www.svgrepo.com/show/213315/avatar-profile.svg"></a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" asp-area="" asp-controller="Doctor" asp-action="Profile"><img class="img-fluid" style="height:20px" src="https://www.svgrepo.com/show/318484/profile.svg">&nbsp; Profile</a>
+                        <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Index" style="color:red">&nbsp;<img class="img-fluid" style="height:14px" src="https://www.svgrepo.com/show/79009/logout.svg">&nbsp; Logout</a>
+                    </div>
                 </div>
             </div>
         </nav>
     </header>
 
 
-    <div class="container-fluid img-responsive" style="background-color:#f0f8ff; height:76vh">
+    <div class="container-fluid img-responsive" style="font-family:'Roboto',sans-serif;background-color:#f0f8ff; height:76vh">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>

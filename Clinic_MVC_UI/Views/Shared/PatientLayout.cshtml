@@ -14,11 +14,12 @@
     <script src="https://kit.fontawesome.com/bf21391385.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <link href="//cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" rel="stylesheet" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light font-weight-bold @*box-shadow mb-3*@" style="background-color:#003399;">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light font-weight-bold" style="background-color:#003399;">
             <div class="container-fluid">
                 <a class="hm-logo-container" asp-controller="Patient" asp-action="Index">
                     <img class="hm-logo" alt="" style="height:120px; padding-bottom:20px" src="https://www.svgrepo.com/show/270145/health-clinic-health-care.svg" />
@@ -45,43 +46,38 @@
                             <a class="nav-link text-uppercase" asp-area="" asp-controller="Patient" asp-action="SelectingDepartment" style="font-size:large;color:white">Take Appointment</a>
                         </li>
                         &nbsp;&nbsp;&nbsp;
-                       @* <li class="nav-item">
-                            <a class="nav-link text-uppercase" asp-area="" asp-controller="Patient" asp-action="SelectingDepartment" style="font-size:large;color:white;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Take Appointment</a>
-                        </li>
-                        &nbsp;&nbsp;&nbsp;*@
-                        <li class="nav-item">
-                           @if(true){
-                               int a=0;
-                                <a class="nav-link text-uppercase" asp-area="" asp-controller="Patient" asp-action="Notification" style="font-size:large;color:white;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
-                                Notification
-                                @if (true == true)
-                                {
-                                    a = Convert.ToInt32(TempData["Notification"]);
-                                        TempData.Keep();
-                                    }
-                                    @if(a >0){<sup style="color:red" >@a</sup>
-                                    }
-                                    </a>
-                               } 
-                        </li>
-                       
-                        &nbsp;&nbsp;&nbsp;
                         <li class="nav-item">
                             <a class="nav-link text-uppercase" asp-area="" asp-controller="Patient" asp-action="PatientFeedback" style="font-size:large;color:white">Feedback</a>
-
-                        </li>
-                        &nbsp;&nbsp;&nbsp;
-                        <li class="nav-item">
-                            <a class="nav-link text-uppercase" asp-area="" asp-controller="Patient" asp-action="Profile" style="font-size:large;color:white">Profile</a>
-
-                        </li>
-                        &nbsp;&nbsp;&nbsp;
-                        <li class="nav-item">
-                            <a class="nav-link text-uppercase" asp-area="" asp-controller="Home" asp-action="Index" style="font-size:large;color:white">Logout</a>
                         </li>
                     </ul>
                 </div>
+                <div class="nav-item">
+                    @if (true)
+                    {
+                        int a = 0;
+                        <a class="nav-link text-uppercase" asp-area="" asp-controller="Patient" asp-action="Notification" style="font-size:large">
+                            <img class="img-fluid" style="height:25px" src="https://www.svgrepo.com/show/18861/bell.svg">
+                            @if (true == true)
+                            {
+                                a = Convert.ToInt32(TempData["Notification"]);
+                                TempData.Keep();
+                            }
+                            @if (a > 0)
+                            {
+                                <sub class="badge bg-danger" style="color:#f0f8ff;font-size:12px">@a</sub>
+                            }
+                        </a>
+                    }
+                </div>
+                <div class="btn-group">
+                    <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#f0f8ff"><img class="img-fluid" style="height:25px" src="https://www.svgrepo.com/show/213315/avatar-profile.svg"></a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" asp-area="" asp-controller="Patient" asp-action="Profile"><img class="img-fluid" style="height:20px" src="https://www.svgrepo.com/show/318484/profile.svg">&nbsp; Profile</a>
+                        <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Index" style="color:red">&nbsp;<img class="img-fluid" style="height:14px" src="https://www.svgrepo.com/show/79009/logout.svg">&nbsp; Logout</a>
+                    </div>
+                </div>
             </div>
+            
         </nav>
     </header>
     <div class="container-fluid" style="height:76vh">
@@ -90,7 +86,7 @@
         </main>
     </div>
 
-    <footer class="footer text-muted" style="background-color:#003399">
+    <footer class="footer text-muted" style="font-family:'Roboto',sans-serif;background-color:#003399;position:fixed; bottom:0;">
         <div class="container">
             <a class="hm-logo-container" href="/">
                 <img class="hm-logo" alt="" style="width:50px; height:50px;" src="https://www.svgrepo.com/show/270145/health-clinic-health-care.svg" />
@@ -102,6 +98,7 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="//cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script>
     @RenderSection("Scripts", required: false)
 
 </body>

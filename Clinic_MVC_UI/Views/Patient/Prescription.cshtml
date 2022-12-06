@@ -1,0 +1,97 @@
+﻿@{
+    Layout = "~/Views/Shared/PatientLayout.cshtml";
+}
+
+@model ClinicEntity.Models.Appointment;
+
+<body style="background-color:#f0f8ff;font-family:'Roboto',sans-serif">
+<div class="container" id="content" style="padding-top:50px">
+	<h3><br /></h3>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="widget-area-2 proclinic-box-shadow pb-3">
+				<!-- Invoice Head -->
+				<div class="row ">
+					<div class="col-sm-6 mb-5">
+						<span>Address:</span>
+						<br>
+						<span>@Model.Doctor.Address</span>
+						<br>
+						<span class="pr-2">Phone: +91 @Model.Doctor.Phone</span>
+					</div>
+					<div class="col-sm-6 text-md-right mb-5">
+						<h3>Prescription-@Model.Patient.Name</h3>
+						<br />
+						<span>Appointment ID: @Model.AppointID</span>
+						<br>
+						<span>Date: @Model.Date.ToShortDateString()</span>
+					</div>
+				</div>
+				<!-- /Invoice Head -->
+				<!-- Invoice Content -->
+				<div class="row">
+					<div class="col-sm-6 mb-5">
+						<h6 class="proclinic-text-color">Patient Details:</h6>
+						<span><strong>Name:</strong> @Model.Patient.Name</span>
+						<br>
+						<span><strong>Gender:</strong> @Model.Patient.Gender</span>
+						<br>					    
+						<span><strong>DOB:</strong> @Model.Patient.BirthDate.ToShortDateString()</span>
+						<br>
+						<span><strong>Address: </strong> @Model.Patient.Address</span>
+						<br>
+						<span><strong>Phone:</strong>+91 @Model.Patient.Phone</span>									
+					</div>
+					<div class="col-sm-6 text-md-right mb-5">
+						<span><strong>Doctor Name:</strong> @Model.Doctor.Name</span>
+						<br>
+						<span><strong>Qualification:</strong> @Model.Doctor.Qualification</span>
+						<br>
+						<span><strong>Specialization:</strong>  @Model.Doctor.Specialization</span>
+						<br>
+						<span><strong>Phone:</strong> +91 @Model.Doctor.Phone</span>
+						<br>
+					</div>
+					<div class="col-sm-12 mb-2">
+						<strong class="proclinic-text-color">Treatment:</strong>
+					</div>
+					<div class="col-sm-12">
+						<table class="table table-bordered table-striped table-invioce">
+							<thead>
+								<tr>
+									<th scope="col">Diseases</th>
+									<th scope="col">Progress</th>
+									<th scope="col">Medicines</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>@Model.Disease</td>
+									<td>@Model.Progress</td>
+									<td>@Model.Prescription</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="col-sm-12">
+	<nav aria-label="Page navigation example">
+		<ul class="pagination justify-content-center export-pagination mt-3 mb-0">
+			<li class="page-item">
+				<div id="editor"></div>
+				<button class="btn btn-outline-info" id="cmd">Generate PDF</button>
+			</li>
+
+		</ul>
+	</nav>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script>
+</body>

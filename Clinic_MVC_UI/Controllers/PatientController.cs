@@ -177,7 +177,7 @@ namespace Clinic_MVC_UI.Controllers
             }
             Appointment appointment = null;
             foreach(var doctor in PatientAppointments) { 
-            if (doctor.Bill_Status != 1 && doctor.Appointment_Status != 4)
+            if (doctor.Bill_Status != 1 )
             {
                     appointment=doctor;
             }
@@ -255,9 +255,11 @@ namespace Clinic_MVC_UI.Controllers
             #endregion region
 
         }
+
         [HttpPost]
         public async Task<IActionResult> After_Selecting_doctor(Doctor doctor, int DoctorIdd)
         {
+
             #region We are Avoiding the null referance error
             Doctor doctors = new Doctor();
             using (HttpClient client = new HttpClient())
@@ -275,6 +277,7 @@ namespace Clinic_MVC_UI.Controllers
             #endregion
 
 
+
             Appointment appointment = new Appointment();
             #region Adding of Appointment
             appointment.DoctorID=DoctorIdd;
@@ -286,10 +289,11 @@ namespace Clinic_MVC_UI.Controllers
             if (appointment.Date < DateTime.Today)
             {
                 ViewBag.status = "Error";
-                ViewBag.message = "Ensure your Appointment date must be Today Onwards";
+                ViewBag.message = "Ensure your appointment date must be today onwards";
             }
             else
             {
+
                 using (HttpClient client = new HttpClient())
                 {
                     StringContent content = new StringContent(JsonConvert.SerializeObject(appointment), Encoding.UTF8, "application/json");
@@ -303,7 +307,7 @@ namespace Clinic_MVC_UI.Controllers
                             TempData["Notification"] =  1;
                             TempData.Keep();
                             return RedirectToAction("SelectingDepartment", "Patient");
-                            
+
 
                         }
                         else
@@ -319,6 +323,9 @@ namespace Clinic_MVC_UI.Controllers
             #endregion
             return View(doctors);
         }
+
+    
+        
 
 
         [HttpGet]
@@ -643,6 +650,7 @@ namespace Clinic_MVC_UI.Controllers
                         ViewBag.message = "Appointment Details Updated Successfully!";
                         //it will show the notification after feedback
                         TempData["Notification"] =  1;
+                        return RedirectToAction("AppointmentProcessing", "Patient");
                     }
                     else
                     {
@@ -654,6 +662,84 @@ namespace Clinic_MVC_UI.Controllers
             return View(appointment);
             #endregion
         }
-      
+
+        public List<SelectListItem> GetGender()
+        {
+            List<SelectListItem> gender = new List<SelectListItem>()
+            {
+                new SelectListItem{Value="Select",Text="Select"},
+                new SelectListItem{Value="M",Text="Male"},
+                new SelectListItem{Value="F",Text="Female"},
+                new SelectListItem{Value="O",Text="Others"},
+
+
+
+           };
+            return gender;
+        }
+        public async Task<IActionResult> EditPatient(int PatientId)
+        {
+            Patient patient = null;
+            using (HttpClient client = new HttpClient())
+            {
+                string endPoint = _configuration["WebApiBaseUrl"] + "Patient/GetPatientById?patientId=" + PatientId;
+                using (var response = await client.GetAsync(endPoint))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        var result = await response.Content.ReadAsStringAsync();
+                        patient = JsonConvert.DeserializeObject<Patient>(result);
+                    }
+                }
+            }
+            ViewBag.genderlist = GetGender();
+            return View(patient);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditPatient(Patient patient)
+        {
+            ViewBag.status = "";
+            using (HttpClient client = new HttpClient())
+            {
+                StringContent content = new StringContent(JsonConvert.SerializeObject(patient), Encoding.UTF8, "application/json");
+                string endPoint = _configuration["WebApiBaseUrl"] + "Patient/UpdatePatient";
+                using (var response = await client.PutAsync(endPoint, content))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        ViewBag.status = "Ok";
+                        ViewBag.message = "Patient Details Updated Successfully!";
+                        return RedirectToAction("Profile", "Patient");
+                    }
+                    else
+                    {
+                        ViewBag.status = "Error";
+                        ViewBag.message = "Wrong Entries!";
+                    }
+                }
+            }
+            return View();
+        }
+
+        public async Task<IActionResult> Prescription(int AppointmentId)
+        {
+            #region Patient prescription
+            Appointment appointment = null;
+            using (HttpClient client = new HttpClient())
+            {
+                string endpoint = _configuration["WebApiBaseUrl"] + "Appointment/GetAppointmentById?AppointmentId=" + AppointmentId;
+                using (var response = await client.GetAsync(endpoint))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        var result = await response.Content.ReadAsStringAsync();
+                        appointment = JsonConvert.DeserializeObject<Appointment>(result);
+                    }
+                }
+            }
+            return View(appointment);
+            #endregion
+        }
     }
 }
