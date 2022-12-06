@@ -82,6 +82,7 @@ namespace Clinic_MVC_UI.Controllers
         public async Task<IActionResult> TodayAppointment()
         {
             #region Doctor can see His Appointments
+            //Fetching the doctor details from database using DoctorId
             int doctorappointId = Convert.ToInt32(TempData["ProfileID"]);
             TempData.Keep();
             IEnumerable<Appointment> Appointments = null;
@@ -100,25 +101,14 @@ namespace Clinic_MVC_UI.Controllers
             List<Appointment> DoctorAppointments = new List<Appointment>();
             foreach (var item in Appointments)
             {
-                if (doctorappointId == item.DoctorID)
+                //in all list of appointments. we just show his(Doctor who is login) appointments and it must be today
+                if (doctorappointId == item.DoctorID && item.Date == DateTime.Today)
                 {
                     DoctorAppointments.Add(item);
                 }
             }
-            #endregion
-            #region He can see today only
-            List<Appointment> TodayAppointments = new List<Appointment>();
-            foreach (var item in DoctorAppointments)
-            {
-
-
-                if (item.Date == DateTime.Today)
-                {
-                    TodayAppointments.Add(item);
-
-                }
-            }
-            return View(TodayAppointments);
+            
+            return View(DoctorAppointments);
             #endregion
 
         }
@@ -141,6 +131,7 @@ namespace Clinic_MVC_UI.Controllers
             }
             #endregion
             #region Updating the Apppointment Status
+            //updating the appointment status (it may be approve or reject)
             appointment.Appointment_Status= Appointment_Status;
 
             ViewBag.status = "";
@@ -170,30 +161,19 @@ namespace Clinic_MVC_UI.Controllers
 
         public async Task<IActionResult> AddPrescription(int AppointmentId)
         {
-            #region Fecthing the appointment details
+            
+            //we are storing the AppointmentId in tempdata
             TempData["AppointmentIDFor"]= AppointmentId;
-            Appointment appointment = null;
-            using (HttpClient client = new HttpClient())
-            {
-                string endpoint = _configuration["WebApiBaseUrl"] + "Appointment/GetAppointmentById?AppointmentId=" + AppointmentId;
-                using (var response = await client.GetAsync(endpoint))
-                {
-                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                    {
-                        var result = await response.Content.ReadAsStringAsync();
-                        appointment = JsonConvert.DeserializeObject<Appointment>(result);
-                    }
-                }
-            }
-            return View(appointment);
-            #endregion
+           
+            return View();
+           
 
         }
         [HttpPost]
         public async Task<IActionResult> AddPrescription(Appointment appointment)
         {
             appointment.AppointID = Convert.ToInt32(TempData["AppointmentIDFor"]);
-            #region Again Feching the appointment details
+            #region  Feching the appointment details
             Appointment appointmentNew = new Appointment();
             using (HttpClient client = new HttpClient())
             {
@@ -209,7 +189,7 @@ namespace Clinic_MVC_UI.Controllers
             }
             #endregion
             #region Updating the appointment by using prescription, disease and Progress 
-
+            //Adding Prescription(Doctor added Prescription) in Database 
             appointmentNew.Appointment_Status = 1;
             appointmentNew.Prescription = appointment.Prescription;
             appointmentNew.Disease = appointment.Disease;
@@ -228,6 +208,7 @@ namespace Clinic_MVC_UI.Controllers
                     {
                         ViewBag.status = "Ok";
                         ViewBag.message = "Prescription Updated Successfully!";
+                        //it will show the notification
                         TempData["Notification"] =  1;
                         TempData.Keep();
                     }
@@ -265,6 +246,7 @@ namespace Clinic_MVC_UI.Controllers
             List<Appointment> DoctorAppointments = new List<Appointment>();
             foreach (var item in Appointments)
             {
+                //we will fetch the appointments by doctorId and the bill must be paid,bill amount grater than 0 and doctor must added Prescription or disease about Patient
                 if (doctorappointId == item.DoctorID && item.Appointment_Status==1 && item.Bill_Amount==0 && (item.Prescription != null || item.Disease != null))
                 {
                     DoctorAppointments.Add(item);
@@ -293,6 +275,7 @@ namespace Clinic_MVC_UI.Controllers
             }
             #endregion
             #region Update the Bill
+            //updating the bill Amount as per the doctor charges and appointment status completed
             appointmentNew.Bill_Amount=appointmentNew.Doctor.Charges_Per_Visit;
             appointmentNew.Appointment_Status = 3;
 
@@ -331,7 +314,9 @@ namespace Clinic_MVC_UI.Controllers
                     }
                 }
             }
+            //After Appointment Completed Patient Treated  will increases to 1
             doctor.Patient_Treated += 1;
+            #region Updating the patient treated count
             using (HttpClient client = new HttpClient())
             {
                 StringContent content = new StringContent(JsonConvert.SerializeObject(doctor), Encoding.UTF8, "application/json");
@@ -353,6 +338,7 @@ namespace Clinic_MVC_UI.Controllers
             }
             
             return View(appointmentNew);
+            #endregion
 
             #endregion
         }
@@ -379,7 +365,8 @@ namespace Clinic_MVC_UI.Controllers
             List<Appointment> DoctorAppointments = new List<Appointment>();
             foreach (var item in Appointments)
             {
-                if (doctorappointId == item.DoctorID && item.Appointment_Status==3 && item.Bill_Amount>0 )
+                //Doctor can see his patients . when Appointment status is Completed
+                if (doctorappointId == item.DoctorID && item.Appointment_Status==3  )
                 {
                     DoctorAppointments.Add(item);
                 }

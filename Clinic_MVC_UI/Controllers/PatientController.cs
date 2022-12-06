@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualBasic;
@@ -36,13 +37,14 @@ namespace Clinic_MVC_UI.Controllers
         public async Task<IActionResult> Profile()
         {
             #region Patient profile
-            int doctorProfileId = Convert.ToInt32(TempData["ProfileID"]);
+            //storing the profile Id
+            int PatientProfileId = Convert.ToInt32(TempData["ProfileID"]);
             TempData.Keep();
 
             Patient patient = null;
             using (HttpClient client = new HttpClient())
             {
-                string endpoint = _configuration["WebApiBaseUrl"] + "Patient/GetPatientById?patientId=" + doctorProfileId;
+                string endpoint = _configuration["WebApiBaseUrl"] + "Patient/GetPatientById?patientId=" + PatientProfileId;
                 using (var response = await client.GetAsync(endpoint))
                 {
                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
@@ -77,8 +79,10 @@ namespace Clinic_MVC_UI.Controllers
             List<Appointment> PatientAppointments = new List<Appointment>();
             foreach (var item in Appointments)
             {
+                //if appointment is in progress it will block to create a new appointment
                 if (PatientAppointmentId == item.PatientID  && item.Bill_Status != 1 && item.Appointment_Status!=4) 
                 {
+                    //it will goes to AppointmentProcessing Page
                     return RedirectToAction("AppointmentProcessing", "Patient");
                 }
             }
@@ -99,7 +103,7 @@ namespace Clinic_MVC_UI.Controllers
             }
             List<SelectListItem> department = new List<SelectListItem>();
 
-
+            //fetching the departments and adding to the Viewbag for selecting appointment
             department.Add(new SelectListItem { Value = "Select Department", Text = "Select Department" });
             foreach (var item in departments)
             {
@@ -132,10 +136,12 @@ namespace Clinic_MVC_UI.Controllers
             List<Appointment> PatientAppointments = new List<Appointment>();
             foreach (var item in Appointments)
             {
-                
+                //it will check the Login patient appointments by using PatientId
                 if (PatientAppointmentId == item.PatientID  )
                 {
-                    #region checking the adate of appointment it is less than today it will automatically reject
+
+                    #region checking the date of appointment it is less than today it will automatically reject
+                    //booking appointment is less than today but appointment in requested mode. it will automatically reject
                     if (item.Date < DateTime.Today && (item.Appointment_Status==0 || item.Appointment_Status==1))
                     {
 
@@ -176,6 +182,7 @@ namespace Clinic_MVC_UI.Controllers
                     appointment=doctor;
             }
             }
+            //for purpose of notification it is storing the appointment Id
             TempData["AppointmentidNotify"] = appointment.AppointID;
             return View(PatientAppointments);
             #endregion
@@ -184,6 +191,7 @@ namespace Clinic_MVC_UI.Controllers
         [HttpPost]
         public async Task<IActionResult> SelectingDepartment(Department department)
         {
+            // We are storing the DeptNo and By using that DeptNo we will search the doctors
             TempData["DepartmentId"] = department.DeptNo;
             TempData.Keep();
             return RedirectToAction("addAppointment", "Patient");
@@ -191,34 +199,7 @@ namespace Clinic_MVC_UI.Controllers
         }
         public async  Task<IActionResult> addAppointment()
         {
-            #region Selecting the department
-            Appointment appointment = new Appointment();
-            List<Department> departments = new List<Department>();
-            using (HttpClient client = new HttpClient())
-            {
-                string endpoint = _configuration["WebApiBaseUrl"] + "Department/GetDepartments";
-                using (var response = await client.GetAsync(endpoint))
-                {
-                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                    {
-                        var result = await response.Content.ReadAsStringAsync();
-                        departments = JsonConvert.DeserializeObject<List<Department>>(result);
-                    }
-                }
-            }
-            
-
-
-            
-            foreach (var item in departments)
-            {
-                if(item.DeptNo == Convert.ToInt32(TempData["DepartmentId"]))
-                {
-                    appointment.Progress=item.DeptName;
-                }
-            }
-        
-            #endregion
+  
             #region selecting the doctor
             List<Doctor> doctors = new List<Doctor>();
 
@@ -240,23 +221,14 @@ namespace Clinic_MVC_UI.Controllers
 
             foreach (var item in doctors)
             {
+                //it will search the doctor based on patient selected department
                 if (item.Deptno == Convert.ToInt32(TempData["DepartmentId"]))
                 {
                     Doctors.Add(item);
                 }
             }
 
-            /* List<SelectListItem> Doctorlist = new List<SelectListItem>();
-             Doctorlist.Add(new SelectListItem { Value = "select", Text = "select" });
-             foreach (var item in doctors)
-             {
-                 if (item.Deptno == Convert.ToInt32(TempData["DepartmentId"]))
-                 {
-                     Doctorlist.Add(new SelectListItem { Value = item.DoctorID.ToString(), Text = "Name: " + item.Name + "; Qulification:  " + item.Qualification + "; Charges Per Visit: " + item.Charges_Per_Visit });
-                 }
-             }
-
-             ViewBag.Doctorlist = Doctorlist;*/
+           
             return View(Doctors);
             #endregion
         }
@@ -278,7 +250,7 @@ namespace Clinic_MVC_UI.Controllers
                 }
             }
             doctor.BirthDate = DateTime.Today;
-            /*var tupeluser = new Tuple<Doctor, Appointment>(doctor, appointment);*/
+          
             return View(doctor);
             #endregion region
 
@@ -302,7 +274,7 @@ namespace Clinic_MVC_UI.Controllers
             }
             #endregion
 
-            
+
             Appointment appointment = new Appointment();
             #region Adding of Appointment
             appointment.DoctorID=DoctorIdd;
@@ -310,6 +282,7 @@ namespace Clinic_MVC_UI.Controllers
             appointment.PatientID = Convert.ToInt32(TempData["ProfileID"]);
             TempData.Keep();
             ViewBag.Status = "";
+            //the appointment date must be today onwords
             if (appointment.Date < DateTime.Today)
             {
                 ViewBag.status = "Error";
@@ -317,8 +290,6 @@ namespace Clinic_MVC_UI.Controllers
             }
             else
             {
-
-
                 using (HttpClient client = new HttpClient())
                 {
                     StringContent content = new StringContent(JsonConvert.SerializeObject(appointment), Encoding.UTF8, "application/json");
@@ -350,41 +321,6 @@ namespace Clinic_MVC_UI.Controllers
         }
 
 
-        
-        
-        [HttpGet]
-        public async Task<IActionResult> PendingAppointment()
-        {
-            #region Patient can see His Appointments
-            int PatientAppointmentId = Convert.ToInt32(TempData["ProfileID"]);
-            TempData.Keep();
-            IEnumerable<Appointment> Appointments = null;
-            using (HttpClient client = new HttpClient())
-            {
-                string endPoint = _configuration["WebApiBaseUrl"] + "Appointment/GetAppointment";
-                using (var response = await client.GetAsync(endPoint))
-                {
-                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                    {
-                        var result = await response.Content.ReadAsStringAsync();
-                        Appointments = JsonConvert.DeserializeObject<IEnumerable<Appointment>>(result);
-                    }
-                }
-            }
-            List<Appointment> PatientAppointments = new List<Appointment>();
-            foreach (var item in Appointments)
-            {
-                if (PatientAppointmentId == item.PatientID && (item.Appointment_Status!=3 && item.Appointment_Status !=4))
-                {
-                    PatientAppointments.Add(item);
-                }
-            }
-            
-
-            return View(PatientAppointments);
-            #endregion
-        }
-
         [HttpGet]
         public async Task<IActionResult> BillHistory()
         {
@@ -407,6 +343,7 @@ namespace Clinic_MVC_UI.Controllers
             List<Appointment> PatientAppointments = new List<Appointment>();
             foreach (var item in Appointments)
             {
+                //when Appointment is completed and he need to pay bill
                 if (PatientAppointmentId == item.PatientID && item.Appointment_Status==3 && item.Bill_Status==0)
                 {
                     PatientAppointments.Add(item);
@@ -434,6 +371,7 @@ namespace Clinic_MVC_UI.Controllers
             }
             #endregion
             #region Updating the Bill Status
+            //after Bill paid the bill status need to change
             appointment.Bill_Status = 1;
 
             ViewBag.status = "";
@@ -457,22 +395,7 @@ namespace Clinic_MVC_UI.Controllers
                     }
                 }
             }
-
-            Appointment appointment1 = null;
-            using (HttpClient client = new HttpClient())
-            {
-                string endpoint = _configuration["WebApiBaseUrl"] + "Appointment/GetAppointmentById?AppointmentId=" + AppointmentId;
-                using (var response = await client.GetAsync(endpoint))
-                {
-                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                    {
-                        var result = await response.Content.ReadAsStringAsync();
-                        appointment1 = JsonConvert.DeserializeObject<Appointment>(result);
-                    }
-                }
-            }
-                
-                return View(appointment1);
+ return View();
             #endregion
 
         }
@@ -480,6 +403,7 @@ namespace Clinic_MVC_UI.Controllers
         public async Task<IActionResult> Notification()
         {
             #region Patient can see Notifications
+            //after clicking on the notification the notification flag status is 0
             TempData["Notification"] = 0;
             TempData.Keep();
             int PatientAppointmentId = Convert.ToInt32(TempData["ProfileID"]);
@@ -503,12 +427,13 @@ namespace Clinic_MVC_UI.Controllers
             List<Appointment> PatientAppointments = new List<Appointment>();
             foreach (var item in Appointments)
             {
+                //only login patient can see his appointments only
                 if (PatientAppointmentId == item.PatientID  )
                 {
                     PatientAppointments.Add(item);
                 }
             }
-          
+          //checking his appointments count
             TempData["oldone"] = PatientAppointments.Count();
             return View(PatientAppointments);
             #endregion
@@ -535,6 +460,7 @@ namespace Clinic_MVC_UI.Controllers
             List<Appointment> PatientAppointments = new List<Appointment>();
             foreach (var item in Appointments)
             {
+                //In Treatment History Patient Can view His History when he paid
                 if (PatientAppointmentId == item.PatientID && item.Bill_Status == 1)
                 {
                     PatientAppointments.Add(item);
@@ -546,6 +472,7 @@ namespace Clinic_MVC_UI.Controllers
         }
         public async Task<IActionResult> PatientFeedback()
         {
+
             #region Patient can give Feedback
             int PatientAppointmentId = Convert.ToInt32(TempData["ProfileID"]);
             TempData.Keep();
@@ -565,6 +492,7 @@ namespace Clinic_MVC_UI.Controllers
             List<Appointment> PatientAppointments = new List<Appointment>();
             foreach (var item in Appointments)
             {
+                //it will show the all feedbacks of patient
                 if (PatientAppointmentId == item.PatientID && item.Bill_Status == 1)
                 {
                     PatientAppointments.Add(item);
@@ -580,7 +508,8 @@ namespace Clinic_MVC_UI.Controllers
             #region Feedback rating select list
 
             TempData["AppointmentId"] = AppointmentId;
-            
+            //it is feedback rating list
+
             List<SelectListItem> Rating = new List<SelectListItem>()
             {
                 new SelectListItem{Value="Select",Text="Select"},
@@ -599,9 +528,7 @@ namespace Clinic_MVC_UI.Controllers
 
         {
             #region Feedback
-            /* pending_Feedback.PatientID = Convert.ToInt32(TempData["ProfileID"]);
-
-             TempData.Keep();*/
+            
             pending_Feedback.AppointID = Convert.ToInt32(TempData["AppointmentId"]);
             TempData.Keep();
 
@@ -658,6 +585,7 @@ namespace Clinic_MVC_UI.Controllers
                     }
                 }
             }
+            //it will calculate the repute index of doctor
             doctor.ReputeIndex = ((doctor.ReputeIndex * (doctor.Patient_Treated - 1)) + pending_Feedback.Rating) / doctor.Patient_Treated;
             using (HttpClient client = new HttpClient())
             {
@@ -667,8 +595,7 @@ namespace Clinic_MVC_UI.Controllers
                 {
                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
-                        ViewBag.status = "Ok";
-                        ViewBag.message = "Doctor Details Updated Successfully!";
+                        int l= 1;
 
                     }
                     else
@@ -678,35 +605,10 @@ namespace Clinic_MVC_UI.Controllers
                     }
                 }
             }
-            /*  pending_Feedback.DoctorID = Convert.ToInt32(TempData["DoctorId"]);
-              TempData.Keep();
-  */
-            /*ViewBag.status = "";
-            using (HttpClient client = new HttpClient())
-            {
-
-                StringContent content = new StringContent(JsonConvert.SerializeObject(pending_Feedback), Encoding.UTF8, "application/json");
-                string endPoint = _configuration["WebApiBaseUrl"] + "Feedback/AddFeedback";
-                using (var response = await client.PostAsync(endPoint, content))
-                {
-                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                    {
-                        ViewBag.status = "Ok";
-                        ViewBag.message = "Feedback Submited Successfully!";
-                    }
-                    else
-                    {
-                        ViewBag.status = "Error";
-                        ViewBag.message = "Wrong Entries!";
-                    }
-                }
-            }*/
-
-            return View();
+          return View();
             #endregion
-        }
+        } 
 
-      
         public async Task<IActionResult> ApproveOrReject(int AppointmentId, int Appointment_Status)
         {
             #region Fetching the appointment details
@@ -725,6 +627,7 @@ namespace Clinic_MVC_UI.Controllers
             }
             #endregion
             #region Updating the Apppointment Status
+            //it will reject the appointment 
             appointment.Appointment_Status = Appointment_Status;
 
             ViewBag.status = "";
@@ -738,6 +641,7 @@ namespace Clinic_MVC_UI.Controllers
                     {
                         ViewBag.status = "Ok";
                         ViewBag.message = "Appointment Details Updated Successfully!";
+                        //it will show the notification after feedback
                         TempData["Notification"] =  1;
                     }
                     else
