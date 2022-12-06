@@ -33,6 +33,7 @@ namespace Clinic_MVC_UI.Controllers
         }
         public List<SelectListItem> GetGender()
         {
+            //it will show the Gender Dropdown
             List<SelectListItem> gender = new List<SelectListItem>()
             {
                 new SelectListItem{Value="Select",Text="Select"},
@@ -47,6 +48,7 @@ namespace Clinic_MVC_UI.Controllers
         #region Doctor View-Edit-Delete Actions
         public List<SelectListItem> GetDoctorStatus()
         {
+            //it will show the Doctor Status
             List<SelectListItem> doctorstatus = new List<SelectListItem>()
             {
                 new SelectListItem{Value="Select",Text="select"},
@@ -62,39 +64,46 @@ namespace Clinic_MVC_UI.Controllers
 
             if (!String.IsNullOrEmpty(searchName))
             {
+                //this function will search details from the database what we want to search
                 projects = projects.Where(c => c.Name.Contains(searchName));
             }
 
             return View(projects);
         }
 
+        #region It will Featch the all doctors details
         [HttpGet]
         public async Task<IActionResult> GetAllDoctors()
         {
             IEnumerable<Doctor> doctorresult = null;
             using (HttpClient client = new HttpClient())
             {
+               // LocalHost Adress in endpoint
                 string endPoint = _configuration["WebApiBaseUrl"] + "Doctor/GetDoctors";
                 using (var response = await client.GetAsync(endPoint))
                 {
                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
                         var result = await response.Content.ReadAsStringAsync();
+                        //It will deserilize the object in the form of JSON
                         doctorresult = JsonConvert.DeserializeObject<IEnumerable<Doctor>>(result);
                     }
                 }
             }
             return View(doctorresult);
         }
+        #endregion
 
         public async Task<IActionResult> EditDoctor(int DoctorId)
         {
             if(DoctorId != 0) 
             {
+                //We are Storing Doctor Id  temporary to avoid the error. Now it will show the doctor details after the update also
                 TempData["EditDoctorId"]=DoctorId;
                 TempData.Keep();
             }
             Doctor doctor = null;
+            //it will fetch the Doctor Details by using DoctorID
             using (HttpClient client = new HttpClient())
             {
                 string endPoint = _configuration["WebApiBaseUrl"] + "Doctor/GetDoctorById?doctorId=" + Convert.ToInt32(TempData["EditDoctorId"]);
@@ -104,6 +113,7 @@ namespace Clinic_MVC_UI.Controllers
                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
                         var result = await response.Content.ReadAsStringAsync();
+                        //It will deserilize the object in the form of JSON
                         doctor = JsonConvert.DeserializeObject<Doctor>(result);
                     }
                 }
@@ -121,11 +131,13 @@ namespace Clinic_MVC_UI.Controllers
                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
                         var result = await response.Content.ReadAsStringAsync();
+                        //It will deserilize the object in the form of JSON
                         departments = JsonConvert.DeserializeObject<List<Department>>(result);
                     }
                 }
             }
 
+            //it will store the list of department in the form of Dropdown
             List<SelectListItem> department = new List<SelectListItem>();
             department.Add(new SelectListItem { Value = "select", Text = "select" });
             foreach (var item in departments)
@@ -141,6 +153,7 @@ namespace Clinic_MVC_UI.Controllers
         public async Task<IActionResult> EditDoctor(Doctor doctor)
         {
             ViewBag.status = "";
+            //it will update the doctor details after Admin Changes
             using (HttpClient client = new HttpClient())
             {
                 StringContent content = new StringContent(JsonConvert.SerializeObject(doctor), Encoding.UTF8, "application/json");
@@ -167,6 +180,7 @@ namespace Clinic_MVC_UI.Controllers
         public async Task<IActionResult> DeleteDoctor(int DoctorId)
         {
             ViewBag.status = "";
+            //it will Delete the doctor Details by using doctor Id
             using (HttpClient client = new HttpClient())
             {
                 string endPoint = _configuration["WebApiBaseUrl"] + "Doctor/DeleteDoctor?doctorId=" + DoctorId;
@@ -191,6 +205,7 @@ namespace Clinic_MVC_UI.Controllers
         public async Task<IActionResult> DoctorProfile(int doctorProfileId)
         {
             Doctor doctor = null;
+            //It will fetch the doctor details By using the Doctor Id 
             using (HttpClient client = new HttpClient())
             {
                 string endpoint = _configuration["WebApiBaseUrl"] + "Doctor/GetDoctorById?doctorId=" + doctorProfileId;
@@ -199,6 +214,7 @@ namespace Clinic_MVC_UI.Controllers
                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
                         var result = await response.Content.ReadAsStringAsync();
+                        //It will deserilize the object in the form of JSON
                         doctor = JsonConvert.DeserializeObject<Doctor>(result);
                     }
                 }
@@ -231,6 +247,7 @@ namespace Clinic_MVC_UI.Controllers
         {
            
             IEnumerable<Patient> patientresult = null;
+            //it will fetch all Patient Details from database
             using (HttpClient client = new HttpClient())
             {
                 string endPoint = _configuration["WebApiBaseUrl"] + "Patient/GetAllPatients";
@@ -249,6 +266,7 @@ namespace Clinic_MVC_UI.Controllers
         public async Task<IActionResult> EditPatient(int PatientId)
         {
             Patient patient = null;
+            //It will fetch One Patient Details by using Patient Id
             using (HttpClient client = new HttpClient())
             {
                 string endPoint = _configuration["WebApiBaseUrl"] + "Patient/GetPatientById?patientId=" + PatientId;
@@ -269,6 +287,7 @@ namespace Clinic_MVC_UI.Controllers
         public async Task<IActionResult> EditPatient(Patient patient)
         {
             ViewBag.status = "";
+            //it will update Patient Details in Database.
             using (HttpClient client = new HttpClient())
             {
                 StringContent content = new StringContent(JsonConvert.SerializeObject(patient), Encoding.UTF8, "application/json");
@@ -295,6 +314,7 @@ namespace Clinic_MVC_UI.Controllers
         public async Task<IActionResult> DeletePatient(int PatientId)
         {
             ViewBag.status = "";
+            //it will delete the patient details in database by using the patient Id
             using (HttpClient client = new HttpClient())
             {
                 string endPoint = _configuration["WebApiBaseUrl"] + "Patient/DeletePatient?patientId=" + PatientId;
@@ -319,6 +339,7 @@ namespace Clinic_MVC_UI.Controllers
         public async Task<IActionResult> PatientProfile(int patientProfileId)
         {
             Patient patient = null;
+            //it will fetch the patient details by Using PatientId. It will show the Patient Profile
             using (HttpClient client = new HttpClient())
             {
                 string endpoint = _configuration["WebApiBaseUrl"] + "Patient/GetPatientById?patientId=" + patientProfileId;
@@ -340,6 +361,7 @@ namespace Clinic_MVC_UI.Controllers
         public ActionResult GetAllOtherStaffs(string searchName)
         {
             var projects = from pr in db.otherStaffs select pr;
+            //this function is for searching purpose 
 
             if (!String.IsNullOrEmpty(searchName))
             {
@@ -353,6 +375,7 @@ namespace Clinic_MVC_UI.Controllers
         public async Task<IActionResult> GetAllOtherStaffs()
         {
             IEnumerable<OtherStaff> otherstaffresult = null;
+            //This function will fetch the all Staffs Details
             using (HttpClient client = new HttpClient())
             {
                 string endPoint = _configuration["WebApiBaseUrl"] + "Staff/GetAllStaffs";
@@ -379,6 +402,7 @@ namespace Clinic_MVC_UI.Controllers
             if (ModelState.IsValid)
             {
                 ViewBag.status = "";
+                //this function will add the OtherStaffs to Database
                 using (HttpClient client = new HttpClient())
                 {
 
@@ -405,6 +429,7 @@ namespace Clinic_MVC_UI.Controllers
         public async Task<IActionResult> EditOtherStaff(int OtherStaffId)
         {
             OtherStaff otherStaff = null;
+            //this function will fetch the deatils of other staff by using other staff Id 
             using (HttpClient client = new HttpClient())
             {
                 string endPoint = _configuration["WebApiBaseUrl"] + "Staff/GetStaffById?staffId=" + OtherStaffId;
@@ -425,6 +450,7 @@ namespace Clinic_MVC_UI.Controllers
         public async Task<IActionResult> EditOtherStaff(OtherStaff otherStaff)
         {
             ViewBag.status = "";
+            //it will update the database of other staff based on Admin Entry
             using (HttpClient client = new HttpClient())
             {
                 StringContent content = new StringContent(JsonConvert.SerializeObject(otherStaff), Encoding.UTF8, "application/json");
@@ -451,6 +477,7 @@ namespace Clinic_MVC_UI.Controllers
         public async Task<IActionResult> DeleteOtherStaff(int OtherStaffId)
         {
             ViewBag.status = "";
+            //it will delete  otherstaff details based on the otherstaffId
             using (HttpClient client = new HttpClient())
             {
                 string endPoint = _configuration["WebApiBaseUrl"] + "Staff/DeleteStaff?staffId=" + OtherStaffId;
@@ -478,6 +505,7 @@ namespace Clinic_MVC_UI.Controllers
         public async Task<IActionResult> GetAllDepartments()
         {
             IEnumerable<Department> departmentresult = null;
+
             using (HttpClient client = new HttpClient())
             {
                 string endPoint = _configuration["WebApiBaseUrl"] + "Department/GetDepartments";
