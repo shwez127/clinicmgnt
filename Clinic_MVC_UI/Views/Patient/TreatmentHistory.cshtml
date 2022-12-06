@@ -38,6 +38,7 @@
                                 <th>Appointment Status</th>
                                 <th>Bill Amount</th>
                                 <th>Bill Status</th>
+                                <th>Prescription</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -83,7 +84,7 @@
                                         {
                                             <td>Paid</td>
                                         }
-
+                                        <td><a class="btn btn-info " asp-controller="Patient" asp-action="Prescription" asp-route-AppointmentId="@doctor.AppointID">Prescription</a></td>
                                     </tr>
                                 }
                             }

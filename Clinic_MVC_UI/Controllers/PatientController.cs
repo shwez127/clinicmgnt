@@ -807,5 +807,25 @@ namespace Clinic_MVC_UI.Controllers
             }
             return View();
         }
+
+        public async Task<IActionResult> Prescription(int AppointmentId)
+        {
+            #region Patient prescription
+            Appointment appointment = null;
+            using (HttpClient client = new HttpClient())
+            {
+                string endpoint = _configuration["WebApiBaseUrl"] + "Appointment/GetAppointmentById?AppointmentId=" + AppointmentId;
+                using (var response = await client.GetAsync(endpoint))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        var result = await response.Content.ReadAsStringAsync();
+                        appointment = JsonConvert.DeserializeObject<Appointment>(result);
+                    }
+                }
+            }
+            return View(appointment);
+            #endregion
+        }
     }
 }
