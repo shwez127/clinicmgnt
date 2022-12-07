@@ -15,7 +15,7 @@ namespace ClinicEntity.Models
         public int AppointID { get; set; }
         public Appointment Appointment { get; set; }
 
-         public int Rating { get; set; }
+        public int Rating { get; set; }
 
         [StringLength(100)]
         public string Comment { get; set; }

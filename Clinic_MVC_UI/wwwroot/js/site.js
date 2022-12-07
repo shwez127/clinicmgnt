@@ -81,3 +81,11 @@ $('#cmd').click(function () {
     });
     doc.save('sample-file.pdf');
 });
+
+
+function submitFeedback() {
+    let val = confirm("Are you sure you want to submit?");
+    if (val == false) {
+        return event.preventDefault();
+    }
+}
