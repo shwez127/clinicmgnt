@@ -6,71 +6,55 @@
 @{
     Layout = "~/Views/Shared/PatientLayout.cshtml";
 }
-
 @model ClinicEntity.Models.Pending_Feedback
-<!--Modal Launch Button-->
 
-<div>
-    <h3 class="text-center" style="font-size:x-large;color:black;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Feedback Request</h3>
 
-</div>
-<br />
-
-<center>
-<form method="post" style="width:800px; height:500px; background-color:gradient; padding-top:20px;">
-<!--Division for Modal-->
-<div>
-            <!-- Modal Body-->
-            <div class="modal-body text-center">
-                <i class="far fa-file-alt fa-4x mb-3 animated rotateIn icon1"></i>
-                <h3 style="font-size:x-large;color:black;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Your opinion matters</h3>
-                <h5> <strong>Give us your feedback.</strong></h5>
-                <br />
-                <h4>Your Rating </h4>
-                <span style="display: inline-block; font-size: 24px; color: #ff0000;">❤️</span>
-                
-                <span style="display: inline-block; font-size: 24px; color: #ffea00;">😄</span>
-                <span style="display: inline-block; font-size: 24px; color: #fbff00;">👍</span>
-                <span style="display: inline-block; font-size: 24px; color: #fae500; ">😢</span>
-                <span style="display: inline-block; font-size: 24px; color: #ff0000;">😡</span>
+<body style="background-color:#f0f8ff">
+    <div class="container d-flex justify-content-center">
+        <div class="card mt-5 pb-5">
+            <div class="d-flex flex-row justify-content-center text-black" style="margin-top:20px" >
+                    <h2 class="pb-3">Feedback</h2>
             </div>
-                <div >
-                <h5>Ratings &nbsp;<select style="width:150px;" asp-for="Rating" asp-items="ViewBag.Ratinglist" placeholder="Your Message" rows="3"></select></h5>
-                
+            <form method="post" enctype="multipart/form-data">
+                <div class="mt-2 p-4 text-center">
+                    <h6 class="mb-0">Your opinion matters.</h6>
+                    <small class="px-3">Please let us know about your experience.</small>
+                    <div class="d-flex flex-row justify-content-center mt-2">
+                        <img src="https://img.icons8.com/emoji/48/000000/angry-face-emoji--v2.png" />
+                        <img src="https://img.icons8.com/fluent/48/000000/sad.png" />
+                        <img src="https://img.icons8.com/color/48/000000/happy.png" />
+                        <img src="https://img.icons8.com/emoji/48/000000/smiling-face.png" />
+                        <img src="https://img.icons8.com/color/48/000000/lol.png" />
+                    </div>
+                    <div class="form-group">
+                        <label>Rating</label>
+                        <select asp-for="Rating" asp-items="ViewBag.Ratinglist" class="form-control" placeholder="Your Feedback" required></select>
+                    </div>
+                    
+                    <div class="form-group mt-4">
+                        <label>What could we improve?</label>
+                        <textarea type="text" asp-for="Comment" class="form-control" rows="4" placeholder="Message"></textarea>
+                    </div>
+
+                    <button type="submit" onclick="submitFeedback()" class="btn btn-primary btn-block"><span>Send Feedback</span></button>
+                    <button type="reset" class="btn btn-secondary btn-block"><span>Reset</span></button>
+                    
                 </div>
-
-            <!--Text Message-->
-            <div class="text-center">
-                <h6>What could we improve?</h6>
-            </div>
-            <textarea style="width:200px" type="textarea"asp-for="Comment" placeholder="Your Message" rows="3"></textarea>
-             
-            <br />
-
-            <!-- Modal Footer-->
-            <div style="padding-top:20px;">
-                    <button type="submit" class="btn btn-primary">
-                    Send
-                    <i class="fa fa-paper-plane"></i>
-                </button>
-                <button class="btn btn-secondary" type="reset" value="Reset">Reset<i class="fa fa-paper-plane"></i></button>
-            </div>
+            </form>
+            @if (ViewBag.status == "Ok")
+            {
+                <div class="alert alert-success">
+                    @ViewBag.message
+                </div>
+            }
+            else if (ViewBag.status == "Error")
+            {
+                <div class="alert alert-danger">
+                    @ViewBag.message
+                </div>
+            }
 
         </div>
-
-   
-</form>
-</center>
-@if (ViewBag.status == "Ok")
-{
-        <div class="alert alert-success">
-        @ViewBag.message
-        </div>
-}
-else if (ViewBag.status == "Error")
-{
-        <div class="alert alert-danger">
-        @ViewBag.message
-        </div>
-}
+    </div>
+</body>
 
