@@ -19,7 +19,10 @@ namespace Clinic_MVC_UI.Controllers
 {
     public class AdminController : Controller
     {
+        //Private member
         private IConfiguration _configuration;
+
+        //Constructor
         public AdminController(IConfiguration configuration)
         {
             _configuration = configuration;
@@ -33,6 +36,7 @@ namespace Clinic_MVC_UI.Controllers
         }
         public List<SelectListItem> GetGender()
         {
+            #region Getting gender list
             //it will show the Gender Dropdown
             List<SelectListItem> gender = new List<SelectListItem>()
             {
@@ -43,6 +47,7 @@ namespace Clinic_MVC_UI.Controllers
 
             };
             return gender;
+            #endregion
         }
 
         #region Doctor View-Edit-Delete Actions

@@ -194,8 +194,7 @@ namespace Clinic_MVC_UI.Controllers
             // We are storing the DeptNo and By using that DeptNo we will search the doctors
             TempData["DepartmentId"] = department.DeptNo;
             TempData.Keep();
-            return RedirectToAction("addAppointment", "Patient");
-            return View();
+            return RedirectToAction("addAppointment", "Patient");           
         }
         public async  Task<IActionResult> addAppointment()
         {
@@ -275,11 +274,8 @@ namespace Clinic_MVC_UI.Controllers
                 }
             }
             #endregion
-
-
-
-            Appointment appointment = new Appointment();
             #region Adding of Appointment
+            Appointment appointment = new Appointment();          
             appointment.DoctorID=DoctorIdd;
             appointment.Date = doctor.BirthDate;
             appointment.PatientID = Convert.ToInt32(TempData["ProfileID"]);
@@ -318,15 +314,10 @@ namespace Clinic_MVC_UI.Controllers
                     }
 
                 }
-            }
-            
-            #endregion
+            }           
             return View(doctors);
+            #endregion
         }
-
-    
-        
-
 
         [HttpGet]
         public async Task<IActionResult> BillHistory()
@@ -356,10 +347,11 @@ namespace Clinic_MVC_UI.Controllers
                     PatientAppointments.Add(item);
                 }
             }
-            #endregion
+          
             return View(PatientAppointments);
+            #endregion
         }
-    
+
         public async Task<IActionResult> UpdateBill(int AppointmentId)
         {
             #region Fetching the appointment details
@@ -665,6 +657,7 @@ namespace Clinic_MVC_UI.Controllers
 
         public List<SelectListItem> GetGender()
         {
+            #region Gender list
             List<SelectListItem> gender = new List<SelectListItem>()
             {
                 new SelectListItem{Value="Select",Text="Select"},
@@ -676,9 +669,11 @@ namespace Clinic_MVC_UI.Controllers
 
            };
             return gender;
+            #endregion
         }
         public async Task<IActionResult> EditPatient(int PatientId)
         {
+            #region Getting Edit patient details action
             Patient patient = null;
             using (HttpClient client = new HttpClient())
             {
@@ -694,11 +689,13 @@ namespace Clinic_MVC_UI.Controllers
             }
             ViewBag.genderlist = GetGender();
             return View(patient);
+            #endregion
         }
 
         [HttpPost]
         public async Task<IActionResult> EditPatient(Patient patient)
         {
+            #region Updating patient details
             ViewBag.status = "";
             using (HttpClient client = new HttpClient())
             {
@@ -720,6 +717,7 @@ namespace Clinic_MVC_UI.Controllers
                 }
             }
             return View();
+            #endregion
         }
 
         public async Task<IActionResult> Prescription(int AppointmentId)

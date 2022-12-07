@@ -25,14 +25,7 @@ namespace Clinic_MVC_UI.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(LoginTable loginTable)
         {
-            //checking the notification
-            /*Dictionary<int, int> modelData = TempData["listofnotification"] as Dictionary<int, int>;
-            TempData.Keep();*/
-
-          
-
-
-
+            #region Admin, patient and doctor can login
             ViewBag.status = "";
             if (loginTable.Email == null && loginTable.Password ==null)
             {
@@ -40,9 +33,7 @@ namespace Clinic_MVC_UI.Controllers
                 ViewBag.message = "Email and Password is required";
                
             }
-            else { 
-            #region Admin, patient and doctor can login
-           
+            else {           
             int[] arr = new int[2];
             using (HttpClient client = new HttpClient())
             {
