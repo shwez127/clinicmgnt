@@ -173,8 +173,8 @@ namespace Clinic_MVC_UI.Controllers
         [HttpPost]
         public async Task<IActionResult> AddPrescription(Appointment appointment)
         {
-            appointment.AppointID = Convert.ToInt32(TempData["AppointmentIDFor"]);
             #region  Feching the appointment details
+            appointment.AppointID = Convert.ToInt32(TempData["AppointmentIDFor"]);         
             Appointment appointmentNew = new Appointment();
             using (HttpClient client = new HttpClient())
             {
@@ -377,37 +377,34 @@ namespace Clinic_MVC_UI.Controllers
 
         }
 
-
-
         public List<SelectListItem> GetGender()
         {
+            #region Getting gender list
             List<SelectListItem> gender = new List<SelectListItem>()
             {
                 new SelectListItem{Value="Select",Text="Select"},
                 new SelectListItem{Value="M",Text="Male"},
                 new SelectListItem{Value="F",Text="Female"},
                 new SelectListItem{Value="O",Text="Others"},
-
-
-
            };
             return gender;
+            #endregion
         }
         public List<SelectListItem> GetDoctorStatus()
         {
+            #region Doctor present/left list
             List<SelectListItem> doctorstatus = new List<SelectListItem>()
             {
                 new SelectListItem{Value="Select",Text="select"},
                 new SelectListItem{Value="1",Text="Present"},
                 new SelectListItem{Value="0",Text="Left"},
-
-
-
            };
             return doctorstatus;
+            #endregion
         }
         public async Task<IActionResult> EditDoctor(int DoctorId)
         {
+            #region Getting doctor details by ID
             if (DoctorId != 0)
             {
                 TempData["EditDoctorId"] = DoctorId;
@@ -455,16 +452,15 @@ namespace Clinic_MVC_UI.Controllers
             {
                 department.Add(new SelectListItem { Value = item.DeptNo.ToString(), Text = item.DeptName });
             }
-
-
-
             ViewBag.Departmentlist = department;
             return View(doctor);
+            #endregion
         }
 
         [HttpPost]
         public async Task<IActionResult> EditDoctor(Doctor doctor)
         {
+            #region Updating doctor details 
             ViewBag.status = "";
             using (HttpClient client = new HttpClient())
             {
@@ -486,13 +482,7 @@ namespace Clinic_MVC_UI.Controllers
                 }
             }
             return View();
-
-
-
+            #endregion
         }
-
-
-
-
     }
 }

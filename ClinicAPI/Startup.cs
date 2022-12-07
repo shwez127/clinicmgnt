@@ -76,7 +76,9 @@ namespace ClinicAPI
             }
 
             app.UseRouting();
+
             app.UseSwagger();
+
             app.UseSwaggerUI(options =>
             options.SwaggerEndpoint("/swagger/v1/swagger.json", "Clinic API"));
 
