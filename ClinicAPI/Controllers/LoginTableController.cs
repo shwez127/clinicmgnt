@@ -13,7 +13,10 @@ namespace ClinicAPI.Controllers
     [ApiController]
     public class LoginTableController : ControllerBase
     {
+        //Private member
         LoginTableService _loginTableService;
+
+        //Constructor
         public LoginTableController(LoginTableService loginTableService)
         {
             _loginTableService = loginTableService;
@@ -22,6 +25,7 @@ namespace ClinicAPI.Controllers
         [HttpPost("Login")]
         public int[] Login(LoginTable loginTable)
         {
+            #region Role based login as admin,patient and doctor
             int[] flag = _loginTableService.Login(loginTable);
             if ( flag[1]==3)
             {
@@ -36,25 +40,32 @@ namespace ClinicAPI.Controllers
                 return flag; ;
             }
             return null;
+            #endregion
 
         }
         [HttpPost("AddLogin")]
         public int AddLogin(LoginTable loginTable)
         {
-          int flag= _loginTableService.AddLogin(loginTable);
+            #region Login adding action
+            int flag = _loginTableService.AddLogin(loginTable);
             if (flag != 0)
                 return flag;
             return 0;
+            #endregion
         }
         [HttpPost("ForgetPassword")]
         public LoginTable ForgetPassword(LoginTable login)
         {
+            #region Forget password action
             return _loginTableService.ForgetPassword(login);
+            #endregion
         }
         [HttpPut("UpdatePassword")]
         public void UpdatePassword(LoginTable login)
         {
+            #region Updating password in forget password action
             _loginTableService.UpdatePassword(login);
+            #endregion
         }
     }
 }

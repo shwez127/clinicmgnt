@@ -27,20 +27,11 @@ namespace Clinic_MVC_UI.Controllers
 
         }
 
-        public async Task<IActionResult> PatientRegister1()
-      
+        public async Task<IActionResult> PatientRegister1()   
         {
-            TempData["Notification"] = 0;
-            TempData.Keep();
             #region Select list before registration
-            /* List<SelectListItem> gender = new List<SelectListItem>()
-             {
-                 new SelectListItem{Value="Select",Text="Select"},
-                 new SelectListItem{Value="0",Text="Are You Patient?"},
-                 new SelectListItem{Value="1",Text="Are You Doctor?"},
-
-             };
-             ViewBag.genderlist = gender;*/
+            TempData["Notification"] = 0;
+            TempData.Keep();           
             List<SelectListItem> gender = new List<SelectListItem>()
             {
                 new SelectListItem{Value="Gender",Text="Gender"},
@@ -49,6 +40,7 @@ namespace Clinic_MVC_UI.Controllers
                 new SelectListItem{Value="O",Text="Others"},
             };
             ViewBag.genderlist = gender;
+
             //Department dropdown list
             List<Department> departments = new List<Department>();
             using (HttpClient client = new HttpClient())
@@ -82,6 +74,7 @@ namespace Clinic_MVC_UI.Controllers
         [HttpPost]
         public async Task<IActionResult> PatientRegister1(Appointment appointment, int Type)
         {
+            #region Verifying as doctor/patient
             LoginTable loginTable = new LoginTable();
             if (Type == 1)
             {
@@ -95,6 +88,7 @@ namespace Clinic_MVC_UI.Controllers
                 loginTable.Password = appointment.Patient.LoginTable.Password;
                 loginTable.Type = Type;
             }
+            #endregion
             #region Patient can register here only by email and password
             ViewBag.Status = "";
             int loginID = 0;
@@ -193,7 +187,7 @@ namespace Clinic_MVC_UI.Controllers
         }
         public async Task<IActionResult> PatientRegister2()
         {
-            #region The dropdown
+            #region Getting gender list as dropdown
             //Gender dropdown list
             List<SelectListItem> gender = new List<SelectListItem>()
             {
@@ -237,47 +231,7 @@ namespace Clinic_MVC_UI.Controllers
             return View();
             #endregion
         }
-        /* public IActionResult DoctorRegister1()
-         {
-             return View();
-         }
-         [HttpPost]
-         public async Task<IActionResult> DoctorRegister1(LoginTable loginTable)
-         {
-             ViewBag.Status = "";
-             int loginID = 0;
-             using (HttpClient client = new HttpClient())
-             {
-                 StringContent content = new StringContent(JsonConvert.SerializeObject(loginTable), Encoding.UTF8, "application/json");
-                 string endPoint = _configuration["WebApiBaseUrl"] + "LoginTable/AddLogin";
-                 using (var response = await client.PostAsync(endPoint, content))
-                 {
-                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                     {
-                         var result = await response.Content.ReadAsStringAsync();
-                         loginID = JsonConvert.DeserializeObject<int>(result);
-                         if (loginID != 0)
-                         {
-                             TempData["LoginID"] = loginID.ToString();
-                             TempData.Keep();
-                         }
-                         ViewBag.status = "Ok";
-                         ViewBag.message = "Patient Registered Successfully";
-                         return RedirectToAction("DoctorRegister2", "Register");
-                     }
-                     else
-                     {
-                         ViewBag.status = "Error";
-                         ViewBag.message = "Wrong Entries";
-                     }
-                 }
-             }
-             return View();
-
-         }
-
-
-         }*/
+        
         public async Task<IActionResult> DoctorRegister2()
         {
             #region Doctor can register here only by email and password
@@ -404,7 +358,6 @@ namespace Clinic_MVC_UI.Controllers
         }
         public IActionResult UpdatePassword()
         {
-
             return View();
         }
         [HttpPost]
