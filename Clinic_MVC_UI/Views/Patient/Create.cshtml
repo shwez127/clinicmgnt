@@ -11,9 +11,9 @@
 
 <body style="background-color:#f0f8ff">
     <div class="container d-flex justify-content-center">
-        <div class="card mt-5 pb-5">
-            <div class="d-flex flex-row justify-content-center text-black" style="margin-top:20px" >
-                    <h2 class="pb-3">Feedback</h2>
+        <div class="card mt-3 pb-1">
+            <div class="d-flex flex-row justify-content-center text-black">
+                    <h2 class="pt-3">Feedback</h2>
             </div>
             <form method="post" enctype="multipart/form-data">
                 <div class="mt-2 p-4 text-center">
@@ -41,18 +41,20 @@
                     
                 </div>
             </form>
-            @if (ViewBag.status == "Ok")
-            {
-                <div class="alert alert-success">
-                    @ViewBag.message
-                </div>
-            }
-            else if (ViewBag.status == "Error")
-            {
-                <div class="alert alert-danger">
-                    @ViewBag.message
-                </div>
-            }
+            <div style="padding-right:15px;padding-left:15px">
+                @if (ViewBag.status == "Ok")
+                {
+                    <div class="alert alert-success">
+                        @ViewBag.message
+                    </div>
+                }
+                else if (ViewBag.status == "Error")
+                {
+                    <div class="alert alert-danger">
+                        @ViewBag.message
+                    </div>
+                }
+            </div>
 
         </div>
     </div>

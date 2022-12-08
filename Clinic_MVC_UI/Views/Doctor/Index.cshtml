@@ -1,10 +1,15 @@
 ﻿
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Doctor";
 }
 @{
     Layout = "~/Views/Shared/DoctorLayout.cshtml";
 }
+<script type="text/javascript">
+    function preventBack() { window.history.forward(); }
+    setTimeout("preventBack()", 10);
+    window.onunload = function () { null };
+</script>
 
 <!DOCTYPE html>
 <html style="font-size: 16px;">

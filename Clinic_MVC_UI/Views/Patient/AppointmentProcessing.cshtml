@@ -36,6 +36,7 @@
                             <th>Date</th>
                             <th>Appointment Status</th>
                             <th>Bill Status</th>
+                            <th>Cancel</th>
                             
                         </tr>
                     </thead>
@@ -88,7 +89,7 @@
                                         {
                                                 <td align="center"><a class="btn btn-outline-danger " asp-controller="Patient" onclick="cancelFunction()"  asp-action="ApproveOrReject" asp-route-AppointmentId="@doctor.AppointID" asp-route-Appointment_Status=4>Cancel</a></td>
                                         }
-                                          
+                                        <td></td> 
                                         </tr>
                                     }
                                     else
