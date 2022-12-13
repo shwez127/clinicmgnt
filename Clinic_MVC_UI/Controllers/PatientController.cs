@@ -386,6 +386,7 @@ namespace Clinic_MVC_UI.Controllers
                         ViewBag.message = "Bill Paid Successfully!";
                         TempData["Notification"] =  1;
                         TempData.Keep();
+                        return RedirectToAction("TreatmentHistory", "Patient");
                     }
                     else
                     {
@@ -394,7 +395,7 @@ namespace Clinic_MVC_UI.Controllers
                     }
                 }
             }
- return View();
+            return View();
             #endregion
 
         }
@@ -747,6 +748,12 @@ namespace Clinic_MVC_UI.Controllers
             }
             return View(appointment);
             #endregion
+        }
+        public IActionResult PaymentMethod(int AppointmentId)
+        {
+            Appointment appointment = new Appointment();
+            appointment.AppointID = AppointmentId;
+            return View(appointment);
         }
     }
 }

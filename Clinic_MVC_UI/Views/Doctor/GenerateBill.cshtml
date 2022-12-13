@@ -11,20 +11,6 @@
 <div class="card">
     <div class="card-body">
         <div class="container mb-5 mt-3">
-           @* <div class="row d-flex align-items-baseline">
-                <div class="col-xl-9">
-                    <p style="color: #7e8d9f;font-size: 20px;">Invoice >> <strong>ID: #123-123</strong></p>
-                </div>
-                <div class="col-xl-3 float-end">
-                    <a class="btn btn-light text-capitalize border-0" data-mdb-ripple-color="dark">
-                        <i class="fas fa-print text-primary"></i> Print
-                    </a>
-                    <a class="btn btn-light text-capitalize" data-mdb-ripple-color="dark">
-                        <i class="far fa-file-pdf text-danger"></i> Export
-                    </a>
-                </div>
-                <hr>
-            </div>*@
 
             <div class="container">
                 <div class="col-md-12">
@@ -40,10 +26,10 @@
                 <div class="row">
                     <div class="col-xl-8">
                         <ul class="list-unstyled">
-                            <li class="text-muted">To: <span style="color:#5d9fc5;">@Model.Patient.Name</span></li>
-                            <li class="text-muted">@Model.Patient.Address</li>
-                            <li class="text-muted">@Model.Patient.Gender</li>
-                            <li class="text-muted"><i class="fas fa-phone"></i>@Model.Patient.Phone</li>
+                            <li class="text-muted">To: <span style="color:#5d9fc5;"> @Model.Patient.Name</span></li>
+                            <li class="text-muted">Address: @Model.Patient.Address</li>
+                            <li class="text-muted">Gender: @Model.Patient.Gender</li>
+                            <li class="text-muted"><i class="fas fa-phone"></i> @Model.Patient.Phone</li>
                         </ul>
                     </div>
                     <div class="col-xl-4">

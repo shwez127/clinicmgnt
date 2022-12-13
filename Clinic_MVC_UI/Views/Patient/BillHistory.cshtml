@@ -35,10 +35,10 @@
                     <div class="row">
                         <div class="col-xl-8">
                             <ul class="list-unstyled">
-                                        <li class="text-muted">To: <span style="color:#5d9fc5 ;">@docters.Patient.Name</span></li>
-                                        <li class="text-muted">@docters.Patient.Address</li>
-                                        <li class="text-muted">@docters.Patient.Gender</li>
-                                        <li class="text-muted"><i class="fas fa-phone"></i>@docters.Patient.Phone</li>
+                                        <li class="text-muted">To: <span style="color:#5d9fc5 ;"> @docters.Patient.Name</span></li>
+                                        <li class="text-muted">Address: @docters.Patient.Address</li>
+                                        <li class="text-muted">Gender: @docters.Patient.Gender</li>
+                                        <li class="text-muted"><i class="fas fa-phone"></i> @docters.Patient.Phone</li>
                             </ul>
                         </div>
                         <div class="col-xl-4">
@@ -134,9 +134,8 @@
                             <p>Thank you for visiting</p>
                         </div>
                         <div class="col-xl-2">
-                                    <button type="submit" class="btn btn-primary text-capitalize" asp-controller="Patient" asp-action="UpdateBill" asp-route-AppointmentId="@docters.AppointID"
-                                    style="background-color:#60bdf3;">
-                                Pay Now
+                                <button type="submit" class="btn btn-primary text-capitalize" asp-controller="Patient" asp-action="PaymentMethod" asp-route-AppointmentId="@docters.AppointID" style="background-color:#60bdf3;">
+                                    Pay Now
                             </button>
                         </div>
                     </div>
@@ -150,12 +149,10 @@
 }
 else
 {
-    <h2 class="h-100 d-flex align-items-center justify-content-center" style="color:#003399;font-family:Roboto,'sans-serif';padding-top:340px">
+    <h2 class="h-100 d-flex align-items-center justify-content-center" style="color:#003399;font-family:Roboto,'sans-serif';padding-top:310px">
         There is no Bill
     </h2>
 }
-
-
 
 
 
