@@ -1,9 +1,15 @@
 ﻿@{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Patient";
 }
 @{
     Layout = "~/Views/Shared/PatientLayout.cshtml";
 }
+<script type="text/javascript">
+    function preventBack() { window.history.forward(); }
+    setTimeout("preventBack()", 10);
+    window.onunload = function () { null };
+</script>
+
 <link rel="stylesheet" href="~/css/site5.css" />
 <body>
     <div class="site-wrapper" style="background-image: url('https://img.freepik.com/premium-vector/hospital-room-interior-illustration-cartoon-empty-ward-patients-hospitalization-with-modern-medical-equipment-background_213110-494.jpg?w=2000'); height: 76vh">

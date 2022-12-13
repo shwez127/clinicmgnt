@@ -20,8 +20,7 @@
                         <th>Appointment ID</th>
                         <th>Patient Name</th>
                         <th>Patient Phone</th>
-                        <th>Patient BirthDate</th>
-                        <th>Date</th>
+                        <th>Appointment Date</th>
                         <th>Appointment Status</th>
                         <th>Bill Amount</th>
                 </tr>
@@ -35,8 +34,7 @@
                             <td>@doctor.AppointID</td>
                             <td>@doctor.Patient.Name</td>
                             <td>@doctor.Patient.Phone</td>
-                            <td>@doctor.Patient.BirthDate</td>
-                            <td>@doctor.Date</td>
+                            <td>@doctor.Date.ToShortDateString()</td>
                             <td>@doctor.Appointment_Status</td>
                             <td>@doctor.Bill_Amount</td>
                     </tr>
@@ -47,8 +45,7 @@
                             <td>@doctor.AppointID</td>
                             <td>@doctor.Patient.Name</td>
                             <td>@doctor.Patient.Phone</td>
-                            <td>@doctor.Patient.BirthDate</td>
-                            <td>@doctor.Date</td>
+                            <td>@doctor.Date.ToShortDateString()</td>
                             <td>@doctor.Appointment_Status</td>
                             <td>@doctor.Bill_Amount</td>
                             <td><a asp-controller="Doctor" class="btn btn-outline-danger" asp-action="ApproveOrReject" asp-route-AppointmentId="@doctor.AppointID" asp-route-Appointment_Status=4>Reject</a></td>

@@ -1,9 +1,14 @@
 ﻿@{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Admin";
 }
 @{
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
+<script type="text/javascript">
+    function preventBack() { window.history.forward(); }
+    setTimeout("preventBack()", 10);
+    window.onunload = function () { null };
+</script>
 
 <body style="background-color:#f0f8ff;font-family:'Roboto',sans-serif">
     <div class="container" >

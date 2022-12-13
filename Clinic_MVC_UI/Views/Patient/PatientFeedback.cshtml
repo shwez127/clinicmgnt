@@ -1,14 +1,20 @@
-﻿@{
+﻿
+@{
     ViewData["Title"] = "PatientFeedback";
 }
+
+
 
 @{
     Layout = "~/Views/Shared/PatientLayout.cshtml";
 }
-@model IEnumerable<ClinicEntity.Models.Appointment>
+@using ClinicEntity.Models;
+@model Tuple<List<Appointment>,List<Pending_Feedback>>
 
 
-@if (Model.Count() >= 1)
+
+
+@if (Model.Item1.Count() >= 1)
 {
     <!DOCTYPE html>
     <html>
@@ -41,10 +47,22 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var doctor in Model)
+                            @foreach (var doctor in Model.Item1)
                             {
-                                if (doctor.Bill_Status == 1)
+                                int x=0;
+                                @foreach (var feedback in Model.Item2)
+                            {
+                                if(doctor.AppointID==feedback.AppointID){
+
+
+
+                                       x = 1;
+                                 
+                                }
+                            }   
+                                if (doctor.Bill_Status == 1 && x==0 )
                                 {
+                                    
                                     <tr>
                                         <td>@doctor.AppointID</td>
                                         <td>@doctor.Doctor.Name</td>
@@ -52,7 +70,8 @@
                                         <td>@doctor.Doctor.Charges_Per_Visit</td>
                                         <td>@doctor.Date.ToShortDateString()</td>
 
-                                        @if (doctor.Appointment_Status == 0)
+
+                                       @if (doctor.Appointment_Status == 0)
                                         {
                                             <td>Requested</td>
                                         }
@@ -82,6 +101,8 @@
                                             <td>Paid</td>
                                         }
 
+
+
                                         <td align="center"><a class="btn btn-info" asp-route-AppointmentId="@doctor.AppointID" asp-controller="Patient" asp-action="Create"><img class="img-fluid" style="height:30px" src="https://www.svgrepo.com/show/271593/customer-rate.svg"></a></td>
                                     </tr>
                                 }
@@ -98,5 +119,5 @@ else
 {
     <h2 class="h-100 d-flex align-items-center justify-content-center" style="color:#003399;font-family:'Roboto',sans-serif;padding-top:340px">
         You don't have any feedback pending.
-    </h2> 
+    </h2>
 }   

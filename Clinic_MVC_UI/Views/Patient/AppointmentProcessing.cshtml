@@ -11,145 +11,150 @@
 {
     int i = 0;
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width-device-width" />
-</head>
-<body style="background-color:#F0F8FF">
-    
-    <br />
-    <br />
-    <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <a class="text-uppercase d-inline-block text-center" style="color:#003399;font-size:x-large" align="center"> Your Appointment is in <span class="font-weight-bold" style="font-size:x-large">Progress</span></a>
-        </div>
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-bordered" id="example" width="100%" cellspacing="0">
-                    <thead>
-                        <tr>
-                            <th>Appointment ID</th>
-                            <th>Doctor Name</th>
-                            <th>Doctor Phone</th>
-                            <th>Doctor Charges per visit</th>
-                            <th>Date</th>
-                            <th>Appointment Status</th>
-                            <th>Bill Status</th>
-                            
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var doctor in Model)
-                        {
-                            if (doctor.Bill_Status != 1 && doctor.Date >= DateTime.Today)
-                            {
-                                if (doctor.Appointment_Status == 4 )
-                                {
-                                       
-                                        <tr style="color:grey">
-                                        <td>@doctor.AppointID</td>
-                                        <td>@doctor.Doctor.Name</td>
-                                        <td>@doctor.Doctor.Phone</td>
-                                        <td>@doctor.Doctor.Charges_Per_Visit</td>
-                                        <td>@doctor.Date</td>
-                                        @if (doctor.Appointment_Status == 0)
-                                        {
-                                            <td>Requested</td>
+      
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <meta name="viewport" content="width-device-width" />
+                </head>
+                <body style="background-color:#F0F8FF">
 
-                                        }
-                                        else if (doctor.Appointment_Status == 1)
-                                        {
-                                            <td>Approved</td>
-                                        }
-                                        else if (doctor.Appointment_Status == 2)
-                                        {
-                                            <td>Pending</td>
-                                        }
-                                        else if (doctor.Appointment_Status == 3)
-                                        {
-                                            <td>Completed</td>
-                                        }
-                                        else if (doctor.Appointment_Status == 4)
-                                        {
-                                            <td>Rejected</td>
-                                        }
-
-                                        @if (doctor.Bill_Status == 0)
-                                        {
-                                            <td>Unpaid</td>
-
-                                        }
-                                        else if (doctor.Bill_Status == 1)
-                                        {
-                                            <td>Paid</td>
-                                        }
-                                        @if (doctor.Appointment_Status == 0)
-                                        {
-                                                <td align="center"><a class="btn btn-outline-danger " asp-controller="Patient" onclick="cancelFunction()"  asp-action="ApproveOrReject" asp-route-AppointmentId="@doctor.AppointID" asp-route-Appointment_Status=4>Cancel</a></td>
-                                        }
-                                          
-                                        </tr>
-                                    }
-                                    else
-                                    {
-                                        i = 1;
-
+                    <br />
+                    <br />
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <a class="text-uppercase d-inline-block text-center" style="color:#003399;font-size:x-large" align="center"> Your Appointment is in <span class="font-weight-bold" style="font-size:x-large">Progress</span></a>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="example" width="100%" cellspacing="0">
+                                    <thead>
                                         <tr>
-                                        <td>@doctor.AppointID</td>
-                                        <td>@doctor.Doctor.Name</td>
-                                        <td>@doctor.Doctor.Phone</td>
-                                        <td>@doctor.Doctor.Charges_Per_Visit</td>
-                                        <td>@doctor.Date</td>
+                                            <th>Appointment ID</th>
+                                            <th>Doctor Name</th>
+                                            <th>Doctor Phone</th>
+                                            <th>Doctor Charges per visit</th>
+                                            <th>Date</th>
+                                            <th>Appointment Status</th>
+                                            <th>Bill Status</th>
+                                            <th>Cancel</th>
+                                          
 
-                                        @if (doctor.Appointment_Status == 0)
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var doctor in Model)
                                         {
-                                            <td>Requested</td>
+                                            if (doctor.Bill_Status != 1 && doctor.Date >= DateTime.Today)
+                                            {
+                                                if (doctor.Appointment_Status == 4)
+                                                {
 
-                                        }
-                                        else if (doctor.Appointment_Status == 1)
-                                        {
-                                            <td>Approved</td>
-                                        }
-                                        else if (doctor.Appointment_Status == 2)
-                                        {
-                                            <td>Pending</td>
-                                        }
-                                        else if (doctor.Appointment_Status == 3)
-                                        {
-                                            <td>Completed</td>
-                                        }
-                                        else if (doctor.Appointment_Status == 4)
-                                        {
-                                            <td>Rejected</td>
-                                        }
+                                                    <tr style="color:grey">
+                                                        <td>@doctor.AppointID</td>
+                                                        <td>@doctor.Doctor.Name</td>
+                                                        <td>@doctor.Doctor.Phone</td>
+                                                        <td>@doctor.Doctor.Charges_Per_Visit</td>
+                                                        <td>@doctor.Date</td>
+                                                        @if (doctor.Appointment_Status == 0)
+                                                        {
+                                                            <td>Requested</td>
 
-                                        @if (doctor.Bill_Status == 0)
-                                        {
-                                            <td>Unpaid</td>
+                                                        }
+                                                        else if (doctor.Appointment_Status == 1)
+                                                        {
+                                                            <td>Approved</td>
+                                                        }
+                                                        else if (doctor.Appointment_Status == 2)
+                                                        {
+                                                            <td>Pending</td>
+                                                        }
+                                                        else if (doctor.Appointment_Status == 3)
+                                                        {
+                                                            <td>Completed</td>
+                                                        }
+                                                        else if (doctor.Appointment_Status == 4)
+                                                        {
+                                                            <td>Rejected</td>
+                                                        }
 
-                                        }
-                                        else if (doctor.Bill_Status == 1)
-                                        {
-                                            <td>Paid</td>
-                                        }
-                                        @if (doctor.Appointment_Status == 0)
-                                        {
-                                                <td align="center"><a class="btn btn-outline-danger " asp-controller="Patient" onclick="cancelFunction()"  asp-action="ApproveOrReject" asp-route-AppointmentId="@doctor.AppointID" asp-route-Appointment_Status=4>Cancel</a></td>
-                                        }
-                                    </tr>
-                                }
-                            }
-                        }                         
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-    @if (i == 0)
-    {
-        <a type="button" class="nav-link text-white btn btn-primary add-new d-inline-block" style="float:right" asp-controller="Patient" asp-action="SelectingDepartment">Make Appointment</a>
-    }
-</body>
-</html>
+                                                        @if (doctor.Bill_Status == 0)
+                                                        {
+                                                            <td>Unpaid</td>
+
+                                                        }
+                                                        else if (doctor.Bill_Status == 1)
+                                                        {
+                                                            <td>Paid</td>
+                                                        }
+                                                        @if (doctor.Appointment_Status == 0)
+                                                        {
+                                                            <td align="center"><a class="btn btn-outline-danger " asp-controller="Patient" onclick="cancelFunction()"  asp-action="ApproveOrReject" asp-route-AppointmentId="@doctor.AppointID" asp-route-Appointment_Status=4>Cancel</a></td>
+                                                        }
+                                                        <td></td> 
+                                                    </tr>
+                                                }
+                                                else
+                                                {
+                                                    i = 1;
+
+                                                    <tr>
+                                                        <td>@doctor.AppointID</td>
+                                                        <td>@doctor.Doctor.Name</td>
+                                                        <td>@doctor.Doctor.Phone</td>
+                                                        <td>@doctor.Doctor.Charges_Per_Visit</td>
+                                                        <td>@doctor.Date</td>
+
+                                                        @if (doctor.Appointment_Status == 0)
+                                                        {
+                                                            <td>Requested</td>
+
+                                                        }
+                                                        else if (doctor.Appointment_Status == 1)
+                                                        {
+                                                            <td>Approved</td>
+                                                        }
+                                                        else if (doctor.Appointment_Status == 2)
+                                                        {
+                                                            <td>Pending</td>
+                                                        }
+                                                        else if (doctor.Appointment_Status == 3)
+                                                        {
+                                                            <td>Completed</td>
+                                                        }
+                                                        else if (doctor.Appointment_Status == 4)
+                                                        {
+                                                            <td>Rejected</td>
+                                                        }
+
+                                                        @if (doctor.Bill_Status == 0)
+                                                        {
+                                                            <td>Unpaid</td>
+
+                                                        }
+                                                        else if (doctor.Bill_Status == 1)
+                                                        {
+                                                            <td>Paid</td>
+                                                        }
+                                                        @if (doctor.Appointment_Status == 0)
+                                                        {
+                                                            <td align="center"><a class="btn btn-outline-danger " asp-controller="Patient" onclick="cancelFunction()"  asp-action="ApproveOrReject" asp-route-AppointmentId="@doctor.AppointID" asp-route-Appointment_Status=4>Cancel</a></td>
+                                                        }
+                                                    </tr>
+                                                }
+                                            }
+                                        }                         
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    @if (i == 0)
+                    {
+                        <a type="button" class="nav-link text-white btn btn-primary add-new d-inline-block" style="float:right" asp-controller="Patient" asp-action="SelectingDepartment">Make Appointment</a>
+                    }
+                </body>
+                </html>
+         
+    
 }

@@ -393,6 +393,7 @@ namespace Clinic_MVC_UI.Controllers
                         ViewBag.message = "Bill Paid Successfully!";
                         TempData["Notification"] =  1;
                         TempData.Keep();
+                        return RedirectToAction("TreatmentHistory", "Patient");
                     }
                     else
                     {
@@ -401,7 +402,7 @@ namespace Clinic_MVC_UI.Controllers
                     }
                 }
             }
- return View();
+            return View();
             #endregion
 
         }
@@ -478,7 +479,6 @@ namespace Clinic_MVC_UI.Controllers
         }
         public async Task<IActionResult> PatientFeedback()
         {
-
             #region Patient can give Feedback
             int PatientAppointmentId = Convert.ToInt32(TempData["ProfileID"]);
             TempData.Keep();
@@ -504,18 +504,30 @@ namespace Clinic_MVC_UI.Controllers
                     PatientAppointments.Add(item);
                 }
             }
-            return View(PatientAppointments);
+            List<Pending_Feedback> pending_Feedbacks = null;
+            using (HttpClient client = new HttpClient())
+            {
+                string endPoint = _configuration["WebApiBaseUrl"] + "Feedback/GetAllFeedbacks";
+                using (var response = await client.GetAsync(endPoint))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        var result = await response.Content.ReadAsStringAsync();
+                        pending_Feedbacks = JsonConvert.DeserializeObject<List<Pending_Feedback>>(result);
+                    }
+                }
+            }
+            var tupeluser = new Tuple<List<Appointment>, List<Pending_Feedback>>(PatientAppointments, pending_Feedbacks);
+            return View(tupeluser);
+
             #endregion
         }
 
-        public IActionResult Create(int AppointmentId)
-            
+        public IActionResult Create(int AppointmentId)    
         {
             #region Feedback rating select list
-
             TempData["AppointmentId"] = AppointmentId;
             //it is feedback rating list
-
             List<SelectListItem> Rating = new List<SelectListItem>()
             {
                 new SelectListItem{Value="Select",Text="Select"},
@@ -523,7 +535,7 @@ namespace Clinic_MVC_UI.Controllers
                 new SelectListItem{Value="4",Text="Good"},
                 new SelectListItem{Value="3",Text="Mediocre"},
                 new SelectListItem{Value="2",Text="Bad"},
-                 new SelectListItem{Value="1",Text="Very Bad"}
+                new SelectListItem{Value="1",Text="Very Bad"}
             };
             ViewBag.Ratinglist = Rating;
             return View();
@@ -531,10 +543,8 @@ namespace Clinic_MVC_UI.Controllers
         }
         [HttpPost]
         public async Task<ActionResult> Create(Pending_Feedback pending_Feedback)
-
         {
-            #region Feedback
-            
+            #region Feedback         
             pending_Feedback.AppointID = Convert.ToInt32(TempData["AppointmentId"]);
             TempData.Keep();
 
@@ -550,12 +560,12 @@ namespace Clinic_MVC_UI.Controllers
                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
                         ViewBag.status = "Ok";
-                        ViewBag.message = "Feedback Saved Successfully!";
+                        ViewBag.message = "Thanks for your time!";
                     }
                     else
                     {
                         ViewBag.status = "Error";
-                        ViewBag.message = "Your Feedback is already submitted";
+                        ViewBag.message = "Your feedback is already submitted";
                     }
                 }
 
@@ -746,6 +756,13 @@ namespace Clinic_MVC_UI.Controllers
             return View(appointment);
             #endregion
         }
-       
+
+        public IActionResult PaymentMethod(int AppointmentId)
+        {
+            Appointment appointment = new Appointment();
+            appointment.AppointID = AppointmentId;
+            return View(appointment);
+        }
+
     }
 }
