@@ -89,3 +89,10 @@ function submitFeedback() {
         return event.preventDefault();
     }
 }
+
+function confirmPayment() {
+    let val = confirm("Are you sure you want to pay?");
+    if (val == false) {
+        return event.preventDefault();
+    }
+}
