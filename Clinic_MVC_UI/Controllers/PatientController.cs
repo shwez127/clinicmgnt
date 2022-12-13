@@ -104,7 +104,7 @@ namespace Clinic_MVC_UI.Controllers
             List<SelectListItem> department = new List<SelectListItem>();
 
             //fetching the departments and adding to the Viewbag for selecting appointment
-            department.Add(new SelectListItem { Value = "Select Department", Text = "Select Department" });
+            department.Add(new SelectListItem { Value = null, Text = "Select Department" });
             foreach (var item in departments)
             {
                 department.Add(new SelectListItem { Value = item.DeptNo.ToString(), Text = item.DeptName });
@@ -191,7 +191,14 @@ namespace Clinic_MVC_UI.Controllers
         [HttpPost]
         public async Task<IActionResult> SelectingDepartment(Department department)
         {
+            ViewBag.Status = "";
             // We are storing the DeptNo and By using that DeptNo we will search the doctors
+            if (department.DeptNo == 0)
+            {
+                ViewBag.Status="Error";
+                ViewBag.message = "Please select department";
+                return RedirectToAction("SelectingDepartment", "Patient");
+            }
             TempData["DepartmentId"] = department.DeptNo;
             TempData.Keep();
             return RedirectToAction("addAppointment", "Patient");           
@@ -739,5 +746,6 @@ namespace Clinic_MVC_UI.Controllers
             return View(appointment);
             #endregion
         }
+       
     }
 }

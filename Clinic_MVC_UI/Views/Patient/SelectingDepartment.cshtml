@@ -38,3 +38,16 @@
         </div>
     </div>
 </body>
+                            
+@if (ViewBag.Status == "Ok")
+{
+    <div class="alert alert-success">
+        @ViewBag.message
+    </div>
+}
+else if (ViewBag.Status == "Error")
+{
+    <div class="alert alert-danger">
+        @ViewBag.message
+    </div>
+}
