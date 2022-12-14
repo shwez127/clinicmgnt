@@ -8,60 +8,74 @@
 }
 
 @model IEnumerable<ClinicEntity.Models.Appointment>
+
 @if(Model.Count()>=1)
 {
-<div class="row">
-    <div class="col-12">
-        <center><h3 style="font-size:x-large;color:black;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">List of Pending Appointments</h3></center>
-        <hr />
-        <table class="table table-light table-bordered table-hover">
-            <thead>
-                <tr>
-                        <th>Appointment ID</th>
-                        <th>Patient Name</th>
-                        <th>Patient Phone</th>
-                        <th>Appointment Date</th>
-                        <th>Appointment Status</th>
-                        <th>Bill Amount</th>
-                        <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var doctor in Model)
-                {
-                    if (doctor.Appointment_Status == 0 && doctor.Date >= DateTime.Today)
-                    {
-                    <tr>
-                            <td>@doctor.AppointID</td>
-                            <td>@doctor.Patient.Name</td>
-                            <td>@doctor.Patient.Phone</td>
-                            <td>@doctor.Date.ToShortDateString()</td>
-                            <td>@doctor.Appointment_Status</td>
-                            <td>@doctor.Bill_Amount</td>
-                    </tr>
-                    }
-                    else if (doctor.Date < DateTime.Today && doctor.Appointment_Status == 0)
-                    {
-                        <tr>
-                            <td>@doctor.AppointID</td>
-                            <td>@doctor.Patient.Name</td>
-                            <td>@doctor.Patient.Phone</td>
-                            <td>@doctor.Date.ToShortDateString()</td>
-                            <td>@doctor.Appointment_Status</td>
-                            <td>@doctor.Bill_Amount</td>
-                            <td><a asp-controller="Doctor" class="btn btn-outline-danger" asp-action="ApproveOrReject" asp-route-AppointmentId="@doctor.AppointID" asp-route-Appointment_Status=4>Reject</a></td>
-                        </tr>
-                        }
-                }
-            </tbody>
-        </table>
-    </div>
-</div>
-<br />
-
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta name="viewport" content="width-device-width" />
+    </head>
+    <body style="background-color:#F0F8FF">
+        <br />
+        <br />
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <a class="text-uppercase d-inline-block text-center" style="color:#003399;font-size:x-large" align="center"> List of <span class="font-weight-bold" style="font-size:x-large">Pending Appointment</span></a>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="example" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Appointment ID</th>
+                                <th>Patient Name</th>
+                                <th>Patient Phone</th>
+                                <th>Appointment Date</th>
+                                <th>Appointment Status</th>
+                                <th>Bill Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var doctor in Model)
+                            {
+                                if (doctor.Appointment_Status == 0 && doctor.Date >= DateTime.Today)
+                                {
+                                    <tr>
+                                        <td>@doctor.AppointID</td>
+                                        <td>@doctor.Patient.Name</td>
+                                        <td>@doctor.Patient.Phone</td>
+                                        <td>@doctor.Date.ToShortDateString()</td>
+                                        <td>@doctor.Appointment_Status</td>
+                                        <td>@doctor.Bill_Amount</td>
+                                    </tr>
+                                }
+                                else if (doctor.Date < DateTime.Today && doctor.Appointment_Status == 0)
+                                {
+                                    <tr>
+                                        <td>@doctor.AppointID</td>
+                                        <td>@doctor.Patient.Name</td>
+                                        <td>@doctor.Patient.Phone</td>
+                                        <td>@doctor.Date.ToShortDateString()</td>
+                                        <td>@doctor.Appointment_Status</td>
+                                        <td>@doctor.Bill_Amount</td>
+                                        <td><a asp-controller="Doctor" class="btn btn-outline-danger" asp-action="ApproveOrReject" asp-route-AppointmentId="@doctor.AppointID" asp-route-Appointment_Status=4>Reject</a></td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </body>
+    </html>
 }
 else
 {
-    <h2 class="h-100 d-flex align-items-center justify-content-center" style="color:#003399;font-family:Roboto,'sans-serif';padding-top:310px">There is no pending appointments</h2>
+    <h2 class="h-100 d-flex align-items-center justify-content-center" style="color:#003399;font-family:Roboto,'sans-serif';padding-top:310px">
+        There is no Pending Appointments
+    </h2>
+
 }
 
