@@ -1,6 +1,4 @@
-﻿
-
-@{
+﻿@{
     Layout = "~/Views/Shared/DoctorLayout.cshtml";
 }
 
@@ -10,7 +8,7 @@
 }
 
 
-@if(Model.Count()>=1)
+@if (Model.Count() >= 1)
 {
     <!DOCTYPE html>
     <html>
@@ -34,113 +32,113 @@
                                 <th>Patient Phone</th>
                                 <th>Email Address</th>
                                 <th>Appiontment Date</th>
-                               <th>Appointment Status</th>
-                    
+                                <th>Appointment Status</th>
+
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var doctor in Model)
                             {
-                                    if (doctor.Appointment_Status == 0)
-                                    {
-                                        <tr>
-                                            <td>@doctor.AppointID</td>
-                                            <td>@doctor.Patient.Name</td>
-                                            <td>@doctor.Patient.Phone</td>
-                                            <td>@doctor.Patient.LoginTable.Email</td>
-                                            <td>@doctor.Date.ToShortDateString()</td>
-                     
-                                            @if (doctor.Appointment_Status == 0)
-                                            {
-                                                <td>Requested</td>
+                                if (doctor.Appointment_Status == 0)
+                                {
+                                    <tr>
+                                        <td>@doctor.AppointID</td>
+                                        <td>@doctor.Patient.Name</td>
+                                        <td>@doctor.Patient.Phone</td>
+                                        <td>@doctor.Patient.LoginTable.Email</td>
+                                        <td>@doctor.Date.ToShortDateString()</td>
 
-                                            }
-                                            else if (doctor.Appointment_Status == 1)
-                                            {
-                                                <td>Approved</td>
-                                            }
-                                            else if (doctor.Appointment_Status == 2)
-                                            {
-                                                <td>Pending</td>
-                                            }
-                                            else if (doctor.Appointment_Status == 3)
-                                            {
-                                                <td>Completed</td>
-                                            }
-                                            else if (doctor.Appointment_Status == 4)
-                                            {
-                                                <td>Rejected</td>
-                                            }                     
-                                            <td><a asp-controller="Doctor" class="btn btn-outline-success" asp-action="ApproveOrReject" asp-route-AppointmentId="@doctor.AppointID" asp-route-Appointment_Status=1>Approve </a></td>
-                                            <td><a asp-controller="Doctor" class="btn btn-outline-danger" asp-action="ApproveOrReject" asp-route-AppointmentId="@doctor.AppointID" asp-route-Appointment_Status=4>Reject</a></td>
+                                        @if (doctor.Appointment_Status == 0)
+                                        {
+                                            <td>Requested</td>
+
+                                        }
+                                        else if (doctor.Appointment_Status == 1)
+                                        {
+                                            <td>Approved</td>
+                                        }
+                                        else if (doctor.Appointment_Status == 2)
+                                        {
+                                            <td>Pending</td>
+                                        }
+                                        else if (doctor.Appointment_Status == 3)
+                                        {
+                                            <td>Completed</td>
+                                        }
+                                        else if (doctor.Appointment_Status == 4)
+                                        {
+                                            <td>Rejected</td>
+                                        }
+                                        <td><a asp-controller="Doctor" class="btn btn-outline-success" asp-action="ApproveOrReject" asp-route-AppointmentId="@doctor.AppointID" asp-route-Appointment_Status=1>Approve </a></td>
+                                        <td><a asp-controller="Doctor" class="btn btn-outline-danger" asp-action="ApproveOrReject" asp-route-AppointmentId="@doctor.AppointID" asp-route-Appointment_Status=4>Reject</a></td>
                                     </tr>
                                 }
-                                    else if (doctor.Appointment_Status == 1 && doctor.Disease ==null && doctor.Prescription==null)
-                                    {
-                                        <tr>
-                                            <td>@doctor.AppointID</td>
-                                            <td>@doctor.Patient.Name</td>
-                                            <td>@doctor.Patient.Phone</td>
-                                                <td>@doctor.Patient.LoginTable.Email</td>
-                                            <td>@doctor.Date.ToShortDateString()</td>
-                       
-                                            @if (doctor.Appointment_Status == 0)
-                                            {
-                                                <td>Requested</td>
+                                else if (doctor.Appointment_Status == 1 && doctor.Disease == null && doctor.Prescription == null)
+                                {
+                                    <tr>
+                                        <td>@doctor.AppointID</td>
+                                        <td>@doctor.Patient.Name</td>
+                                        <td>@doctor.Patient.Phone</td>
+                                        <td>@doctor.Patient.LoginTable.Email</td>
+                                        <td>@doctor.Date.ToShortDateString()</td>
 
-                                            }
-                                            else if (doctor.Appointment_Status == 1)
-                                            {
-                                                <td>Approved</td>
-                                            }
-                                            else if (doctor.Appointment_Status == 2)
-                                            {
-                                                <td>Pending</td>
-                                            }
-                                            else if (doctor.Appointment_Status == 3)
-                                            {
-                                                <td>Completed</td>
-                                            }
-                                            else if (doctor.Appointment_Status == 4)
-                                            {
-                                                <td>Rejected</td>
-                                            }                       
-                                            <td><a class="btn btn-outline-info" asp-controller="Doctor" asp-action="AddPrescription" asp-route-AppointmentId="@doctor.AppointID">Add Precscription</a></td>
-                                        </tr>
-                                    }
-                                    else if (doctor.Appointment_Status == 4)
-                                    {
-                                        <tr>
-                                            <td>@doctor.AppointID</td>
-                                            <td>@doctor.Patient.Name</td>
-                                            <td>@doctor.Patient.Phone</td>
-                                            <td>@doctor.Patient.LoginTable.Email</td>-
-                                            <td>@doctor.Date.ToShortDateString()</td>
-                      
-                                            @if (doctor.Appointment_Status == 0)
-                                            {
-                                                <td>Requested</td>
+                                        @if (doctor.Appointment_Status == 0)
+                                        {
+                                            <td>Requested</td>
 
-                                            }
-                                            else if (doctor.Appointment_Status == 1)
-                                            {
-                                                <td>Approved</td>
-                                            }
-                                            else if (doctor.Appointment_Status == 2)
-                                            {
-                                                <td>Pending</td>
-                                            }
-                                            else if (doctor.Appointment_Status == 3)
-                                            {
-                                                <td>Completed</td>
-                                            }
-                                            else if (doctor.Appointment_Status == 4)
-                                            {
-                                                <td>Rejected</td>
-                                            }                      
-                                        </tr>
-                                    }
-                               }
+                                        }
+                                        else if (doctor.Appointment_Status == 1)
+                                        {
+                                            <td>Approved</td>
+                                        }
+                                        else if (doctor.Appointment_Status == 2)
+                                        {
+                                            <td>Pending</td>
+                                        }
+                                        else if (doctor.Appointment_Status == 3)
+                                        {
+                                            <td>Completed</td>
+                                        }
+                                        else if (doctor.Appointment_Status == 4)
+                                        {
+                                            <td>Rejected</td>
+                                        }
+                                        <td><a class="btn btn-outline-info" asp-controller="Doctor" asp-action="AddPrescription" asp-route-AppointmentId="@doctor.AppointID">Add Precscription</a></td>
+                                    </tr>
+                                }
+                                else if (doctor.Appointment_Status == 4)
+                                {
+                                    <tr>
+                                        <td>@doctor.AppointID</td>
+                                        <td>@doctor.Patient.Name</td>
+                                        <td>@doctor.Patient.Phone</td>
+                                        <td>@doctor.Patient.LoginTable.Email</td>-
+                                        <td>@doctor.Date.ToShortDateString()</td>
+
+                                        @if (doctor.Appointment_Status == 0)
+                                        {
+                                            <td>Requested</td>
+
+                                        }
+                                        else if (doctor.Appointment_Status == 1)
+                                        {
+                                            <td>Approved</td>
+                                        }
+                                        else if (doctor.Appointment_Status == 2)
+                                        {
+                                            <td>Pending</td>
+                                        }
+                                        else if (doctor.Appointment_Status == 3)
+                                        {
+                                            <td>Completed</td>
+                                        }
+                                        else if (doctor.Appointment_Status == 4)
+                                        {
+                                            <td>Rejected</td>
+                                        }
+                                    </tr>
+                                }
+                            }
                         </tbody>
                     </table>
                 </div>
@@ -156,7 +154,6 @@ else
         There is no Pending Appointments
     </h2>
 }
-
 
 
 

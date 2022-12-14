@@ -7,17 +7,17 @@
     ViewData["Title"] = "GetAllDoctors";
 }
 
-@if(Model.Count()>=1)
+@if (Model.Count() >= 1)
 {
-<!DOCTYPE html>
-<html>
+    <!DOCTYPE html>
+    <html>
     <head>
         <meta name="viewport" content="width-device-width" />
     </head>
     <body style="background-color:#F0F8FF">
         <br />
         <br />
-    <form>
+        <form>
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <a class="text-uppercase d-inline-block text-center" style="color:#003399;font-size:x-large" align="center"> Bill <span class="font-weight-bold" style="font-size:x-large">Generate</span></a>
@@ -77,14 +77,14 @@
                         </table>
                     </div>
                 </div>
-        </div>
-    </form>
+            </div>
+        </form>
     </body>
-</html>
+    </html>
 }
 else
 {
-        <h2 class="h-100 d-flex align-items-center justify-content-center" style="color:#003399;font-family:Roboto,'sans-serif';padding-top:310px">
-            There is no Pending Appointments to generate bill
-        </h2>
+    <h2 class="h-100 d-flex align-items-center justify-content-center" style="color:#003399;font-family:Roboto,'sans-serif';padding-top:310px">
+        There is no Pending Appointments to generate bill
+    </h2>
 }

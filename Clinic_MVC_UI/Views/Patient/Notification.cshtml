@@ -124,9 +124,9 @@
                 <br />
                 <br />
             }
-            else if (doctor.Appointment_Status == 3)
+            else if (doctor.Appointment_Status == 3 && doctor.Bill_Status==0)
             {
-                <div class="card text-white bg-success mb-3" style="width:800px;">
+                <div class="card text-white bg-secondary mb-3" style="width:800px;">
                     <div class="card-header">
                         @if (doctor.Appointment_Status == 0)
                         {
@@ -194,12 +194,31 @@
                 <br />
                 <br />
             }
+            else if (doctor.Bill_Status == 1)
+            {
+                <div class="card text-white bg-success mb-3" style="width:800px;">
+                    <div class="card-header">
+                        @if(doctor.Bill_Status==1)
+                        {
+                            <p><span>Bill Status: &nbsp;</span><strong>Paid</strong></p>
+                        }
+                    </div>
+                    <div class="card-body">
+                        <blockquote class="blockquote mb-0">
+                            <p><span>Doctor Name:&nbsp;</span>@doctor.Doctor.Name<span>&nbsp; <br> Department: @doctor.Doctor.Department.DeptName</span></p>
+                            <footer style="color:white" ><span>Appointment Date:</span>&nbsp;@doctor.Date.ToShortDateString() <cite title="Source Title"><br/> <span>Email: &nbsp;</span>@doctor.Patient.LoginTable.Email</cite></footer>
+                        </blockquote>
+                    </div>
+                </div>
+                <br />
+                <br />
+            }
             
         }
     }
  
 }else{
-        <h1 class="text-center" style="font-size:x-large;color:#003399;font-family:'Roboto',sans-serif;padding-top:340px">You don't have any Notifications</h1>
+        <h2 class="text-center" style="font-size:x-large;color:#003399;font-family:'Roboto',sans-serif;padding-top:340px">You don't have any Notifications</h2>
 }
 </center>
 
