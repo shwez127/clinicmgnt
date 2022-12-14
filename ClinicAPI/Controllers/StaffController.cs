@@ -34,28 +34,49 @@ namespace ClinicAPI.Controllers
         [HttpPost("AddStaff")]
         public IActionResult AddStaff(OtherStaff otherStaff)
         {
-            #region Staff adding action
-            _staffService.AddStaff(otherStaff);
-            return Ok("Staff added successfully");
-            #endregion
+            try
+            {
+                #region Staff adding action
+                _staffService.AddStaff(otherStaff);
+                return Ok("Staff added successfully");
+                #endregion
+            }
+            catch
+            {
+                return BadRequest(400);
+            }
         }
 
         [HttpPut("UpdateStaff")]
         public IActionResult UpdateStaff(OtherStaff otherStaff)
         {
-            #region Staff updation action
-            _staffService.UpdateStaff(otherStaff);
-            return Ok("Staff updated Successfully");
-            #endregion
+            try
+            {
+                #region Staff updation action
+                _staffService.UpdateStaff(otherStaff);
+                return Ok("Staff updated Successfully");
+                #endregion
+            }
+            catch
+            {
+                return BadRequest(400);
+            }
         }
 
         [HttpDelete("DeleteStaff")]
         public IActionResult DeleteStaff(int staffId)
         {
-            #region Staff deletion action
-            _staffService.DeleteStaff(staffId);
-            return Ok("Staff deleted successfully");
-            #endregion
+            try
+            {
+                #region Staff deletion action
+                _staffService.DeleteStaff(staffId);
+                return Ok("Staff deleted successfully");
+                #endregion
+            }
+            catch
+            {
+                return BadRequest(400);
+            }
         }
 
         [HttpGet("GetStaffById")]

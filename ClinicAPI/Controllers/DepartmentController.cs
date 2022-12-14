@@ -25,28 +25,51 @@ namespace ClinicAPI.Controllers
         [HttpPost("AddDepartment")]
         public IActionResult AddDepartment(Department department)
         {
-            #region Department adding action
-            _departmentService.AddDepartment(department);
-            return Ok("Department Added Successfully");
-            #endregion
+            try
+            {
+
+                #region Department adding action
+                _departmentService.AddDepartment(department);
+                return Ok("Department Added Successfully");
+                #endregion
+            }
+            catch
+            {
+                return BadRequest(400);
+            }
         }
 
         [HttpPut("UpdateDepartment")]
         public IActionResult UpdateDepartment([FromBody] Department department)
         {
-            #region Department updation action
-            _departmentService.UpdateDepartment(department);
-            return Ok("Department updated successfully");
-            #endregion
+            try
+            {
+                #region Department updation action
+                _departmentService.UpdateDepartment(department);
+                return Ok("Department updated successfully");
+                #endregion
+            }
+            catch
+            {
+                return BadRequest(400);
+            }
+
         }
 
         [HttpDelete("DeleteDepartment")]
         public IActionResult DeleteDepartment(int departmentId)
         {
-            #region Department deletion action
-            _departmentService.DeleteDepartment(departmentId);
-            return Ok("Department deleted successfully");
-            #endregion
+            try
+            {
+                #region Department deletion action
+                _departmentService.DeleteDepartment(departmentId);
+                return Ok("Department deleted successfully");
+                #endregion
+            }
+            catch
+            {
+                return BadRequest(400);
+            }
         }
 
         [HttpGet("GetDepartments")]
