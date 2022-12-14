@@ -11,18 +11,13 @@
 <div class="card">
     <div class="card-body">
         <div class="container mb-5 mt-3">
-
             <div class="container">
                 <div class="col-md-12">
                     <div class="text-center">
-                        @*<i class="fab fa-mdb fa-4x ms-0" style="color:#5d9fc5 ;"></i>*@
                         <h3 class="text-center">TheCareClinic</h3>
                         <a href="#">TheCareClinic.com</a>
                     </div>
-
                 </div>
-
-
                 <div class="row">
                     <div class="col-xl-8">
                         <ul class="list-unstyled">
@@ -54,13 +49,10 @@
                     <table class="table table-striped table-borderless">
                         <thead style="background-color:#84B0CA ;" class="text-white">
                             <tr>
-
-                               @* <th scope="col">Appointment ID</th>*@
                                 <th scope="col">Doctor Name</th>
                                 <th scope="col">Doctor Phone</th>
                                 <th scope="col">Doctor Charges per visit</th>
                                 <th scope="col">Appointment Date</th>
-                                @*<th scope="col">Progress</th>*@
                                 <th scope="col">Appointment_Status</th>
                                 <th scope="col">Bill Amount</th>
                                 <th scope="col"> Bill Status</th>
@@ -68,12 +60,10 @@
                         </thead>
                         <tbody>
                             <tr>
-                                @*<td scope="row">@Model.AppointID</td>*@
                                 <td scope="row">@Model.Doctor.Name</td>
                                 <td scope="row">@Model.Doctor.Phone</td>
                                 <td scope="row">@Model.Doctor.Charges_Per_Visit</td>
                                 <td scope="row">@Model.Date.ToShortDateString()</td>
-                               @* <td scope="row">@Model.Progress</td>*@
                                 @if (Model.Appointment_Status == 0)
                                 {
                                     <td>Requested</td>
@@ -107,7 +97,6 @@
                                 {
                                     <td>Paid</td>
                                 }
-                                @*<td scope="row"><a class="btn btn-info" asp-controller="Patient" asp-action="UpdateBill" asp-route-AppointmentId="@Model.AppointID">Pay Bill</a></td>*@
                             </tr>
 
                         </tbody>
