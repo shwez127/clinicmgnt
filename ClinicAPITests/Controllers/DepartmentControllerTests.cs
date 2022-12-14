@@ -110,10 +110,10 @@ namespace ClinicAPI.Controllers.Tests
         [TestMethod()]
         public async Task GetDepartmentsNeagtiveTest()
         {
-            var departmentlist = _fixture.CreateMany<Department>().ToList();
-            moq.Setup(x => x.GetDepartments()).Returns(departmentlist);
+            List<Department> departments = null;
+            moq.Setup(x => x.GetDepartments()).Returns(departments);
             departmentController = new DepartmentController(new DepartmentService(moq.Object));
-            var result = departmentController.GetDepartments();
+            Assert.IsNull(departmentController.GetDepartments());
         }
 
         [TestMethod()]

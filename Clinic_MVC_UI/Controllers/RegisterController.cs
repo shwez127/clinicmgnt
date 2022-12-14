@@ -266,9 +266,6 @@ namespace Clinic_MVC_UI.Controllers
                             var result = await response.Content.ReadAsStringAsync();
                             doctor1 = JsonConvert.DeserializeObject<Doctor>(result);
                         }
-
-
-
                     }
                 }
                 //Checking birthdate to update password

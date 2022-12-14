@@ -46,10 +46,10 @@ namespace ClinicAPI.Controllers.Tests
         [TestMethod()]
         public async Task GetAllStaffsNeagtiveTest()
         {
-            var stafflist = _fixture.CreateMany<OtherStaff>(3).ToList();
+            List<OtherStaff> stafflist = null;
             moq.Setup(x => x.GetAllStaffs()).Returns(stafflist);
             staffController = new StaffController(new StaffServices(moq.Object));
-            var result = staffController.GetAllStaffs();
+            Assert.IsNull(staffController.GetAllStaffs());
         }
 
         [TestMethod()]

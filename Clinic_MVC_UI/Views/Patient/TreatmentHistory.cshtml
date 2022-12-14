@@ -51,7 +51,7 @@
                                         <td>@doctor.Doctor.Name</td>
                                         <td>@doctor.Doctor.Phone</td>
                                         <td>@doctor.Doctor.Charges_Per_Visit</td>
-                                        <td>@doctor.Date</td>
+                                        <td>@doctor.Date.ToShortDateString()</td>
                                         <td>@doctor.Progress</td>
                                         <td>@doctor.Prescription</td>
                                         @if (doctor.Appointment_Status == 0)

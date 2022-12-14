@@ -24,7 +24,7 @@
                     <th>Email Address</th>
                     <th>Appiontment Date</th>
                    <th>Appointment Status</th>
-                    
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -62,8 +62,8 @@
                         }
                       
 
-                        <td><a asp-controller="Doctor" class="btn btn-outline-success" asp-action="ApproveOrReject" asp-route-AppointmentId="@doctor.AppointID" asp-route-Appointment_Status=1>Approve </a></td>
-                        <td><a asp-controller="Doctor" class="btn btn-outline-danger" asp-action="ApproveOrReject" asp-route-AppointmentId="@doctor.AppointID" asp-route-Appointment_Status=4>Reject</a></td>
+                        <td><a asp-controller="Doctor" onclick="myfunction1()" class="btn btn-outline-success" asp-action="ApproveOrReject" asp-route-AppointmentId="@doctor.AppointID" asp-route-Appointment_Status=1>Approve </a></td>
+                            <td><a asp-controller="Doctor" onclick="myfunction2()" class="btn btn-outline-danger" asp-action="ApproveOrReject" asp-route-AppointmentId="@doctor.AppointID" asp-route-Appointment_Status=4>Reject</a></td>
                     </tr>
                     }
                 else if (doctor.Appointment_Status == 1 && doctor.Disease ==null && doctor.Prescription==null)
@@ -142,9 +142,17 @@
     </div>
 <hr />
 }else{
-    <h1>There is no pending appointments</h1>
+    <h2 class="h-100 d-flex align-items-center justify-content-center" style="color:#003399;font-family:Roboto,'sans-serif';padding-top:310px">There is no pending appointments</h2>
 }
   
+<script>
+    function myfunction1(){
+        alert("You Approved the request")
+    }
+    function myfunction2(){
+        alert("You Rejecterd the request")
+    }
+</script>
 
 
 

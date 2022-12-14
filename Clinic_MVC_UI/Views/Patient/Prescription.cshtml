@@ -1,37 +1,38 @@
 ﻿@{
-    Layout = "~/Views/Shared/PatientLayout.cshtml";
+	Layout = "~/Views/Shared/PatientLayout.cshtml";
 }
 
 @model ClinicEntity.Models.Appointment;
 
 <body style="background-color:#f0f8ff;font-family:'Roboto',sans-serif">
 <div class="container" id="content" style="padding-top:20px">
-	<h3><br /></h3>
+	<h3 class="text-center">The Care Clinic<br /></h3>
+		<center><a href="https://www.thecareclinic.org/">www.thecareclinic.com</a></center>
 	<div class="row">
 		<div class="col-md-12">
 			<div class="widget-area-2 proclinic-box-shadow pb-3">
 				<!-- Invoice Head -->
 				<div class="row ">
 					<div class="col-sm-6 mb-5">
-						<span>Address:</span>
+						<strong><span>Address:</span></strong>
 						<br>
 						<span>@Model.Doctor.Address</span>
 						<br>
-						<span class="pr-2">Phone: +91 @Model.Doctor.Phone</span>
+							<span class="pr-2"><strong>Phone:</strong> +91 @Model.Doctor.Phone</span>
 					</div>
 					<div class="col-sm-6 text-md-right mb-5">
 						<h3>Prescription-@Model.Patient.Name</h3>
 						<br />
-						<span>Appointment ID: @Model.AppointID</span>
+							<span><strong>Appointment ID:</strong> @Model.AppointID</span>
 						<br>
-						<span>Date: @Model.Date.ToShortDateString()</span>
+							<span><strong>Date: </strong> @Model.Date.ToShortDateString()</span>
 					</div>
 				</div>
 				<!-- /Invoice Head -->
 				<!-- Invoice Content -->
 				<div class="row">
 					<div class="col-sm-6 mb-5">
-						<h6 class="proclinic-text-color">Patient Details:</h6>
+							<h6 class="proclinic-text-color"><strong>Patient Details:</strong></h6>
 						<span><strong>Name:</strong> @Model.Patient.Name</span>
 						<br>
 						<span><strong>Gender:</strong> @Model.Patient.Gender</span>

@@ -103,7 +103,7 @@ namespace Clinic_MVC_UI.Controllers
             foreach (var item in Appointments)
             {
                 //in all list of appointments. we just show his(Doctor who is login) appointments and it must be today
-                if (doctorappointId == item.DoctorID && item.Date == DateTime.Today)
+                if (doctorappointId == item.DoctorID && item.Date == DateTime.Today && item.Bill_Status != 1 && (item.Prescription == null || item.Disease == null))
                 {
                     DoctorAppointments.Add(item);
                 }
@@ -148,6 +148,7 @@ namespace Clinic_MVC_UI.Controllers
                         ViewBag.message = "Appointment Details Updated Successfully!";
                         TempData["Notification"] =  1;
                         TempData.Keep();
+                        return RedirectToAction("TodayAppointment", "Doctor");
                     }
                     else
                     {
@@ -161,14 +162,10 @@ namespace Clinic_MVC_UI.Controllers
         }
 
         public async Task<IActionResult> AddPrescription(int AppointmentId)
-        {
-            
+        {           
             //we are storing the AppointmentId in tempdata
-            TempData["AppointmentIDFor"]= AppointmentId;
-           
+            TempData["AppointmentIDFor"]= AppointmentId;          
             return View();
-           
-
         }
         [HttpPost]
         public async Task<IActionResult> AddPrescription(Appointment appointment)
