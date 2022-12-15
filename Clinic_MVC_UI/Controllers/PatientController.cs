@@ -195,8 +195,6 @@ namespace Clinic_MVC_UI.Controllers
             // We are storing the DeptNo and By using that DeptNo we will search the doctors
             if (department.DeptNo == 0)
             {
-                ViewBag.Status="Error";
-                ViewBag.message = "Please select department";
                 return RedirectToAction("SelectingDepartment", "Patient");
             }
             TempData["DepartmentId"] = department.DeptNo;
@@ -208,9 +206,6 @@ namespace Clinic_MVC_UI.Controllers
   
             #region selecting the doctor
             List<Doctor> doctors = new List<Doctor>();
-
-            
-
             using (HttpClient client = new HttpClient())
             {
                 string endpoint = _configuration["WebApiBaseUrl"] + "Doctor/GetDoctors";

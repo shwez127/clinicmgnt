@@ -33,7 +33,7 @@
                                 <th>Patient Phone</th>
                                 <th>Appointment Date</th>
                                 <th>Appointment Status</th>
-                                <th>Bill Amount</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
@@ -46,8 +46,28 @@
                                         <td>@doctor.Patient.Name</td>
                                         <td>@doctor.Patient.Phone</td>
                                         <td>@doctor.Date.ToShortDateString()</td>
-                                        <td>@doctor.Appointment_Status</td>
-                                        <td>@doctor.Bill_Amount</td>
+                                        @if (doctor.Appointment_Status == 0)
+                                        {
+                                            <td>Requested</td>
+
+                                        }
+                                        else if (doctor.Appointment_Status == 1)
+                                        {
+                                            <td>Approved</td>
+                                        }
+                                        else if (doctor.Appointment_Status == 2)
+                                        {
+                                            <td>Pending</td>
+                                        }
+                                        else if (doctor.Appointment_Status == 3)
+                                        {
+                                            <td>Completed</td>
+                                        }
+                                        else if (doctor.Appointment_Status == 4)
+                                        {
+                                            <td>Rejected</td>
+                                        }
+                                       
                                     </tr>
                                 }
                                 else if (doctor.Date < DateTime.Today && doctor.Appointment_Status == 0)
@@ -57,8 +77,28 @@
                                         <td>@doctor.Patient.Name</td>
                                         <td>@doctor.Patient.Phone</td>
                                         <td>@doctor.Date.ToShortDateString()</td>
-                                        <td>@doctor.Appointment_Status</td>
-                                        <td>@doctor.Bill_Amount</td>
+                                        @if (doctor.Appointment_Status == 0)
+                                        {
+                                            <td>Requested</td>
+
+                                        }
+                                        else if (doctor.Appointment_Status == 1)
+                                        {
+                                            <td>Approved</td>
+                                        }
+                                        else if (doctor.Appointment_Status == 2)
+                                        {
+                                            <td>Pending</td>
+                                        }
+                                        else if (doctor.Appointment_Status == 3)
+                                        {
+                                            <td>Completed</td>
+                                        }
+                                        else if (doctor.Appointment_Status == 4)
+                                        {
+                                            <td>Rejected</td>
+                                        }
+                                        
                                         <td><a asp-controller="Doctor" class="btn btn-outline-danger" asp-action="ApproveOrReject" asp-route-AppointmentId="@doctor.AppointID" asp-route-Appointment_Status=4>Reject</a></td>
                                     </tr>
                                 }
