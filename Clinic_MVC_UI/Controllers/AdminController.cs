@@ -77,6 +77,7 @@ namespace Clinic_MVC_UI.Controllers
         }
 
         #region It will Featch the all doctors details
+
         [HttpGet]
         public async Task<IActionResult> GetAllDoctors()
         {
