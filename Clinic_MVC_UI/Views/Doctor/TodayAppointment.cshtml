@@ -33,7 +33,17 @@
                                 <th>Email Address</th>
                                 <th>Appiontment Date</th>
                                 <th>Appointment Status</th>
-                                <th class="text-center" colspan="2">Actions</th>
+                                  @foreach (var doctor2 in Model)
+                            {
+                                    if (doctor2.Appointment_Status == 0)
+                                    {
+                                        <th>Approve</th>
+                                        <th>Reject</th>
+                                    }else{
+                                        <th>AddPrescription</th>
+                                    }
+                            }
+                                  @*  <th class="text-center" colspan="2">Actions</th>*@
 
                             </tr>
                         </thead>
