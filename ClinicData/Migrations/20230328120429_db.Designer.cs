@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClinicData.Migrations
 {
     [DbContext(typeof(ClinicDbContext))]
-    [Migration("20221207061021_cms")]
-    partial class cms
+    [Migration("20230328120429_db")]
+    partial class db
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
