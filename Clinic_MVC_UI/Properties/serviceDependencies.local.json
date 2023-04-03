@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "secretStore": null,
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/azureserver127/databases/ClinicMngt2",
+      "type": "mssql.azure",
+      "connectionId": "ConnectionStrings:Microsoft.sqlConnection",
+      "dynamicId": null
+    }
+  }
+}

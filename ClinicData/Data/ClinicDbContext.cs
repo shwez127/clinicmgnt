@@ -26,7 +26,7 @@ namespace ClinicData.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder dbContextOptionsBuilder)
         {
-            dbContextOptionsBuilder.UseSqlServer("Server=tcp:azureserver127.database.windows.net,1433;Initial Catalog=azuredb;Persist Security Info=False;User ID=azureserver127;Password=Shwetha@127;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+            dbContextOptionsBuilder.UseSqlServer("Server=tcp:azureserver127.database.windows.net,1433;Initial Catalog=ClinicMngt2;Persist Security Info=False;User ID=azureserver127;Password=Shwetha@127;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
 
         }
 
